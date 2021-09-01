@@ -15,7 +15,7 @@ const ICON_SIZE = {
 const menuConfig = [
   {
     title: 'Home',
-    path: '/',
+    path: '/home',
     icon: <Icon icon={homeFill} {...ICON_SIZE} />
   },
   { title: 'Dashboard', path: PATH_DASHBOARD.root, icon: <Icon icon={fileFill} {...ICON_SIZE} /> }

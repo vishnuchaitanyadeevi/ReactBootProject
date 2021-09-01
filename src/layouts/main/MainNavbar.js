@@ -4,6 +4,7 @@ import { experimentalStyled as styled } from '@material-ui/core/styles';
 import { Box, AppBar, Toolbar, Container } from '@material-ui/core';
 // hooks
 import useOffSetTop from '../../hooks/useOffSetTop';
+import { useState } from 'react';
 // components
 import Logo from '../../components/Logo';
 import { MHidden } from '../../components/@material-extend';
@@ -13,6 +14,10 @@ import MenuDesktop from './MenuDesktop';
 import MenuMobile from './MenuMobile';
 import navConfig from './MenuConfig';
 import { Avatar } from '@material-ui/core';
+import {
+  Menu,
+  MenuItem,
+} from '@material-ui/core';
 // ----------------------------------------------------------------------
 
 const APP_BAR_MOBILE = 64;
@@ -45,6 +50,22 @@ const ToolbarShadowStyle = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function MainNavbar() {
+  // Code for Menu Items
+  const [isOpen, setOpen] = useState(null);
+  const [isOpenList, setOpenList] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(1);
+  const [isOpenMaxHeight, setOpenMaxHeight] = useState(null);
+
+
+  const handleOpen = (event) => {
+    setOpen(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setOpen(null);
+  };
+
+ 
   const isOffset = useOffSetTop(100);
   const { pathname } = useLocation();
   const isHome = pathname === '/';
@@ -68,7 +89,7 @@ export default function MainNavbar() {
             justifyContent: 'space-between'
           }}
         >
-          <RouterLink to="/">
+          <RouterLink to="/home">
             <Logo />
           </RouterLink>
           <Box sx={{ flexGrow: 1 }} />
@@ -81,7 +102,16 @@ export default function MainNavbar() {
             <MenuMobile isOffset={isOffset} isHome={isHome} navConfig={navConfig} />
           </MHidden>
 
-          <Avatar src= {image} sx={{ width: 40, height: 40 }}/>
+          <Avatar src= {image} sx={{ width: 40, height: 40 }} onClick={handleOpen}>
+            
+            </Avatar>
+            <Menu keepMounted id="simple-menu" anchorEl={isOpen} onClose={handleClose} open={Boolean(isOpen)}>
+              {['Profile', 'My account', 'Logout'].map((option) => (
+                <MenuItem key={option} onClick={handleClose}>
+                  {option}
+                </MenuItem>
+              ))}
+            </Menu>
         </Container>
       </ToolbarStyle>
 
