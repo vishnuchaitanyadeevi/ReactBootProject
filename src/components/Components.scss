@@ -1,0 +1,10 @@
+.prefixClass{
+    width: 5rem;
+}
+.prefixedTextField{
+    width: calc(100% - 5rem);
+}
+
+.prefixDropdown.MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon.css-a3yhzf-MuiAutocomplete-root .MuiOutlinedInput-root {
+    padding-right: 55px;
+}
