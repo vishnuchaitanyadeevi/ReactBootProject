@@ -83,6 +83,10 @@ export default function Router() {
       element: <LandingPage />,
      // children: [{ path: '/', element: <Dashboard /> }]
     },
+    {
+      path: '/employee',
+      element: <Employee />,
+    },
     { path: '*', element: <Navigate to="/404" replace /> }
   ]);
 }
@@ -94,3 +98,4 @@ const Dashboard = Loadable(lazy(() => import('../pages/Dashboard')));
 const PageFour = Loadable(lazy(() => import('../pages/PageFour')));
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 const LandingPage = Loadable(lazy(() => import('../pages/LandingPage')));
+const Employee = Loadable(lazy(() => import('../pages/Employee')));
