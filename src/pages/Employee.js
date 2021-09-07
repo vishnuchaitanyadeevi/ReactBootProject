@@ -1,9 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
 import * as Yup from 'yup';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { Button, Checkbox, TextField, Paper, Typography, Grid, IconButton, NoSsr  } from '@material-ui/core';
 import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
+//import LoadingOverlay from 'react-loading-overlay';
 import { LocalizationProvider } from '@material-ui/lab';
+import { LoadingButton } from '@material-ui/lab';
+import { Save } from '@material-ui/icons';
 import { DatePicker } from '@material-ui/lab';
 import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Slider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/';
@@ -120,6 +125,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 */
+
+
 function Employee() {
 
 //formik
@@ -140,9 +147,11 @@ const formik = useFormik(
 const [value, setValue] = React.useState(null);
 //SnackBar
 const [open, setOpen] = React.useState(false);
+const [loading, setLoading] = React.useState(false);
 
 const handleClick = () => {
   setOpen(true);
+  setLoading(true);
 };
 
 const handleClose = (event, reason) => {
@@ -152,6 +161,18 @@ const handleClose = (event, reason) => {
 
   setOpen(false);
 };
+
+
+// loader
+const [loader, setLoader] = React.useState(false);
+  const handleLoader = () => {
+    setLoader(false);
+  };
+  const handleToggle = () => {
+    setLoader(!loader);
+  };
+
+
 
 
 //formik handle change
@@ -188,7 +209,7 @@ function valuetext(value) {
           id="outlined"
           style={marginTop}
           label="Employee ID"
-          defaultValue=""
+          // defaultValue=""
           fullWidth
           helperText= {formik.touched.id && formik.errors.id?formik.errors.id:''} 
           error={Boolean(formik.touched.id && formik.errors.id)}
@@ -202,7 +223,7 @@ function valuetext(value) {
           id="outlined"
           style={marginTop}
           label="Employee First Name"
-          defaultValue=""
+          // defaultValue=""
           fullWidth
           helperText= {formik.touched.fname && formik.errors.fname?formik.errors.fname:''} 
           error={Boolean(formik.touched.fname && formik.errors.fname)}
@@ -215,7 +236,7 @@ function valuetext(value) {
           id="outlined"
           style={marginTop}
           label="Employee Last Name"
-          defaultValue=""
+          // defaultValue=""
           fullWidth
           helperText= {formik.touched.lname && formik.errors.lname?formik.errors.lname:''} 
           error={Boolean(formik.touched.lname && formik.errors.lname)}
@@ -240,7 +261,7 @@ function valuetext(value) {
           id="outlined"
           style={marginTop}
           label="Employee Address"
-          defaultValue=""
+          // defaultValue=""
           fullWidth
           helperText= {formik.touched.add && formik.errors.add?formik.errors.add:''} 
           error={Boolean(formik.touched.add && formik.errors.add)}
@@ -256,7 +277,7 @@ function valuetext(value) {
           id="outlined"
           style={marginTop}
           label="Employee Mobile Number"
-          defaultValue=""
+          // defaultValue=""
           fullWidth
           helperText= {formik.touched.mob && formik.errors.mob?formik.errors.mob:''} 
           error={Boolean(formik.touched.mob && formik.errors.mob)}
@@ -269,7 +290,7 @@ function valuetext(value) {
           id="outlined"
           style={marginTop}
           label="Employee E-mail"
-          defaultValue=""
+          // defaultValue=""
           fullWidth
           helperText= {formik.touched.email && formik.errors.email?formik.errors.email:''} 
           error={Boolean(formik.touched.email && formik.errors.email)}
@@ -298,18 +319,33 @@ function valuetext(value) {
 
               />
               </div>
-      <Button variant="outlined" onClick={handleClick} style={marginTop}>
+        <LoadingButton loading ={loading}
+        fullWidth
+        loadingPosition="start"
+        startIcon={<Save />}
+        variant="outlined" onClick={handleClick} style={marginTop}>
         Save Employee Data
-      </Button>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success">
-         Data Saved Successfully!
-        </Alert>
-      </Snackbar>
-        </form>
-      </Paper>
-      </Grid>
-     
+        </LoadingButton>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success">
+          Data Saved Successfully!
+          </Alert>
+        </Snackbar>
+
+        <Button fullWidth variant="outlined" style={marginTop} onClick={handleToggle}>
+
+          Open Page Loader
+        </Button>
+        <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loader }
+        onClick={handleLoader}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+          </form>
+        </Paper>
+        </Grid>
     </div>
     </center>
     </div>
