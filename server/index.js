@@ -11,8 +11,20 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.post("/payment", cors(), async (req, res) => {
+
+
 	let { amount, id } = req.body
 	try {
+		/* const invoice = await stripe.invoices.create({
+			customer: 'cus_KEPxxO6j9nUgta',
+		  });
+		const invoice = await stripe.invoices.finalizeInvoice(
+			id
+		  );
+		const invoice = await stripe.invoices.sendInvoice(
+			id
+		  );
+		  */
 		const payment = await stripe.paymentIntents.create({
 			amount,
 			currency: "USD",
@@ -20,7 +32,9 @@ app.post("/payment", cors(), async (req, res) => {
 			payment_method: id,
 			confirm: true
 		})
+		
 		console.log("Payment", payment)
+
 		res.json({
 			message: "Payment successful",
 			success: true

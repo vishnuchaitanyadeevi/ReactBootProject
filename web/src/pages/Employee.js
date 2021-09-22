@@ -63,13 +63,30 @@ const validate = values => {
     errors.id='Required'
   }
 
+  else if (!/^[0-9]{3}$/i.test(values.id))
+  {
+    errors.id='Invalid ID'
+  }
+
   if (!values.fname)
   {
     errors.fname='Required'
   }
+
+  else if (!/^[a-zA-Z]$/i.test(values.fname))
+  {
+    errors.fname='First Name must contain letters'
+  }
+
    if (!values.lname){
     errors.lname='Required'
   }
+
+  else if (!/^[a-zA-Z]$/i.test(values.lname))
+  {
+    errors.lname='Last Name must contain letters'
+  }
+
   if (!values.doj)
   {
     errors.doj='Required'
@@ -93,6 +110,10 @@ const validate = values => {
   if (!values.email)
   {
     errors.email='Required'
+  }
+  else if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(values.email))
+  {
+    errors.email='Invalid email'
   }
 
   if (!values.rating)
@@ -152,6 +173,16 @@ const [loading, setLoading] = React.useState(false);
 const handleClick = () => {
   setOpen(true);
   setLoading(true);
+  closeloader();
+};
+
+const closeloader = () => {
+  
+  setTimeout(() => {
+    setLoading(false);
+  }, 2000);
+
+
 };
 
 const handleClose = (event, reason) => {
@@ -326,7 +357,7 @@ function valuetext(value) {
         variant="outlined" onClick={handleClick} style={marginTop}>
         Save Employee Data
         </LoadingButton>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="success">
           Data Saved Successfully!
           </Alert>

@@ -80,7 +80,14 @@ const marginTop = { marginTop: 10}
 
 
         <form>
-        <Alert severity="info">Contribute $10 for Open Source</Alert>
+        <Alert severity="info">
+        <div align= "left">    
+        Contribute $10 for Open Source. 
+        </div>
+        <div>
+        Either pay from here or using invoice and get the receipt.
+        </div>
+        </Alert>
         <Grid  item xs ={12}></Grid>
            <Grid item xs={12} sm={6}>
             <TextField 
