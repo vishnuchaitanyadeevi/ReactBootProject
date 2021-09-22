@@ -1,9 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
+
 import * as Yup from 'yup';
+import { FormikProvider, Form } from 'formik';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { Button, Checkbox, TextField, Paper, Typography, Grid, IconButton, NoSsr  } from '@material-ui/core';
+import { Box ,Button, Checkbox, TextField, Paper, Typography, Grid, IconButton, NoSsr  } from '@material-ui/core';
 import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
 //import LoadingOverlay from 'react-loading-overlay';
 import { LocalizationProvider } from '@material-ui/lab';
@@ -30,12 +32,17 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 // import Signin from './Signin';
 import Select from '@material-ui/core/Select';
-// import './App.css';
-
+import '../Styles/app.scss';
 import { Formik, useFormik } from 'formik';
 import { values } from 'lodash';
 
 //formik starts
+// gradient background starts
+
+
+
+//gradient background ends
+
 
 const initialValues = {
   id: '',
@@ -73,7 +80,7 @@ const validate = values => {
     errors.fname='Required'
   }
 
-  else if (!/^[a-zA-Z]$/i.test(values.fname))
+  else if (!/^[a-zA-Z]+$/i.test(values.fname))
   {
     errors.fname='First Name must contain letters'
   }
@@ -82,7 +89,7 @@ const validate = values => {
     errors.lname='Required'
   }
 
-  else if (!/^[a-zA-Z]$/i.test(values.lname))
+  else if (!/^[a-zA-Z]+$/i.test(values.lname))
   {
     errors.lname='Last Name must contain letters'
   }
@@ -224,18 +231,39 @@ function valuetext(value) {
 
   
   
-  const paperStyle={padding:'30px 20px', width: 300, margin: "20px auto"}
+  const paperStyle={padding:'30px 20px', width: 570}
 
   return (
+    
+    <div >
 
-    <div>
+
+
+      
         <center>
-      <div>
+      <div >
         
         <Grid >
       <Paper  elevation ={20} style = {paperStyle} >
       <Grid align='center'></Grid>
-      <form> 
+      <FormikProvider value={formik}>
+      
+      <Form onSubmit={formik.handleSubmit}> 
+      <Alert severity="info">
+        <div align= "left">    
+        Fill Employee Details Below  
+        </div>
+        </Alert>
+      
+        <Box
+    //  component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+     <div>
       <TextField
           id="outlined"
           style={marginTop}
@@ -250,6 +278,30 @@ function valuetext(value) {
           name="id"
 
         />
+
+
+<LocalizationProvider dateAdapter={AdapterDateFns} >
+      <DatePicker
+        label="Date of Joining"
+        value={value}
+        onChange={(newValue) => {
+          setValue(newValue);
+        }}
+        renderInput={(params) => <TextField  {...params} />}
+      />
+    </LocalizationProvider>
+
+        </div>
+        </Box>
+          <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <div>
         <TextField
           id="outlined"
           style={marginTop}
@@ -263,6 +315,9 @@ function valuetext(value) {
           value={formik.values.fname}
           name="fname"
         />
+       
+        
+        
         <TextField
           id="outlined"
           style={marginTop}
@@ -276,18 +331,18 @@ function valuetext(value) {
           value={formik.values.lname}
           name="lname"
         />
-        <div style={marginTop}>
-<LocalizationProvider dateAdapter={AdapterDateFns} >
-      <DatePicker
-        label="Date of Joining"
-        value={value}
-        onChange={(newValue) => {
-          setValue(newValue);
-        }}
-        renderInput={(params) => <TextField  {...params} />}
-      />
-    </LocalizationProvider>
-    </div>
+        </div>
+        </Box>
+        <Box
+      component="form"
+      sx={
+        { m: 1}
+      }
+      noValidate
+      autoComplete="off"
+      //align="left"
+    >
+      <div>
         <TextField
           id="outlined"
           style={marginTop}
@@ -304,6 +359,17 @@ function valuetext(value) {
 
 
         />
+        </div>
+        </Box>
+          <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+        <div>
         <TextField
           id="outlined"
           style={marginTop}
@@ -330,7 +396,16 @@ function valuetext(value) {
           value={formik.values.email}
           name="email"
         />
-
+</div>
+</Box>
+<Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
 <div style={marginTop}>
   <p align="left">Employee Rating</p>
               <Slider
@@ -350,7 +425,9 @@ function valuetext(value) {
 
               />
               </div>
+              </Box>
         <LoadingButton loading ={loading}
+        //disabled={}
         fullWidth
         loadingPosition="start"
         startIcon={<Save />}
@@ -374,10 +451,13 @@ function valuetext(value) {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-          </form>
+      
+          </Form>
+         
+          </FormikProvider>
         </Paper>
         </Grid>
-    </div>
+        </div>
     </center>
     </div>
   );
