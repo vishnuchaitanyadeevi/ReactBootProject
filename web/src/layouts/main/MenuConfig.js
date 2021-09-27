@@ -4,7 +4,7 @@ import fileFill from '@iconify/icons-eva/file-fill';
 import { Avatar } from '@material-ui/core';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
-//import Avatar from 'src/theme/overrides/Avatar';
+// import Avatar from 'src/theme/overrides/Avatar';
 // ----------------------------------------------------------------------
 
 const ICON_SIZE = {

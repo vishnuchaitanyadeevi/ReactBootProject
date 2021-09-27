@@ -9,8 +9,7 @@ import { Button, Box, Link, Container, Typography, Stack } from '@material-ui/co
 import { PATH_DASHBOARD } from '../../../routes/paths';
 //
 import { varFadeIn, varFadeInUp, varWrapEnter, varFadeInRight } from '../../animate';
-import MainNavbar from 'src/layouts/main/MainNavbar';
-import Avatar from 'src/theme/overrides/Avatar';
+
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(motion.div)(({ theme }) => ({
@@ -71,7 +70,6 @@ export default function LandingHero() {
   return (
     <>
       <RootStyle initial="initial" animate="animate" variants={varWrapEnter}>
-        
         <HeroOverlayStyle alt="overlay" src="/static/overlay.svg" variants={varFadeIn} />
 
         <HeroImgStyle alt="hero" src="/static/home/hero.png" variants={varFadeInUp} />
@@ -81,14 +79,11 @@ export default function LandingHero() {
             <motion.div variants={varFadeInRight}>
               <Typography variant="h1" sx={{ color: 'common.white' }}>
                 Welcome <br />
-                User !<br /> 
-               
+                User !<br />
               </Typography>
             </motion.div>
 
-            <motion.div variants={varFadeInRight}>
-            
-            </motion.div>
+            <motion.div variants={varFadeInRight} />
           </ContentStyle>
         </Container>
       </RootStyle>

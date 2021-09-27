@@ -59,10 +59,7 @@ export default function Router() {
     {
       path: 'Manage-order',
       element: <DashboardLayout />,
-      children: [
-        { path: '/', element: <Navigate to="/Manage-order/Dispatch-appointment" replace /> },
-       
-      ]
+      children: [{ path: '/', element: <Navigate to="/Manage-order/Dispatch-appointment" replace /> }]
     },
     {
       path: '',
@@ -80,16 +77,16 @@ export default function Router() {
     },
     {
       path: '/home',
-      element: <LandingPage />,
-     // children: [{ path: '/', element: <Dashboard /> }]
+      element: <LandingPage />
+      // children: [{ path: '/', element: <Dashboard /> }]
     },
     {
       path: '/employee',
-      element: <Employee />,
+      element: <Employee />
     },
     {
       path: '/pay',
-      element: <StripeContainer />,
+      element: <StripeContainer />
     },
     { path: '*', element: <Navigate to="/404" replace /> }
   ]);

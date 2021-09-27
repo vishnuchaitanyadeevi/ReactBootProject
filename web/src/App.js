@@ -21,7 +21,7 @@ export default function App() {
   useEffect(() => {
     if (location.pathname === '/login') {
       // if (localStorage.getItem(TOKEN_KEY)) navigate('/');
-    } 
+    }
     // else if (localStorage.getItem(TOKEN_KEY)) navigate(location);
     else navigate('/login'); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

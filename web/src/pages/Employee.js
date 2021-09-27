@@ -1,48 +1,16 @@
 import React from 'react';
-import { useState } from 'react';
-
-import * as Yup from 'yup';
-import { FormikProvider, Form } from 'formik';
+import { FormikProvider, Form, useFormik } from 'formik';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { Box, Button, Checkbox, TextField, Paper, Typography, Grid, IconButton, NoSsr } from '@material-ui/core';
+import { Box, Button, TextField, Paper, Grid, Slider } from '@material-ui/core';
 import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
-//import LoadingOverlay from 'react-loading-overlay';
-import { LocalizationProvider } from '@material-ui/lab';
-import { LoadingButton } from '@material-ui/lab';
+// import LoadingOverlay from 'react-loading-overlay';
+import { LoadingButton, DatePicker, LocalizationProvider } from '@material-ui/lab';
 import { Save } from '@material-ui/icons';
-import { DatePicker } from '@material-ui/lab';
-import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Slider } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/';
-import InputLabel from '@material-ui/core/InputLabel';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import styled from '@material-ui/styles/styled';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import { CheckCircleOutlined } from '@material-ui/icons';
-import { CancelOutlined } from '@material-ui/icons';
-import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
-import Tab from '@material-ui/core/Tab';
-import { Tabs } from '@material-ui/core';
-import MainNavbar from 'src/layouts/main/MainNavbar';
-// adding inputAdornment
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-// import Signin from './Signin';
-import Select from '@material-ui/core/Select';
 import '../Styles/app.scss';
-import { Formik, useFormik } from 'formik';
-import { values } from 'lodash';
-
-//formik starts
-// gradient background starts
-
-
-
-//gradient background ends
-
+// formik starts
 
 const initialValues = {
   id: '',
@@ -53,116 +21,80 @@ const initialValues = {
   mob: '',
   email: '',
   rating: ''
+};
 
-}
-
-
-const onSubmit = values => {
-  console.log('Form data', values)
-}
+const onSubmit = (values) => {
+  console.log('Form data', values);
+};
 
 // validation
-const validate = values => {
-  var errors = {}
+const validate = (values) => {
+  const errors = {};
 
   if (!values.id) {
-    errors.id = 'Required'
-  }
-
-  else if (!/^[0-9]{3}$/i.test(values.id)) {
-    errors.id = 'Invalid ID'
+    errors.id = 'Required';
+  } else if (!/^[0-9]{3}$/i.test(values.id)) {
+    errors.id = 'Invalid ID';
   }
 
   if (!values.fname) {
-    errors.fname = 'Required'
-  }
-
-  else if (!/^[a-zA-Z]+$/i.test(values.fname)) {
-    errors.fname = 'First Name must contain letters'
+    errors.fname = 'Required';
+  } else if (!/^[a-zA-Z]+$/i.test(values.fname)) {
+    errors.fname = 'First Name must contain letters';
   }
 
   if (!values.lname) {
-    errors.lname = 'Required'
-  }
-
-  else if (!/^[a-zA-Z]+$/i.test(values.lname)) {
-    errors.lname = 'Last Name must contain letters'
+    errors.lname = 'Required';
+  } else if (!/^[a-zA-Z]+$/i.test(values.lname)) {
+    errors.lname = 'Last Name must contain letters';
   }
 
   if (!values.doj) {
-    errors.doj = 'Required'
+    errors.doj = 'Required';
   }
+
   if (!values.add) {
-    errors.add = 'Required'
+    errors.add = 'Required';
   }
 
   if (!values.mob) {
-    errors.mob = 'Required'
+    errors.mob = 'Required';
+  } else if (!/^[0-9]{10}$/i.test(values.mob)) {
+    errors.mob = 'Invalid Mobile Number';
   }
-
-  else if (!/^[0-9]{10}$/i.test(values.mob)) {
-    errors.mob = 'Invalid Mobile Number'
-  }
-
-
 
   if (!values.email) {
-    errors.email = 'Required'
-  }
-  else if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(values.email)) {
-    errors.email = 'Invalid email'
+    errors.email = 'Required';
+  } else if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(values.email)) {
+    errors.email = 'Invalid email';
   }
 
   if (!values.rating) {
-    errors.rating = 'Required'
+    errors.rating = 'Required';
   }
-
-
-  return errors
-}
-
-
-
-
-
-
+  return errors;
+};
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const marginTop = { marginTop: 10 }
-/*
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    '& > * + *': {
-      marginTop: theme.spacing(2),
-    },
-  },
-}));
-*/
-
+const marginTop = { marginTop: 10 };
 
 function Employee() {
+  // formik
 
-  //formik
-
-  const formik = useFormik(
-    {
-      initialValues,
-      onSubmit,
-      validate
-
-    }
-  )
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validate
+  });
 
   // Snackbar Code Starts
 
-
-  //Date Picker
+  // Date Picker
   const [value, setValue] = React.useState(null);
-  //SnackBar
+  // SnackBar
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
 
@@ -173,12 +105,9 @@ function Employee() {
   };
 
   const closeloader = () => {
-
     setTimeout(() => {
       setLoading(false);
     }, 2000);
-
-
   };
 
   const handleClose = (event, reason) => {
@@ -189,7 +118,6 @@ function Employee() {
     setOpen(false);
   };
 
-
   // loader
   const [loader, setLoader] = React.useState(false);
   const handleLoader = () => {
@@ -198,45 +126,32 @@ function Employee() {
   const handleToggle = () => {
     setLoader(!loader);
   };
-
-
-
-
-  //formik handle change
+  // formik handle change
   const [age, setAge] = React.useState('');
 
   const handleChange = (event) => {
     setAge(event.target.value);
-
   };
-
-
 
   function valuetext(value) {
     return `${value}`;
   }
 
-  //Snackbar code ends
-
-
-
-  const paperStyle = { padding: '30px 20px', width: 570 }
+  // Snackbar code ends
+  const paperStyle = { padding: '30px 20px', width: 570 };
 
   return (
     <div>
       <center>
-        <div >
-          <Grid >
-            <Paper elevation={20} style={paperStyle} >
-              <Grid align='center'></Grid>
+        <div>
+          <Grid>
+            <Paper elevation={20} style={paperStyle}>
+              <Grid align="center" />
               <FormikProvider value={formik}>
                 <Form onSubmit={formik.handleSubmit}>
                   <Alert severity="info">
-                    <div align="left">
-                      Fill Employee Details Below
-                    </div>
+                    <div align="left">Fill Employee Details Below</div>
                   </Alert>
-
                   <Box
                     //  component="form"
                     // sx={{
@@ -258,11 +173,9 @@ function Employee() {
                         onChange={formik.handleChange}
                         value={formik.values.id}
                         name="id"
-
                       />
 
-
-                      <LocalizationProvider dateAdapter={AdapterDateFns} >
+                      <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
                           style={{ width: '100%', maxWidth: '100%', minWidth: '20%', marginTop: 10 }}
                           fullWidth
@@ -271,10 +184,14 @@ function Employee() {
                           onChange={(newValue) => {
                             setValue(newValue);
                           }}
-                          renderInput={(params) => <TextField style={{ width: '100%', maxWidth: '100%', minWidth: '20%', marginTop: 10 }}  {...params} />}
+                          renderInput={(params) => (
+                            <TextField
+                              style={{ width: '100%', maxWidth: '100%', minWidth: '20%', marginTop: 10 }}
+                              {...params}
+                            />
+                          )}
                         />
                       </LocalizationProvider>
-
                     </div>
                   </Box>
                   <Box
@@ -300,8 +217,6 @@ function Employee() {
                         name="fname"
                       />
 
-
-
                       <TextField
                         id="outlined"
                         style={marginTop}
@@ -324,7 +239,7 @@ function Employee() {
                     // }
                     noValidate
                     autoComplete="off"
-                  //align="left"
+                    // align="left"
                   >
                     <div>
                       <TextField
@@ -339,9 +254,6 @@ function Employee() {
                         onChange={formik.handleChange}
                         value={formik.values.add}
                         name="add"
-
-
-
                       />
                     </div>
                   </Box>
@@ -385,7 +297,7 @@ function Employee() {
                   <Box
                     component="form"
                     sx={{
-                      '& .MuiTextField-root': { m: 1, width: '25ch' },
+                      '& .MuiTextField-root': { m: 1, width: '25ch' }
                     }}
                     noValidate
                     autoComplete="off"
@@ -393,7 +305,6 @@ function Employee() {
                     <div style={marginTop}>
                       <p align="left">Employee Rating</p>
                       <Slider
-
                         defaultValue={0}
                         getAriaValueText={valuetext}
                         valueLabelDisplay="auto"
@@ -403,12 +314,16 @@ function Employee() {
                       />
                     </div>
                   </Box>
-                  <LoadingButton loading={loading}
-                    //disabled={}
+                  <LoadingButton
+                    loading={loading}
+                    // disabled={}
                     fullWidth
                     loadingPosition="start"
                     startIcon={<Save />}
-                    variant="outlined" onClick={handleClick} style={marginTop}>
+                    variant="outlined"
+                    onClick={handleClick}
+                    style={marginTop}
+                  >
                     Save Employee Data
                   </LoadingButton>
                   <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
@@ -418,7 +333,6 @@ function Employee() {
                   </Snackbar>
 
                   <Button fullWidth variant="outlined" style={marginTop} onClick={handleToggle}>
-
                     Open Page Loader
                   </Button>
                   <Backdrop
@@ -428,9 +342,7 @@ function Employee() {
                   >
                     <CircularProgress color="inherit" />
                   </Backdrop>
-
                 </Form>
-
               </FormikProvider>
             </Paper>
           </Grid>

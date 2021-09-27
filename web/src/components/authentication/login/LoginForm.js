@@ -4,8 +4,7 @@ import * as Yup from 'yup';
 import { Route, useNavigate } from 'react-router-dom';
 import { FormikProvider, Form, useFormik } from 'formik';
 import { Icon } from '@iconify/react';
-import LandingPage from 'src/pages/LandingPage';
-import { PATH_PAGE } from 'src/routes/paths';
+
 // material
 import { Link, Stack, Checkbox, TextField, IconButton, InputAdornment, FormControlLabel } from '@material-ui/core';
 import { LoadingButton } from '@material-ui/lab';
@@ -13,10 +12,6 @@ import { LOCAL_STORAGE_KEYS } from '../../../utils/constants';
 import { login } from '../../../utils/auth-service';
 // hooks
 import useIsMountedRef from '../../../hooks/useIsMountedRef';
-//styles
-//import '../Styles/app.scss';
-
-
 
 const { TOKEN_KEY } = LOCAL_STORAGE_KEYS;
 export default function LoginForm() {
@@ -37,11 +32,8 @@ export default function LoginForm() {
     },
     validationSchema: LoginSchema,
     onSubmit: () => {
-    navigate('/home');
-     
+      navigate('/home');
     }
-    
-  
   });
   const { errors, touched, values, isSubmitting, getFieldProps } = formik;
 
