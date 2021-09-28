@@ -13,6 +13,7 @@ import './styles.css';
 import { Typography, Button, TextField, Paper, Grid, Alert } from '@material-ui/core';
 import { LoadingButton } from '@material-ui/lab';
 import StripeInput from '../components/StripeInput';
+import MainNavbar from '../layouts/main/MainNavbar';
 
 const CARD_OPTIONS = {
   iconStyle: 'solid',
@@ -72,9 +73,12 @@ export default function PaymentForm() {
   const marginTop = { marginTop: 10 };
   return (
     <center>
+      <div>
+        <MainNavbar />
+      </div>
       <>
         {!success ? (
-          <div>
+          <div className="rel">
             <Grid>
               <Paper elevation={20} style={paperStyle}>
                 <Grid align="center" />
@@ -153,7 +157,7 @@ export default function PaymentForm() {
             </Grid>
           </div>
         ) : (
-          <Grid>
+          <Grid className="rel">
             <Paper elevation={20} style={paperStyle}>
               <Grid align="center" />
               <Alert severity="success">Your payment is Successful. Thanks for using our service.</Alert>

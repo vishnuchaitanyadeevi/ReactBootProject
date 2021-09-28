@@ -7,6 +7,8 @@ import { Icon } from '@iconify/react';
 
 // material
 import { Link, Stack, Checkbox, TextField, IconButton, InputAdornment, FormControlLabel } from '@material-ui/core';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { LoadingButton } from '@material-ui/lab';
 import { LOCAL_STORAGE_KEYS } from '../../../utils/constants';
 import { login } from '../../../utils/auth-service';
@@ -15,6 +17,9 @@ import useIsMountedRef from '../../../hooks/useIsMountedRef';
 
 const { TOKEN_KEY } = LOCAL_STORAGE_KEYS;
 export default function LoginForm() {
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleMouseDownPassword = () => setShowPassword(!showPassword);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -52,6 +57,7 @@ export default function LoginForm() {
             helperText={touched.email && errors.email}
           />
           <TextField
+            type={showPassword ? 'text' : 'password'}
             fullWidth
             autoComplete="current-password"
             label="Password"
@@ -60,8 +66,8 @@ export default function LoginForm() {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton edge="end">
-                    <Icon />
+                  <IconButton edge="end" onClick={handleClickShowPassword} onMouseDown={handleMouseDownPassword}>
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
               )

@@ -10,6 +10,8 @@ import { Save } from '@material-ui/icons';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import '../Styles/app.scss';
+import MainNavbar from '../layouts/main/MainNavbar';
+
 // formik starts
 
 const initialValues = {
@@ -136,216 +138,217 @@ function Employee() {
   }
 
   // Snackbar code ends
-  const paperStyle = { padding: '30px 20px', width: 570 };
+  const paperStyle = { padding: '30px 20px', width: 570, margin: '20px auto' };
 
   return (
     <div>
-      <center>
-        <div>
-          <Grid>
-            <Paper elevation={20} style={paperStyle}>
-              <Grid align="center" />
-              <FormikProvider value={formik}>
-                <Form onSubmit={formik.handleSubmit}>
-                  <Alert severity="info">
-                    <div align="left">Fill Employee Details Below</div>
+      <div>
+        <MainNavbar />
+      </div>
+      <div align="center" className="rel">
+        <Grid>
+          <Paper elevation={20} style={paperStyle}>
+            <Grid align="center" />
+            <FormikProvider value={formik}>
+              <Form onSubmit={formik.handleSubmit}>
+                <Alert severity="info">
+                  <div align="left">Fill Employee Details Below</div>
+                </Alert>
+                <Box
+                  //  component="form"
+                  // sx={{
+                  //   '& .MuiTextField-root': { m: 1, width: '25ch' },
+                  // }}
+                  noValidate
+                  autoComplete="off"
+                >
+                  <div>
+                    <TextField
+                      id="outlined"
+                      style={marginTop}
+                      label="Employee ID"
+                      // defaultValue=""
+                      fullWidth
+                      helperText={formik.touched.id && formik.errors.id ? formik.errors.id : ''}
+                      error={Boolean(formik.touched.id && formik.errors.id)}
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                      value={formik.values.id}
+                      name="id"
+                    />
+
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      <DatePicker
+                        style={{ width: '100%', maxWidth: '100%', minWidth: '20%', marginTop: 10 }}
+                        fullWidth
+                        label="Date of Joining"
+                        value={value}
+                        onChange={(newValue) => {
+                          setValue(newValue);
+                        }}
+                        renderInput={(params) => (
+                          <TextField
+                            style={{ width: '100%', maxWidth: '100%', minWidth: '20%', marginTop: 10 }}
+                            {...params}
+                          />
+                        )}
+                      />
+                    </LocalizationProvider>
+                  </div>
+                </Box>
+                <Box
+                  component="form"
+                  // sx={{
+                  //   '& .MuiTextField-root': { m: 1, width: '25ch' },
+                  // }}
+                  noValidate
+                  autoComplete="off"
+                >
+                  <div>
+                    <TextField
+                      id="outlined"
+                      style={marginTop}
+                      label="Employee First Name"
+                      // defaultValue=""
+                      fullWidth
+                      helperText={formik.touched.fname && formik.errors.fname ? formik.errors.fname : ''}
+                      error={Boolean(formik.touched.fname && formik.errors.fname)}
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                      value={formik.values.fname}
+                      name="fname"
+                    />
+
+                    <TextField
+                      id="outlined"
+                      style={marginTop}
+                      label="Employee Last Name"
+                      // defaultValue=""
+                      fullWidth
+                      helperText={formik.touched.lname && formik.errors.lname ? formik.errors.lname : ''}
+                      error={Boolean(formik.touched.lname && formik.errors.lname)}
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                      value={formik.values.lname}
+                      name="lname"
+                    />
+                  </div>
+                </Box>
+                <Box
+                  component="form"
+                  // sx={
+                  //   { m: 1}
+                  // }
+                  noValidate
+                  autoComplete="off"
+                  // align="left"
+                >
+                  <div>
+                    <TextField
+                      id="outlined"
+                      style={marginTop}
+                      label="Employee Address"
+                      // defaultValue=""
+                      fullWidth
+                      helperText={formik.touched.add && formik.errors.add ? formik.errors.add : ''}
+                      error={Boolean(formik.touched.add && formik.errors.add)}
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                      value={formik.values.add}
+                      name="add"
+                    />
+                  </div>
+                </Box>
+                <Box
+                  component="form"
+                  // sx={{
+                  //   '& .MuiTextField-root': { m: 1, width: '25ch' },
+                  // }}
+                  noValidate
+                  autoComplete="off"
+                >
+                  <div>
+                    <TextField
+                      id="mob"
+                      style={marginTop}
+                      label="Employee Mobile Number"
+                      // defaultValue=""
+                      fullWidth
+                      helperText={formik.touched.mob && formik.errors.mob ? formik.errors.mob : ''}
+                      error={Boolean(formik.touched.mob && formik.errors.mob)}
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                      value={formik.values.mob}
+                      name="mob"
+                    />
+                    <TextField
+                      id="outlined"
+                      style={marginTop}
+                      label="Employee E-mail"
+                      // defaultValue=""
+                      fullWidth
+                      helperText={formik.touched.email && formik.errors.email ? formik.errors.email : ''}
+                      error={Boolean(formik.touched.email && formik.errors.email)}
+                      onBlur={formik.handleBlur}
+                      onChange={formik.handleChange}
+                      value={formik.values.email}
+                      name="email"
+                    />
+                  </div>
+                </Box>
+                <Box
+                  component="form"
+                  sx={{
+                    '& .MuiTextField-root': { m: 1, width: '25ch' }
+                  }}
+                  noValidate
+                  autoComplete="off"
+                >
+                  <div style={marginTop}>
+                    <p align="left">Employee Rating</p>
+                    <Slider
+                      defaultValue={0}
+                      getAriaValueText={valuetext}
+                      valueLabelDisplay="auto"
+                      step={1}
+                      min={1}
+                      max={10}
+                    />
+                  </div>
+                </Box>
+                <LoadingButton
+                  loading={loading}
+                  // disabled={}
+                  fullWidth
+                  loadingPosition="start"
+                  startIcon={<Save />}
+                  variant="outlined"
+                  onClick={handleClick}
+                  style={marginTop}
+                >
+                  Save Employee Data
+                </LoadingButton>
+                <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+                  <Alert onClose={handleClose} severity="success">
+                    Data Saved Successfully!
                   </Alert>
-                  <Box
-                    //  component="form"
-                    // sx={{
-                    //   '& .MuiTextField-root': { m: 1, width: '25ch' },
-                    // }}
-                    noValidate
-                    autoComplete="off"
-                  >
-                    <div>
-                      <TextField
-                        id="outlined"
-                        style={marginTop}
-                        label="Employee ID"
-                        // defaultValue=""
-                        fullWidth
-                        helperText={formik.touched.id && formik.errors.id ? formik.errors.id : ''}
-                        error={Boolean(formik.touched.id && formik.errors.id)}
-                        onBlur={formik.handleBlur}
-                        onChange={formik.handleChange}
-                        value={formik.values.id}
-                        name="id"
-                      />
+                </Snackbar>
 
-                      <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <DatePicker
-                          style={{ width: '100%', maxWidth: '100%', minWidth: '20%', marginTop: 10 }}
-                          fullWidth
-                          label="Date of Joining"
-                          value={value}
-                          onChange={(newValue) => {
-                            setValue(newValue);
-                          }}
-                          renderInput={(params) => (
-                            <TextField
-                              style={{ width: '100%', maxWidth: '100%', minWidth: '20%', marginTop: 10 }}
-                              {...params}
-                            />
-                          )}
-                        />
-                      </LocalizationProvider>
-                    </div>
-                  </Box>
-                  <Box
-                    component="form"
-                    // sx={{
-                    //   '& .MuiTextField-root': { m: 1, width: '25ch' },
-                    // }}
-                    noValidate
-                    autoComplete="off"
-                  >
-                    <div>
-                      <TextField
-                        id="outlined"
-                        style={marginTop}
-                        label="Employee First Name"
-                        // defaultValue=""
-                        fullWidth
-                        helperText={formik.touched.fname && formik.errors.fname ? formik.errors.fname : ''}
-                        error={Boolean(formik.touched.fname && formik.errors.fname)}
-                        onBlur={formik.handleBlur}
-                        onChange={formik.handleChange}
-                        value={formik.values.fname}
-                        name="fname"
-                      />
-
-                      <TextField
-                        id="outlined"
-                        style={marginTop}
-                        label="Employee Last Name"
-                        // defaultValue=""
-                        fullWidth
-                        helperText={formik.touched.lname && formik.errors.lname ? formik.errors.lname : ''}
-                        error={Boolean(formik.touched.lname && formik.errors.lname)}
-                        onBlur={formik.handleBlur}
-                        onChange={formik.handleChange}
-                        value={formik.values.lname}
-                        name="lname"
-                      />
-                    </div>
-                  </Box>
-                  <Box
-                    component="form"
-                    // sx={
-                    //   { m: 1}
-                    // }
-                    noValidate
-                    autoComplete="off"
-                    // align="left"
-                  >
-                    <div>
-                      <TextField
-                        id="outlined"
-                        style={marginTop}
-                        label="Employee Address"
-                        // defaultValue=""
-                        fullWidth
-                        helperText={formik.touched.add && formik.errors.add ? formik.errors.add : ''}
-                        error={Boolean(formik.touched.add && formik.errors.add)}
-                        onBlur={formik.handleBlur}
-                        onChange={formik.handleChange}
-                        value={formik.values.add}
-                        name="add"
-                      />
-                    </div>
-                  </Box>
-                  <Box
-                    component="form"
-                    // sx={{
-                    //   '& .MuiTextField-root': { m: 1, width: '25ch' },
-                    // }}
-                    noValidate
-                    autoComplete="off"
-                  >
-                    <div>
-                      <TextField
-                        id="outlined"
-                        style={marginTop}
-                        label="Employee Mobile Number"
-                        // defaultValue=""
-                        fullWidth
-                        helperText={formik.touched.mob && formik.errors.mob ? formik.errors.mob : ''}
-                        error={Boolean(formik.touched.mob && formik.errors.mob)}
-                        onBlur={formik.handleBlur}
-                        onChange={formik.handleChange}
-                        value={formik.values.mob}
-                        name="mob"
-                      />
-                      <TextField
-                        id="outlined"
-                        style={marginTop}
-                        label="Employee E-mail"
-                        // defaultValue=""
-                        fullWidth
-                        helperText={formik.touched.email && formik.errors.email ? formik.errors.email : ''}
-                        error={Boolean(formik.touched.email && formik.errors.email)}
-                        onBlur={formik.handleBlur}
-                        onChange={formik.handleChange}
-                        value={formik.values.email}
-                        name="email"
-                      />
-                    </div>
-                  </Box>
-                  <Box
-                    component="form"
-                    sx={{
-                      '& .MuiTextField-root': { m: 1, width: '25ch' }
-                    }}
-                    noValidate
-                    autoComplete="off"
-                  >
-                    <div style={marginTop}>
-                      <p align="left">Employee Rating</p>
-                      <Slider
-                        defaultValue={0}
-                        getAriaValueText={valuetext}
-                        valueLabelDisplay="auto"
-                        step={1}
-                        min={1}
-                        max={10}
-                      />
-                    </div>
-                  </Box>
-                  <LoadingButton
-                    loading={loading}
-                    // disabled={}
-                    fullWidth
-                    loadingPosition="start"
-                    startIcon={<Save />}
-                    variant="outlined"
-                    onClick={handleClick}
-                    style={marginTop}
-                  >
-                    Save Employee Data
-                  </LoadingButton>
-                  <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
-                    <Alert onClose={handleClose} severity="success">
-                      Data Saved Successfully!
-                    </Alert>
-                  </Snackbar>
-
-                  <Button fullWidth variant="outlined" style={marginTop} onClick={handleToggle}>
-                    Open Page Loader
-                  </Button>
-                  <Backdrop
-                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                    open={loader}
-                    onClick={handleLoader}
-                  >
-                    <CircularProgress color="inherit" />
-                  </Backdrop>
-                </Form>
-              </FormikProvider>
-            </Paper>
-          </Grid>
-        </div>
-      </center>
+                <Button fullWidth variant="outlined" style={marginTop} onClick={handleToggle}>
+                  Open Page Loader
+                </Button>
+                <Backdrop
+                  sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                  open={loader}
+                  onClick={handleLoader}
+                >
+                  <CircularProgress color="inherit" />
+                </Backdrop>
+              </Form>
+            </FormikProvider>
+          </Paper>
+        </Grid>
+      </div>
     </div>
   );
 }

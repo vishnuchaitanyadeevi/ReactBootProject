@@ -1,5 +1,8 @@
 import { DataGrid } from '@material-ui/data-grid';
 import { Typography } from '@material-ui/core';
+import MainNavbar from '../layouts/main/MainNavbar';
+import '../Styles/app.scss';
+
 // data grid
 const columns = [
   { field: 'id', headerName: 'ID', width: 120 },
@@ -61,8 +64,11 @@ const rows = [
 // data grid ends
 function Data() {
   return (
-    <center>
-      <div style={{ height: 400 }}>
+    <div>
+      <div>
+        <MainNavbar />
+      </div>
+      <div align="center" style={{ height: 400 }} className="rel">
         <Typography>EMPLOYEE DATA</Typography>
         <DataGrid
           align="center"
@@ -74,7 +80,7 @@ function Data() {
           disableSelectionOnClick
         />
       </div>
-    </center>
+    </div>
   );
 }
 
