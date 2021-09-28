@@ -28,7 +28,8 @@ export const PATH_PAGE = {
   components: '/components',
   landingPage: '/home',
   employee: '/employee',
-  StripeContainer: '/pay'
+  StripeContainer: '/pay',
+  Data: '/data'
 };
 
 const ROOTS_DASHBOARD = '';

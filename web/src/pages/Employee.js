@@ -59,8 +59,8 @@ const validate = (values) => {
 
   if (!values.mob) {
     errors.mob = 'Required';
-  } else if (!/^[0-9]{10}$/i.test(values.mob)) {
-    errors.mob = 'Invalid Mobile Number';
+  } else if (!/^\([2-9][\d]{2}\) [\d]{3}-[\d]{4}$/i.test(values.mob)) {
+    errors.mob = 'Invalid Mobile Number (US Format)';
   }
 
   if (!values.email) {
@@ -75,9 +75,7 @@ const validate = (values) => {
   return errors;
 };
 
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+const Alert = React.forwardRef((props, ref) => <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />);
 
 const marginTop = { marginTop: 10 };
 

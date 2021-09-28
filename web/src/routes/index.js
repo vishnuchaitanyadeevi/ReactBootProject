@@ -85,6 +85,10 @@ export default function Router() {
       element: <Employee />
     },
     {
+      path: '/data',
+      element: <Data />
+    },
+    {
       path: '/pay',
       element: <StripeContainer />
     },
@@ -100,4 +104,5 @@ const PageFour = Loadable(lazy(() => import('../pages/PageFour')));
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 const LandingPage = Loadable(lazy(() => import('../pages/LandingPage')));
 const Employee = Loadable(lazy(() => import('../pages/Employee')));
+const Data = Loadable(lazy(() => import('../pages/Data')));
 const StripeContainer = Loadable(lazy(() => import('../pages/StripeContainer')));

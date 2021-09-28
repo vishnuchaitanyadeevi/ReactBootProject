@@ -19,6 +19,7 @@ const menuConfig = [
     icon: <Icon icon={homeFill} {...ICON_SIZE} />
   },
   { title: 'Employee', path: '/employee', icon: <Icon icon={fileFill} {...ICON_SIZE} /> },
+  { title: 'Data', path: '/data', icon: <Icon icon={fileFill} {...ICON_SIZE} /> },
   { title: 'Pay', path: '/pay', icon: <Icon icon={fileFill} {...ICON_SIZE} /> }
 ];
 
