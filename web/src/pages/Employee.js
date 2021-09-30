@@ -102,6 +102,7 @@ function Employee() {
     setOpen(true);
     setLoading(true);
     closeloader();
+    handleLoader();
   };
 
   const closeloader = () => {
@@ -121,11 +122,20 @@ function Employee() {
   // loader
   const [loader, setLoader] = React.useState(false);
   const handleLoader = () => {
-    setLoader(false);
+    setLoader(true);
+    closePageloader();
   };
-  const handleToggle = () => {
+
+  const closePageloader = () => {
+    setTimeout(() => {
+      setLoader(false);
+    }, 2000);
+  };
+
+  /* const handleToggle = () => {
     setLoader(!loader);
   };
+  */
   // formik handle change
   const [age, setAge] = React.useState('');
 
@@ -169,7 +179,9 @@ function Employee() {
                       label="Employee ID"
                       // defaultValue=""
                       fullWidth
-                      helperText={formik.touched.id && formik.errors.id ? formik.errors.id : ''}
+                      helperText={
+                        formik.touched.id && formik.errors.id ? formik.errors.id : 'Enter 3-digit Employee ID'
+                      }
                       error={Boolean(formik.touched.id && formik.errors.id)}
                       onBlur={formik.handleBlur}
                       onChange={formik.handleChange}
@@ -274,7 +286,7 @@ function Employee() {
                       label="Employee Mobile Number"
                       // defaultValue=""
                       fullWidth
-                      helperText={formik.touched.mob && formik.errors.mob ? formik.errors.mob : ''}
+                      helperText={formik.touched.mob && formik.errors.mob ? formik.errors.mob : 'In US format'}
                       error={Boolean(formik.touched.mob && formik.errors.mob)}
                       onBlur={formik.handleBlur}
                       onChange={formik.handleChange}
@@ -313,6 +325,7 @@ function Employee() {
                       step={1}
                       min={1}
                       max={10}
+                      helperText="Between 1 to 10"
                     />
                   </div>
                 </Box>
@@ -334,13 +347,10 @@ function Employee() {
                   </Alert>
                 </Snackbar>
 
-                <Button fullWidth variant="outlined" style={marginTop} onClick={handleToggle}>
-                  Open Page Loader
-                </Button>
                 <Backdrop
                   sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                   open={loader}
-                  onClick={handleLoader}
+                  // onClick={handleLoader}
                 >
                   <CircularProgress color="inherit" />
                 </Backdrop>

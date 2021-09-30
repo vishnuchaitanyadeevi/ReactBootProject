@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router';
 import * as Yup from 'yup';
 import { Route, useNavigate } from 'react-router-dom';
 import { FormikProvider, Form, useFormik } from 'formik';
 import { Icon } from '@iconify/react';
+import axios from 'axios';
 
 // material
 import { Link, Stack, Checkbox, TextField, IconButton, InputAdornment, FormControlLabel } from '@material-ui/core';
@@ -22,8 +23,38 @@ export default function LoginForm() {
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [user, setUser] = useState();
   const navigate = useNavigate();
   const isMountedRef = useIsMountedRef();
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem('user');
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUser(foundUser);
+    }
+  }, []);
+
+  // logout
+  const handleLogout = () => {
+    setUser({});
+    setEmail('');
+    setPassword('');
+    localStorage.clear();
+  };
+
+  // login the user
+  /* const handleSubmit = async (e) => {
+    e.preventDefault();
+    const user = { email, password };
+    // send the email and password to the server
+    const response = await axios.post('http://localhost:4000/login', user);
+    // set the state of the user
+    setUser(response.data);
+    // store the user in localStorage
+    localStorage.setItem('user', JSON.stringify(response.data));
+  };
+  */
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -36,8 +67,17 @@ export default function LoginForm() {
       password
     },
     validationSchema: LoginSchema,
-    onSubmit: () => {
+    onSubmit: async (e) => {
       navigate('/home');
+      /* e.preventDefault();
+      const user = { email, password };
+      // send the email and password to the server
+      const response = await axios.post('http://localhost:4000/login', user);
+      // set the state of the user
+      setUser(response.data);
+      // store the user in localStorage
+      localStorage.setItem('user', JSON.stringify(response.data));
+      */
     }
   });
   const { errors, touched, values, isSubmitting, getFieldProps } = formik;
