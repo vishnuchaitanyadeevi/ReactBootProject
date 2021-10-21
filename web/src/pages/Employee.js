@@ -1,16 +1,45 @@
 import React from 'react';
 import { FormikProvider, Form, useFormik } from 'formik';
 import Backdrop from '@material-ui/core/Backdrop';
+import PropTypes from 'prop-types';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { Box, Button, TextField, Paper, Grid, Slider } from '@material-ui/core';
+import Input from '@mui/material/Input';
+import { Box, Button, TextField, Paper, Grid, Slider, Container } from '@material-ui/core';
+import moment from 'moment-timezone';
 import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
 // import LoadingOverlay from 'react-loading-overlay';
-import { LoadingButton, DatePicker, LocalizationProvider } from '@material-ui/lab';
+import { LoadingButton, DatePicker, LocalizationProvider, DateTimePicker } from '@material-ui/lab';
 import { Save } from '@material-ui/icons';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import '../Styles/app.scss';
+import { IMaskInput } from 'react-imask';
 import MainNavbar from '../layouts/main/MainNavbar';
+
+moment.tz.setDefault('Asia/Kuala_Lumpur');
+
+// Masking Input
+// const Alert = React.forwardRef((props, ref) => <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />);
+const TextMaskCustom = React.forwardRef((props, ref) => {
+  const { onChange, ...other } = props;
+  return (
+    <IMaskInput
+      {...other}
+      mask="(#00) 000-0000"
+      definitions={{
+        '#': /[1-9]/
+      }}
+      inputRef={ref}
+      onAccept={(value) => onChange({ target: { name: props.name, value } })}
+      overwrite
+    />
+  );
+});
+
+TextMaskCustom.propTypes = {
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
+};
 
 // formik starts
 
@@ -94,6 +123,8 @@ function Employee() {
 
   // Date Picker
   const [value, setValue] = React.useState(null);
+  // date time picker
+  const [dt, setdt] = React.useState(moment(new Date()).format());
   // SnackBar
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
@@ -143,6 +174,17 @@ function Employee() {
     setAge(event.target.value);
   };
 
+  const [values, setValues] = React.useState({
+    textmask: ''
+  });
+
+  const handleNumberChange = (event) => {
+    setValues({
+      ...values,
+      [event.target.name]: event.target.value
+    });
+  };
+
   function valuetext(value) {
     return `${value}`;
   }
@@ -161,192 +203,175 @@ function Employee() {
             <Grid align="center" />
             <FormikProvider value={formik}>
               <Form onSubmit={formik.handleSubmit}>
-                <Alert severity="info">
-                  <div align="left">Fill Employee Details Below</div>
-                </Alert>
-                <Box
-                  //  component="form"
-                  // sx={{
-                  //   '& .MuiTextField-root': { m: 1, width: '25ch' },
-                  // }}
-                  noValidate
-                  autoComplete="off"
-                >
-                  <div>
-                    <TextField
-                      id="outlined"
-                      style={marginTop}
-                      label="Employee ID"
-                      // defaultValue=""
-                      fullWidth
-                      helperText={
-                        formik.touched.id && formik.errors.id ? formik.errors.id : 'Enter 3-digit Employee ID'
-                      }
-                      error={Boolean(formik.touched.id && formik.errors.id)}
-                      onBlur={formik.handleBlur}
-                      onChange={formik.handleChange}
-                      value={formik.values.id}
-                      name="id"
-                    />
-
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                      <DatePicker
-                        style={{ width: '100%', maxWidth: '100%', minWidth: '20%', marginTop: 10 }}
+                <Container>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} md={12} lg={12} xl={12}>
+                      <Alert severity="info">Fill Employee Details Below</Alert>
+                    </Grid>
+                    <Grid item xs={12} md={6} lg={6} xl={6}>
+                      <TextField
+                        id="outlined"
+                        style={marginTop}
+                        label="Employee ID"
+                        // defaultValue=""
                         fullWidth
-                        label="Date of Joining"
-                        value={value}
-                        onChange={(newValue) => {
-                          setValue(newValue);
-                        }}
-                        renderInput={(params) => (
-                          <TextField
-                            style={{ width: '100%', maxWidth: '100%', minWidth: '20%', marginTop: 10 }}
-                            {...params}
-                          />
-                        )}
+                        helperText={
+                          formik.touched.id && formik.errors.id ? formik.errors.id : 'Enter 3-digit Employee ID'
+                        }
+                        error={Boolean(formik.touched.id && formik.errors.id)}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        value={formik.values.id}
+                        name="id"
                       />
-                    </LocalizationProvider>
-                  </div>
-                </Box>
-                <Box
-                  component="form"
-                  // sx={{
-                  //   '& .MuiTextField-root': { m: 1, width: '25ch' },
-                  // }}
-                  noValidate
-                  autoComplete="off"
-                >
-                  <div>
-                    <TextField
-                      id="outlined"
-                      style={marginTop}
-                      label="Employee First Name"
-                      // defaultValue=""
-                      fullWidth
-                      helperText={formik.touched.fname && formik.errors.fname ? formik.errors.fname : ''}
-                      error={Boolean(formik.touched.fname && formik.errors.fname)}
-                      onBlur={formik.handleBlur}
-                      onChange={formik.handleChange}
-                      value={formik.values.fname}
-                      name="fname"
-                    />
+                    </Grid>
+                    <Grid item xs={12} md={6} lg={6} xl={6}>
+                      <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DatePicker
+                          style={{ width: '100%', maxWidth: '100%', minWidth: '20%', marginTop: 10 }}
+                          fullWidth
+                          label="Date of Joining"
+                          value={value}
+                          onChange={(newValue) => {
+                            setValue(moment(newValue).format());
+                          }}
+                          renderInput={(params) => (
+                            <TextField
+                              style={{ width: '100%', maxWidth: '100%', minWidth: '20%', marginTop: 10 }}
+                              {...params}
+                            />
+                          )}
+                        />
+                      </LocalizationProvider>
+                    </Grid>
 
-                    <TextField
-                      id="outlined"
-                      style={marginTop}
-                      label="Employee Last Name"
-                      // defaultValue=""
-                      fullWidth
-                      helperText={formik.touched.lname && formik.errors.lname ? formik.errors.lname : ''}
-                      error={Boolean(formik.touched.lname && formik.errors.lname)}
-                      onBlur={formik.handleBlur}
-                      onChange={formik.handleChange}
-                      value={formik.values.lname}
-                      name="lname"
-                    />
-                  </div>
-                </Box>
-                <Box
-                  component="form"
-                  // sx={
-                  //   { m: 1}
-                  // }
-                  noValidate
-                  autoComplete="off"
-                  // align="left"
-                >
-                  <div>
-                    <TextField
-                      id="outlined"
-                      style={marginTop}
-                      label="Employee Address"
-                      // defaultValue=""
-                      fullWidth
-                      helperText={formik.touched.add && formik.errors.add ? formik.errors.add : ''}
-                      error={Boolean(formik.touched.add && formik.errors.add)}
-                      onBlur={formik.handleBlur}
-                      onChange={formik.handleChange}
-                      value={formik.values.add}
-                      name="add"
-                    />
-                  </div>
-                </Box>
-                <Box
-                  component="form"
-                  // sx={{
-                  //   '& .MuiTextField-root': { m: 1, width: '25ch' },
-                  // }}
-                  noValidate
-                  autoComplete="off"
-                >
-                  <div>
-                    <TextField
-                      id="mob"
-                      style={marginTop}
-                      label="Employee Mobile Number"
-                      // defaultValue=""
-                      fullWidth
-                      helperText={formik.touched.mob && formik.errors.mob ? formik.errors.mob : 'In US format'}
-                      error={Boolean(formik.touched.mob && formik.errors.mob)}
-                      onBlur={formik.handleBlur}
-                      onChange={formik.handleChange}
-                      value={formik.values.mob}
-                      name="mob"
-                    />
-                    <TextField
-                      id="outlined"
-                      style={marginTop}
-                      label="Employee E-mail"
-                      // defaultValue=""
-                      fullWidth
-                      helperText={formik.touched.email && formik.errors.email ? formik.errors.email : ''}
-                      error={Boolean(formik.touched.email && formik.errors.email)}
-                      onBlur={formik.handleBlur}
-                      onChange={formik.handleChange}
-                      value={formik.values.email}
-                      name="email"
-                    />
-                  </div>
-                </Box>
-                <Box
-                  component="form"
-                  sx={{
-                    '& .MuiTextField-root': { m: 1, width: '25ch' }
-                  }}
-                  noValidate
-                  autoComplete="off"
-                >
-                  <div style={marginTop}>
-                    <p align="left">Employee Rating</p>
-                    <Slider
-                      defaultValue={0}
-                      getAriaValueText={valuetext}
-                      valueLabelDisplay="auto"
-                      step={1}
-                      min={1}
-                      max={10}
-                      helperText="Between 1 to 10"
-                    />
-                  </div>
-                </Box>
-                <LoadingButton
-                  loading={loading}
-                  // disabled={}
-                  fullWidth
-                  loadingPosition="start"
-                  startIcon={<Save />}
-                  variant="outlined"
-                  onClick={handleClick}
-                  style={marginTop}
-                >
-                  Save Employee Data
-                </LoadingButton>
-                <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
-                  <Alert onClose={handleClose} severity="success">
-                    Data Saved Successfully!
-                  </Alert>
-                </Snackbar>
-
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        id="outlined"
+                        style={marginTop}
+                        label="Employee First Name"
+                        // defaultValue=""
+                        fullWidth
+                        helperText={formik.touched.fname && formik.errors.fname ? formik.errors.fname : ''}
+                        error={Boolean(formik.touched.fname && formik.errors.fname)}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        value={formik.values.fname}
+                        name="fname"
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        id="outlined"
+                        style={marginTop}
+                        label="Employee Last Name"
+                        // defaultValue=""
+                        fullWidth
+                        helperText={formik.touched.lname && formik.errors.lname ? formik.errors.lname : ''}
+                        error={Boolean(formik.touched.lname && formik.errors.lname)}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        value={formik.values.lname}
+                        name="lname"
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={12} lg={12} xl={12}>
+                      <TextField
+                        id="outlined"
+                        style={marginTop}
+                        label="Employee Address"
+                        // defaultValue=""
+                        fullWidth
+                        helperText={formik.touched.add && formik.errors.add ? formik.errors.add : ''}
+                        error={Boolean(formik.touched.add && formik.errors.add)}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        value={formik.values.add}
+                        name="add"
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        id="formatted-text-mask-input"
+                        style={marginTop}
+                        label="Employee Mobile Number"
+                        // defaultValue=""
+                        fullWidth
+                        helperText={formik.touched.mob && formik.errors.mob ? formik.errors.mob : 'In US format'}
+                        error={Boolean(formik.touched.mob && formik.errors.mob)}
+                        onBlur={formik.handleBlur}
+                        // value={formik.values.mob}
+                        // onChange={formik.handleChange}
+                        // name="textmask"
+                        // inputComponent={TextMaskCustom}
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        id="outlined"
+                        style={marginTop}
+                        label="Employee E-mail"
+                        // defaultValue=""
+                        fullWidth
+                        helperText={formik.touched.email && formik.errors.email ? formik.errors.email : ''}
+                        error={Boolean(formik.touched.email && formik.errors.email)}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
+                        name="email"
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={12} lg={12} xl={12}>
+                      <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DateTimePicker
+                          style={{ width: '100%', maxWidth: '100%', minWidth: '20%', marginTop: 10 }}
+                          renderInput={(props) => (
+                            <TextField
+                              style={{ width: '100%', maxWidth: '100%', minWidth: '20%', marginTop: 10 }}
+                              {...props}
+                            />
+                          )}
+                          label="Record Added On"
+                          value={dt}
+                          onChange={(newValue) => {
+                            setdt(newValue);
+                          }}
+                        />
+                      </LocalizationProvider>
+                    </Grid>
+                    <Grid item xs={12} md={12} lg={12} xl={12}>
+                      <p align="left">Employee Rating</p>
+                      <Slider
+                        defaultValue={0}
+                        getAriaValueText={valuetext}
+                        valueLabelDisplay="auto"
+                        step={1}
+                        min={1}
+                        max={10}
+                        helperText="Between 1 to 10"
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={12} lg={12} xl={12}>
+                      <LoadingButton
+                        loading={loading}
+                        // disabled={}
+                        fullWidth
+                        loadingPosition="start"
+                        startIcon={<Save />}
+                        variant="outlined"
+                        onClick={handleClick}
+                        style={marginTop}
+                      >
+                        Save Employee Data
+                      </LoadingButton>
+                    </Grid>
+                    <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+                      <Alert onClose={handleClose} severity="success">
+                        Data Saved Successfully!
+                      </Alert>
+                    </Snackbar>
+                  </Grid>
+                </Container>
                 <Backdrop
                   sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                   open={loader}

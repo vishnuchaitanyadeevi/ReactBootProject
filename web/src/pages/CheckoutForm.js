@@ -123,6 +123,7 @@ export default function PaymentForm() {
                   <Grid item xs={12} />
                   <Grid item xs={12} sm={6}>
                     <TextField
+                      type="password"
                       fullWidth
                       label="CVV"
                       style={marginTop}

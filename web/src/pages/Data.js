@@ -1,87 +1,77 @@
-import { DataGrid } from '@material-ui/data-grid';
-import { Typography } from '@material-ui/core';
+import React from 'react';
+import 'react-datasheet/lib/react-datasheet.css';
+import ReactDOM from 'react-dom';
+import Datasheet from 'react-datasheet';
 import MainNavbar from '../layouts/main/MainNavbar';
 import '../Styles/app.scss';
 
-// data grid
-const columns = [
-  { field: 'id', headerName: 'ID', width: 120 },
-  {
-    field: 'firstName',
-    headerName: 'First name',
-    width: 150,
-    editable: false
-  },
-  {
-    field: 'lastName',
-    headerName: 'Last name',
-    width: 150,
-    editable: false
-  },
-  {
-    field: 'rating',
-    headerName: 'Rating',
-    type: 'number',
-    width: 150,
-    editable: false
-  },
-  {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'Cannot sort this',
-    sortable: false,
-    width: 160,
-    valueGetter: (params) =>
-      `${params.getValue(params.id, 'firstName') || ''} ${params.getValue(params.id, 'lastName') || ''}`
-  },
-  {
-    field: 'mob',
-    headerName: 'Contact',
-    type: 'phone',
-    width: 150,
-    editable: false
-  },
-  {
-    field: 'doj',
-    headerName: 'Date of Joining',
-    type: 'date',
-    width: 1580,
-    editable: false
+export default class BasicSheet extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      grid: [
+        [
+          { readOnly: true, value: '' },
+          { value: 'Employee ID', readOnly: true },
+          { value: 'First Name', readOnly: true },
+          { value: 'Last Name', readOnly: true },
+          { value: 'Email', readOnly: true }
+        ],
+        [
+          { readOnly: true, value: 1 },
+          { value: 101 },
+          { value: 'Alex' },
+          { value: 'Page' },
+          { value: 'alex@gmail.com' }
+        ],
+        [
+          { readOnly: true, value: 2 },
+          { value: 102 },
+          { value: 'Bob' },
+          { value: 'Williamson' },
+          { value: 'bob@gmail.com' }
+        ],
+        [
+          { readOnly: true, value: 3 },
+          { value: 103 },
+          { value: 'Charles' },
+          { value: 'Babbage' },
+          { value: 'charles@gmail.com' }
+        ],
+        [
+          { readOnly: true, value: 4 },
+          { value: 104 },
+          { value: 'David' },
+          { value: 'Thomson' },
+          { value: 'david@gmail.com' }
+        ]
+      ]
+    };
   }
-];
 
-const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', rating: 10, mob: 9999999999, doj: new Date('2013/12/23') },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', rating: 8, mob: 9999999999, doj: new Date('2013/12/22') },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', rating: 9, mob: 9999999999, doj: new Date('2013/12/21') },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', rating: 10, mob: 9999999999, doj: new Date('2013/12/25') },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', rating: 7, mob: 9999999999, doj: new Date('2013/12/24') },
-  { id: 6, lastName: 'Melisandre', firstName: 'John', rating: 10, mob: 9999999999, doj: new Date('2013/12/20') },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', rating: 5, mob: 9999999999, doj: new Date('2013/12/26') },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', rating: 8, mob: 9999999999, doj: new Date('2013/12/27') },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', rating: 9, mob: 9999999999, doj: new Date('2013/12/28') }
-];
-// data grid ends
-function Data() {
-  return (
-    <div>
+  render() {
+    return (
       <div>
-        <MainNavbar />
+        <div>
+          <MainNavbar />
+        </div>
+        <div className="rel">
+          <div className="sheet-container">
+            <Datasheet
+              data={this.state.grid}
+              valueRenderer={(cell) => cell.value}
+              onContextMenu={(e, cell, i, j) => (cell.readOnly ? e.preventDefault() : null)}
+              onCellsChanged={(changes) => {
+                const grid = this.state.grid.map((row) => [...row]);
+                changes.forEach(({ cell, row, col, value }) => {
+                  grid[row][col] = { ...grid[row][col], value };
+                });
+                // this.setState({ grid });
+              }}
+            />
+          </div>
+        </div>
       </div>
-      <div align="center" style={{ height: 400 }} className="rel">
-        <Typography>EMPLOYEE DATA</Typography>
-        <DataGrid
-          align="center"
-          rows={rows}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-          checkboxSelection
-          disableSelectionOnClick
-        />
-      </div>
-    </div>
-  );
+    );
+  }
 }
-
-export default Data;
