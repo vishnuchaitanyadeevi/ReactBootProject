@@ -7,10 +7,10 @@ import { Icon } from '@iconify/react';
 import axios from 'axios';
 
 // material
-import { Link, Stack, Checkbox, TextField, IconButton, InputAdornment, FormControlLabel } from '@material-ui/core';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import { LoadingButton } from '@material-ui/lab';
+import { Link, Stack, Checkbox, TextField, IconButton, InputAdornment, FormControlLabel } from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { LoadingButton } from '@mui/lab';
 import { LOCAL_STORAGE_KEYS } from '../../../utils/constants';
 import { login } from '../../../utils/auth-service';
 // hooks
@@ -106,7 +106,12 @@ export default function LoginForm() {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton edge="end" onClick={handleClickShowPassword} onMouseDown={handleMouseDownPassword}>
+                  <IconButton
+                    edge="end"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    size="large"
+                  >
                     {showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>

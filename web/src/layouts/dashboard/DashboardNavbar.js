@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 import menu2Fill from '@iconify/icons-eva/menu-2-fill';
 // material
-import { alpha, experimentalStyled as styled } from '@material-ui/core/styles';
-import { Box, Stack, AppBar, Toolbar, IconButton } from '@material-ui/core';
+import { alpha, experimentalStyled as styled } from '@mui/material/styles';
+import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
 //
 import { MHidden } from '../../components/@material-extend';
 import AccountPopover from './AccountPopover';
@@ -43,7 +43,7 @@ export default function DashboardNavbar({ onOpenSidebar, header }) {
     <RootStyle>
       <ToolbarStyle>
         <MHidden width="lgUp">
-          <IconButton onClick={onOpenSidebar} sx={{ mr: 1, color: 'text.primary' }}>
+          <IconButton onClick={onOpenSidebar} sx={{ mr: 1, color: 'text.primary' }} size="large">
             <Icon icon={menu2Fill} />
           </IconButton>
         </MHidden>

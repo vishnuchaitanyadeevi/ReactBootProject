@@ -1,7 +1,7 @@
 import { isString } from 'lodash';
 import PropTypes from 'prop-types';
 // material
-import { Box, Typography, Link, Stack } from '@material-ui/core';
+import { Box, Typography, Link, Stack } from '@mui/material';
 //
 import { MBreadcrumbs } from './@material-extend';
 

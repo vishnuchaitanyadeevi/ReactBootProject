@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { useMemo } from 'react';
 // material
-import { CssBaseline } from '@material-ui/core';
-import { ThemeProvider, createTheme, StyledEngineProvider } from '@material-ui/core/styles';
+import { CssBaseline, adaptV4Theme } from '@mui/material';
+import { ThemeProvider, createTheme, StyledEngineProvider } from '@mui/material/styles';
 // hooks
 import useSettings from '../hooks/useSettings';
 //
@@ -37,7 +37,7 @@ export default function ThemeConfig({ children }) {
     [isLight, themeDirection]
   );
 
-  const theme = createTheme(themeOptions);
+  const theme = createTheme(adaptV4Theme(themeOptions));
   theme.components = componentsOverride(theme);
 
   return (

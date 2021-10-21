@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 import flashFill from '@iconify/icons-eva/flash-fill';
 import { Link as RouterLink } from 'react-router-dom';
 // material
-import { experimentalStyled as styled } from '@material-ui/core/styles';
-import { Button, Box, Link, Container, Typography, Stack } from '@material-ui/core';
+import { experimentalStyled as styled } from '@mui/material/styles';
+import { Button, Box, Link, Container, Typography, Stack } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 //

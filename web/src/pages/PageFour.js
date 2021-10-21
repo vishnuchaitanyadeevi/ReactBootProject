@@ -1,5 +1,5 @@
 // material
-import { Container } from '@material-ui/core';
+import { Container } from '@mui/material';
 import { useState, useEffect } from 'react';
 // components
 import Page from '../components/Page';

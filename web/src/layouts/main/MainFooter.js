@@ -6,8 +6,8 @@ import linkedinFill from '@iconify/icons-eva/linkedin-fill';
 import { Link as ScrollLink } from 'react-scroll';
 import { Link as RouterLink } from 'react-router-dom';
 // material
-import { experimentalStyled as styled } from '@material-ui/core/styles';
-import { Grid, Link, Divider, Container, Typography, IconButton, Stack } from '@material-ui/core';
+import { experimentalStyled as styled } from '@mui/material/styles';
+import { Grid, Link, Divider, Container, Typography, IconButton, Stack } from '@mui/material';
 //
 import Logo from '../../components/Logo';
 
@@ -80,7 +80,7 @@ export default function MainFooter() {
               sx={{ mt: 5, mb: { xs: 5, md: 0 } }}
             >
               {SOCIALS.map((social) => (
-                <IconButton key={social.name} color="primary" sx={{ p: 1 }}>
+                <IconButton key={social.name} color="primary" sx={{ p: 1 }} size="large">
                   <Icon icon={social.icon} width={16} height={16} />
                 </IconButton>
               ))}

@@ -1,4 +1,4 @@
-import { Container } from '@material-ui/core';
+import { Container } from '@mui/material';
 import { useEffect, useState } from 'react';
 // components
 import SkeletonLoading from '../components/skeletons/SkeletonLoading';

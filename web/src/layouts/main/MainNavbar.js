@@ -1,7 +1,7 @@
 import { NavLink as RouterLink, useLocation } from 'react-router-dom';
 // material
-import { experimentalStyled as styled } from '@material-ui/core/styles';
-import { Box, AppBar, Toolbar, Container, Avatar, Menu, MenuItem } from '@material-ui/core';
+import { experimentalStyled as styled } from '@mui/material/styles';
+import { Box, AppBar, Toolbar, Container, Avatar, Menu, MenuItem } from '@mui/material';
 // hooks
 import { useState } from 'react';
 import useOffSetTop from '../../hooks/useOffSetTop';

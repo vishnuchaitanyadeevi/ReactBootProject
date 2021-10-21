@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { TextField, FormGroup, Autocomplete } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { TextField, FormGroup, Autocomplete } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import ControlledOpenSelect from './dropdown';
 
 // styles

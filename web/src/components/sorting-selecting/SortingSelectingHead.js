@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 // material
-import { visuallyHidden } from '@material-ui/utils';
-import { Box, Checkbox, TableRow, TableCell, TableHead, TableSortLabel, TextField } from '@material-ui/core';
+import { visuallyHidden } from '@mui/utils';
+import { Box, Checkbox, TableRow, TableCell, TableHead, TableSortLabel, TextField } from '@mui/material';
 import './SortSelecting.scss';
 
 // ----------------------------------------------------------------------

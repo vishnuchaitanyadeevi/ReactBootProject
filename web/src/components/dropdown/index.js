@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, Autocomplete } from '@material-ui/core';
+import { TextField, Autocomplete } from '@mui/material';
 
 export default function ControlledOpenSelect({ label, li, value, className, handleSelectedValue }) {
   return (

@@ -1,9 +1,9 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
-import LocalPrintshopIcon from '@material-ui/icons/LocalPrintshop';
-import BorderColorTwoToneIcon from '@material-ui/icons/BorderColorTwoTone';
+import makeStyles from '@mui/styles/makeStyles';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
+import BorderColorTwoToneIcon from '@mui/icons-material/BorderColorTwoTone';
 
 // style
 import './Icon-button.scss';
@@ -21,13 +21,13 @@ export default function IconButtons() {
 
   return (
     <div className="icon">
-      <IconButton color="secondary" className="icon-button">
+      <IconButton color="secondary" className="icon-button" size="large">
         <LocalPrintshopIcon fontSize="small" />
       </IconButton>
-      <IconButton color="primary" className="icon-button">
+      <IconButton color="primary" className="icon-button" size="large">
         <BorderColorTwoToneIcon fontSize="small" />
       </IconButton>
-      <IconButton aria-label="delete" className="icon-button">
+      <IconButton aria-label="delete" className="icon-button" size="large">
         <DeleteIcon fontSize="small" />
       </IconButton>
     </div>

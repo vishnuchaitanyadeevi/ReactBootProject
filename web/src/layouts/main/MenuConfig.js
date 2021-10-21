@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react';
 import homeFill from '@iconify/icons-eva/home-fill';
 import fileFill from '@iconify/icons-eva/file-fill';
-import { Avatar } from '@material-ui/core';
+import { Avatar } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // import Avatar from 'src/theme/overrides/Avatar';

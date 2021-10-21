@@ -59,7 +59,12 @@ export default function Router() {
     {
       path: 'Manage-order',
       element: <DashboardLayout />,
-      children: [{ path: '/', element: <Navigate to="/Manage-order/Dispatch-appointment" replace /> }]
+      children: [
+        {
+          path: '/Manage-order/Dispatch-appointment',
+          element: <Navigate to="/Manage-order/Dispatch-appointment" replace />
+        }
+      ]
     },
     {
       path: '',

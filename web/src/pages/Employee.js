@@ -1,17 +1,17 @@
 import React from 'react';
 import { FormikProvider, Form, useFormik } from 'formik';
-import Backdrop from '@material-ui/core/Backdrop';
+import Backdrop from '@mui/material/Backdrop';
 import PropTypes from 'prop-types';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress';
 import Input from '@mui/material/Input';
-import { Box, Button, TextField, Paper, Grid, Slider, Container } from '@material-ui/core';
+import { Box, Button, TextField, Paper, Grid, Slider, Container } from '@mui/material';
 import moment from 'moment-timezone';
-import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 // import LoadingOverlay from 'react-loading-overlay';
-import { LoadingButton, DatePicker, LocalizationProvider, DateTimePicker } from '@material-ui/lab';
-import { Save } from '@material-ui/icons';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import { LoadingButton, DatePicker, LocalizationProvider, DateTimePicker } from '@mui/lab';
+import { Save } from '@mui/icons-material';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 import '../Styles/app.scss';
 import { IMaskInput } from 'react-imask';
 import MainNavbar from '../layouts/main/MainNavbar';
@@ -343,7 +343,6 @@ function Employee() {
                       <p align="left">Employee Rating</p>
                       <Slider
                         defaultValue={0}
-                        getAriaValueText={valuetext}
                         valueLabelDisplay="auto"
                         step={1}
                         min={1}

@@ -6,12 +6,12 @@ import {
   CardExpiryElement,
   CardCvcElement
 } from '@stripe/react-stripe-js';
-import { ArrowForward } from '@material-ui/icons';
+import { ArrowForward } from '@mui/icons-material';
 import axios from 'axios';
 import React, { useState } from 'react';
 import './styles.css';
-import { Typography, Button, TextField, Paper, Grid, Alert } from '@material-ui/core';
-import { LoadingButton } from '@material-ui/lab';
+import { Typography, Button, TextField, Paper, Grid, Alert } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import StripeInput from '../components/StripeInput';
 import MainNavbar from '../layouts/main/MainNavbar';
 
