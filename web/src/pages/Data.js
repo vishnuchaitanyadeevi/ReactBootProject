@@ -1,5 +1,8 @@
 import React, { useState, forwardRef } from 'react';
 import MaterialTable from '@material-table/core';
+import { TextField } from '@mui/material';
+import { DatePicker, LocalizationProvider, DateTimePicker } from '@mui/lab';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import GetAppIcon from '@mui/icons-material/GetApp';
 import AddBox from '@mui/icons-material/AddBox';
 import ArrowUpward from '@mui/icons-material/ArrowUpward';
@@ -22,11 +25,11 @@ import '../Styles/app.scss';
 function Data() {
   const TABLE_ICONS = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
-    Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
-    Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-    Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
+    Check: forwardRef((props, ref) => <Check {...props} ref={ref} color="success" />),
+    Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} color="error" />),
+    Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} color="error" />),
     DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-    Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+    Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} color="success" />),
     Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
     Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
     FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
@@ -34,132 +37,86 @@ function Data() {
     NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
     PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
     ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-    Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+    Search: forwardRef((props, ref) => <Search {...props} ref={ref} color="primary" />),
     SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref} />),
     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
   };
+
+  // const [dt, setdt] = React.useState(new Date());
 
   const [tableData, setTableData] = useState([
     {
       name: 'Raj',
       email: 'Raj@gmail.com',
       phone: 7894561230,
-      age: null,
-      gender: 'M',
-      city: 'Chennai',
-      fee: 78456,
-      dob: '2000-08-18'
+      doj: '12/13/2000'
     },
     {
       name: 'Mohan',
       email: 'mohan@gmail.com',
       phone: 7845621590,
-      age: 35,
-      gender: 'M',
-      city: 'Delhi',
-      fee: 456125,
-      dob: '2000-07-17'
+      doj: '12/13/2005'
     },
     {
       name: 'Sweety',
       email: 'sweety@gmail.com',
       phone: 741852912,
-      age: 17,
-      gender: 'F',
-      city: 'Noida',
-      fee: 458796,
-      dob: '2000-06-16'
+      doj: '12/13/2010'
     },
     {
       name: 'Vikas',
       email: 'vikas@gmail.com',
       phone: 9876543210,
-      age: 20,
-      gender: 'M',
-      city: 'Mumbai',
-      fee: 874569,
-      dob: '2000-05-15'
+      doj: '12/13/2015'
     },
     {
       name: 'Neha',
       email: 'neha@gmail.com',
       phone: 7845621301,
-      age: 25,
-      gender: 'F',
-      city: 'Patna',
-      fee: 748521,
-      dob: '2000-04-14'
+      doj: '12/13/2009'
     },
     {
       name: 'Mohan',
       email: 'mohan@gmail.com',
       phone: 7845621590,
-      age: 35,
-      gender: 'M',
-      city: 'Delhi',
-      fee: 456125,
-      dob: '2000-03-13'
+      doj: '12/13/2007'
     },
     {
       name: 'Sweety',
       email: 'sweety@gmail.com',
       phone: 741852912,
-      age: 17,
-      gender: 'F',
-      city: 'Noida',
-      fee: 458796,
-      dob: '2000-02-12'
+      doj: '12/13/2005'
     },
     {
       name: 'Vikas',
       email: 'vikas@gmail.com',
       phone: 9876543210,
-      age: 20,
-      gender: 'M',
-      city: 'Mumbai',
-      fee: 874569,
-      dob: '2000-01-11'
+      doj: '12/13/2000'
     },
     {
       name: 'Raj',
       email: 'Raj@gmail.com',
       phone: 7894561230,
-      age: null,
-      gender: 'M',
-      city: 'Chennai',
-      fee: 78456,
-      dob: '2000-09-10'
+      doj: '12/13/2000'
     },
     {
       name: 'Mohan',
       email: 'mohan@gmail.com',
       phone: 7845621590,
-      age: 35,
-      gender: 'M',
-      city: 'Delhi',
-      fee: 456125,
-      dob: '2000-10-09'
+      doj: '12/13/2000'
     },
     {
       name: 'Sweety',
       email: 'sweety@gmail.com',
       phone: 741852912,
-      age: 17,
-      gender: 'F',
-      city: 'Noida',
-      fee: 458796,
-      dob: '2000-11-08'
+      doj: '12/13/2000'
     },
     {
       name: 'Vikas',
       email: 'vikas@gmail.com',
       phone: 9876543210,
-      age: 20,
-      gender: 'M',
-      city: 'Mumbai',
-      fee: 874569,
-      dob: '2000-12-07'
+      doj: '12/13/2000'
     }
   ]);
   /* const [value, setValue] = React.useState(new Date('2000-08-18'));
@@ -173,67 +130,49 @@ function Data() {
     {
       title: 'Name',
       field: 'name',
-      sorting: false,
-      filtering: false,
-      cellStyle: { background: '#009688' },
-      headerStyle: { color: '#fff' }
+      filterPlaceholder: 'filter by Name'
+      // headerStyle: { color: '#fff' }
     },
     {
       title: 'Email',
       field: 'email',
-      filterPlaceholder: 'filter by mail'
+      filterPlaceholder: 'filter by E-Mail'
     },
     {
       title: 'Phone Number',
       field: 'phone',
-      align: 'center',
       grouping: false,
-      filterPlaceholder: 'filter '
+      filterPlaceholder: 'filter by Phone'
     },
     {
-      title: 'Age',
-      field: 'age',
-      emptyValue: () => <em>null</em>,
-      render: (rowData) => (
-        <div style={{ background: rowData.age >= 18 ? '#008000aa' : '#f90000aa', borderRadius: '4px', paddingLeft: 5 }}>
-          {rowData.age >= 18 ? '18+' : '18-'}
-        </div>
-      ),
-      searchable: false,
-      export: false
-    },
-    {
-      title: 'Date of Birth',
-      field: 'dob'
-      /* render: (row) =>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DatePicker
-          // label='Date desktop'
-          inputFormat='MM/dd/yyyy'
-          value={value}
-          onChange={handleChange}
-          renderInput={(params) => <TextField {...params} />}
-        />
-      </LocalizationProvider> 
+      title: 'Date of Joining',
+      field: 'doj',
+      filterPlaceholder: 'filter by joining date'
+      /* 
+      render: (row) => (
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker
+            style={{ width: '100%', maxWidth: '100%', minWidth: '20%', marginTop: 10 }}
+            renderInput={(props) => (
+              <TextField
+                style={{
+                  width: '100%',
+                  maxWidth: '100%',
+                  minWidth: '20%',
+                  marginTop: 10
+                }}
+                {...props}
+              />
+            )}
+            label="Date of Joining"
+            // value={tableData.doj}
+            onChange={(newValue) => {
+              // setdt(newValue);
+            }}
+          />
+        </LocalizationProvider>
+      )
       */
-    },
-    {
-      title: 'Gender',
-      field: 'gender',
-      lookup: { M: 'Male', F: 'Female' }
-    },
-    {
-      title: 'City',
-      field: 'city',
-      filterPlaceholder: 'filter'
-    },
-    {
-      title: 'School Fee',
-      field: 'fee',
-      type: 'currency',
-      currencySetting: { currencyCode: 'INR', minimumFractionDigits: 1 },
-      cellStyle: { background: '#009688' },
-      headerStyle: { color: '#fff' }
     }
   ];
   return (
@@ -286,7 +225,6 @@ function Data() {
               paging: true,
               pageSizeOptions: [2, 5, 10, 20, 25, 50, 100],
               pageSize: 5,
-              paginationType: 'stepped',
               showFirstLastPageButtons: false,
               exportButton: true,
               exportAllData: true,
@@ -295,17 +233,16 @@ function Data() {
               actionsColumnIndex: -1,
               selection: true,
               showSelectAllCheckbox: true,
-              showTextRowsSelected: false,
+              showTextRowsSelected: true,
               selectionProps: (rowData) => ({
-                disabled: rowData.age == null
                 // color:'primary'
               }),
               grouping: true,
               columnsButton: true,
               rowStyle: (data, index) => (index % 2 === 0 ? { background: '#f5f5f5' } : null),
-              headerStyle: { background: '#f44336', color: '#fff' }
+              headerStyle: { background: '#01579b', color: 'white' }
             }}
-            title="Student Information"
+            title="Employee Information"
             icons={TABLE_ICONS}
           />
         </div>
