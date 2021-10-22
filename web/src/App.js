@@ -25,6 +25,7 @@ export default function App() {
     }
     // else if (localStorage.getItem(TOKEN_KEY)) navigate(location);
     else navigate('/login'); // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => {};
   }, []);
 
   return (
