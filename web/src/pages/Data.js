@@ -20,6 +20,7 @@ import SaveAlt from '@mui/icons-material/SaveAlt';
 import Search from '@mui/icons-material/Search';
 import ViewColumn from '@mui/icons-material/ViewColumn';
 import MainNavbar from '../layouts/main/MainNavbar';
+import jsonData from '../tabledata.json';
 import '../Styles/app.scss';
 
 function Data() {
@@ -45,80 +46,7 @@ function Data() {
 
   // const [dt, setdt] = React.useState(new Date());
 
-  const [tableData, setTableData] = useState([
-    {
-      name: 'Raj',
-      email: 'Raj@gmail.com',
-      phone: 7894561230,
-      doj: '12/13/2000'
-    },
-    {
-      name: 'Mohan',
-      email: 'mohan@gmail.com',
-      phone: 7845621590,
-      doj: '12/13/2005'
-    },
-    {
-      name: 'Sweety',
-      email: 'sweety@gmail.com',
-      phone: 741852912,
-      doj: '12/13/2010'
-    },
-    {
-      name: 'Vikas',
-      email: 'vikas@gmail.com',
-      phone: 9876543210,
-      doj: '12/13/2015'
-    },
-    {
-      name: 'Neha',
-      email: 'neha@gmail.com',
-      phone: 7845621301,
-      doj: '12/13/2009'
-    },
-    {
-      name: 'Mohan',
-      email: 'mohan@gmail.com',
-      phone: 7845621590,
-      doj: '12/13/2007'
-    },
-    {
-      name: 'Sweety',
-      email: 'sweety@gmail.com',
-      phone: 741852912,
-      doj: '12/13/2005'
-    },
-    {
-      name: 'Vikas',
-      email: 'vikas@gmail.com',
-      phone: 9876543210,
-      doj: '12/13/2000'
-    },
-    {
-      name: 'Raj',
-      email: 'Raj@gmail.com',
-      phone: 7894561230,
-      doj: '12/13/2000'
-    },
-    {
-      name: 'Mohan',
-      email: 'mohan@gmail.com',
-      phone: 7845621590,
-      doj: '12/13/2000'
-    },
-    {
-      name: 'Sweety',
-      email: 'sweety@gmail.com',
-      phone: 741852912,
-      doj: '12/13/2000'
-    },
-    {
-      name: 'Vikas',
-      email: 'vikas@gmail.com',
-      phone: 9876543210,
-      doj: '12/13/2000'
-    }
-  ]);
+  const [tableData, setTableData] = useState(jsonData);
   /* const [value, setValue] = React.useState(new Date('2000-08-18'));
 
   const handleChange = (newValue) => {

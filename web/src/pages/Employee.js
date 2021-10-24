@@ -292,7 +292,7 @@ function Employee() {
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <TextField
-                        id="formatted-text-mask-input"
+                        id="outlined"
                         style={marginTop}
                         label="Employee Mobile Number"
                         // defaultValue=""
@@ -300,10 +300,9 @@ function Employee() {
                         helperText={formik.touched.mob && formik.errors.mob ? formik.errors.mob : 'In US format'}
                         error={Boolean(formik.touched.mob && formik.errors.mob)}
                         onBlur={formik.handleBlur}
-                        // value={formik.values.mob}
-                        // onChange={formik.handleChange}
-                        // name="textmask"
-                        // inputComponent={TextMaskCustom}
+                        value={formik.values.mob}
+                        onChange={formik.handleChange}
+                        name="mob"
                       />
                     </Grid>
                     <Grid item xs={12} md={6}>
@@ -342,6 +341,7 @@ function Employee() {
                     <Grid item xs={12} md={12} lg={12} xl={12}>
                       <p align="left">Employee Rating</p>
                       <Slider
+                        required
                         defaultValue={0}
                         valueLabelDisplay="auto"
                         step={1}
@@ -353,7 +353,6 @@ function Employee() {
                     <Grid item xs={12} md={12} lg={12} xl={12}>
                       <LoadingButton
                         loading={loading}
-                        // disabled={}
                         fullWidth
                         loadingPosition="start"
                         startIcon={<Save />}
@@ -361,7 +360,7 @@ function Employee() {
                         onClick={handleClick}
                         style={marginTop}
                       >
-                        Save Employee Data
+                        {loading ? 'Saving ...' : 'Save Employee Data'}
                       </LoadingButton>
                     </Grid>
                     <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>

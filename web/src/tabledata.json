@@ -1,0 +1,74 @@
+[
+    {
+        "name": "Raj",
+        "email": "Raj@gmail.com",
+        "phone": 7894561230,
+        "doj": "12/13/2000"
+    },
+    {
+        "name": "Mohan",
+        "email": "mohan@gmail.com",
+        "phone": 7845621590,
+        "doj": "12/13/2005"
+    },
+    {
+        "name": "Sweety",
+        "email": "sweety@gmail.com",
+        "phone": 741852912,
+        "doj": "12/13/2010"
+    },
+    {
+        "name": "Vikas",
+        "email": "vikas@gmail.com",
+        "phone": 9876543210,
+        "doj": "12/13/2015"
+    },
+    {
+        "name": "Neha",
+        "email": "neha@gmail.com",
+        "phone": 7845621301,
+        "doj": "12/13/2009"
+    },
+    {
+        "name": "Mohan",
+        "email": "mohan@gmail.com",
+        "phone": 7845621590,
+        "doj": "12/13/2007"
+    },
+    {
+        "name": "Sweety",
+        "email": "sweety@gmail.com",
+        "phone": 741852912,
+        "doj": "12/13/2005"
+    },
+    {
+        "name": "Vikas",
+        "email": "vikas@gmail.com",
+        "phone": 9876543210,
+        "doj": "12/13/2000"
+    },
+    {
+        "name": "Raj",
+        "email": "Raj@gmail.com",
+        "phone": 7894561230,
+        "doj": "12/13/2000"
+    },
+    {
+        "name": "Mohan",
+        "email": "mohan@gmail.com",
+        "phone": 7845621590,
+        "doj": "12/13/2000"
+    },
+    {
+        "name": "Sweety",
+        "email": "sweety@gmail.com",
+        "phone": 741852912,
+        "doj": "12/13/2000"
+    },
+    {
+        "name": "Vikas",
+        "email": "vikas@gmail.com",
+        "phone": 9876543210,
+        "doj": "12/13/2000"
+    }
+]
