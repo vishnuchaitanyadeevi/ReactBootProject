@@ -29,7 +29,8 @@ export const PATH_PAGE = {
   landingPage: '/home',
   employee: '/employee',
   StripeContainer: '/pay',
-  Data: '/data'
+  Data: '/data',
+  Invoice: '/invoice'
 };
 
 const ROOTS_DASHBOARD = '';

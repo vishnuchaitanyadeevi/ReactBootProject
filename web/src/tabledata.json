@@ -1,74 +1,82 @@
 [
     {
-        "name": "Raj",
-        "email": "Raj@gmail.com",
-        "phone": 7894561230,
-        "doj": "12/13/2000"
+        "code": 611151,
+        "desc": "Cobra Cartridge",
+        "qty": 4.00,
+        "uom": "Each",
+        "hqty": 0,
+        "hand": 2804,
+        "owan": 208,
+        "fwan": 0
     },
     {
-        "name": "Mohan",
-        "email": "mohan@gmail.com",
-        "phone": 7845621590,
-        "doj": "12/13/2005"
+        "code": 611154,
+        "desc": "Universal Cartridges F/Liberator & Cobra",
+        "qty": 2.00,
+        "uom": "Each",
+        "hqty": 0,
+        "hand": 38345,
+        "owan": 996,
+        "fwan": 0
     },
     {
-        "name": "Sweety",
-        "email": "sweety@gmail.com",
-        "phone": 741852912,
-        "doj": "12/13/2010"
+        "code": 638143,
+        "desc": "SMW Amber",
+        "qty": 0.00,
+        "uom": "Kg",
+        "hqty": 2,
+        "hand": 66,
+        "owan": 21,
+        "fwan": 0
     },
     {
-        "name": "Vikas",
-        "email": "vikas@gmail.com",
-        "phone": 9876543210,
-        "doj": "12/13/2015"
+        "code": 638250,
+        "desc": "Prolitec ...",
+        "qty": 21.00,
+        "uom": "Each",
+        "hqty": 0,
+        "hand": 144,
+        "owan": 80,
+        "fwan": 0
     },
     {
-        "name": "Neha",
-        "email": "neha@gmail.com",
-        "phone": 7845621301,
-        "doj": "12/13/2009"
+        "code": 638251,
+        "desc": "Prolitec ...",
+        "qty": 40.00,
+        "uom": "Each",
+        "hqty": 0,
+        "hand": 631,
+        "owan": 250,
+        "fwan": 0
     },
     {
-        "name": "Mohan",
-        "email": "mohan@gmail.com",
-        "phone": 7845621590,
-        "doj": "12/13/2007"
+        "code": 638254,
+        "desc": "SMW Jasmine",
+        "qty": 12.50,
+        "uom": "Kg",
+        "hqty": 0,
+        "hand": 144,
+        "owan": 83,
+        "fwan": 0
     },
     {
-        "name": "Sweety",
-        "email": "sweety@gmail.com",
-        "phone": 741852912,
-        "doj": "12/13/2005"
+        "code": 638313,
+        "desc": "Prolitec ...",
+        "qty": 2.00,
+        "uom": "Each",
+        "hqty": 0,
+        "hand": 48,
+        "owan": 4,
+        "fwan": 0
     },
     {
-        "name": "Vikas",
-        "email": "vikas@gmail.com",
-        "phone": 9876543210,
-        "doj": "12/13/2000"
-    },
-    {
-        "name": "Raj",
-        "email": "Raj@gmail.com",
-        "phone": 7894561230,
-        "doj": "12/13/2000"
-    },
-    {
-        "name": "Mohan",
-        "email": "mohan@gmail.com",
-        "phone": 7845621590,
-        "doj": "12/13/2000"
-    },
-    {
-        "name": "Sweety",
-        "email": "sweety@gmail.com",
-        "phone": 741852912,
-        "doj": "12/13/2000"
-    },
-    {
-        "name": "Vikas",
-        "email": "vikas@gmail.com",
-        "phone": 9876543210,
-        "doj": "12/13/2000"
+        "code": 638614,
+        "desc": "Prolitec",
+        "qty": 5.00,
+        "uom": "EACH",
+        "hqty": 0,
+        "hand": 156,
+        "owan": 10,
+        "fwan": 0
     }
-]
+]       
