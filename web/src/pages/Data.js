@@ -59,24 +59,35 @@ function Data() {
     {
       title: 'Stock Code',
       field: 'code',
-      filterPlaceholder: 'filter by Code'
+      filterPlaceholder: 'filter by Code',
+      minWidth: 150,
+      width: 150,
+      // maxWidth: 150,
+      align: 'left'
       // headerStyle: { color: '#fff' }
     },
     {
       title: 'Description',
       field: 'desc',
-      filterPlaceholder: 'filter by Description'
+      filterPlaceholder: 'filter by Description',
+      minWidth: 150,
+      // maxWidth: 150,
+      width: 150
     },
     {
       title: 'Qty',
       field: 'qty',
       grouping: false,
-      filterPlaceholder: 'filter by qty'
+      filterPlaceholder: 'filter by qty',
+      minWidth: 150,
+      width: 150
     },
     {
       title: 'Inv UOM',
       field: 'uom',
-      filterPlaceholder: 'filter by UOM'
+      filterPlaceholder: 'filter by UOM',
+      minWidth: 150,
+      width: 150
       /* 
       render: (row) => (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -106,22 +117,30 @@ function Data() {
     {
       title: 'Hold qty',
       field: 'hqty',
-      filterPlaceholder: 'filter by Hold qty'
+      filterPlaceholder: 'filter by Hold qty',
+      minWidth: 150,
+      width: 150
     },
     {
       title: 'On-hand',
       field: 'hand',
-      filterPlaceholder: 'filter by On-hand'
+      filterPlaceholder: 'filter by On-hand',
+      minWidth: 150,
+      width: 150
     },
     {
       title: 'On-wan',
       field: 'owan',
-      filterPlaceholder: 'filter by On-wan'
+      filterPlaceholder: 'filter by On-wan',
+      minWidth: 150,
+      width: 150
     },
     {
       title: 'From-wan',
       field: 'fwan',
-      filterPlaceholder: 'filter by From-wan'
+      filterPlaceholder: 'filter by From-wan',
+      minWidth: 150,
+      width: 150
     }
   ];
   return (
@@ -165,6 +184,11 @@ function Data() {
             ]}
             onSelectionChange={(selectedRows) => console.log(selectedRows)}
             options={{
+              fixedColumns: {
+                left: 2,
+                right: 0
+              },
+              cellStyle: { textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden', fontSize: 13 },
               sorting: true,
               search: true,
               searchFieldAlignment: 'right',
@@ -183,13 +207,16 @@ function Data() {
               selection: true,
               showSelectAllCheckbox: true,
               showTextRowsSelected: true,
+              columnResizable: true,
+              padding: 'dense',
               selectionProps: (rowData) => ({
                 // color:'primary'
               }),
               grouping: true,
               columnsButton: true,
               rowStyle: (data, index) => (index % 2 === 0 ? { background: '#f5f5f5' } : null),
-              headerStyle: { background: '#01579b', color: 'white' }
+              headerStyle: { background: '#01579b', color: 'white', fontSize: 13 },
+              tableLayout: 'fixed'
             }}
             title="Material Picking List"
             icons={TABLE_ICONS}
