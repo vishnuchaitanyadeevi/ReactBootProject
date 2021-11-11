@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 // material
-import { Box, Container } from '@material-ui/core';
+import { Box, Container } from '@mui/material';
 //
 import MainNavbar from './MainNavbar';
 

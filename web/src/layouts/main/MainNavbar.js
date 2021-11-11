@@ -1,23 +1,19 @@
 import { NavLink as RouterLink, useLocation } from 'react-router-dom';
 // material
-import { experimentalStyled as styled } from '@material-ui/core/styles';
-import { Box, AppBar, Toolbar, Container } from '@material-ui/core';
+import { experimentalStyled as styled } from '@mui/material/styles';
+import { Box, AppBar, Toolbar, Container, Avatar, Menu, MenuItem } from '@mui/material';
 // hooks
-import useOffSetTop from '../../hooks/useOffSetTop';
 import { useState } from 'react';
+import useOffSetTop from '../../hooks/useOffSetTop';
+
 // components
 import Logo from '../../components/Logo';
 import { MHidden } from '../../components/@material-extend';
 //
-import image from '../../assets/images/img_avatar.png'
+import image from '../../assets/images/img_avatar.png';
 import MenuDesktop from './MenuDesktop';
 import MenuMobile from './MenuMobile';
 import navConfig from './MenuConfig';
-import { Avatar } from '@material-ui/core';
-import {
-  Menu,
-  MenuItem,
-} from '@material-ui/core';
 // ----------------------------------------------------------------------
 
 const APP_BAR_MOBILE = 64;
@@ -56,7 +52,6 @@ export default function MainNavbar() {
   const [selectedIndex, setSelectedIndex] = useState(1);
   const [isOpenMaxHeight, setOpenMaxHeight] = useState(null);
 
-
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
   };
@@ -65,7 +60,6 @@ export default function MainNavbar() {
     setOpen(null);
   };
 
- 
   const isOffset = useOffSetTop(100);
   const { pathname } = useLocation();
   const isHome = pathname === '/';
@@ -102,16 +96,14 @@ export default function MainNavbar() {
             <MenuMobile isOffset={isOffset} isHome={isHome} navConfig={navConfig} />
           </MHidden>
 
-          <Avatar src= {image} sx={{ width: 40, height: 40 }} onClick={handleOpen}>
-            
-            </Avatar>
-            <Menu keepMounted id="simple-menu" anchorEl={isOpen} onClose={handleClose} open={Boolean(isOpen)}>
-              {['Profile', 'My account', 'Logout'].map((option) => (
-                <MenuItem key={option} onClick={handleClose}>
-                  {option}
-                </MenuItem>
-              ))}
-            </Menu>
+          <Avatar src={image} sx={{ width: 40, height: 40 }} onClick={handleOpen} />
+          <Menu keepMounted id="simple-menu" anchorEl={isOpen} onClose={handleClose} open={Boolean(isOpen)}>
+            {['Profile', 'My account', 'Logout'].map((option) => (
+              <MenuItem key={option} onClick={handleClose}>
+                {option}
+              </MenuItem>
+            ))}
+          </Menu>
         </Container>
       </ToolbarStyle>
 

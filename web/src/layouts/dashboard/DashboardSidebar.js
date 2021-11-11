@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useLocation, Link as RouterLink } from 'react-router-dom';
 // material
-import { experimentalStyled as styled } from '@material-ui/core/styles';
-import { Box, Drawer } from '@material-ui/core';
+import { experimentalStyled as styled } from '@mui/material/styles';
+import { Box, Drawer } from '@mui/material';
 // components
 import Scrollbar from '../../components/Scrollbar';
 import NavSection from '../../components/NavSection';
@@ -39,12 +39,14 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       onCloseSidebar();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => {};
   }, [pathname]);
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 2000); // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => {};
   }, []);
   const renderContent = (
     <Scrollbar

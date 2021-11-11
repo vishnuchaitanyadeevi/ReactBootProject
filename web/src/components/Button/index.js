@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { makeStyles, experimentalStyled as styled } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Box, Grid, Container, Typography } from '@material-ui/core';
+import { experimentalStyled as styled } from '@mui/material/styles';
+import makeStyles from '@mui/styles/makeStyles';
+import Button from '@mui/material/Button';
+import { Dialog, DialogTitle, DialogContent, DialogActions, Box, Grid, Container, Typography } from '@mui/material';
 import Page from '../Page';
 
 const useStyles = makeStyles((theme) => ({

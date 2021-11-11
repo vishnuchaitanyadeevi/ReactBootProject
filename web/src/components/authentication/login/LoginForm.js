@@ -1,29 +1,60 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router';
 import * as Yup from 'yup';
 import { Route, useNavigate } from 'react-router-dom';
 import { FormikProvider, Form, useFormik } from 'formik';
 import { Icon } from '@iconify/react';
-import LandingPage from 'src/pages/LandingPage';
-import { PATH_PAGE } from 'src/routes/paths';
+import axios from 'axios';
+
 // material
-import { Link, Stack, Checkbox, TextField, IconButton, InputAdornment, FormControlLabel } from '@material-ui/core';
-import { LoadingButton } from '@material-ui/lab';
+import { Link, Stack, Checkbox, TextField, IconButton, InputAdornment, FormControlLabel } from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { LoadingButton } from '@mui/lab';
 import { LOCAL_STORAGE_KEYS } from '../../../utils/constants';
 import { login } from '../../../utils/auth-service';
 // hooks
 import useIsMountedRef from '../../../hooks/useIsMountedRef';
-//styles
-//import '../Styles/app.scss';
-
-
 
 const { TOKEN_KEY } = LOCAL_STORAGE_KEYS;
 export default function LoginForm() {
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleMouseDownPassword = () => setShowPassword(!showPassword);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [user, setUser] = useState();
   const navigate = useNavigate();
   const isMountedRef = useIsMountedRef();
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem('user');
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUser(foundUser);
+    }
+  }, []);
+
+  // logout
+  const handleLogout = () => {
+    setUser({});
+    setEmail('');
+    setPassword('');
+    localStorage.clear();
+  };
+
+  // login the user
+  /* const handleSubmit = async (e) => {
+    e.preventDefault();
+    const user = { email, password };
+    // send the email and password to the server
+    const response = await axios.post('http://localhost:4000/login', user);
+    // set the state of the user
+    setUser(response.data);
+    // store the user in localStorage
+    localStorage.setItem('user', JSON.stringify(response.data));
+  };
+  */
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -36,12 +67,18 @@ export default function LoginForm() {
       password
     },
     validationSchema: LoginSchema,
-    onSubmit: () => {
-    navigate('/home');
-     
+    onSubmit: async (e) => {
+      navigate('/home');
+      /* e.preventDefault();
+      const user = { email, password };
+      // send the email and password to the server
+      const response = await axios.post('http://localhost:4000/login', user);
+      // set the state of the user
+      setUser(response.data);
+      // store the user in localStorage
+      localStorage.setItem('user', JSON.stringify(response.data));
+      */
     }
-    
-  
   });
   const { errors, touched, values, isSubmitting, getFieldProps } = formik;
 
@@ -60,6 +97,7 @@ export default function LoginForm() {
             helperText={touched.email && errors.email}
           />
           <TextField
+            type={showPassword ? 'text' : 'password'}
             fullWidth
             autoComplete="current-password"
             label="Password"
@@ -68,8 +106,13 @@ export default function LoginForm() {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton edge="end">
-                    <Icon />
+                  <IconButton
+                    edge="end"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    size="large"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
               )

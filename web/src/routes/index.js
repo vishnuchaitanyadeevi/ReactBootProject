@@ -60,8 +60,10 @@ export default function Router() {
       path: 'Manage-order',
       element: <DashboardLayout />,
       children: [
-        { path: '/', element: <Navigate to="/Manage-order/Dispatch-appointment" replace /> },
-       
+        {
+          path: '/Manage-order/Dispatch-appointment',
+          element: <Navigate to="/Manage-order/Dispatch-appointment" replace />
+        }
       ]
     },
     {
@@ -80,16 +82,24 @@ export default function Router() {
     },
     {
       path: '/home',
-      element: <LandingPage />,
-     // children: [{ path: '/', element: <Dashboard /> }]
+      element: <LandingPage />
+      // children: [{ path: '/', element: <Dashboard /> }]
     },
     {
       path: '/employee',
-      element: <Employee />,
+      element: <Employee />
+    },
+    {
+      path: '/data',
+      element: <Data />
+    },
+    {
+      path: '/invoice',
+      element: <Invoice />
     },
     {
       path: '/pay',
-      element: <StripeContainer />,
+      element: <StripeContainer />
     },
     { path: '*', element: <Navigate to="/404" replace /> }
   ]);
@@ -103,4 +113,6 @@ const PageFour = Loadable(lazy(() => import('../pages/PageFour')));
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 const LandingPage = Loadable(lazy(() => import('../pages/LandingPage')));
 const Employee = Loadable(lazy(() => import('../pages/Employee')));
+const Data = Loadable(lazy(() => import('../pages/Data')));
+const Invoice = Loadable(lazy(() => import('../pages/Invoice')));
 const StripeContainer = Loadable(lazy(() => import('../pages/StripeContainer')));

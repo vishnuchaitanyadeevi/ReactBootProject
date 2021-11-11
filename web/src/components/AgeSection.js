@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { TextField, Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import FormLabel from '@material-ui/core/FormLabel';
+import { TextField, Grid } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import FormLabel from '@mui/material/FormLabel';
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -1,10 +1,10 @@
 import { Icon } from '@iconify/react';
 import homeFill from '@iconify/icons-eva/home-fill';
 import fileFill from '@iconify/icons-eva/file-fill';
-import { Avatar } from '@material-ui/core';
+import { Avatar } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
-//import Avatar from 'src/theme/overrides/Avatar';
+// import Avatar from 'src/theme/overrides/Avatar';
 // ----------------------------------------------------------------------
 
 const ICON_SIZE = {
@@ -19,6 +19,8 @@ const menuConfig = [
     icon: <Icon icon={homeFill} {...ICON_SIZE} />
   },
   { title: 'Employee', path: '/employee', icon: <Icon icon={fileFill} {...ICON_SIZE} /> },
+  { title: 'Data', path: '/data', icon: <Icon icon={fileFill} {...ICON_SIZE} /> },
+  { title: 'Invoice', path: '/invoice', icon: <Icon icon={fileFill} {...ICON_SIZE} /> },
   { title: 'Pay', path: '/pay', icon: <Icon icon={fileFill} {...ICON_SIZE} /> }
 ];
 

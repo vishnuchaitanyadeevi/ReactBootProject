@@ -1,9 +1,9 @@
 // material
-import { experimentalStyled as styled } from '@material-ui/core/styles';
+import { experimentalStyled as styled } from '@mui/material/styles';
 // components
+import MainNavbar from '../layouts/main/MainNavbar';
 import Page from '../components/Page';
 import { LandingHero, LandingMinimal } from '../components/_external-pages/landing';
-import MainNavbar from 'src/layouts/main/MainNavbar';
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Page)({

@@ -3,14 +3,13 @@ import { motion } from 'framer-motion';
 import flashFill from '@iconify/icons-eva/flash-fill';
 import { Link as RouterLink } from 'react-router-dom';
 // material
-import { experimentalStyled as styled } from '@material-ui/core/styles';
-import { Button, Box, Link, Container, Typography, Stack } from '@material-ui/core';
+import { experimentalStyled as styled } from '@mui/material/styles';
+import { Button, Box, Link, Container, Typography, Stack } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 //
 import { varFadeIn, varFadeInUp, varWrapEnter, varFadeInRight } from '../../animate';
-import MainNavbar from 'src/layouts/main/MainNavbar';
-import Avatar from 'src/theme/overrides/Avatar';
+
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(motion.div)(({ theme }) => ({
@@ -71,7 +70,6 @@ export default function LandingHero() {
   return (
     <>
       <RootStyle initial="initial" animate="animate" variants={varWrapEnter}>
-        
         <HeroOverlayStyle alt="overlay" src="/static/overlay.svg" variants={varFadeIn} />
 
         <HeroImgStyle alt="hero" src="/static/home/hero.png" variants={varFadeInUp} />
@@ -81,14 +79,11 @@ export default function LandingHero() {
             <motion.div variants={varFadeInRight}>
               <Typography variant="h1" sx={{ color: 'common.white' }}>
                 Welcome <br />
-                User !<br /> 
-               
+                User !<br />
               </Typography>
             </motion.div>
 
-            <motion.div variants={varFadeInRight}>
-            
-            </motion.div>
+            <motion.div variants={varFadeInRight} />
           </ContentStyle>
         </Container>
       </RootStyle>

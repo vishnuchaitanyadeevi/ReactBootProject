@@ -10,7 +10,7 @@ import {
   TableContainer,
   TablePagination,
   tableRowClasses
-} from '@material-ui/core';
+} from '@mui/material';
 // components
 import Scrollbar from '../Scrollbar';
 //
