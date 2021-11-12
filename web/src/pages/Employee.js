@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import { FormikProvider, Form, useFormik } from 'formik';
 import Backdrop from '@mui/material/Backdrop';
 import PropTypes from 'prop-types';
@@ -14,11 +14,13 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import '../Styles/app.scss';
 import { IMaskInput } from 'react-imask';
+import MailIcon from '@mui/icons-material/Mail';
 import MainNavbar from '../layouts/main/MainNavbar';
 import invoiceData from '../invoicedata.json';
 import ControlledOpenSelect from '../components/dropdown';
 import ProminentAppBar from '../components/header/header';
 import NavSection from '../components/NavSection';
+import ResponsiveDrawer from '../components/Sidebar';
 
 moment.tz.setDefault('Asia/Kuala_Lumpur');
 // Masking Input
@@ -196,11 +198,15 @@ function Employee() {
 
   // Snackbar code ends
   const paperStyle = { padding: '30px 20px', width: 570, margin: '20px auto' };
-
+  const li = ['All mail', 'Inbox', 'Spam'];
+  // { items: [{ title: 'All mail', Children: [{ title: 'Inbox' }] }, { title: 'Trash' }, { title: 'Spam' }] }
+  // ];
+  const iconli = [MailIcon];
   return (
     <div>
       <div>
         <MainNavbar />
+        <ResponsiveDrawer Textlist={li} Iconslist={iconli} />
       </div>
       <div align="center" className="rel">
         <Grid>
