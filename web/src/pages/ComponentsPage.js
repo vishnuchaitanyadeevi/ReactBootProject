@@ -1,22 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Button, TextField, Paper, Grid, Slider, Container, Typography, Divider } from '@mui/material';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import MainNavbar from '../layouts/main/MainNavbar';
 import UploadFile from '../components/UploadFile';
 import Avatar from '../components/Avatar';
+import alertDialog from '../components/AlertDialog';
 
 function ComponentsPage() {
   const handleFileChange = (event) => console.log('inComponent page...', event.target.files);
+  const [isAlertDialogOpen, setAlertDialogOpen] = useState(false);
+
+  const handleAlertDialogSubmit = () => {
+    setAlertDialogOpen(false);
+  };
+
+  const handleAlertDialogClose = () => {
+    setAlertDialogOpen(false);
+  };
 
   return (
     <div>
       <MainNavbar />
+      {isAlertDialogOpen &&
+        alertDialog({
+          title: 'Delete Record',
+          description: 'Do you want to delete record ?',
+          isOpen: isAlertDialogOpen,
+          handleClose: handleAlertDialogClose,
+          handleSubmit: handleAlertDialogSubmit,
+          negativeText: 'No',
+          positiveText: 'Yes'
+        })}
+
       <div className="rel">
         <Grid container spacing={3}>
           <Grid style={{ margin: '1rem' }} item xs={12} sm={6}>
             <Typography variant="h6">Upload File Component</Typography>
           </Grid>
 
+          {/* Upload Component Section */}
           <Grid style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }} item xs={12} sm={6}>
             <UploadFile
               buttonName="Upload File 1"
@@ -37,6 +59,7 @@ function ComponentsPage() {
         </Grid>
         <Divider style={{ backgroundColor: '#212B36', marginTop: '1rem' }} />
 
+        {/* Avatar Component Section */}
         <Grid container spacing={3}>
           <Grid style={{ margin: '1rem' }} item xs={12} sm={6}>
             <Typography variant="h6">Avatar Component</Typography>
@@ -61,6 +84,18 @@ function ComponentsPage() {
           </Grid>
         </Grid>
         <Divider style={{ backgroundColor: '#212B36', marginTop: '1rem' }} />
+
+        {/* Confirmation Dialog Section */}
+        <Grid container spacing={3}>
+          <Grid style={{ margin: '1rem' }} item xs={12} sm={12}>
+            <Typography variant="h6">Alert Dialog Component</Typography>
+          </Grid>
+          <Grid style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} item xs={12} sm={3}>
+            <Button onClick={() => setAlertDialogOpen(true)} variant="contained">
+              Confirm me
+            </Button>
+          </Grid>
+        </Grid>
       </div>
     </div>
   );
