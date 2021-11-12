@@ -7,13 +7,36 @@ import Avatar from '../components/Avatar';
 import alertDialog from '../components/AlertDialog';
 
 function ComponentsPage() {
-  const handleFileChange = (event) => console.log('inComponent page...', event.target.files);
   const [isAlertDialogOpen, setAlertDialogOpen] = useState(false);
+  const [fileName1, setFileName1] = useState('');
+  const [fileName2, setFileName2] = useState('');
 
+  // File change method for first button
+  const handleFileChange1 = (event) => {
+    setFileName1(event.target.files[0].name);
+  };
+
+  // File change method for second button
+  const handleFileChange2 = (event) => {
+    setFileName2(event.target.files[0].name);
+  };
+
+  // Delete First file
+  const handleDeleteFile1 = () => {
+    setFileName1('');
+  };
+
+  // Delete Second file
+  const handleDeleteFile2 = () => {
+    setFileName2('');
+  };
+
+  // Handle alert dialog success method
   const handleAlertDialogSubmit = () => {
     setAlertDialogOpen(false);
   };
 
+  // Handle alert dialog close method
   const handleAlertDialogClose = () => {
     setAlertDialogOpen(false);
   };
@@ -45,7 +68,9 @@ function ComponentsPage() {
               accept="image/*"
               backgroundColor="green"
               startIcon={<PhotoCamera />}
-              handleFileChange={handleFileChange}
+              handleFileChange={handleFileChange1}
+              fileName={fileName1}
+              handleDelete={handleDeleteFile1}
             />
 
             <UploadFile
@@ -53,7 +78,9 @@ function ComponentsPage() {
               accept="image/*"
               backgroundColor="#212B36"
               endIcon={<PhotoCamera />}
-              handleFileChange={handleFileChange}
+              handleFileChange={handleFileChange2}
+              fileName={fileName2}
+              handleDelete={handleDeleteFile2}
             />
           </Grid>
         </Grid>
