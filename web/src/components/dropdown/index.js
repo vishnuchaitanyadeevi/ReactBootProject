@@ -8,7 +8,7 @@ export default function ControlledOpenSelect({ label, li, value, className, hand
         options={li}
         onChange={(event, newValue) => handleSelectedValue(event, newValue)}
         value={value}
-        renderInput={(params) => <TextField {...params} label={label} size="small" />}
+        renderInput={(params) => <TextField {...params} label={label} />}
       />
     </div>
   );
