@@ -59,28 +59,33 @@ function Invoice() {
     {
       title: 'ID',
       field: 'id',
-      filterPlaceholder: 'filter by ID'
-      // width: '100%'
+      filterPlaceholder: 'filter by ID',
+      minWidth: 150,
+      width: 150,
+      align: 'center'
       // headerStyle: { color: '#fff' }
     },
     {
       title: 'Invoice Number',
       field: 'inv',
-      filterPlaceholder: 'filter by Invoice Number'
-      // width: '100%'
+      filterPlaceholder: 'filter by Invoice Number',
+      minWidth: 150,
+      width: 150
     },
     {
       title: 'Invoice Date',
       field: 'invdate',
       grouping: false,
-      filterPlaceholder: 'filter by Invoice Date'
-      // width: '100%'
+      filterPlaceholder: 'filter by Invoice Date',
+      minWidth: 150,
+      width: 150
     },
     {
       title: 'Project Number',
       field: 'proj',
-      filterPlaceholder: 'filter by Project Number'
-      // width: '100%'
+      filterPlaceholder: 'filter by Project Number',
+      minWidth: 150,
+      width: 150
       /* 
       render: (row) => (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -110,56 +115,66 @@ function Invoice() {
     {
       title: 'Customer No.',
       field: 'cust-no',
-      filterPlaceholder: 'filter by Cust No.'
-      // width: '100%'
+      filterPlaceholder: 'filter by Cust No.',
+      minWidth: 150,
+      width: 150
     },
     {
       title: 'Customer Name',
       field: 'cust-name',
-      filterPlaceholder: 'filter by Cust Name'
-      // width: '100%'
+      filterPlaceholder: 'filter by Cust Name',
+      minWidth: 150,
+      width: 150
     },
     {
       title: 'Location Name',
       field: 'loc',
-      filterPlaceholder: 'filter by Location'
-      // width: '100%'
+      filterPlaceholder: 'filter by Location',
+      minWidth: 150,
+      width: 150
     },
     {
       title: 'Gross Amnt',
       field: 'amnt',
-      filterPlaceholder: 'filter by Amnt'
-      // width: '100%'
+      filterPlaceholder: 'filter by Amnt',
+      minWidth: 150,
+      width: 150
     },
     {
       title: 'Discount %',
       field: 'disc',
-      filterPlaceholder: 'filter by Discount'
-      // width: '100%'
+      filterPlaceholder: 'filter by Discount',
+      minWidth: 150,
+      width: 150
     },
     {
       title: 'Discount Amnt',
       field: 'disc-amnt',
-      filterPlaceholder: 'filter by Discount Amount'
-      // width: '100%'
+      filterPlaceholder: 'filter by Discount Amount',
+      minWidth: 150,
+      width: 150
     },
     {
       title: 'Net Amnt',
       field: 'net-amnt',
-      filterPlaceholder: 'filter by Amnt'
-      // width: '100%'
+      filterPlaceholder: 'filter by Amnt',
+      minWidth: 150,
+      width: 150
     },
     {
       title: 'VAT Amnt',
       field: 'VAT',
-      filterPlaceholder: 'filter by Amnt'
-      // width: '100%'
+      filterPlaceholder: 'filter by Amnt',
+      minWidth: 150,
+      width: 150
     },
     {
       title: 'Net w VAT Amnt',
       field: 'net',
-      filterPlaceholder: 'filter by Amnt'
-      // width: '100%'
+      filterPlaceholder: 'filter by Amnt',
+      minWidth: 150,
+      maxWidth: 150,
+      width: 150
     }
   ];
   return (
@@ -203,7 +218,14 @@ function Invoice() {
             ]}
             onSelectionChange={(selectedRows) => console.log(selectedRows)}
             options={{
+              fixedColumns: {
+                left: 2,
+                right: 0
+              },
+              cellStyle: { textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden', fontSize: 13 },
+              columnResizable: true,
               sorting: true,
+              padding: 'dense',
               search: true,
               searchFieldAlignment: 'right',
               searchAutoFocus: true,
@@ -227,8 +249,20 @@ function Invoice() {
               grouping: true,
               columnsButton: true,
               rowStyle: (data, index) => (index % 2 === 0 ? { background: '#f5f5f5' } : null),
-              headerStyle: { background: '#01579b', color: 'white' },
-              tableLayout: 'auto'
+              headerStyle: {
+                background: '#01579b',
+                color: 'white',
+                // position: 'sticky',
+                // top: 0,
+                fontSize: 13
+                /* textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden'
+                */
+              },
+              height: '300px',
+              tableLayout: 'fixed'
+              // margin: 0
             }}
             title="Invoice List"
             icons={TABLE_ICONS}

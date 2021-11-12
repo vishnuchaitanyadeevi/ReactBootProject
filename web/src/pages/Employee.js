@@ -15,9 +15,12 @@ import MuiAlert from '@mui/material/Alert';
 import '../Styles/app.scss';
 import { IMaskInput } from 'react-imask';
 import MainNavbar from '../layouts/main/MainNavbar';
+import invoiceData from '../invoicedata.json';
+import ControlledOpenSelect from '../components/dropdown';
+import ProminentAppBar from '../components/header/header';
+import NavSection from '../components/NavSection';
 
 moment.tz.setDefault('Asia/Kuala_Lumpur');
-
 // Masking Input
 // const Alert = React.forwardRef((props, ref) => <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />);
 const TextMaskCustom = React.forwardRef((props, ref) => {
@@ -128,6 +131,8 @@ function Employee() {
   // SnackBar
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
+  const [country, setCountry] = React.useState('');
+  const listExample = ['India', 'England', 'USA', 'Germany', 'Spain'];
 
   const handleClick = () => {
     setOpen(true);
@@ -276,6 +281,7 @@ function Employee() {
                       />
                     </Grid>
                     <Grid item xs={12} md={12} lg={12} xl={12}>
+                      <ProminentAppBar header="Address Details" textVarient="h6" height="30px" />
                       <TextField
                         id="outlined"
                         style={marginTop}
@@ -288,6 +294,14 @@ function Employee() {
                         onChange={formik.handleChange}
                         value={formik.values.add}
                         name="add"
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={12} lg={12} xl={12}>
+                      <ControlledOpenSelect
+                        label="Select Country"
+                        li={listExample}
+                        value={country}
+                        handleSelectedValue={(event, value) => setCountry(value)}
                       />
                     </Grid>
                     <Grid item xs={12} md={6}>
