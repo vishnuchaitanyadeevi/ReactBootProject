@@ -184,10 +184,10 @@ function Data() {
             ]}
             onSelectionChange={(selectedRows) => console.log(selectedRows)}
             options={{
-              fixedColumns: {
-                left: 2,
-                right: 0
-              },
+              // fixedColumns: {
+              //   left: 2,
+              //   right: 0
+              // },
               cellStyle: { textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden', fontSize: 13 },
               sorting: true,
               search: true,
@@ -212,7 +212,7 @@ function Data() {
               selectionProps: (rowData) => ({
                 // color:'primary'
               }),
-              grouping: true,
+              grouping: false,
               columnsButton: true,
               rowStyle: (data, index) => (index % 2 === 0 ? { background: '#f5f5f5' } : null),
               headerStyle: { background: '#01579b', color: 'white', fontSize: 13 },

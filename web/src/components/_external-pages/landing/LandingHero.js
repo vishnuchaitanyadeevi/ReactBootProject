@@ -14,7 +14,7 @@ import { varFadeIn, varFadeInUp, varWrapEnter, varFadeInRight } from '../../anim
 
 const RootStyle = styled(motion.div)(({ theme }) => ({
   position: 'relative',
-  backgroundColor: theme.palette.grey[200],
+  backgroundColor: 'common.white',
   [theme.breakpoints.up('md')]: {
     top: 0,
     left: 0,
@@ -70,10 +70,13 @@ export default function LandingHero() {
   return (
     <>
       <RootStyle initial="initial" animate="animate" variants={varWrapEnter}>
+        {/* <HeroOverlayStyle alt="overlay" src="/static/overlay.svg" variants={varFadeIn} /> */}
+
+        <HeroImgStyle alt="hero" src="/static/home/hero.png" variants={varFadeInUp} />
         <Container maxWidth="lg">
           <ContentStyle>
             <motion.div variants={varFadeInRight}>
-              <Typography variant="h6">
+              <Typography variant="h6" sx={{ color: 'common.grey' }}>
                 Welcome to
                 <br />
                 Operation Management System
