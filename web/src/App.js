@@ -9,7 +9,6 @@ import ThemeConfig from './theme';
 import './Styles/app.scss';
 // components
 import RtlLayout from './components/RtlLayout';
-import Settings from './components/settings';
 import ScrollToTop from './components/ScrollToTop';
 import ThemePrimaryColor from './components/ThemePrimaryColor';
 import { LOCAL_STORAGE_KEYS } from './utils/constants';
@@ -26,14 +25,12 @@ export default function App() {
     }
     // else if (localStorage.getItem(TOKEN_KEY)) navigate(location);
     else navigate('/login'); // eslint-disable-next-line react-hooks/exhaustive-deps
-    return () => {};
   }, []);
 
   return (
     <ThemeConfig>
       <ThemePrimaryColor>
         <RtlLayout>
-          <Settings />
           <ScrollToTop />
           <Router />
         </RtlLayout>

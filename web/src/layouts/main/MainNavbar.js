@@ -1,4 +1,4 @@
-import { NavLink as RouterLink, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink as RouterLink, useLocation } from 'react-router-dom';
 // material
 import { experimentalStyled as styled } from '@mui/material/styles';
 import { Box, AppBar, Toolbar, Container, Avatar, Menu, MenuItem } from '@mui/material';
@@ -14,8 +14,6 @@ import image from '../../assets/images/img_avatar.png';
 import MenuDesktop from './MenuDesktop';
 import MenuMobile from './MenuMobile';
 import navConfig from './MenuConfig';
-import { logout } from '../../utils/auth-service';
-
 // ----------------------------------------------------------------------
 
 const APP_BAR_MOBILE = 64;
@@ -48,7 +46,6 @@ const ToolbarShadowStyle = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function MainNavbar() {
-  const navigate = useNavigate();
   // Code for Menu Items
   const [isOpen, setOpen] = useState(null);
   const [isOpenList, setOpenList] = useState(null);
@@ -59,11 +56,8 @@ export default function MainNavbar() {
     setOpen(event.currentTarget);
   };
 
-  const handleClose = async (option) => {
+  const handleClose = () => {
     setOpen(null);
-    if (option === 'Logout') {
-      navigate('/login');
-    }
   };
 
   const isOffset = useOffSetTop(100);
@@ -105,7 +99,7 @@ export default function MainNavbar() {
           <Avatar src={image} sx={{ width: 40, height: 40 }} onClick={handleOpen} />
           <Menu keepMounted id="simple-menu" anchorEl={isOpen} onClose={handleClose} open={Boolean(isOpen)}>
             {['Profile', 'My account', 'Logout'].map((option) => (
-              <MenuItem key={option} onClick={() => handleClose(option)}>
+              <MenuItem key={option} onClick={handleClose}>
                 {option}
               </MenuItem>
             ))}
