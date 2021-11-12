@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Children } from 'react';
 import { FormikProvider, Form, useFormik } from 'formik';
 import Backdrop from '@mui/material/Backdrop';
 import PropTypes from 'prop-types';
@@ -15,6 +15,7 @@ import MuiAlert from '@mui/material/Alert';
 import '../Styles/app.scss';
 import { IMaskInput } from 'react-imask';
 import { useDispatch, connect } from 'react-redux';
+import MailIcon from '@mui/icons-material/Mail';
 import { LoadEmployeeForm } from '../redux/actions/employeeFormActions';
 import MainNavbar from '../layouts/main/MainNavbar';
 import invoiceData from '../invoicedata.json';
@@ -22,6 +23,7 @@ import ControlledOpenSelect from '../components/dropdown';
 import ProminentAppBar from '../components/header/header';
 import SkeletonSet from '../components/skeletons/SkeletonSet';
 import NavSection from '../components/NavSection';
+import ResponsiveDrawer from '../components/Sidebar';
 
 moment.tz.setDefault('Asia/Kuala_Lumpur');
 // Masking Input
@@ -220,6 +222,10 @@ function Employee(isFormLoaded) {
     { height: '40', width: '500', xs: 12, md: 12, lg: 12, xl: 12 }
     // { height: '20', circle: true, width: '20', xs: 12, md: 3, lg: 2, xl: 3 }
   ];
+  const li = ['All mail', 'Inbox', 'Spam'];
+  // { items: [{ title: 'All mail', Children: [{ title: 'Inbox' }] }, { title: 'Trash' }, { title: 'Spam' }] }
+  // ];
+  const iconli = [MailIcon];
   if (!isFormLoaded.isFormLoaded) {
     return (
       <div>
