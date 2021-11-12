@@ -10,3 +10,5 @@ export const VALID_FILE_FORMAT = {
   INVOICES: '.jpg, .jpeg, .png, .gif, .JPEG, .PNG, .JPG,.pdf,.PDF',
   INVOICES_LIST: ['jpg', 'jpeg', 'png', 'webp', 'gif', 'JPEG', 'PNG', 'JPG', 'pdf', 'PDF']
 };
+
+export const LANGUAGE_CODES = { EN: 'en', AR: 'ar' };

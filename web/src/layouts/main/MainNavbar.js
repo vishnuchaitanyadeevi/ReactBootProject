@@ -1,10 +1,12 @@
 import { NavLink as RouterLink, useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 // material
 import { experimentalStyled as styled } from '@mui/material/styles';
-import { Box, AppBar, Toolbar, Container, Avatar, Menu, MenuItem } from '@mui/material';
+import { Box, AppBar, Toolbar, Container, Avatar, Menu, MenuItem, Stack, TextField } from '@mui/material';
 // hooks
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useOffSetTop from '../../hooks/useOffSetTop';
+import useSettings from '../../hooks/useSettings';
 
 // components
 import Logo from '../../components/Logo';
@@ -15,6 +17,7 @@ import MenuDesktop from './MenuDesktop';
 import MenuMobile from './MenuMobile';
 import navConfig from './MenuConfig';
 import { logout } from '../../utils/auth-service';
+import { LANGUAGE_CODES } from '../../utils/constants';
 
 // ----------------------------------------------------------------------
 
@@ -49,6 +52,9 @@ const ToolbarShadowStyle = styled('div')(({ theme }) => ({
 
 export default function MainNavbar() {
   const navigate = useNavigate();
+  const { onChangeDirection } = useSettings();
+  const { t, i18n } = useTranslation();
+  const { EN, AR } = LANGUAGE_CODES;
   // Code for Menu Items
   const [isOpen, setOpen] = useState(null);
   const [isOpenList, setOpenList] = useState(null);
@@ -69,6 +75,21 @@ export default function MainNavbar() {
   const isOffset = useOffSetTop(100);
   const { pathname } = useLocation();
   const isHome = pathname === '/';
+  const [language, setLanguage] = useState(EN);
+
+  const LANGUAGES = [
+    { name: 'English', val: EN },
+    { name: 'Arabic', val: AR }
+  ];
+
+  const handleChangeLanguage = (event) => {
+    setLanguage(event.target.value);
+  };
+
+  useEffect(() => {
+    onChangeDirection({ target: { value: language === AR ? 'rtl' : 'ltr' } });
+    i18n.changeLanguage(language);
+  }, [language]);
 
   return (
     <AppBar color={isHome ? 'transparent' : 'default'} sx={{ boxShadow: 0 }}>
@@ -103,6 +124,26 @@ export default function MainNavbar() {
           </MHidden>
 
           <Avatar src={image} sx={{ width: 40, height: 40 }} onClick={handleOpen} />
+
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 3, sm: 2 }}>
+            <TextField
+              size="small"
+              select
+              fullWidth
+              label={t('Navbar.Language')}
+              placeholder={t('Navbar.Language')}
+              SelectProps={{ native: true }}
+              onChange={handleChangeLanguage}
+              value={language}
+              sx={{ ml: '10px', height: '30px' }}
+            >
+              {LANGUAGES.map((lang) => (
+                <option key={lang.val} value={lang.val}>
+                  {lang.name}
+                </option>
+              ))}
+            </TextField>
+          </Stack>
           <Menu keepMounted id="simple-menu" anchorEl={isOpen} onClose={handleClose} open={Boolean(isOpen)}>
             {['Profile', 'My account', 'Logout'].map((option) => (
               <MenuItem key={option} onClick={() => handleClose(option)}>
