@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
 import flashFill from '@iconify/icons-eva/flash-fill';
@@ -67,6 +68,8 @@ const HeroImgStyle = styled(motion.img)(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function LandingHero() {
+  const { t } = useTranslation();
+
   return (
     <>
       <RootStyle initial="initial" animate="animate" variants={varWrapEnter}>
@@ -77,9 +80,9 @@ export default function LandingHero() {
           <ContentStyle>
             <motion.div variants={varFadeInRight}>
               <Typography variant="h6" sx={{ color: 'common.grey' }}>
-                Welcome to
+                {t('LandingHero.WelcomeTo')}
                 <br />
-                Operation Management System
+                {t('LandingHero.OperationManagementSystem')}
               </Typography>
             </motion.div>
 

@@ -7,5 +7,9 @@
   "Components": "عناصر",
   "Navbar": {
     "Language" : "لغة"
+  },
+  "LandingHero": {
+    "WelcomeTo": "مرحبا بك في",
+    "OperationManagementSystem": "نظام إدارة العمليات"
   }
 }
