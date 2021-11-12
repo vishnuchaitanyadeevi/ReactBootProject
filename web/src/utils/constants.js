@@ -4,3 +4,9 @@ export const LOCAL_STORAGE_KEYS = {
 };
 
 export const API_BASE_PATH = 'https://lims-admin-api.azurewebsites.net';
+
+// Valid upload file type constants
+export const VALID_FILE_FORMAT = {
+  INVOICES: '.jpg, .jpeg, .png, .gif, .JPEG, .PNG, .JPG,.pdf,.PDF',
+  INVOICES_LIST: ['jpg', 'jpeg', 'png', 'webp', 'gif', 'JPEG', 'PNG', 'JPG', 'pdf', 'PDF']
+};

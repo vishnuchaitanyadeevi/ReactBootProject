@@ -94,8 +94,16 @@ export default function Router() {
       element: <Data />
     },
     {
+      path: '/invoice',
+      element: <Invoice />
+    },
+    {
       path: '/pay',
       element: <StripeContainer />
+    },
+    {
+      path: '/components',
+      element: <ComponentsPage />
     },
     { path: '*', element: <Navigate to="/404" replace /> }
   ]);
@@ -110,4 +118,6 @@ const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 const LandingPage = Loadable(lazy(() => import('../pages/LandingPage')));
 const Employee = Loadable(lazy(() => import('../pages/Employee')));
 const Data = Loadable(lazy(() => import('../pages/Data')));
+const Invoice = Loadable(lazy(() => import('../pages/Invoice')));
 const StripeContainer = Loadable(lazy(() => import('../pages/StripeContainer')));
+const ComponentsPage = Loadable(lazy(() => import('../pages/ComponentsPage')));

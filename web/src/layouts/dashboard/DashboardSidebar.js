@@ -39,12 +39,14 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       onCloseSidebar();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => {};
   }, [pathname]);
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 2000); // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => {};
   }, []);
   const renderContent = (
     <Scrollbar

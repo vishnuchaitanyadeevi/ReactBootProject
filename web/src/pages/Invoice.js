@@ -21,10 +21,10 @@ import SaveAlt from '@mui/icons-material/SaveAlt';
 import Search from '@mui/icons-material/Search';
 import ViewColumn from '@mui/icons-material/ViewColumn';
 import MainNavbar from '../layouts/main/MainNavbar';
-import jsonData from '../tabledata.json';
+import invoiceData from '../invoicedata.json';
 import '../Styles/app.scss';
 
-function Data() {
+function Invoice() {
   const TABLE_ICONS = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
     Check: forwardRef((props, ref) => <Check {...props} ref={ref} color="success" />),
@@ -47,7 +47,7 @@ function Data() {
 
   // const [dt, setdt] = React.useState(new Date());
 
-  const [tableData, setTableData] = useState(jsonData);
+  const [tableData, setTableData] = useState(invoiceData);
   /* const [value, setValue] = React.useState(new Date('2000-08-18'));
 
   const handleChange = (newValue) => {
@@ -57,35 +57,33 @@ function Data() {
 
   const columns = [
     {
-      title: 'Stock Code',
-      field: 'code',
-      filterPlaceholder: 'filter by Code',
+      title: 'ID',
+      field: 'id',
+      filterPlaceholder: 'filter by ID',
       minWidth: 150,
       width: 150,
-      // maxWidth: 150,
-      align: 'left'
+      align: 'center'
       // headerStyle: { color: '#fff' }
     },
     {
-      title: 'Description',
-      field: 'desc',
-      filterPlaceholder: 'filter by Description',
+      title: 'Invoice Number',
+      field: 'inv',
+      filterPlaceholder: 'filter by Invoice Number',
       minWidth: 150,
-      // maxWidth: 150,
       width: 150
     },
     {
-      title: 'Qty',
-      field: 'qty',
+      title: 'Invoice Date',
+      field: 'invdate',
       grouping: false,
-      filterPlaceholder: 'filter by qty',
+      filterPlaceholder: 'filter by Invoice Date',
       minWidth: 150,
       width: 150
     },
     {
-      title: 'Inv UOM',
-      field: 'uom',
-      filterPlaceholder: 'filter by UOM',
+      title: 'Project Number',
+      field: 'proj',
+      filterPlaceholder: 'filter by Project Number',
       minWidth: 150,
       width: 150
       /* 
@@ -115,31 +113,67 @@ function Data() {
       */
     },
     {
-      title: 'Hold qty',
-      field: 'hqty',
-      filterPlaceholder: 'filter by Hold qty',
+      title: 'Customer No.',
+      field: 'cust-no',
+      filterPlaceholder: 'filter by Cust No.',
       minWidth: 150,
       width: 150
     },
     {
-      title: 'On-hand',
-      field: 'hand',
-      filterPlaceholder: 'filter by On-hand',
+      title: 'Customer Name',
+      field: 'cust-name',
+      filterPlaceholder: 'filter by Cust Name',
       minWidth: 150,
       width: 150
     },
     {
-      title: 'On-wan',
-      field: 'owan',
-      filterPlaceholder: 'filter by On-wan',
+      title: 'Location Name',
+      field: 'loc',
+      filterPlaceholder: 'filter by Location',
       minWidth: 150,
       width: 150
     },
     {
-      title: 'From-wan',
-      field: 'fwan',
-      filterPlaceholder: 'filter by From-wan',
+      title: 'Gross Amnt',
+      field: 'amnt',
+      filterPlaceholder: 'filter by Amnt',
       minWidth: 150,
+      width: 150
+    },
+    {
+      title: 'Discount %',
+      field: 'disc',
+      filterPlaceholder: 'filter by Discount',
+      minWidth: 150,
+      width: 150
+    },
+    {
+      title: 'Discount Amnt',
+      field: 'disc-amnt',
+      filterPlaceholder: 'filter by Discount Amount',
+      minWidth: 150,
+      width: 150
+    },
+    {
+      title: 'Net Amnt',
+      field: 'net-amnt',
+      filterPlaceholder: 'filter by Amnt',
+      minWidth: 150,
+      width: 150
+    },
+    {
+      title: 'VAT Amnt',
+      field: 'VAT',
+      filterPlaceholder: 'filter by Amnt',
+      minWidth: 150,
+      width: 150
+    },
+    {
+      title: 'Net w VAT Amnt',
+      field: 'net',
+      filterPlaceholder: 'filter by Amnt',
+      minWidth: 150,
+      maxWidth: 150,
       width: 150
     }
   ];
@@ -184,12 +218,14 @@ function Data() {
             ]}
             onSelectionChange={(selectedRows) => console.log(selectedRows)}
             options={{
-              // fixedColumns: {
-              //   left: 2,
-              //   right: 0
-              // },
+              fixedColumns: {
+                left: 2,
+                right: 0
+              },
               cellStyle: { textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden', fontSize: 13 },
+              columnResizable: true,
               sorting: true,
+              padding: 'dense',
               search: true,
               searchFieldAlignment: 'right',
               searchAutoFocus: true,
@@ -207,18 +243,28 @@ function Data() {
               selection: true,
               showSelectAllCheckbox: true,
               showTextRowsSelected: true,
-              columnResizable: true,
-              padding: 'dense',
               selectionProps: (rowData) => ({
                 // color:'primary'
               }),
-              grouping: false,
+              grouping: true,
               columnsButton: true,
               rowStyle: (data, index) => (index % 2 === 0 ? { background: '#f5f5f5' } : null),
-              headerStyle: { background: '#01579b', color: 'white', fontSize: 13 },
+              headerStyle: {
+                background: '#01579b',
+                color: 'white',
+                // position: 'sticky',
+                // top: 0,
+                fontSize: 13
+                /* textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden'
+                */
+              },
+              height: '300px',
               tableLayout: 'fixed'
+              // margin: 0
             }}
-            title="Material Picking List"
+            title="Invoice List"
             icons={TABLE_ICONS}
           />
         </div>
@@ -227,4 +273,4 @@ function Data() {
   );
 }
 
-export default Data;
+export default Invoice;

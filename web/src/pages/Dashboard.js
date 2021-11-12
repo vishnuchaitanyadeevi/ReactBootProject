@@ -12,6 +12,7 @@ export default function Dashboard() {
     setTimeout(() => {
       setLoading(false);
     }, 2000);
+    return () => {};
   }, []);
   return (
     <Page title="Page One | Minimal-UI">

@@ -83,7 +83,7 @@ export default function PaymentForm() {
               <Paper elevation={20} style={paperStyle}>
                 <Grid align="center" />
                 <form>
-                  <Alert severity="info">
+                  <Alert severity="info" variant="filled">
                     <div align="left">Contribute $10 for Open Source.</div>
                     <div>Either pay from here or using invoice and get the receipt.</div>
                   </Alert>
@@ -149,8 +149,9 @@ export default function PaymentForm() {
                       variant="outlined"
                       onClick={handleSubmit}
                       style={marginTop}
+                      // disabled
                     >
-                      Pay
+                      {loading ? 'Processing ...' : 'Pay'}
                     </LoadingButton>
                   </Grid>
                 </form>
