@@ -21,6 +21,7 @@ import ControlledOpenSelect from '../components/dropdown';
 import ProminentAppBar from '../components/header/header';
 import NavSection from '../components/NavSection';
 import ResponsiveDrawer from '../components/Sidebar';
+import DashboardSidebar from '../layouts/dashboard';
 
 moment.tz.setDefault('Asia/Kuala_Lumpur');
 // Masking Input
@@ -206,7 +207,7 @@ function Employee() {
     <div>
       <div>
         <MainNavbar />
-        <ResponsiveDrawer Textlist={li} Iconslist={iconli} />
+        <DashboardSidebar />
       </div>
       <div align="center" className="rel">
         <Grid>
