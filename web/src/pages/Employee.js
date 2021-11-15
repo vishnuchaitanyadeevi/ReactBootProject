@@ -21,6 +21,7 @@ import MainNavbar from '../layouts/main/MainNavbar';
 import ControlledOpenSelect from '../components/dropdown';
 import ProminentAppBar from '../components/header/header';
 import SkeletonSet from '../components/skeletons/SkeletonSet';
+import RatingsWidget from '../components/RatingsWidget/RatingsWidget';
 
 moment.tz.setDefault('Asia/Kuala_Lumpur');
 // Masking Input
