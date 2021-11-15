@@ -16,12 +16,8 @@ import '../Styles/app.scss';
 import { IMaskInput } from 'react-imask';
 import MailIcon from '@mui/icons-material/Mail';
 import MainNavbar from '../layouts/main/MainNavbar';
-import invoiceData from '../invoicedata.json';
 import ControlledOpenSelect from '../components/dropdown';
 import ProminentAppBar from '../components/header/header';
-import NavSection from '../components/NavSection';
-import ResponsiveDrawer from '../components/Sidebar';
-import DashboardSidebar from '../layouts/dashboard';
 
 moment.tz.setDefault('Asia/Kuala_Lumpur');
 // Masking Input
@@ -207,7 +203,6 @@ function Employee() {
     <div>
       <div>
         <MainNavbar />
-        <DashboardSidebar />
       </div>
       <div align="center" className="rel">
         <Grid>
