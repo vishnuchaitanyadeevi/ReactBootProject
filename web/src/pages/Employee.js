@@ -18,14 +18,10 @@ import { useDispatch, connect } from 'react-redux';
 import MailIcon from '@mui/icons-material/Mail';
 import { LoadEmployeeForm } from '../redux/actions/employeeFormActions';
 import MainNavbar from '../layouts/main/MainNavbar';
-import invoiceData from '../invoicedata.json';
 import ControlledOpenSelect from '../components/dropdown';
 import ProminentAppBar from '../components/header/header';
 import SkeletonSet from '../components/skeletons/SkeletonSet';
-import NavSection from '../components/NavSection';
-import ResponsiveDrawer from '../components/Sidebar';
 import RatingsWidget from '../components/RatingsWidget/RatingsWidget';
-import DashboardSidebar from '../layouts/dashboard';
 
 moment.tz.setDefault('Asia/Kuala_Lumpur');
 // Masking Input
@@ -249,7 +245,6 @@ function Employee(isFormLoaded) {
           </Grid>
         </div>
         <MainNavbar />
-        <DashboardSidebar />
       </div>
     );
   }
@@ -257,7 +252,6 @@ function Employee(isFormLoaded) {
     return (
       <div>
         <div>
-          <DashboardSidebar />
           <MainNavbar />
         </div>
         <div align="center" className="rel">
