@@ -17,7 +17,7 @@ import MenuDesktop from './MenuDesktop';
 import MenuMobile from './MenuMobile';
 import navConfig from './MenuConfig';
 import { logout } from '../../utils/auth-service';
-import { LANGUAGE_CODES, LANGUAGES_CODES_RTL_ORIENTATION } from '../../utils/constants';
+import { LANGUAGES, LANGUAGE_CODES, LANGUAGES_CODES_RTL_ORIENTATION } from '../../utils/constants';
 
 // ----------------------------------------------------------------------
 
@@ -76,11 +76,6 @@ export default function MainNavbar() {
   const { pathname } = useLocation();
   const isHome = pathname === '/';
   const [language, setLanguage] = useState(EN);
-
-  const LANGUAGES = [
-    { name: 'English', val: EN },
-    { name: 'عربي', val: AR } // Arabic
-  ];
 
   const handleChangeLanguage = (event) => {
     setLanguage(event.target.value);
