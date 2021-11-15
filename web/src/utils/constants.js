@@ -12,3 +12,5 @@ export const VALID_FILE_FORMAT = {
 };
 
 export const LANGUAGE_CODES = { EN: 'en', AR: 'ar' };
+
+export const LANGUAGES_CODES_RTL_ORIENTATION = ['ar'];

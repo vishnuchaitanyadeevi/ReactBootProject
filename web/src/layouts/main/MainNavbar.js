@@ -17,7 +17,7 @@ import MenuDesktop from './MenuDesktop';
 import MenuMobile from './MenuMobile';
 import navConfig from './MenuConfig';
 import { logout } from '../../utils/auth-service';
-import { LANGUAGE_CODES } from '../../utils/constants';
+import { LANGUAGE_CODES, LANGUAGES_CODES_RTL_ORIENTATION } from '../../utils/constants';
 
 // ----------------------------------------------------------------------
 
@@ -79,7 +79,7 @@ export default function MainNavbar() {
 
   const LANGUAGES = [
     { name: 'English', val: EN },
-    { name: 'Arabic', val: AR }
+    { name: 'عربي', val: AR } // Arabic
   ];
 
   const handleChangeLanguage = (event) => {
@@ -87,7 +87,7 @@ export default function MainNavbar() {
   };
 
   useEffect(() => {
-    onChangeDirection({ target: { value: language === AR ? 'rtl' : 'ltr' } });
+    onChangeDirection({ target: { value: LANGUAGES_CODES_RTL_ORIENTATION.includes(language) ? 'rtl' : 'ltr' } });
     i18n.changeLanguage(language);
   }, [language]);
 
