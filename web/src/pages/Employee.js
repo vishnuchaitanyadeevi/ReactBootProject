@@ -16,6 +16,7 @@ import '../Styles/app.scss';
 import { IMaskInput } from 'react-imask';
 import { useDispatch, connect } from 'react-redux';
 import MailIcon from '@mui/icons-material/Mail';
+import AutocompleteWidget from '../components/Autocomplete/autocompletWidget';
 import { LoadEmployeeForm } from '../redux/actions/employeeFormActions';
 import MainNavbar from '../layouts/main/MainNavbar';
 import ControlledOpenSelect from '../components/dropdown';
@@ -220,6 +221,10 @@ function Employee(isFormLoaded) {
     { height: '40', width: '500', xs: 12, md: 12, lg: 12, xl: 12 }
     // { height: '20', circle: true, width: '20', xs: 12, md: 3, lg: 2, xl: 3 }
   ];
+  const positionOptions = [
+    { label: 'Technician', value: 1 },
+    { label: 'Manager', value: 2 }
+  ];
   const li = ['All mail', 'Inbox', 'Spam'];
   // { items: [{ title: 'All mail', Children: [{ title: 'Inbox' }] }, { title: 'Trash' }, { title: 'Spam' }] }
   // ];
@@ -331,6 +336,9 @@ function Employee(isFormLoaded) {
                           value={formik.values.lname}
                           name="lname"
                         />
+                      </Grid>
+                      <Grid item xs={12} md={12} lg={12} xl={12}>
+                        <AutocompleteWidget options={positionOptions} label="Position" disablePortal autoSelect />
                       </Grid>
                       <Grid item xs={12} md={12} lg={12} xl={12}>
                         <ProminentAppBar header="Address Details" textVarient="h6" height="30px" />
