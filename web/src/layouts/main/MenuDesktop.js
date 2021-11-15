@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { NavLink as RouterLink, useLocation } from 'react-router-dom';
 import arrowIosUpwardFill from '@iconify/icons-eva/arrow-ios-upward-fill';
 import arrowIosDownwardFill from '@iconify/icons-eva/arrow-ios-downward-fill';
+import { useTranslation } from 'react-i18next';
 // material
 import { experimentalStyled as styled } from '@mui/material/styles';
 import { Box, Link, Grid, List, Stack, Popover, ListItem, ListSubheader, CardActionArea } from '@mui/material';
@@ -59,6 +60,7 @@ MenuDesktopItem.propTypes = {
 };
 
 function MenuDesktopItem({ item, pathname, isHome, isOpen, isOffset, onOpen, onClose }) {
+  const { t } = useTranslation();
   const { title, path, children } = item;
   const isActive = pathname === path;
 
@@ -195,7 +197,7 @@ function MenuDesktopItem({ item, pathname, isHome, isOpen, isOffset, onOpen, onC
         ...(isActive && { color: 'primary.main' })
       }}
     >
-      {title}
+      {t([title])}
     </LinkStyle>
   );
 }

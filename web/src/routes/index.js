@@ -67,6 +67,36 @@ export default function Router() {
       ]
     },
     {
+      path: '/',
+      element: <DashboardLayout />,
+      children: [
+        {
+          path: '/home',
+          element: <LandingPage />
+        },
+        {
+          path: '/employee',
+          element: <Employee />
+        },
+        {
+          path: '/data',
+          element: <Data />
+        },
+        {
+          path: '/invoice',
+          element: <Invoice />
+        },
+        {
+          path: '/pay',
+          element: <StripeContainer />
+        },
+        {
+          path: '/components',
+          element: <ComponentsPage />
+        }
+      ]
+    },
+    {
       path: '',
       element: <DashboardLayout />,
       children: [{ path: 'Profile', element: <PageFour /> }]
@@ -80,7 +110,7 @@ export default function Router() {
         { path: '*', element: <Navigate to="/404" replace /> }
       ]
     },
-    {
+    /* {
       path: '/home',
       element: <LandingPage />
       // children: [{ path: '/', element: <Dashboard /> }]
@@ -105,6 +135,7 @@ export default function Router() {
       path: '/components',
       element: <ComponentsPage />
     },
+    */
     { path: '*', element: <Navigate to="/404" replace /> }
   ]);
 }

@@ -1,0 +1,15 @@
+{
+  "Home": "Home",
+  "Employee": "Employee",
+  "Data": "Data",
+  "Invoice": "Invoice",
+  "Pay": "Pay",
+  "Components": "Components",
+  "Navbar": {
+    "Language" : "Language"
+  },
+  "LandingHero": {
+    "WelcomeTo": "Welcome to",
+    "OperationManagementSystem": "Operation Management System"
+  }
+}

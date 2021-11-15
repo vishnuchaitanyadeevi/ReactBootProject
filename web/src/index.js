@@ -12,6 +12,7 @@ import store from './redux/store/index';
 import { SettingsProvider } from './contexts/SettingsContext';
 //
 import App from './App';
+import './i18n';
 import * as serviceWorker from './serviceWorker';
 import reportWebVitals from './reportWebVitals';
 
