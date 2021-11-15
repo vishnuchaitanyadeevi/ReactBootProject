@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
-import { Box, Button, TextField, Paper, Grid, Slider, Container, Typography, Divider } from '@mui/material';
+import React, { useState, useCallback } from 'react';
+import { Box, Button, Grid, Typography, Divider } from '@mui/material';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import MainNavbar from '../layouts/main/MainNavbar';
 import UploadFile from '../components/UploadFile';
 import Avatar from '../components/Avatar';
 import alertDialog from '../components/AlertDialog';
+import Dialog from '../components/Dialog';
+import { UploadAvatar } from '../components/upload';
+import MyComponent from './MyComponent';
 
 function ComponentsPage() {
   const [isAlertDialogOpen, setAlertDialogOpen] = useState(false);
   const [fileName1, setFileName1] = useState('');
   const [fileName2, setFileName2] = useState('');
-
+  const [avatarUrl, setAvatarUrl] = useState('');
+  const [openDialog, setOpenDialog] = useState(false);
   // File change method for first button
   const handleFileChange1 = (event) => {
     setFileName1(event.target.files[0].name);
@@ -41,6 +45,22 @@ function ComponentsPage() {
     setAlertDialogOpen(false);
   };
 
+  // Handle open dialog
+  const handleClickOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  // Handle close dialog
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
+  const handleDrop = useCallback((acceptedFiles) => {
+    const file = acceptedFiles[0];
+    if (file) {
+      setAvatarUrl({ ...file, preview: URL.createObjectURL(file) });
+    }
+  });
   return (
     <div>
       <MainNavbar />
@@ -54,6 +74,10 @@ function ComponentsPage() {
           negativeText: 'No',
           positiveText: 'Yes'
         })}
+
+      {openDialog && (
+        <Dialog open={openDialog} handleClose={handleCloseDialog} component={<MyComponent title="prop title" />} />
+      )}
 
       <div className="rel">
         <Grid container spacing={3}>
@@ -121,6 +145,37 @@ function ComponentsPage() {
             <Button onClick={() => setAlertDialogOpen(true)} variant="contained">
               Confirm me
             </Button>
+          </Grid>
+
+          <Grid item xs={12} sm={12}>
+            <Button variant="outlined" onClick={handleClickOpenDialog}>
+              Open full-screen dialog
+            </Button>
+          </Grid>
+
+          <Grid item xs={12} sm={12}>
+            <Box sx={{ mb: 5 }}>
+              <UploadAvatar
+                accept="image/*"
+                file={avatarUrl}
+                maxSize={3145728}
+                onDrop={handleDrop}
+                caption={
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      mt: 2,
+                      mx: 'auto',
+                      display: 'block',
+                      textAlign: 'center',
+                      color: 'text.secondary'
+                    }}
+                  >
+                    Allowed *.jpeg, *.jpg, *.png, *.gif
+                  </Typography>
+                }
+              />
+            </Box>
           </Grid>
         </Grid>
       </div>
