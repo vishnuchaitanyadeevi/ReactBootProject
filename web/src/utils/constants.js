@@ -18,4 +18,4 @@ export const LANGUAGES = [
   { name: 'عربي', val: LANGUAGE_CODES.AR } // Arabic
 ];
 
-export const LANGUAGES_CODES_RTL_ORIENTATION = ['ar'];
+export const LANGUAGES_CODES_RTL_ORIENTATION = [LANGUAGE_CODES.AR];
