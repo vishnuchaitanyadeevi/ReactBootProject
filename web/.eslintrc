@@ -10,6 +10,13 @@
     "plugin:jsx-a11y/recommended",
     "plugin:react-hooks/recommended"
   ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
   "plugins": [
     "prettier",
     "react",
