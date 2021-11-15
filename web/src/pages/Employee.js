@@ -24,6 +24,7 @@ import ProminentAppBar from '../components/header/header';
 import SkeletonSet from '../components/skeletons/SkeletonSet';
 import NavSection from '../components/NavSection';
 import ResponsiveDrawer from '../components/Sidebar';
+import RatingsWidget from '../components/RatingsWidget/RatingsWidget';
 import DashboardSidebar from '../layouts/dashboard';
 
 moment.tz.setDefault('Asia/Kuala_Lumpur');
@@ -411,6 +412,14 @@ function Employee(isFormLoaded) {
                       </Grid>
                       <Grid item xs={12} md={12} lg={12} xl={12}>
                         <p align="left">Employee Rating</p>
+                        <RatingsWidget
+                          name="employee-ratings"
+                          precision={1}
+                          max={7}
+                          onChange={(event, value) => {
+                            console.log(event, value);
+                          }}
+                        />
                         <Slider
                           required
                           defaultValue={0}
