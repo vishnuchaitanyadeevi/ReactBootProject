@@ -405,6 +405,14 @@ function Employee(isFormLoaded) {
                       </Grid>
                       <Grid item xs={12} md={12} lg={12} xl={12}>
                         <p align="left">Employee Rating</p>
+                        <RatingsWidget
+                          name="employee-ratings"
+                          precision={1}
+                          max={7}
+                          onChange={(event, value) => {
+                            console.log(event, value);
+                          }}
+                        />
                         <Slider
                           required
                           defaultValue={0}
