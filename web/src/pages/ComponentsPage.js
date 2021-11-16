@@ -11,29 +11,9 @@ import MyComponent from './MyComponent';
 
 function ComponentsPage() {
   const [isAlertDialogOpen, setAlertDialogOpen] = useState(false);
-  const [fileName1, setFileName1] = useState('');
-  const [fileName2, setFileName2] = useState('');
   const [avatarUrl, setAvatarUrl] = useState('');
   const [openDialog, setOpenDialog] = useState(false);
-  // File change method for first button
-  const handleFileChange1 = (event) => {
-    setFileName1(event.target.files[0].name);
-  };
-
-  // File change method for second button
-  const handleFileChange2 = (event) => {
-    setFileName2(event.target.files[0].name);
-  };
-
-  // Delete First file
-  const handleDeleteFile1 = () => {
-    setFileName1('');
-  };
-
-  // Delete Second file
-  const handleDeleteFile2 = () => {
-    setFileName2('');
-  };
+  const [multipleImages, setMultipleImages] = useState({ images: [] });
 
   // Handle alert dialog success method
   const handleAlertDialogSubmit = () => {
@@ -61,6 +41,24 @@ function ComponentsPage() {
       setAvatarUrl({ ...file, preview: URL.createObjectURL(file) });
     }
   });
+
+  const handleDropMultiple = useCallback((acceptedFiles) => {
+    setMultipleImages({
+      ...multipleImages,
+      images: acceptedFiles.map((file) =>
+        Object.assign(file, {
+          preview: URL.createObjectURL(file)
+        })
+      )
+    });
+  });
+
+  const handleRemove = (file) => {
+    const filteredItems = multipleImages.images.filter((_file) => _file !== file);
+    setMultipleImages({ ...multipleImages, images: filteredItems });
+  };
+
+  console.log('Multiple files....', multipleImages.images);
   return (
     <div>
       <MainNavbar />
@@ -86,25 +84,16 @@ function ComponentsPage() {
           </Grid>
 
           {/* Upload Component Section */}
-          <Grid style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }} item xs={12} sm={6}>
+          <Grid style={{ display: 'flex', alignItems: 'center' }} item xs={12} sm={6}>
             <UploadFile
-              buttonName="Upload File 1"
-              accept="image/*"
+              showPreview
+              maxSize={3145728}
+              accept="application/pdf,image/*"
+              files={multipleImages.images}
+              onDrop={handleDropMultiple}
+              onRemove={handleRemove}
               backgroundColor="green"
               startIcon={<PhotoCamera />}
-              handleFileChange={handleFileChange1}
-              fileName={fileName1}
-              handleDelete={handleDeleteFile1}
-            />
-
-            <UploadFile
-              buttonName="Upload File 2"
-              accept="image/*"
-              backgroundColor="#212B36"
-              endIcon={<PhotoCamera />}
-              handleFileChange={handleFileChange2}
-              fileName={fileName2}
-              handleDelete={handleDeleteFile2}
             />
           </Grid>
         </Grid>
