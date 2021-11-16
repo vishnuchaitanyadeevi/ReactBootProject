@@ -36,6 +36,7 @@ function ComponentsPage() {
     setOpenDialog(false);
   };
 
+  // Handle select avatar
   const handleDrop = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
     if (file) {
@@ -43,6 +44,7 @@ function ComponentsPage() {
     }
   });
 
+  // handle change selected file
   const handleDropMultiple = useCallback((acceptedFiles) => {
     setMultipleImages({
       ...multipleImages,
@@ -54,6 +56,7 @@ function ComponentsPage() {
     });
   });
 
+  // handle remove selcted file
   const handleRemove = (file) => {
     const filteredItems = multipleImages.images.filter((_file) => _file !== file);
     setMultipleImages({ ...multipleImages, images: filteredItems });
@@ -84,7 +87,7 @@ function ComponentsPage() {
             <Typography variant="h6">Upload File Component</Typography>
           </Grid>
 
-          {/* Upload Component Section */}
+          {/* Upload single and multiple file Component Section */}
           <Grid style={{ display: 'flex', alignItems: 'center' }} item xs={12} sm={6}>
             <UploadFile
               showPreview
@@ -137,12 +140,14 @@ function ComponentsPage() {
             </Button>
           </Grid>
 
+          {/* Open dialog Component */}
           <Grid item xs={12} sm={12}>
             <Button variant="outlined" onClick={handleClickOpenDialog}>
               Open full-screen dialog
             </Button>
           </Grid>
 
+          {/* Upload Avatar Component */}
           <Grid item xs={12} sm={12}>
             <Box sx={{ mb: 5 }}>
               <UploadAvatar
