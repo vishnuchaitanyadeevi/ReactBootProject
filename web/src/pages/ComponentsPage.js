@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { Box, Button, Grid, Typography, Divider } from '@mui/material';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import BasicDatePicker from '../components/pickers/BasicDatePicker';
 import MainNavbar from '../layouts/main/MainNavbar';
 import UploadFile from '../components/UploadFile';
 import Avatar from '../components/Avatar';
@@ -165,6 +166,17 @@ function ComponentsPage() {
                 }
               />
             </Box>
+          </Grid>
+        </Grid>
+        <Divider style={{ backgroundColor: '#212B36', marginTop: '1rem' }} />
+
+        {/* Date Picker Component */}
+        <Grid container spacing={3}>
+          <Grid style={{ margin: '1rem' }} item xs={12} sm={12}>
+            <Typography variant="h6">Date-Time Picker Component</Typography>
+          </Grid>
+          <Grid style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} item xs={12} sm={3}>
+            <BasicDatePicker label="Select Date" />
           </Grid>
         </Grid>
       </div>

@@ -29,7 +29,7 @@ const RootStyle = styled(motion.div)(({ theme }) => ({
 
 const ContentStyle = styled((props) => <Stack spacing={5} {...props} />)(({ theme }) => ({
   zIndex: 10,
-  maxWidth: 520,
+  maxWidth: 800,
   margin: 'auto',
   textAlign: 'center',
   position: 'relative',
@@ -37,7 +37,7 @@ const ContentStyle = styled((props) => <Stack spacing={5} {...props} />)(({ them
   paddingBottom: theme.spacing(15),
   [theme.breakpoints.up('md')]: {
     margin: 'unset',
-    textAlign: 'left'
+    textAlign: 'center'
   }
 }));
 
@@ -90,7 +90,7 @@ export default function LandingHero() {
           </ContentStyle>
         </Container>
       </RootStyle>
-      <Box sx={{ height: { md: '100vh' } }} />
+      <Box sx={{ height: { md: 'auto' } }} />
     </>
   );
 }
