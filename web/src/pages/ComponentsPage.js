@@ -1,36 +1,20 @@
-import React, { useState } from 'react';
-import { Box, Button, TextField, Paper, Grid, Slider, Container, Typography, Divider } from '@mui/material';
+import React, { useState, useCallback } from 'react';
+import { Box, Button, Grid, Typography, Divider } from '@mui/material';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import BasicDatePicker from '../components/pickers/BasicDatePicker';
 import MainNavbar from '../layouts/main/MainNavbar';
 import UploadFile from '../components/UploadFile';
 import Avatar from '../components/Avatar';
 import alertDialog from '../components/AlertDialog';
+import Dialog from '../components/Dialog';
+import { UploadAvatar } from '../components/upload';
+import MyComponent from './MyComponent';
 
 function ComponentsPage() {
   const [isAlertDialogOpen, setAlertDialogOpen] = useState(false);
-  const [fileName1, setFileName1] = useState('');
-  const [fileName2, setFileName2] = useState('');
-
-  // File change method for first button
-  const handleFileChange1 = (event) => {
-    setFileName1(event.target.files[0].name);
-  };
-
-  // File change method for second button
-  const handleFileChange2 = (event) => {
-    setFileName2(event.target.files[0].name);
-  };
-
-  // Delete First file
-  const handleDeleteFile1 = () => {
-    setFileName1('');
-  };
-
-  // Delete Second file
-  const handleDeleteFile2 = () => {
-    setFileName2('');
-  };
+  const [avatarUrl, setAvatarUrl] = useState('');
+  const [openDialog, setOpenDialog] = useState(false);
+  const [multipleImages, setMultipleImages] = useState({ images: [] });
 
   // Handle alert dialog success method
   const handleAlertDialogSubmit = () => {
@@ -42,6 +26,43 @@ function ComponentsPage() {
     setAlertDialogOpen(false);
   };
 
+  // Handle open dialog
+  const handleClickOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  // Handle close dialog
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
+  // Handle select avatar
+  const handleDrop = useCallback((acceptedFiles) => {
+    const file = acceptedFiles[0];
+    if (file) {
+      setAvatarUrl({ ...file, preview: URL.createObjectURL(file) });
+    }
+  });
+
+  // handle change selected file
+  const handleDropMultiple = useCallback((acceptedFiles) => {
+    setMultipleImages({
+      ...multipleImages,
+      images: acceptedFiles.map((file) =>
+        Object.assign(file, {
+          preview: URL.createObjectURL(file)
+        })
+      )
+    });
+  });
+
+  // handle remove selcted file
+  const handleRemove = (file) => {
+    const filteredItems = multipleImages.images.filter((_file) => _file !== file);
+    setMultipleImages({ ...multipleImages, images: filteredItems });
+  };
+
+  console.log('Multiple files....', multipleImages.images);
   return (
     <div>
       <MainNavbar />
@@ -56,32 +77,27 @@ function ComponentsPage() {
           positiveText: 'Yes'
         })}
 
+      {openDialog && (
+        <Dialog open={openDialog} handleClose={handleCloseDialog} component={<MyComponent title="prop title" />} />
+      )}
+
       <div className="rel">
         <Grid container spacing={3}>
           <Grid style={{ margin: '1rem' }} item xs={12} sm={6}>
             <Typography variant="h6">Upload File Component</Typography>
           </Grid>
 
-          {/* Upload Component Section */}
-          <Grid style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }} item xs={12} sm={6}>
+          {/* Upload single and multiple file Component Section */}
+          <Grid style={{ display: 'flex', alignItems: 'center' }} item xs={12} sm={6}>
             <UploadFile
-              buttonName="Upload File 1"
-              accept="image/*"
+              showPreview
+              maxSize={3145728}
+              accept="application/pdf,image/*"
+              files={multipleImages.images}
+              onDrop={handleDropMultiple}
+              onRemove={handleRemove}
               backgroundColor="green"
               startIcon={<PhotoCamera />}
-              handleFileChange={handleFileChange1}
-              fileName={fileName1}
-              handleDelete={handleDeleteFile1}
-            />
-
-            <UploadFile
-              buttonName="Upload File 2"
-              accept="image/*"
-              backgroundColor="#212B36"
-              endIcon={<PhotoCamera />}
-              handleFileChange={handleFileChange2}
-              fileName={fileName2}
-              handleDelete={handleDeleteFile2}
             />
           </Grid>
         </Grid>
@@ -122,6 +138,39 @@ function ComponentsPage() {
             <Button onClick={() => setAlertDialogOpen(true)} variant="contained">
               Confirm me
             </Button>
+          </Grid>
+
+          {/* Open dialog Component */}
+          <Grid item xs={12} sm={12}>
+            <Button variant="outlined" onClick={handleClickOpenDialog}>
+              Open full-screen dialog
+            </Button>
+          </Grid>
+
+          {/* Upload Avatar Component */}
+          <Grid item xs={12} sm={12}>
+            <Box sx={{ mb: 5 }}>
+              <UploadAvatar
+                accept="image/*"
+                file={avatarUrl}
+                maxSize={3145728}
+                onDrop={handleDrop}
+                caption={
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      mt: 2,
+                      mx: 'auto',
+                      display: 'block',
+                      textAlign: 'center',
+                      color: 'text.secondary'
+                    }}
+                  >
+                    Allowed *.jpeg, *.jpg, *.png, *.gif
+                  </Typography>
+                }
+              />
+            </Box>
           </Grid>
         </Grid>
         <Divider style={{ backgroundColor: '#212B36', marginTop: '1rem' }} />
