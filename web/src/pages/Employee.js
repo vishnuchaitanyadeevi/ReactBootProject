@@ -292,6 +292,7 @@ function Employee(isFormLoaded) {
                           <DatePicker
                             style={{ width: '100%', maxWidth: '100%', minWidth: '20%', marginTop: 10 }}
                             fullWidth
+                            inputFormat="dd-MM-yyyy"
                             label="Date of Joining"
                             value={value}
                             onChange={(newValue) => {
@@ -398,6 +399,7 @@ function Employee(isFormLoaded) {
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                           <DateTimePicker
                             style={{ width: '100%', maxWidth: '100%', minWidth: '20%', marginTop: 10 }}
+                            inputFormat="dd-MM-yyyy"
                             renderInput={(props) => (
                               <TextField
                                 style={{ width: '100%', maxWidth: '100%', minWidth: '20%', marginTop: 10 }}
@@ -417,7 +419,7 @@ function Employee(isFormLoaded) {
                         <RatingsWidget
                           name="employee-ratings"
                           precision={1}
-                          max={7}
+                          max={5}
                           onChange={(event, value) => {
                             console.log(event, value);
                           }}
