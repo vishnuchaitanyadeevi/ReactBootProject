@@ -6,10 +6,10 @@
   "Pay": "Pay",
   "Components": "Components",
   "Navbar": {
-    "Language" : "Language"
+    "Language": "Language"
   },
   "LandingHero": {
     "WelcomeTo": "Welcome to",
-    "OperationManagementSystem": "Operation Management System"
+    "OperationManagementSystem": "Operations Management System"
   }
 }
