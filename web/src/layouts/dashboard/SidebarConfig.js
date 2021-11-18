@@ -3,6 +3,7 @@ import { PATH_DASHBOARD } from '../../routes/paths';
 // components
 import Label from '../../components/Label';
 import SvgIconStyle from '../../components/SvgIconStyle';
+import menuConfig from '../main/MenuConfig';
 
 // ----------------------------------------------------------------------
 
@@ -26,90 +27,73 @@ const ICONS = {
 };
 
 const sidebarConfig = [
-  // GENERAL
-  // ----------------------------------------------------------------------
   {
-    subheader: 'general',
     items: [
+      { title: 'dashboard', path: PATH_DASHBOARD.general.home },
       {
-        title: 'app',
-        path: PATH_DASHBOARD.general.app,
-        icon: ICONS.dashboard
-      },
-      { title: 'e-commerce', path: PATH_DASHBOARD.general.ecommerce, icon: ICONS.ecommerce },
-      { title: 'analytics', path: PATH_DASHBOARD.general.analytics, icon: ICONS.analytics },
-      { title: 'banking', path: PATH_DASHBOARD.general.banking, icon: ICONS.banking },
-      { title: 'booking', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking }
-    ]
-  },
-
-  // MANAGEMENT
-  // ----------------------------------------------------------------------
-  {
-    subheader: 'management',
-    items: [
-      // MANAGEMENT : USER
-      {
-        title: 'user',
-        path: PATH_DASHBOARD.user.root,
-        icon: ICONS.user,
+        title: 'customer',
+        path: '',
         children: [
-          { title: 'profile', path: PATH_DASHBOARD.user.profile },
-          { title: 'cards', path: PATH_DASHBOARD.user.cards },
-          { title: 'list', path: PATH_DASHBOARD.user.list },
-          { title: 'create', path: PATH_DASHBOARD.user.newUser },
-          { title: 'edit', path: PATH_DASHBOARD.user.editById },
-          { title: 'account', path: PATH_DASHBOARD.user.account }
+          { title: 'customers', path: PATH_DASHBOARD.general.customers },
+          { title: 'contracts/projects', path: PATH_DASHBOARD.general.contracts },
+          { title: 'project expiration list', path: PATH_DASHBOARD.general.banking },
+          { title: 'scheduling', path: PATH_DASHBOARD.general.booking }
         ]
       },
-
-      // MANAGEMENT : E-COMMERCE
       {
-        title: 'e-commerce',
-        path: PATH_DASHBOARD.eCommerce.root,
-        icon: ICONS.cart,
+        title: 'material management',
+        path: '',
         children: [
-          { title: 'shop', path: PATH_DASHBOARD.eCommerce.shop },
-          { title: 'product', path: PATH_DASHBOARD.eCommerce.productById },
-          { title: 'list', path: PATH_DASHBOARD.eCommerce.list },
-          { title: 'create', path: PATH_DASHBOARD.eCommerce.newProduct },
-          { title: 'edit', path: PATH_DASHBOARD.eCommerce.editById },
-          { title: 'checkout', path: PATH_DASHBOARD.eCommerce.checkout },
-          { title: 'invoice', path: PATH_DASHBOARD.eCommerce.invoice }
+          { title: 'Material Picking List', path: PATH_DASHBOARD.general.booking },
+          { title: 'Materials and price list', path: PATH_DASHBOARD.general.booking },
+          { title: 'FOL Material Stats', path: PATH_DASHBOARD.general.booking },
+          { title: 'Equipments', path: PATH_DASHBOARD.general.booking }
         ]
       },
-
-      // MANAGEMENT : BLOG
       {
-        title: 'blog',
-        path: PATH_DASHBOARD.blog.root,
-        icon: ICONS.blog,
+        title: 'invoicing',
+        path: '',
         children: [
-          { title: 'posts', path: PATH_DASHBOARD.blog.posts },
-          { title: 'post', path: PATH_DASHBOARD.blog.postById },
-          { title: 'new post', path: PATH_DASHBOARD.blog.newPost }
+          { title: 'invoicing home', path: PATH_DASHBOARD.general.booking },
+          { title: 'Invoicing -Overview', path: PATH_DASHBOARD.general.booking }
         ]
-      }
-    ]
-  },
-
-  // APP
-  // ----------------------------------------------------------------------
-  {
-    subheader: 'app',
-    items: [
-      {
-        title: 'mail',
-        path: PATH_DASHBOARD.mail.root,
-        icon: ICONS.mail,
-        info: <Label color="error">2</Label>
       },
-      { title: 'chat', path: PATH_DASHBOARD.chat.root, icon: ICONS.chat },
-      { title: 'calendar', path: PATH_DASHBOARD.calendar, icon: ICONS.calendar },
       {
-        title: 'kanban',
-        path: PATH_DASHBOARD.kanban,
-        icon: ICONS.kanban
+        title: 'credit',
+        path: '',
+        children: [
+          { title: 'Credit notes Proposal & Workflow', path: PATH_DASHBOARD.general.booking },
+          { title: 'credit note list', path: PATH_DASHBOARD.general.booking },
+          { title: 'credit control view', path: PATH_DASHBOARD.general.booking },
+          { title: 'credit control co-ordinator view', path: PATH_DASHBOARD.general.booking }
+        ]
+      },
+      {
+        title: 'misc',
+        path: '',
+        children: [
+          { title: 'Reports', path: PATH_DASHBOARD.general.booking },
+          { title: 'iPad Synchronization Log', path: PATH_DASHBOARD.general.booking },
+          { title: 'Route Analysis', path: PATH_DASHBOARD.general.booking },
+          { title: 'Manage Questions', path: PATH_DASHBOARD.general.booking },
+          { title: 'Discount Workflow', path: PATH_DASHBOARD.general.booking },
+          { title: 'Equipment Builder', path: PATH_DASHBOARD.general.booking },
+          { title: 'Ax Synchronization', path: PATH_DASHBOARD.general.booking },
+          { title: 'Mobile Warehouse', path: PATH_DASHBOARD.general.booking },
+          { title: 'Salesmen View', path: PATH_DASHBOARD.general.booking },
+          { title: 'Export', path: PATH_DASHBOARD.general.booking }
+        ]
+      },
+      {
+        title: 'Demo',
+        path: '',
+        children: [
+          { title: 'Employee', path: '/employee' },
+          { title: 'Data', path: '/data' },
+          { title: 'Invoice', path: '/invoice' },
+          { title: 'Pay', path: '/pay' },
+          { title: 'Components', path: '/components' }
+        ]
       }
     ]
   }
