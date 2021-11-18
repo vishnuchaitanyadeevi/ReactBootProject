@@ -110,17 +110,17 @@ export default function MainNavbar() {
           </RouterLink>
           <Box sx={{ flexGrow: 1 }} />
 
-          <MHidden width="mdDown">
+          {/* <MHidden width="mdDown">
             <MenuDesktop isOffset={isOffset} isHome={isHome} navConfig={navConfig} />
           </MHidden>
 
           <MHidden width="mdUp">
             <MenuMobile isOffset={isOffset} isHome={isHome} navConfig={navConfig} />
-          </MHidden>
+          </MHidden> */}
 
           <Avatar src={image} sx={{ width: 40, height: 40 }} onClick={handleOpen} />
 
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 3, sm: 2 }}>
+          {/* <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 3, sm: 2 }}>
             <TextField
               size="small"
               select
@@ -138,7 +138,7 @@ export default function MainNavbar() {
                 </option>
               ))}
             </TextField>
-          </Stack>
+          </Stack> */}
           <Menu keepMounted id="simple-menu" anchorEl={isOpen} onClose={handleClose} open={Boolean(isOpen)}>
             {['Profile', 'My account', 'Logout'].map((option) => (
               <MenuItem key={option} onClick={() => handleClose(option)}>
