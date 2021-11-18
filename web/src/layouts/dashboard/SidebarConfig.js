@@ -45,35 +45,42 @@ const sidebarConfig = [
   {
     subheader: 'material management',
     items: [
-      { title: 'Material Picking List', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
-      { title: 'Materials and price list', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
-      { title: 'FOL Material Stats', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
-      { title: 'Equipments', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking }
+      { title: 'Material Picking List', path: PATH_DASHBOARD.general.booking, icon: ICONS.cart },
+      { title: 'Materials and price list', path: PATH_DASHBOARD.general.booking, icon: ICONS.ecommerce },
+      { title: 'FOL Material Stats', path: PATH_DASHBOARD.general.booking, icon: ICONS.kanban },
+      { title: 'Equipments', path: PATH_DASHBOARD.general.booking, icon: ICONS.ecommerce }
     ]
   },
   {
     subheader: 'invoicing',
     items: [
-      { title: 'invoicing home', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
-      { title: 'Invoicing -Overview', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
-      { title: 'Invoicing -Credit notes Proposal', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
-      { title: 'Invoicing -Credit notes Workflow', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking }
+      { title: 'invoicing home', path: PATH_DASHBOARD.general.booking, icon: ICONS.ecommerce },
+      { title: 'Invoicing -Overview', path: PATH_DASHBOARD.general.booking, icon: ICONS.analytics },
+      { title: 'Credit notes Proposal & Workflow', path: PATH_DASHBOARD.general.booking, icon: ICONS.banking }
+    ]
+  },
+  {
+    subheader: 'crdit',
+    items: [
+      { title: 'credit note list', path: PATH_DASHBOARD.general.booking, icon: ICONS.ecommerce },
+      { title: 'credit control view', path: PATH_DASHBOARD.general.booking, icon: ICONS.analytics },
+      { title: 'credit control co-ordinator view', path: PATH_DASHBOARD.general.booking, icon: ICONS.analytics }
     ]
   },
 
   {
     subheader: 'misc',
     items: [
-      { title: 'Reports', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
-      { title: 'iPad Synchronization Log', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
-      { title: 'Route Analysis', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
-      { title: 'Manage Questions', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
-      { title: 'Discount Workflow', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
-      { title: 'Equipment Builder', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
-      { title: 'Ax Synchronization', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
+      { title: 'Reports', path: PATH_DASHBOARD.general.booking, icon: ICONS.analytics },
+      { title: 'iPad Synchronization Log', path: PATH_DASHBOARD.general.booking, icon: ICONS.kanban },
+      { title: 'Route Analysis', path: PATH_DASHBOARD.general.booking, icon: ICONS.analytics },
+      { title: 'Manage Questions', path: PATH_DASHBOARD.general.booking, icon: ICONS.kanban },
+      { title: 'Discount Workflow', path: PATH_DASHBOARD.general.booking, icon: ICONS.ecommerce },
+      { title: 'Equipment Builder', path: PATH_DASHBOARD.general.booking, icon: ICONS.banking },
+      { title: 'Ax Synchronization', path: PATH_DASHBOARD.general.booking, icon: ICONS.dashboard },
       { title: 'Mobile Warehouse', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
-      { title: 'Salesmen View', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
-      { title: 'Export', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking }
+      { title: 'Salesmen View', path: PATH_DASHBOARD.general.booking, icon: ICONS.user },
+      { title: 'Export', path: PATH_DASHBOARD.general.booking, icon: ICONS.kanban }
     ]
   }
 ];
