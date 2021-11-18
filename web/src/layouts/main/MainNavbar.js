@@ -1,5 +1,7 @@
 import { NavLink as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Icon } from '@iconify/react';
+import menu2Fill from '@iconify/icons-eva/menu-2-fill';
 // material
 import { experimentalStyled as styled } from '@mui/material/styles';
 import { Box, AppBar, Toolbar, Container, Avatar, Menu, MenuItem, Stack, TextField } from '@mui/material';
@@ -7,10 +9,12 @@ import { Box, AppBar, Toolbar, Container, Avatar, Menu, MenuItem, Stack, TextFie
 import { useState, useEffect } from 'react';
 import useOffSetTop from '../../hooks/useOffSetTop';
 import useSettings from '../../hooks/useSettings';
+import DashboardSidebar from '../dashboard/DashboardSidebar';
 
 // components
 import Logo from '../../components/Logo';
-import { MHidden } from '../../components/@material-extend';
+import { MHidden, MIconButton } from '../../components/@material-extend';
+
 //
 import image from '../../assets/images/img_avatar.png';
 import MenuDesktop from './MenuDesktop';
@@ -60,6 +64,7 @@ export default function MainNavbar() {
   const [isOpenList, setOpenList] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(1);
   const [isOpenMaxHeight, setOpenMaxHeight] = useState(null);
+  const [openSidebar, setOpenSidebar] = useState(false);
 
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
@@ -71,6 +76,8 @@ export default function MainNavbar() {
       navigate('/login');
     }
   };
+
+  const handleSidebarOpen = () => setOpenSidebar(!openSidebar);
 
   const isOffset = useOffSetTop(100);
   const { pathname } = useLocation();
@@ -105,18 +112,29 @@ export default function MainNavbar() {
             justifyContent: 'space-between'
           }}
         >
+          <MIconButton
+            onClick={handleSidebarOpen}
+            sx={{
+              ml: 1,
+              ...(isHome && { color: 'common.white' }),
+              ...(isOffset && { color: 'text.primary' })
+            }}
+          >
+            <Icon icon={menu2Fill} />
+          </MIconButton>
           <RouterLink to="/home">
             <Logo />
           </RouterLink>
-          <Box sx={{ flexGrow: 1 }} />
+          {/* <Box sx={{ flexGrow: 1 }} /> */}
+          <DashboardSidebar isOpenSidebar={openSidebar} onCloseSidebar={handleSidebarOpen} />
 
           <MHidden width="mdDown">
             <MenuDesktop isOffset={isOffset} isHome={isHome} navConfig={navConfig} />
           </MHidden>
 
-          <MHidden width="mdUp">
+          {/* <MHidden width="mdUp">
             <MenuMobile isOffset={isOffset} isHome={isHome} navConfig={navConfig} />
-          </MHidden>
+          </MHidden> */}
 
           <Avatar src={image} sx={{ width: 40, height: 40 }} onClick={handleOpen} />
 

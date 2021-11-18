@@ -7,6 +7,7 @@ import useCollapseDrawer from '../../hooks/useCollapseDrawer';
 //
 import DashboardNavbar from './DashboardNavbar';
 import DashboardSidebar from './DashboardSidebar';
+import MainNavbar from '../main/MainNavbar';
 
 // ----------------------------------------------------------------------
 
@@ -15,7 +16,7 @@ const APP_BAR_DESKTOP = 92;
 
 const RootStyle = styled('div')({
   display: 'flex',
-  minHeight: '100%',
+  minHeight: '100vh',
   overflow: 'hidden'
 });
 
@@ -41,7 +42,8 @@ export default function DashboardLayout() {
 
   return (
     <RootStyle>
-      <DashboardNavbar onOpenSidebar={() => setOpen(true)} />
+      {/* <DashboardNavbar onOpenSidebar={() => setOpen(true)} /> */}
+      <MainNavbar />
       <DashboardSidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} />
       <MainStyle
         sx={{

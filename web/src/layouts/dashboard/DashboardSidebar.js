@@ -99,9 +99,9 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     useCollapseDrawer();
 
   useEffect(() => {
-    if (isOpenSidebar) {
-      onCloseSidebar();
-    }
+    // if (isOpenSidebar) {
+    //   onCloseSidebar();
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
@@ -192,7 +192,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
         })
       }}
     >
-      <MHidden width="lgUp">
+      {/* <MHidden width="lgUp">
         <Drawer
           open={isOpenSidebar}
           onClose={onCloseSidebar}
@@ -202,34 +202,32 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
         >
           {renderContent}
         </Drawer>
-      </MHidden>
+      </MHidden> */}
 
-      <MHidden width="lgDown">
-        <Drawer
-          open
-          variant="persistent"
-          onMouseEnter={onHoverEnter}
-          onMouseLeave={onHoverLeave}
-          PaperProps={{
-            sx: {
-              width: DRAWER_WIDTH,
-              bgcolor: 'background.default',
-              ...(isCollapse && {
-                width: COLLAPSE_WIDTH
-              }),
-              ...(collapseHover && {
-                borderRight: 0,
-                backdropFilter: 'blur(6px)',
-                WebkitBackdropFilter: 'blur(6px)', // Fix on Mobile
-                boxShadow: (theme) => theme.customShadows.z20,
-                bgcolor: (theme) => alpha(theme.palette.background.default, 0.88)
-              })
-            }
-          }}
-        >
-          {renderContent}
-        </Drawer>
-      </MHidden>
+      <Drawer
+        open={isOpenSidebar}
+        ModalProps={{ onBackdropClick: onCloseSidebar }}
+        onMouseEnter={onHoverEnter}
+        onMouseLeave={onHoverLeave}
+        PaperProps={{
+          sx: {
+            width: DRAWER_WIDTH,
+            bgcolor: 'background.default',
+            ...(isCollapse && {
+              width: COLLAPSE_WIDTH
+            }),
+            ...(collapseHover && {
+              borderRight: 0,
+              backdropFilter: 'blur(6px)',
+              WebkitBackdropFilter: 'blur(6px)', // Fix on Mobile
+              boxShadow: (theme) => theme.customShadows.z20,
+              bgcolor: (theme) => alpha(theme.palette.background.default, 0.88)
+            })
+          }
+        }}
+      >
+        {renderContent}
+      </Drawer>
     </RootStyle>
   );
 }
