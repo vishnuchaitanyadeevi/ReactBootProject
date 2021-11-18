@@ -1,60 +1,84 @@
-import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
+import Brightness1Icon from '@mui/icons-material/Brightness1';
+import { useDropzone } from 'react-dropzone';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { Button, Typography, Grid } from '@mui/material';
-import { VALID_FILE_FORMAT } from '../utils/constants';
+// material
+import { alpha } from '@mui/material/styles';
+import { Box, List, Paper, Button, Typography, Grid } from '@mui/material';
+import { MIconButton } from './@material-extend';
 
-function UploadFile({
-  buttonName,
-  accept,
-  backgroundColor,
-  startIcon,
-  endIcon,
-  handleFileChange,
-  fileName,
-  handleDelete
-}) {
-  const inputRef = useRef(null);
+UploadMultiFile.propTypes = {
+  error: PropTypes.bool,
+  showPreview: PropTypes.bool,
+  files: PropTypes.array,
+  onRemove: PropTypes.func,
+  onRemoveAll: PropTypes.func,
+  sx: PropTypes.object
+};
 
-  const uploadPic = (e) => {
-    // e.persist();
-    inputRef.current?.click();
-  };
+export default function UploadMultiFile({ files, onRemove, backgroundColor, startIcon, endIcon, ...other }) {
+  const hasFile = files.length > 0;
 
-  const imageChanged = (event) => {
-    const [filesArray] = event.target.files;
-    const fileType = filesArray.name.split('.').pop();
-    if (VALID_FILE_FORMAT.INVOICES_LIST.includes(fileType)) {
-      handleFileChange(event);
-      alert('Upload Success');
-    } else {
-      alert('Invalid File Type');
-    }
-  };
+  const { getRootProps, getInputProps, fileRejections } = useDropzone({
+    ...other
+  });
+
+  const ShowRejectionItems = () => (
+    <Paper
+      variant="outlined"
+      sx={{
+        py: 1,
+        px: 2,
+        mt: 3,
+        borderColor: 'error.light',
+        bgcolor: (theme) => alpha(theme.palette.error.main, 0.08)
+      }}
+    >
+      {fileRejections.map(({ file, errors }) => {
+        const { path, size } = file;
+        return (
+          <Box key={path} sx={{ my: 1 }}>
+            <Typography variant="subtitle2" noWrap>
+              {path}
+            </Typography>
+            {errors.map((e) => (
+              <Typography key={e.code} variant="caption" component="p">
+                - {e.message}
+              </Typography>
+            ))}
+          </Box>
+        );
+      })}
+    </Paper>
+  );
 
   return (
-    <>
-      <label htmlFor="contained-button-file">
-        <input accept={accept} ref={inputRef} type="file" onChange={imageChanged} style={{ display: 'none' }} />
-        <Button
-          variant="contained"
-          style={{ backgroundColor }}
-          startIcon={startIcon}
-          endIcon={endIcon}
-          component="span"
-          onClick={(e) => uploadPic(e)}
-          type="file"
-        >
-          {buttonName}
+    <Box>
+      <div {...getRootProps()}>
+        <input {...getInputProps()} />
+        <Button variant="contained" style={{ backgroundColor }} startIcon={startIcon} endIcon={endIcon}>
+          Upload
         </Button>
-        {fileName && (
-          <Grid item xs={12} sm={12} style={{ marginTop: '0.5rem', display: 'flex', alignItems: 'center' }}>
-            <Typography style={{ marginLeft: '1rem' }}>{fileName}</Typography>
-            <CancelIcon onClick={handleDelete} style={{ cursor: 'pointer', color: 'red', marginLeft: '0.5rem' }} />
-          </Grid>
-        )}
-      </label>
-    </>
+      </div>
+
+      {fileRejections.length > 0 && <ShowRejectionItems />}
+
+      <List disablePadding sx={{ ...(hasFile && { my: 3 }) }}>
+        {files.map((file) => {
+          const { name, size, preview } = file;
+          return (
+            <Grid container spacing={3}>
+              <Grid item xs={12} style={{ display: 'flex', alignItems: 'center' }}>
+                <Brightness1Icon style={{ fontSize: '10px', marginRight: '1rem', color: 'green' }} />
+                <Typography>{name}</Typography>
+                <MIconButton edge="end" size="small" onClick={() => onRemove(file)}>
+                  <CancelIcon style={{ cursor: 'pointer', color: 'red', fontSize: '18px' }} />
+                </MIconButton>
+              </Grid>
+            </Grid>
+          );
+        })}
+      </List>
+    </Box>
   );
 }
-
-export default UploadFile;
