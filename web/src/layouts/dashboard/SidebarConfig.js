@@ -86,12 +86,8 @@ const sidebarConfig = [
       },
       {
         title: 'Demo',
-        path: '/',
+        path: '',
         children: [
-          {
-            title: 'Home',
-            path: '/home'
-          },
           { title: 'Employee', path: '/employee' },
           { title: 'Data', path: '/data' },
           { title: 'Invoice', path: '/invoice' },
@@ -102,64 +98,5 @@ const sidebarConfig = [
     ]
   }
 ];
-// const sidebarConfig = [
-//   // GENERAL
-//   // ----------------------------------------------------------------------
-//   {
-//     subheader: 'general',
-//     items: [
-//       {
-//         title: 'home',
-//         // path: PATH_DASHBOARD.general.home
-//         childern
-//       },
-//       { title: 'customers', path: PATH_DASHBOARD.general.customers },
-//       { title: 'contracts/projects', path: PATH_DASHBOARD.general.contracts },
-//       { title: 'project expiration list', path: PATH_DASHBOARD.general.banking },
-//       { title: 'scheduling', path: PATH_DASHBOARD.general.booking }
-//     ]
-//   },
-//   {
-//     subheader: 'material management',
-//     items: [
-//       { title: 'Material Picking List', path: PATH_DASHBOARD.general.booking },
-//       { title: 'Materials and price list', path: PATH_DASHBOARD.general.booking },
-//       { title: 'FOL Material Stats', path: PATH_DASHBOARD.general.booking },
-//       { title: 'Equipments', path: PATH_DASHBOARD.general.booking }
-//     ]
-//   },
-//   {
-//     subheader: 'invoicing',
-//     items: [
-//       { title: 'invoicing home', path: PATH_DASHBOARD.general.booking },
-//       { title: 'Invoicing -Overview', path: PATH_DASHBOARD.general.booking },
-//       { title: 'Credit notes Proposal & Workflow', path: PATH_DASHBOARD.general.booking }
-//     ]
-//   },
-//   {
-//     subheader: 'credit',
-//     items: [
-//       { title: 'credit note list', path: PATH_DASHBOARD.general.booking },
-//       { title: 'credit control view', path: PATH_DASHBOARD.general.booking, icon: ICONS.analytics },
-//       { title: 'credit control co-ordinator view', path: PATH_DASHBOARD.general.booking, icon: ICONS.analytics }
-//     ]
-//   },
-
-//   {
-//     subheader: 'misc',
-//     items: [
-//       { title: 'Reports', path: PATH_DASHBOARD.general.booking, icon: ICONS.analytics },
-//       { title: 'iPad Synchronization Log', path: PATH_DASHBOARD.general.booking, icon: ICONS.kanban },
-//       { title: 'Route Analysis', path: PATH_DASHBOARD.general.booking, icon: ICONS.analytics },
-//       { title: 'Manage Questions', path: PATH_DASHBOARD.general.booking, icon: ICONS.kanban },
-//       { title: 'Discount Workflow', path: PATH_DASHBOARD.general.booking, icon: ICONS.ecommerce },
-//       { title: 'Equipment Builder', path: PATH_DASHBOARD.general.booking, icon: ICONS.banking },
-//       { title: 'Ax Synchronization', path: PATH_DASHBOARD.general.booking, icon: ICONS.dashboard },
-//       { title: 'Mobile Warehouse', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
-//       { title: 'Salesmen View', path: PATH_DASHBOARD.general.booking, icon: ICONS.user },
-//       { title: 'Export', path: PATH_DASHBOARD.general.booking, icon: ICONS.kanban }
-//     ]
-//   }
-// ];
 
 export default sidebarConfig;
