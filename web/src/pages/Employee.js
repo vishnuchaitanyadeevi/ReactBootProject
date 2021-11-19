@@ -232,9 +232,6 @@ function Employee(isFormLoaded) {
   if (!isFormLoaded.isFormLoaded) {
     return (
       <div>
-        <div>
-          <MainNavbar />
-        </div>
         <div align="center" className="rel">
           <Grid>
             <Paper elevation={20} style={paperStyle}>
@@ -256,10 +253,7 @@ function Employee(isFormLoaded) {
   if (isFormLoaded.isFormLoaded)
     return (
       <div>
-        <div>
-          <MainNavbar />
-        </div>
-        <div align="center" className="rel">
+        <div align="center">
           <Grid>
             <Paper elevation={20} style={paperStyle}>
               <Grid align="center" />
@@ -342,7 +336,9 @@ function Employee(isFormLoaded) {
                         <AutocompleteWidget options={positionOptions} label="Position" disablePortal autoSelect />
                       </Grid>
                       <Grid item xs={12} md={12} lg={12} xl={12}>
-                        <ProminentAppBar header="Address Details" textVarient="h6" height="30px" />
+                        <div className="makeSticky">
+                          <ProminentAppBar header="Address Details" textVarient="h6" height="30px" />
+                        </div>
                         <TextField
                           id="outlined"
                           style={marginTop}
