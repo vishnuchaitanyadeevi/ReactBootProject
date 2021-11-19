@@ -18,7 +18,7 @@ export default function SettingMode() {
           <Grid item xs={6} key={mode}>
             <Paper
               sx={{
-                width: 1,
+                width: '30%',
                 zIndex: 0,
                 overflow: 'hidden',
                 position: 'relative',
@@ -31,7 +31,7 @@ export default function SettingMode() {
               <CardActionArea sx={{ color: 'primary.main' }}>
                 <Box
                   sx={{
-                    py: 4,
+                    paddingTop: '4px',
                     display: 'flex',
                     color: 'text.disabled',
                     justifyContent: 'center',

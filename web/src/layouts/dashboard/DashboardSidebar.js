@@ -137,7 +137,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
           </MHidden>
         </Stack>
 
-        {isCollapse ? (
+        {/* {isCollapse ? (
           <MyAvatar sx={{ mx: 'auto', mb: 2 }} />
         ) : (
           <Link underline="none" component={RouterLink} to={PATH_DASHBOARD.user.account}>
@@ -153,14 +153,14 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
               </Box>
             </AccountStyle>
           </Link>
-        )}
+        )} */}
       </Stack>
 
       <NavSection navConfig={sidebarConfig} isShow={!isCollapse} />
 
       <Box sx={{ flexGrow: 1 }} />
 
-      {!isCollapse && (
+      {/* {!isCollapse && (
         <Stack spacing={3} alignItems="center" sx={{ px: 5, pb: 5, mt: 10, width: 1, textAlign: 'center' }}>
           <DocIllustration sx={{ width: 1 }} />
 
@@ -177,7 +177,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
             Documentation
           </Button>
         </Stack>
-      )}
+      )} */}
     </Scrollbar>
   );
 

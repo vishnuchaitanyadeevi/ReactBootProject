@@ -110,13 +110,13 @@ export default function MainNavbar() {
           </RouterLink>
           <Box sx={{ flexGrow: 1 }} />
 
-          <MHidden width="mdDown">
+          {/* <MHidden width="mdDown">
             <MenuDesktop isOffset={isOffset} isHome={isHome} navConfig={navConfig} />
           </MHidden>
 
           <MHidden width="mdUp">
             <MenuMobile isOffset={isOffset} isHome={isHome} navConfig={navConfig} />
-          </MHidden>
+          </MHidden> */}
 
           <Avatar src={image} sx={{ width: 40, height: 40 }} onClick={handleOpen} />
 
