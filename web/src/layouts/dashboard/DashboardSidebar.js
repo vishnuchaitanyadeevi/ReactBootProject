@@ -99,11 +99,12 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     useCollapseDrawer();
 
   useEffect(() => {
-    if (isOpenSidebar) {
-      onCloseSidebar();
-    }
+    console.log(isOpenSidebar);
+    // if (isOpenSidebar) {
+    //   onCloseSidebar();
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]);
+  }, [pathname, isOpenSidebar]);
 
   const renderContent = (
     <Scrollbar
@@ -204,7 +205,31 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
         </Drawer>
       </MHidden>
 
-      <MHidden width="lgDown">
+      <Drawer
+        open={isOpenSidebar}
+        ModalProps={{ onBackdropClick: onCloseSidebar }}
+        onMouseEnter={onHoverEnter}
+        onMouseLeave={onHoverLeave}
+        PaperProps={{
+          sx: {
+            width: DRAWER_WIDTH,
+            bgcolor: 'background.default',
+            ...(isCollapse && {
+              width: COLLAPSE_WIDTH
+            }),
+            ...(collapseHover && {
+              borderRight: 0,
+              backdropFilter: 'blur(6px)',
+              WebkitBackdropFilter: 'blur(6px)', // Fix on Mobile
+              boxShadow: (theme) => theme.customShadows.z20,
+              bgcolor: (theme) => alpha(theme.palette.background.default, 0.88)
+            })
+          }
+        }}
+      >
+        {renderContent}
+      </Drawer>
+      {/* <MHidden width="lgDown">
         <Drawer
           open
           variant="persistent"
@@ -228,8 +253,8 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
           }}
         >
           {renderContent}
-        </Drawer>
-      </MHidden>
+        </Drawer> */}
+      {/* </MHidden> */}
     </RootStyle>
   );
 }

@@ -44,7 +44,8 @@ const RootStyle = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: theme.palette.background.default
+  backgroundColor: theme.palette.background.default,
+  opacity: '0.6'
 }));
 
 // ----------------------------------------------------------------------
@@ -122,7 +123,7 @@ export default function LoadingScreen({ ...other }) {
   if (hideLoader) {
     return (
       <RootStyle {...other}>
-        <CircularProgress color="success" disableShrink size={55} thickness={4} />
+        <CircularProgress color="success" disableShrink size={55} thickness={4} sx={{ opacity: '1' }} />
       </RootStyle>
     );
   }
