@@ -49,7 +49,7 @@ export default function DashboardNavbar({ onOpenSidebar, header }) {
         </MHidden>
         <h3 style={{ color: 'black' }}>{header}</h3>
         <Box sx={{ flexGrow: 1 }} />
-        <Stack direction="row" spacing={{ xs: 0.5, sm: 1.2 }}>
+        <Stack direction="row" spacing={{ xs: 0.5, sm: 1.5 }}>
           <AccountPopover />
         </Stack>
       </ToolbarStyle>

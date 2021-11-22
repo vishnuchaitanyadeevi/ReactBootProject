@@ -1,9 +1,9 @@
 // material
 import { experimentalStyled as styled } from '@mui/material/styles';
 // components
-import MainNavbar from '../layouts/main/MainNavbar';
 import Page from '../components/Page';
 import { LandingHero, LandingMinimal } from '../components/_external-pages/landing';
+import AccountPopover from '../layouts/dashboard/AccountPopover';
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Page)({
@@ -21,7 +21,7 @@ const ContentStyle = styled('div')(({ theme }) => ({
 export default function LandingPage() {
   return (
     <RootStyle title="The starting point for your next project | Minimal-UI" id="move_top">
-      <MainNavbar />
+      {/* <AccountPopover /> */}
       <LandingHero />
     </RootStyle>
   );

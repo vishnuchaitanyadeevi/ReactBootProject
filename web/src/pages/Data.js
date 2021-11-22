@@ -3,7 +3,6 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import ngPrimeGrid from '../components/ngPrimeGrid';
-import MainNavbar from '../layouts/main/MainNavbar';
 import jsonData from '../utils/tabledata.json';
 import '../Styles/app.scss';
 

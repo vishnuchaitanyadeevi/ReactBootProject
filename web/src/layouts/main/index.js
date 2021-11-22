@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 // material
 import { Box, Container } from '@mui/material';
+import AccountPopover from '../dashboard/AccountPopover';
 //
 import MainNavbar from './MainNavbar';
 
@@ -9,7 +10,7 @@ import MainNavbar from './MainNavbar';
 export default function MainLayout() {
   return (
     <>
-      <MainNavbar />
+      <AccountPopover />
       <div>
         <Outlet />
       </div>
