@@ -8,7 +8,6 @@ import alertDialog from '../components/AlertDialog';
 import Dialog from '../components/Dialog';
 import { UploadAvatar } from '../components/upload';
 import MyComponent from './MyComponent';
-import AccountPopover from '../layouts/dashboard/AccountPopover';
 
 function ComponentsPage() {
   const [isAlertDialogOpen, setAlertDialogOpen] = useState(false);
