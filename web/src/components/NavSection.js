@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
@@ -60,6 +61,7 @@ NavItem.propTypes = {
 };
 
 function NavItem({ item, active }) {
+  const { t } = useTranslation();
   const theme = useTheme();
   const isActiveRoot = active(item.path);
   const { title, path, icon, info, children } = item;
@@ -90,8 +92,8 @@ function NavItem({ item, active }) {
             ...(isActiveRoot && activeRootStyle)
           }}
         >
-          <ListItemIconStyle>{icon && icon}</ListItemIconStyle>
-          <ListItemText disableTypography primary={title} />
+          {/* <ListItemIconStyle>{icon && icon}</ListItemIconStyle> */}
+          <ListItemText disableTypography primary={t([title])} />
           {info && info}
           <Box
             component={Icon}
@@ -133,7 +135,7 @@ function NavItem({ item, active }) {
                       }}
                     />
                   </ListItemIconStyle>
-                  <ListItemText disableTypography primary={item.title} />
+                  <ListItemText disableTypography primary={t([item.title])} />
                 </ListItemStyle>
               );
             })}
@@ -151,8 +153,8 @@ function NavItem({ item, active }) {
         ...(isActiveRoot && activeRootStyle)
       }}
     >
-      <ListItemIconStyle>{icon && icon}</ListItemIconStyle>
-      <ListItemText disableTypography primary={item.title} />
+      {/* <ListItemIconStyle>{icon && icon}</ListItemIconStyle> */}
+      <ListItemText disableTypography primary={t([title])} />
       {info && info}
     </ListItemStyle>
   );

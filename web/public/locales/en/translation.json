@@ -11,5 +11,36 @@
   "LandingHero": {
     "WelcomeTo": "Welcome to",
     "OperationManagementSystem": "Operations Management System"
-  }
+  },
+  "dashboard": "dashboard",
+  "customer": "customer",
+  "contracts/projects": "contracts/projects",
+  "project expiration list": "project expiration list",
+  "scheduling": "scheduling",
+  "material management": "material management",
+  "Material Picking List": "Material Picking List",
+  "Materials and price list": "Materials and price list",
+  "FOL Material Stats": "FOL Material Stats",
+  "Equipments": "Equipments",
+  "invoicing": "invoicing",
+  "invoicing home": "invoicing home",
+  "Invoicing -Overview": "Invoicing -Overview",
+  "credit": "credit",
+  "Credit notes Proposal & Workflow": "Credit notes Proposal & Workflow",
+  "credit note list": "credit note list",
+  "credit control view": "credit control view",
+  "credit control co-ordinator view": "credit control co-ordinator view",
+  "misc": "misc",
+  "Reports": "Reports",
+  "iPad Synchronization Log": "iPad Synchronization Log",
+  "Route Analysis": "Route Analysis",
+  "Manage Questions": "Manage Questions",
+  "Discount Workflow": "Discount Workflow",
+  "Equipment Builder": "Equipment Builder",
+  "Ax Synchronization": "Ax Synchronization",
+  "Mobile Warehouse": "Mobile Warehouse",
+  "Salesmen View": "Salesmen View",
+  "Export": "Export",
+  "Demo": "Demo" 
 }
+  

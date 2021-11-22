@@ -122,7 +122,7 @@ export default function LoadingScreen({ ...other }) {
   if (hideLoader) {
     return (
       <RootStyle {...other}>
-        <CircularProgress color="success" disableShrink size={90} thickness={4} />
+        <CircularProgress color="success" disableShrink size={55} thickness={4} />
       </RootStyle>
     );
   }

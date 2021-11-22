@@ -128,7 +128,7 @@ export default function MainNavbar() {
           {/* <Box sx={{ flexGrow: 1 }} /> */}
           <DashboardSidebar isOpenSidebar={openSidebar} onCloseSidebar={handleSidebarOpen} />
 
-          <MHidden width="mdDown">
+          {/* <MHidden width="mdDown">
             <MenuDesktop isOffset={isOffset} isHome={isHome} navConfig={navConfig} />
           </MHidden>
 

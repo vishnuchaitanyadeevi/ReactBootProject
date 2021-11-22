@@ -10,6 +10,7 @@ import { Avatar, Button, Box, Divider, MenuItem, Typography } from '@mui/materia
 // components
 import { MIconButton } from '../../components/@material-extend';
 import MenuPopover from '../../components/MenuPopover';
+import SettingMode from '../../components/settings/SettingMode';
 import { logout } from '../../utils/auth-service';
 
 // ----------------------------------------------------------------------
@@ -97,7 +98,9 @@ export default function AccountPopover() {
             {option.label}
           </MenuItem>
         ))}
-
+        <Box sx={{ p: 2, pt: 1.5 }}>
+          <SettingMode />
+        </Box>
         <Box sx={{ p: 2, pt: 1.5 }}>
           <Button onClick={logoutHandler} fullWidth color="inherit" variant="outlined">
             Logout
