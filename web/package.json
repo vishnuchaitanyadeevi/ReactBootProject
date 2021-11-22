@@ -145,6 +145,7 @@
     "react-toastify": "^8.0.2",
     "react-transition": "^1.0.3",
     "react-transition-group": "^4.4.2",
+    "react-trello": "^2.2.11",
     "redux": "^4.1.0",
     "redux-persist": "^6.0.0",
     "rehype-highlight": "^4.1.0",

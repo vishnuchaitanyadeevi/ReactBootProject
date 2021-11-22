@@ -77,6 +77,12 @@
         "tabWidth": 2,
         "endOfLine": "auto"
       }
-    ]
+    ],
+    "camelcase": [
+      "error", {
+         "ignoreDestructuring": true,
+         "allow": ["^UNSAFE_"]
+      }
+   ]
   }
 }
