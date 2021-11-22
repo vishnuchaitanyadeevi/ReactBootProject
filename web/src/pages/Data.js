@@ -70,7 +70,6 @@ function Data() {
     <div>
       <div className="rel">
         <div>
-          <Toolbar right={toolbardata} className="p-mb-4" />
           <DataTable
             value={tableData}
             showGridlines
@@ -94,7 +93,6 @@ function Data() {
             scrollable
             scrollHeight="400px"
             header={header}
-            footer={footer}
             filterDisplay="row"
             globalFilterFields={['code', 'desc', 'qty', 'uom', 'hqty', 'hand', 'owan', 'fwan']}
             rowsPerPageOptions={[10, 25, 50]}

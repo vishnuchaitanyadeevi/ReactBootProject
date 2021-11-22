@@ -61,7 +61,7 @@ export default function AccountPopover() {
     <>
       <Stack direction="row" spacing={2} sx={{ textAlign: 'center', alignItems: 'center' }}>
         <Typography variant="subtitle1" sx={{ color: 'text.secondary', mx: 1 }} noWrap>
-          Mr.Thomsan Johnson
+          Thomsan Johnson
         </Typography>
         <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
           (Head Technician)

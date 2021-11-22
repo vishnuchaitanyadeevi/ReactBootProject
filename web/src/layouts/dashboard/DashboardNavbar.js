@@ -11,6 +11,7 @@ import { MHidden, MIconButton } from '../../components/@material-extend';
 import AccountPopover from './AccountPopover';
 import useOffSetTop from '../../hooks/useOffSetTop';
 import DashboardSidebar from './DashboardSidebar';
+import Logo from '../../components/Logo';
 
 // ----------------------------------------------------------------------
 
@@ -67,7 +68,7 @@ export default function DashboardNavbar({ onOpenSidebar, header, toggleSidebar }
         >
           <Icon icon={menu2Fill} />
         </MIconButton>
-
+        <Logo />
         <h3 style={{ color: 'black' }}>{header}</h3>
         <Box sx={{ flexGrow: 1 }} />
         <Stack direction="row" spacing={{ xs: 0.5, sm: 1.5 }}>
