@@ -6,7 +6,6 @@ import { Toolbar } from 'primereact/toolbar';
 import { Button } from 'primereact/button';
 import { FilterMatchMode } from 'primereact/api';
 import ngPrimeGrid from '../components/ngPrimeGrid';
-import MainNavbar from '../layouts/main/MainNavbar';
 import jsonData from '../utils/tabledata.json';
 import '../Styles/app.scss';
 
@@ -71,7 +70,6 @@ function Data() {
     <div>
       <div className="rel">
         <div>
-          <Toolbar right={toolbardata} className="p-mb-4" />
           <DataTable
             value={tableData}
             showGridlines
@@ -95,7 +93,6 @@ function Data() {
             scrollable
             scrollHeight="400px"
             header={header}
-            footer={footer}
             filterDisplay="row"
             globalFilterFields={['code', 'desc', 'qty', 'uom', 'hqty', 'hand', 'owan', 'fwan']}
             rowsPerPageOptions={[10, 25, 50]}

@@ -2,7 +2,6 @@ import React, { useState, useCallback } from 'react';
 import { Box, Button, Grid, Typography, Divider } from '@mui/material';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import BasicDatePicker from '../components/pickers/BasicDatePicker';
-import MainNavbar from '../layouts/main/MainNavbar';
 import UploadFile from '../components/UploadFile';
 import Avatar from '../components/Avatar';
 import alertDialog from '../components/AlertDialog';
@@ -65,7 +64,6 @@ function ComponentsPage() {
   console.log('Multiple files....', multipleImages.images);
   return (
     <div>
-      <MainNavbar />
       {isAlertDialogOpen &&
         alertDialog({
           title: 'Delete Record',
