@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { Toolbar } from 'primereact/toolbar';
 import { Button } from 'primereact/button';
+import { Dropdown } from 'primereact/dropdown';
 import { FilterMatchMode } from 'primereact/api';
 import ngPrimeGrid from '../components/ngPrimeGrid';
 import jsonData from '../utils/tabledata.json';
@@ -23,7 +24,7 @@ function Data() {
       type="text"
       value={options.value}
       onChange={(e) => options.editorCallback(e.target.value)}
-      style={{ flexGrow: 1 }}
+      style={{ minWidth: '12rem' }}
     />
   );
   /* const onRowReorder = (e) => {
@@ -35,6 +36,7 @@ function Data() {
   });
   // const [globalFilterValue, setGlobalFilterValue] = useState('');
   const [globalFilter, setGlobalFilter] = useState(null);
+  const [stockFilter, setStockFilter] = useState(null);
   /*
   const onGlobalFilterChange = (e) => {
     const { value } = e.target.value;
@@ -64,12 +66,31 @@ function Data() {
     </div>
   );
   const footer = `--- END ---`;
-  const toolbardata = () => <Button label="Filter" icon="pi pi-search" />;
+  const toolbardataright = () => (
+    <div>
+      <Button className="p-button-sm" label="Filter" icon="pi pi-search" />
+      <Button className="p-button-sm" label="Clear" icon="pi pi-times" />
+    </div>
+  );
+
+  const toolbardataleft = () => (
+    <div>
+      <InputText className="p-inputtext-sm" type="search" placeholder="Stock Code" />
+      <InputText className="p-inputtext-sm" type="search" placeholder="Description" />
+      <InputText className="p-inputtext-sm" type="search" placeholder="Qty" />
+      <InputText className="p-inputtext-sm" type="search" placeholder="Inv UOM" />
+      <InputText className="p-inputtext-sm" type="search" placeholder="Hold Qty" />
+      <InputText className="p-inputtext-sm" type="search" placeholder="On-hand" />
+      <InputText className="p-inputtext-sm" type="search" placeholder="On-wan" />
+      <InputText className="p-inputtext-sm" type="search" placeholder="From-wan" />
+    </div>
+  );
 
   return (
     <div>
       <div className="rel">
         <div>
+          {/* <Toolbar left={toolbardataleft} right={toolbardataright} className="p-mb-4" /> */}
           <DataTable
             value={tableData}
             showGridlines
@@ -97,6 +118,7 @@ function Data() {
             globalFilterFields={['code', 'desc', 'qty', 'uom', 'hqty', 'hand', 'owan', 'fwan']}
             rowsPerPageOptions={[10, 25, 50]}
             globalFilter={globalFilter}
+            style={{ marginTop: '10px' }}
           >
             {/* <Column columnKey="rowreorder" field="rowreorder" rowReorder style={{ width: '3em' }} /> */}
             <Column
@@ -104,7 +126,12 @@ function Data() {
               field="selection"
               selectionMode="multiple"
               reorderable={false}
-              style={{ minWidth: '3rem', maxWidth: '3rem' }}
+              style={{
+                minWidth: '3rem',
+                width: '3rem',
+                paddingBottom: '0.1rem',
+                paddingTop: '0.1rem'
+              }}
             />
             <Column
               columnKey="code"
@@ -116,7 +143,12 @@ function Data() {
               // style={{ flexGrow: 1, flexBasis: '200px' }}
               reorderable={false}
               filter
-              style={{ minWidth: '12rem', width: '12rem' }}
+              style={{
+                minWidth: '12rem',
+                width: '12rem',
+                paddingBottom: '0.1rem',
+                paddingTop: '0.1rem'
+              }}
             />
             <Column
               columnKey="desc"
@@ -125,7 +157,17 @@ function Data() {
               sortable
               editor={(options) => textEditor(options)}
               filter
-              style={{ minWidth: '12rem', width: '12rem' }}
+              style={{
+                minWidth: '12rem',
+                width: '12rem',
+                // Making Ellipsis for lengthy descriptions
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                // display: 'block',
+                paddingBottom: '0.1rem',
+                paddingTop: '0.1rem'
+              }}
               // style={{ flexGrow: 1, flexBasis: '200px' }}
             />
             <Column
@@ -135,7 +177,12 @@ function Data() {
               sortable
               editor={(options) => textEditor(options)}
               filter
-              style={{ minWidth: '12rem', width: '12rem' }}
+              style={{
+                minWidth: '12rem',
+                width: '12rem',
+                paddingBottom: '0.1rem',
+                paddingTop: '0.1rem'
+              }}
               // style={{ flexGrow: 1, flexBasis: '200px' }}
             />
             <Column
@@ -145,7 +192,12 @@ function Data() {
               sortable
               editor={(options) => textEditor(options)}
               filter
-              style={{ minWidth: '12rem', width: '12rem' }}
+              style={{
+                minWidth: '12rem',
+                width: '12rem',
+                paddingBottom: '0.1rem',
+                paddingTop: '0.1rem'
+              }}
               // style={{ flexGrow: 1, flexBasis: '200px' }}
             />
             <Column
@@ -155,7 +207,12 @@ function Data() {
               sortable
               editor={(options) => textEditor(options)}
               filter
-              style={{ minWidth: '12rem', width: '12rem' }}
+              style={{
+                minWidth: '12rem',
+                width: '12rem',
+                paddingBottom: '0.1rem',
+                paddingTop: '0.1rem'
+              }}
               // style={{ flexGrow: 1, flexBasis: '200px' }}
             />
             <Column
@@ -165,7 +222,12 @@ function Data() {
               sortable
               editor={(options) => textEditor(options)}
               filter
-              style={{ minWidth: '12rem', width: '12rem' }}
+              style={{
+                minWidth: '12rem',
+                width: '12rem',
+                paddingBottom: '0.1rem',
+                paddingTop: '0.1rem'
+              }}
               // style={{ flexGrow: 1, flexBasis: '200px' }}
             />
             <Column
@@ -175,7 +237,12 @@ function Data() {
               sortable
               editor={(options) => textEditor(options)}
               filter
-              style={{ minWidth: '12rem', width: '12rem' }}
+              style={{
+                minWidth: '12rem',
+                width: '12rem',
+                paddingBottom: '0.1rem',
+                paddingTop: '0.1rem'
+              }}
               // style={{ flexGrow: 1, flexBasis: '200px' }}
             />
             <Column
@@ -185,14 +252,24 @@ function Data() {
               sortable
               editor={(options) => textEditor(options)}
               filter
-              style={{ minWidth: '12rem', width: '12rem' }}
+              style={{
+                minWidth: '12rem',
+                width: '12rem',
+                paddingBottom: '0.1rem',
+                paddingTop: '0.1rem'
+              }}
               // style={{ flexGrow: 1, flexBasis: '200px' }}
             />
             <Column
               rowEditor
               headerstyle={{ width: '10%', minWidth: '8rem' }}
               bodyStyle={{ textAlign: 'center' }}
-              style={{ minWidth: '5rem', maxWidth: '5rem' }}
+              style={{
+                minWidth: '5rem',
+                maxWidth: '5rem',
+                paddingBottom: '0.1rem',
+                paddingTop: '0.1rem'
+              }}
               reorderable={false}
             />
           </DataTable>
