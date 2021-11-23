@@ -18,7 +18,6 @@ import { useDispatch, connect } from 'react-redux';
 import MailIcon from '@mui/icons-material/Mail';
 import AutocompleteWidget from '../components/Autocomplete/autocompletWidget';
 import { LoadEmployeeForm } from '../redux/actions/employeeFormActions';
-import MainNavbar from '../layouts/main/MainNavbar';
 import ControlledOpenSelect from '../components/dropdown';
 import ProminentAppBar from '../components/header/header';
 import SkeletonSet from '../components/skeletons/SkeletonSet';
@@ -246,7 +245,6 @@ function Employee(isFormLoaded) {
             </Paper>
           </Grid>
         </div>
-        <MainNavbar />
       </div>
     );
   }

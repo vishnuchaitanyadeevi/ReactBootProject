@@ -114,7 +114,6 @@ function Data() {
             scrollable
             scrollHeight="400px"
             header={header}
-            footer={footer}
             filterDisplay="row"
             globalFilterFields={['code', 'desc', 'qty', 'uom', 'hqty', 'hand', 'owan', 'fwan']}
             rowsPerPageOptions={[10, 25, 50]}

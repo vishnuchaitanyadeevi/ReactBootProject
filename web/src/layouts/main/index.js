@@ -2,14 +2,12 @@ import { Outlet } from 'react-router-dom';
 // material
 import { Box, Container } from '@mui/material';
 //
-import MainNavbar from './MainNavbar';
 
 // ----------------------------------------------------------------------
 
 export default function MainLayout() {
   return (
     <>
-      <MainNavbar />
       <div>
         <Outlet />
       </div>

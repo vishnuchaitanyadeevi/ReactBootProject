@@ -49,41 +49,7 @@ IconCollapse.propTypes = {
 };
 
 function IconCollapse({ onToggleCollapse, collapseClick }) {
-  return (
-    <Tooltip title="Mini Menu">
-      <CardActionArea
-        onClick={onToggleCollapse}
-        sx={{
-          width: 18,
-          height: 18,
-          display: 'flex',
-          cursor: 'pointer',
-          borderRadius: '50%',
-          alignItems: 'center',
-          color: 'text.primary',
-          justifyContent: 'center',
-          border: 'solid 1px currentColor',
-          ...(collapseClick && {
-            borderWidth: 2
-          })
-        }}
-      >
-        <Box
-          sx={{
-            width: 8,
-            height: 8,
-            borderRadius: '50%',
-            bgcolor: 'currentColor',
-            transition: (theme) => theme.transitions.create('all'),
-            ...(collapseClick && {
-              width: 0,
-              height: 0
-            })
-          }}
-        />
-      </CardActionArea>
-    </Tooltip>
-  );
+  return <></>;
 }
 
 DashboardSidebar.propTypes = {
@@ -99,11 +65,12 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     useCollapseDrawer();
 
   useEffect(() => {
-    if (isOpenSidebar) {
-      onCloseSidebar();
-    }
+    console.log(isOpenSidebar);
+    // if (isOpenSidebar) {
+    //   onCloseSidebar();
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]);
+  }, [pathname, isOpenSidebar]);
 
   const renderContent = (
     <Scrollbar
@@ -204,7 +171,31 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
         </Drawer>
       </MHidden>
 
-      <MHidden width="lgDown">
+      <Drawer
+        open={isOpenSidebar}
+        ModalProps={{ onBackdropClick: onCloseSidebar }}
+        onMouseEnter={onHoverEnter}
+        onMouseLeave={onHoverLeave}
+        PaperProps={{
+          sx: {
+            width: DRAWER_WIDTH,
+            bgcolor: 'background.default',
+            ...(isCollapse && {
+              width: COLLAPSE_WIDTH
+            }),
+            ...(collapseHover && {
+              borderRight: 0,
+              backdropFilter: 'blur(6px)',
+              WebkitBackdropFilter: 'blur(6px)', // Fix on Mobile
+              boxShadow: (theme) => theme.customShadows.z20,
+              bgcolor: (theme) => alpha(theme.palette.background.default, 0.88)
+            })
+          }
+        }}
+      >
+        {renderContent}
+      </Drawer>
+      {/* <MHidden width="lgDown">
         <Drawer
           open
           variant="persistent"
@@ -228,8 +219,8 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
           }}
         >
           {renderContent}
-        </Drawer>
-      </MHidden>
+        </Drawer> */}
+      {/* </MHidden> */}
     </RootStyle>
   );
 }

@@ -13,7 +13,6 @@ import './styles.css';
 import { Typography, Button, TextField, Paper, Grid, Alert } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import StripeInput from '../components/StripeInput';
-import MainNavbar from '../layouts/main/MainNavbar';
 
 const CARD_OPTIONS = {
   iconStyle: 'solid',
@@ -73,9 +72,6 @@ export default function PaymentForm() {
   const marginTop = { marginTop: 10 };
   return (
     <center>
-      <div>
-        <MainNavbar />
-      </div>
       <>
         {!success ? (
           <div className="rel">
