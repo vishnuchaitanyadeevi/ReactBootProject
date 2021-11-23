@@ -15,25 +15,17 @@ import Logo from '../../components/Logo';
 
 // ----------------------------------------------------------------------
 
-const DRAWER_WIDTH = 280;
-const APPBAR_MOBILE = 64;
-const APPBAR_DESKTOP = 55;
-
-const RootStyle = styled(AppBar)(({ theme }) => ({
-  boxShadow: 'none',
-  backdropFilter: 'blur(6px)',
-  WebkitBackdropFilter: 'blur(6px)', // Fix on Mobile
-  backgroundColor: '#f8f9fa',
-  [theme.breakpoints.up('lg')]: {
-    width: `100%`
-  }
-}));
+const APP_BAR_MOBILE = 64;
+const APP_BAR_DESKTOP = 55;
 
 const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
-  minHeight: APPBAR_MOBILE,
-  [theme.breakpoints.up('lg')]: {
-    minHeight: APPBAR_DESKTOP,
-    padding: theme.spacing(0, 5)
+  height: APP_BAR_MOBILE,
+  transition: theme.transitions.create(['height', 'background-color'], {
+    easing: theme.transitions.easing.easeInOut,
+    duration: theme.transitions.duration.shorter
+  }),
+  [theme.breakpoints.up('md')]: {
+    height: APP_BAR_DESKTOP
   }
 }));
 
@@ -51,8 +43,15 @@ export default function DashboardNavbar({ onOpenSidebar, header, toggleSidebar }
   const isHome = pathname === '/';
 
   return (
-    <RootStyle>
-      <ToolbarStyle>
+    <AppBar color={isHome ? 'transparent' : 'default'} sx={{ boxShadow: 0 }}>
+      <ToolbarStyle
+        sx={{
+          ...(isOffset && {
+            bgcolor: 'background.default',
+            height: { md: APP_BAR_DESKTOP - 16 }
+          })
+        }}
+      >
         {/* <MHidden width="lgUp">
           <IconButton onClick={onOpenSidebar} sx={{ mr: 1, color: 'text.primary' }} size="large">
             <Icon icon={menu2Fill} />
@@ -75,7 +74,6 @@ export default function DashboardNavbar({ onOpenSidebar, header, toggleSidebar }
           <AccountPopover />
         </Stack>
       </ToolbarStyle>
-      {/* <DashboardSidebar isOpenSidebar={openSidebar} onCloseSidebar={handleSidebarOpen} /> */}
-    </RootStyle>
+    </AppBar>
   );
 }
