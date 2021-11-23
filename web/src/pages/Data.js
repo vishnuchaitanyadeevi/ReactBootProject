@@ -8,6 +8,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { FilterMatchMode } from 'primereact/api';
 import ngPrimeGrid from '../components/ngPrimeGrid';
 import jsonData from '../utils/tabledata.json';
+import FilterComponent from '../components/FilterComponent';
 import '../Styles/app.scss';
 
 function Data() {
@@ -37,6 +38,40 @@ function Data() {
   // const [globalFilterValue, setGlobalFilterValue] = useState('');
   const [globalFilter, setGlobalFilter] = useState(null);
   const [stockFilter, setStockFilter] = useState(null);
+
+  const [filters1, setFilters1] = useState({
+    code: { constraints: [{ value: stockFilter, matchMode: FilterMatchMode.CONTAINS }] },
+    desc: { constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+    qty: { constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+    uom: { constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+    hqty: { constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+    hand: { constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+    owan: { constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+    fwan: { constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] }
+  });
+  const initFilters1 = () => {
+    setFilters1({
+      code: { constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+      desc: { constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+      qty: { constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+      uom: { constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+      hqty: { constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+      hand: { constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+      owan: { constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] },
+      fwan: { constraints: [{ value: null, matchMode: FilterMatchMode.CONTAINS }] }
+    });
+  };
+  const clearFilter1 = () => {
+    initFilters1();
+  };
+  const onStockFilterChange = (e) => {
+    const { value } = e.target.value;
+    const _filters1 = { ...filters1 };
+    _filters1.code.value = value;
+    setFilters1(_filters1);
+    setStockFilter(value);
+  };
+
   /*
   const onGlobalFilterChange = (e) => {
     const { value } = e.target.value;
@@ -68,21 +103,56 @@ function Data() {
   const footer = `--- END ---`;
   const toolbardataright = () => (
     <div>
-      <Button className="p-button-sm" label="Filter" icon="pi pi-search" />
-      <Button className="p-button-sm" label="Clear" icon="pi pi-times" />
+      <table style={{ borderSpacing: '10px' }}>
+        <tr>
+          <td>
+            <Button className="p-button-sm" label="Filter" icon="pi pi-search" onClick={initFilters1} />
+          </td>
+          <td>
+            <Button className="p-button-sm" label="Clear" icon="pi pi-times" onClick={clearFilter1} />
+          </td>
+        </tr>
+      </table>
     </div>
   );
 
   const toolbardataleft = () => (
     <div>
-      <InputText className="p-inputtext-sm" type="search" placeholder="Stock Code" />
-      <InputText className="p-inputtext-sm" type="search" placeholder="Description" />
-      <InputText className="p-inputtext-sm" type="search" placeholder="Qty" />
-      <InputText className="p-inputtext-sm" type="search" placeholder="Inv UOM" />
-      <InputText className="p-inputtext-sm" type="search" placeholder="Hold Qty" />
-      <InputText className="p-inputtext-sm" type="search" placeholder="On-hand" />
-      <InputText className="p-inputtext-sm" type="search" placeholder="On-wan" />
-      <InputText className="p-inputtext-sm" type="search" placeholder="From-wan" />
+      <table style={{ borderSpacing: '10px' }}>
+        <tr>
+          <td>
+            <InputText
+              className="p-inputtext-sm"
+              type="search"
+              placeholder="Stock Code"
+              onChange={onStockFilterChange}
+            />
+          </td>
+          <td>
+            <InputText className="p-inputtext-sm" type="search" placeholder="Description" />
+          </td>
+          <td>
+            <InputText className="p-inputtext-sm" type="search" placeholder="Qty" />
+          </td>
+          <td>
+            <InputText className="p-inputtext-sm" type="search" placeholder="Inv UOM" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <InputText className="p-inputtext-sm" type="search" placeholder="Hold Qty" />
+          </td>
+          <td>
+            <InputText className="p-inputtext-sm" type="search" placeholder="On-hand" />
+          </td>
+          <td>
+            <InputText className="p-inputtext-sm" type="search" placeholder="On-wan" />
+          </td>
+          <td>
+            <InputText className="p-inputtext-sm" type="search" placeholder="From-wan" />
+          </td>
+        </tr>
+      </table>
     </div>
   );
 
@@ -90,7 +160,8 @@ function Data() {
     <div>
       <div className="rel">
         <div>
-          {/* <Toolbar left={toolbardataleft} right={toolbardataright} className="p-mb-4" /> */}
+          {/* <Toolbar left={toolbardataleft} right={toolbardataright} className="p-mb-4" style={{ padding: '0.1rem' }} /> */}
+          <FilterComponent />
           <DataTable
             value={tableData}
             showGridlines
@@ -116,7 +187,7 @@ function Data() {
             header={header}
             filterDisplay="row"
             globalFilterFields={['code', 'desc', 'qty', 'uom', 'hqty', 'hand', 'owan', 'fwan']}
-            rowsPerPageOptions={[10, 25, 50]}
+            rowsPerPageOptions={[10, 20, 50, 100]}
             globalFilter={globalFilter}
             style={{ marginTop: '10px' }}
           >
