@@ -29,14 +29,12 @@ const RootStyle = styled(motion.div)(({ theme }) => ({
 
 const ContentStyle = styled((props) => <Stack spacing={5} {...props} />)(({ theme }) => ({
   zIndex: 10,
-  maxWidth: 800,
-  margin: 'auto',
+  maxWidth: 960,
   textAlign: 'center',
   position: 'relative',
   paddingTop: theme.spacing(15),
   paddingBottom: theme.spacing(15),
   [theme.breakpoints.up('md')]: {
-    margin: 'unset',
     textAlign: 'center'
   }
 }));
@@ -77,7 +75,7 @@ export default function LandingHero() {
 
         <Container maxWidth="lg" style={{ alignContent: 'center' }}>
           <ContentStyle>
-            <div>
+            <div style={{ paddingLeft: '273px' }}>
               <motion.div variants={varFadeInRight}>
                 <Typography variant="h3" sx={{ color: 'common.grey' }}>
                   {t('LandingHero.WelcomeTo')}
