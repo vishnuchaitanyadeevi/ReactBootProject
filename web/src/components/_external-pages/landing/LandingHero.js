@@ -29,14 +29,12 @@ const RootStyle = styled(motion.div)(({ theme }) => ({
 
 const ContentStyle = styled((props) => <Stack spacing={5} {...props} />)(({ theme }) => ({
   zIndex: 10,
-  maxWidth: 800,
-  margin: 'auto',
+  maxWidth: 960,
   textAlign: 'center',
   position: 'relative',
   paddingTop: theme.spacing(15),
   paddingBottom: theme.spacing(15),
   [theme.breakpoints.up('md')]: {
-    margin: 'unset',
     textAlign: 'center'
   }
 }));
@@ -57,7 +55,7 @@ const HeroImgStyle = styled(motion.img)(({ theme }) => ({
   width: '100%',
   margin: 'auto',
   position: 'absolute',
-  filter: 'drop-shadow(40px 80px 80px rgba(0, 0, 0, 0.48))',
+  filter: 'drop-shadow(0px 0px 0px rgba(0, 0, 0, 0))',
   [theme.breakpoints.up('lg')]: {
     right: '8%',
     width: 'auto',
@@ -75,17 +73,20 @@ export default function LandingHero() {
       <RootStyle initial="initial" animate="animate" variants={varWrapEnter}>
         {/* <HeroOverlayStyle alt="overlay" src="/static/overlay.svg" variants={varFadeIn} /> */}
 
-        {/* <HeroImgStyle alt="hero" src="/static/home/hero.png" variants={varFadeInUp} /> */}
-        <Container maxWidth="lg">
+        <Container maxWidth="lg" style={{ alignContent: 'center' }}>
           <ContentStyle>
-            <motion.div variants={varFadeInRight}>
-              <Typography variant="h6" sx={{ color: 'common.grey' }}>
-                {t('LandingHero.WelcomeTo')}
-                <br />
-                {t('LandingHero.OperationManagementSystem')}
-              </Typography>
-            </motion.div>
-
+            <div style={{ paddingLeft: '273px' }}>
+              <motion.div variants={varFadeInRight}>
+                <Typography variant="h3" sx={{ color: 'common.grey' }}>
+                  {t('LandingHero.WelcomeTo')}
+                  <br />
+                  {/* t('LandingHero.OperationManagementSystem') */}
+                </Typography>
+              </motion.div>
+            </div>
+            <div style={{ position: 'relative', marginTop: '200px' }}>
+              <HeroImgStyle alt="hero" src="/static/home/omslogo.png" variants={varFadeInUp} />
+            </div>
             <motion.div variants={varFadeInRight} />
           </ContentStyle>
         </Container>
