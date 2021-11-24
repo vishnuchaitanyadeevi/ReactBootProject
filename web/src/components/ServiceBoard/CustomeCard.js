@@ -1,9 +1,10 @@
-import { Icon } from '@iconify/react';
-import heartFill from '@iconify/icons-eva/heart-fill';
-import settings2Fill from '@iconify/icons-eva/settings-2-fill';
+import HandymanIcon from '@mui/icons-material/Handyman';
+import PanToolIcon from '@mui/icons-material/PanTool';
+import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
+import RunningWithErrorsOutlinedIcon from '@mui/icons-material/RunningWithErrorsOutlined';
+import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
 
 import { MovableCardWrapper } from './styles/Base';
-import DeleteButton from './widgets/DeleteButton';
 
 export default function CustomCard({
   onClick,
@@ -11,8 +12,7 @@ export default function CustomCard({
   name,
   startDate,
   occurences,
-  address1,
-  address2,
+  address,
   service,
   cardStyle,
   body,
@@ -47,19 +47,40 @@ export default function CustomCard({
         <div style={{ fontSize: 14, fontWeight: 'bold' }}>{name}</div>
         {/* {showDeleteButton && <DeleteButton onClick={clickDelete} />} */}
       </header>
-      <div style={{ fontSize: 12, padding: '10px' }}>
+      <div style={{ fontSize: 12, padding: '0 10px 10px 10px' }}>
         <div style={{ color: '#4C4C4C' }}>
-          {startDate} [{occurences}]
-          <span className="service-type-icons">
-            {service.isHighene && <Icon icon={heartFill} width={20} height={20} />}
-          </span>
-          <span className="service-type-icons">{service.type && service.type}</span>
-          <span className="service-type-icons">
-            {service.isMaintenance && <Icon icon={settings2Fill} width={20} height={20} />}
-          </span>
+          {startDate} [{occurences}]{service.audit && <span className="service-type-icons circle">A</span>}
+          {service.maintenance && <span className="service-type-icons circle">M</span>}
+          {service.refill && <span className="service-type-icons circle">R</span>}
+          {service.callOut && <span className="service-type-icons circle">C</span>}
+          {service.highene && (
+            <span className="service-type-icons">
+              <PanToolIcon className="service-icon" />
+            </span>
+          )}
+          {service.scheduled && (
+            <span className="service-type-icons">
+              <HandymanIcon className="service-icon" />
+            </span>
+          )}
+          {service.complete && (
+            <span className="service-type-icons">
+              <CheckCircleOutlinedIcon className="service-icon" />
+            </span>
+          )}
+          {service.notCompleted && (
+            <span className="service-type-icons">
+              <RunningWithErrorsOutlinedIcon className="service-icon" />
+            </span>
+          )}
+          {service.cancelled && (
+            <span className="service-type-icons">
+              <HighlightOffOutlinedIcon className="service-icon" />
+            </span>
+          )}
         </div>
-        <div style={{ padding: '5px 0px' }}>{address1}</div>
-        <div style={{ fontWeight: 'bold' }}>{address2}</div>
+        {/* <div style={{ padding: '5px 0px' }}>{address1}</div> */}
+        <div style={{ fontWeight: 'bold' }}>{address}</div>
       </div>
     </MovableCardWrapper>
   );

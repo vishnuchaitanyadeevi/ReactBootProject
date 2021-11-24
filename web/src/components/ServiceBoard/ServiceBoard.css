@@ -4,5 +4,53 @@
 
 .service-type-icons {
   float: right;
-  padding-left: 5px;
+  margin-left: 5px;
+}
+
+.circle {
+  border-radius: 50%;
+  width: 19px;
+  height: 19px;
+  padding: 0px;
+  border: 2px solid #000;
+  text-align: center;
+  font-size: 11px;
+}
+
+.service-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.service-men-grid {
+  background-color: #000;
+  color: #fff;
+  height: 100%;
+}
+
+.service-mens-stack {
+  margin: 0;
+  margin-left: 4rem;
+}
+
+.service-men-clr {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  border: 2px solid;
+  margin-top: 3px;
+}
+
+.service-type-grid {
+  float: right;
+}
+
+.service-type-txt {
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.service-type-txt-clr {
+  color: #000;
 }
