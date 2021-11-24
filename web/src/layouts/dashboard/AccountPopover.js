@@ -67,7 +67,7 @@ export default function AccountPopover() {
           (Head Technician)
         </Typography>
         <Button onClick={logoutHandler} color="secondary">
-          Logout
+          {t('Logout')}
         </Button>
       </Stack>
       <MIconButton
@@ -115,7 +115,7 @@ export default function AccountPopover() {
               }}
             />
 
-            {option.label}
+            {t([option.label])}
           </MenuItem>
         ))}
         <MenuItem>
