@@ -1,8 +1,18 @@
-import { Grid, TextField, Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
+import {
+  Grid,
+  TextField,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
+  Stack,
+  Button
+} from '@mui/material';
 import React, { Fragment, useState, useCallback } from 'react';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { ArrowRight, ArrowLeft } from '@mui/icons-material/';
+import ProjectTable from '../../components/contracts/projectTable';
 import BasicDatePicker from '../../components/pickers/BasicDatePicker';
 import UploadFile from '../../components/UploadFile';
 import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget';
@@ -15,6 +25,8 @@ export default function ContractsCreation() {
   const rolesArr = ['Primary', 'Role 1', 'Role 2 ', 'Role 3'];
   const transactionCurrencyArr = ['Riyal', 'Dollar'];
   const fundingTypeArr = ['Customer', 'Third Party'];
+  const salesmanArr = ['Abdul Razak', 'Abdul Miyan', 'Shehnaz Kureshi'];
+  const regionArr = ['Region 1', 'Region 2'];
   const [multipleImages, setMultipleImages] = useState({ images: [] });
   const [axDefaultexpanded, setAxDefaultexpanded] = useState(true);
   const handleChange = (panel) => (event, isExpanded) => {
@@ -45,7 +57,7 @@ export default function ContractsCreation() {
             <AutocompleteWidget options={countryArr} size="small" label="Country" disablePortal autoSelect />
           </Grid>
           <Grid item xs={12} xl={6} md={6}>
-            <TextField fullWidth label="Region" size="small" />
+            <AutocompleteWidget options={regionArr} size="small" label="Region" disablePortal autoSelect />
           </Grid>
         </Grid>
         <Grid item xs={12} xl={6} md={6}>
@@ -62,11 +74,11 @@ export default function ContractsCreation() {
         </Grid>
         <Grid item xs={12} xl={6} md={6} />
         <Grid item xs={12} xl={6} md={6}>
-          <TextField fullWidth label="Salesman" size="small" />
+          <AutocompleteWidget options={salesmanArr} size="small" label="Salesman" disablePortal autoSelect />
         </Grid>
       </Grid>
       <Grid container rowSpacing={2} columnSpacing={1} item xs={12} lg={6}>
-        <h2>Contracts Details</h2>
+        <h2>Contract Details</h2>
         <Grid container spacing={1} item xs={12} xl={6}>
           <Grid item xs={12} xl={6} md={6}>
             <TextField fullWidth label="Contract No." size="small" />
@@ -136,7 +148,7 @@ export default function ContractsCreation() {
             onDrop={handleDropMultiple}
             onRemove={handleRemove}
             backgroundColor="green"
-            label="Upload Contract"
+            buttonLabel="Upload Contract"
             startIcon={<PhotoCamera />}
           />
         </Grid>
@@ -148,7 +160,7 @@ export default function ContractsCreation() {
           onChange={handleChange('panel1')}
         >
           <AccordionSummary expandIcon={<ArrowRight />} aria-controls="panel1a-content" id="panel1a-header">
-            <Typography>AX Default Fields</Typography>
+            <h2>AX Default Fields</h2>
           </AccordionSummary>
         </Accordion>
         <Grid item xs={12} xl={6} md={6} />
@@ -187,6 +199,20 @@ export default function ContractsCreation() {
             </AccordionDetails>
           </Accordion>
         </Grid>
+      </Grid>
+      <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={12} justifyContent="center">
+        <Stack direction="row" spacing={2}>
+          <Button color="secondary" variant="contained">
+            Back
+          </Button>
+          <Button variant="contained">Save</Button>
+          <Button color="warning" variant="contained">
+            Complete Contract
+          </Button>
+        </Stack>
+      </Grid>
+      <Grid rowSpacing={1} columnSpacing={1} item xs={12} lg={12} justifyContent="center">
+        <ProjectTable />
       </Grid>
     </Grid>
   );
