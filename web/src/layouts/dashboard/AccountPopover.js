@@ -64,7 +64,7 @@ export default function AccountPopover() {
           Thomsan Johnson
         </Typography>
         <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-          (Head Technician)
+          (Admin)
         </Typography>
         <Button onClick={logoutHandler} color="secondary">
           {t('Logout')}
