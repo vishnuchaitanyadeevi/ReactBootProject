@@ -16,7 +16,7 @@ UploadMultiFile.propTypes = {
   sx: PropTypes.object
 };
 
-export default function UploadMultiFile({ files, onRemove, backgroundColor, startIcon, endIcon, ...other }) {
+export default function UploadMultiFile({ files, onRemove, backgroundColor, startIcon, endIcon, title, ...other }) {
   const hasFile = files.length > 0;
 
   const { getRootProps, getInputProps, fileRejections } = useDropzone({
@@ -57,7 +57,7 @@ export default function UploadMultiFile({ files, onRemove, backgroundColor, star
       <div {...getRootProps()}>
         <input {...getInputProps()} />
         <Button variant="contained" style={{ backgroundColor }} startIcon={startIcon} endIcon={endIcon}>
-          Upload
+          {title}
         </Button>
       </div>
 
