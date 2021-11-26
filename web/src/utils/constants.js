@@ -19,3 +19,21 @@ export const LANGUAGES = [
 ];
 
 export const LANGUAGES_CODES_RTL_ORIENTATION = [LANGUAGE_CODES.AR];
+
+export const SERVICE_TYPES = {
+  COMPLETE: 'complete',
+  SCHEDULE: 'scheduled',
+  NOT_COMPLETE: 'notCompleted',
+  CANCELLED: 'cancelled',
+  REFILL: 'refill',
+  MAINTENANCE: 'maintenance',
+  CALL_OUT: 'callOut',
+  AUDIT: 'audit'
+};
+
+export const GROUP_BY = {
+  SERVICE_MEN: 'servicemen',
+  CUSTOMER: 'customer'
+};
+
+export const MAX_LANES = 3;
