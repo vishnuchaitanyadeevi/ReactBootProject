@@ -1,14 +1,13 @@
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Board from 'react-trello';
 
 import CustomCard from './CustomeCard';
 import CustomLaneHeader from './CustomLaneHeader';
 
-import { serviceData } from './data';
-
 import './ServiceBoard.css';
 
-export default function ServiceBoard() {
+export default function ServiceBoard({ data = [] }) {
   const { t } = useTranslation();
 
   const onCardClickHandler = (cardId, cardDetails, laneId) => {
@@ -31,7 +30,7 @@ export default function ServiceBoard() {
   return (
     <Board
       components={{ Card: CustomCard, LaneHeader: CustomLaneHeader }}
-      data={serviceData}
+      data={{ lanes: data }}
       draggable
       tagStyle={{ fontSize: '80%' }}
       style={{

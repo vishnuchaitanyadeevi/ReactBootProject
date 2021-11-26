@@ -10,467 +10,465 @@ const laneStyle = {
   backgroundColor: '#424242'
 };
 
-export const serviceData = {
-  lanes: [
-    // Sun
-    {
-      cards: [
-        {
-          ...card,
-          id: 'Card11',
-          laneId: 'lane1',
-          metadata: {
-            id: 'Card11'
-          },
-          name: 'Abdul Cader',
-          startDate: '19.2.2020',
-          occurences: 3,
-          address: 'Le Meridian Towers Kudai-Makkah Kudai road makkah',
-          service: {
-            complete: false,
-            notCompleted: false,
-            cancelled: false,
-            scheduled: false,
-            callOut: false,
-            audit: false,
-            refill: true,
-            highene: true
-          }
+export const serviceData = [
+  // Sun
+  {
+    cards: [
+      {
+        ...card,
+        id: 'Card11',
+        laneId: 'lane1',
+        metadata: {
+          id: 'Card11'
         },
-        {
-          ...card,
-          id: 'Card12',
-          laneId: 'lane1',
-          metadata: {
-            id: 'Card12'
-          },
-          name: 'Abdul Cader',
-          startDate: '20.07.2020',
-          occurences: 0,
-          address: 'Samba Financial Group Fayha office branch',
-          service: {
-            scheduled: true,
-            refill: true,
-            highene: true
-          }
-        },
-        {
-          ...card,
-          id: 'Card13',
-          laneId: 'lane1',
-          metadata: {
-            id: 'Card13'
-          },
-          name: 'Abdul Cader',
-          startDate: '17.01.2021',
-          occurences: 0,
-          address: 'Tamimi Global Co Ltd (TAFGA) Dialysis centre near red sea mall',
-          service: {
-            scheduled: true,
-            refill: true,
-            highene: true
-          }
+        name: 'Abdul Cader',
+        startDate: '19.2.2020',
+        occurences: 3,
+        address: 'Le Meridian Towers Kudai-Makkah Kudai road makkah',
+        service: {
+          complete: false,
+          notCompleted: false,
+          cancelled: false,
+          scheduled: false,
+          callOut: false,
+          audit: false,
+          refill: true,
+          highene: true
         }
-      ],
-      currentPage: 1,
-      id: 'lane1',
-      day: 'Sun',
-      date: '14.11.2021',
-      style: laneStyle
-    },
-    // Mon
-    {
-      cards: [
-        {
-          ...card,
-          id: 'Card21',
-          laneId: 'lane2',
-          metadata: {
-            id: 'Card21'
-          },
-          name: 'Abdulla Sherieff',
-          startDate: '19.05.2021',
-          occurences: 8,
-          address: 'Panda Retail Company Panda 3',
-          service: {
-            scheduled: true,
-            type: '#',
-            highene: true
-          }
+      },
+      {
+        ...card,
+        id: 'Card12',
+        laneId: 'lane1',
+        metadata: {
+          id: 'Card12'
         },
-        {
-          ...card,
-          id: 'Card22',
-          laneId: 'lane2',
-          metadata: {
-            id: 'Card22'
-          },
-          name: 'Abdulla Sherieff',
-          startDate: '19.05.2021',
-          occurences: 8,
-          address: 'Panda Retail Company Panda 1',
-          service: {
-            scheduled: true,
-            type: '#',
-            highene: true
-          }
+        name: 'Abdul Cader',
+        startDate: '20.07.2020',
+        occurences: 0,
+        address: 'Samba Financial Group Fayha office branch',
+        service: {
+          scheduled: true,
+          refill: true,
+          highene: true
         }
-      ],
-      currentPage: 2,
-      id: 'lane2',
-      day: 'Mon',
-      date: '15.11.2021',
-      style: laneStyle
-    },
-    // Tue
-    {
-      cards: [
-        {
-          ...card,
-          id: 'Card31',
-          laneId: 'lane3',
-          metadata: {
-            id: 'Card31'
-          },
-          name: 'Abdul Cader',
-          startDate: '21.07.2020',
-          occurences: 0,
-          address: 'Samba Financial Groug Bawadi branch',
-          service: {
-            scheduled: true,
-            refill: true,
-            highene: true
-          }
+      },
+      {
+        ...card,
+        id: 'Card13',
+        laneId: 'lane1',
+        metadata: {
+          id: 'Card13'
         },
-        {
-          ...card,
-          id: 'Card32',
-          laneId: 'lane3',
-          metadata: {
-            id: 'Card32'
-          },
-          name: 'Abdul Cader',
-          startDate: '20.07.2020',
-          occurences: 0,
-          address: 'Samba Financial Group Faiha building branch',
-          service: {
-            scheduled: true,
-            refill: true,
-            highene: true
-          }
+        name: 'Abdul Cader',
+        startDate: '17.01.2021',
+        occurences: 0,
+        address: 'Tamimi Global Co Ltd (TAFGA) Dialysis centre near red sea mall',
+        service: {
+          scheduled: true,
+          refill: true,
+          highene: true
         }
-      ],
-      currentPage: 3,
-      id: 'lane3',
-      day: 'Tue',
-      date: '16.11.2021',
-      style: laneStyle
-    },
-    // Wed
-    {
-      cards: [
-        {
-          ...card,
-          id: 'Card41',
-          laneId: 'lane4',
-          metadata: {
-            id: 'Card41'
-          },
-          name: 'Abdul Cader',
-          startDate: '23.05.2021',
-          occurences: 90,
-          address: 'Panda Retail Company Makkah iskan 220',
-          service: {
-            scheduled: true,
-            refill: true
-          }
+      }
+    ],
+    currentPage: 1,
+    id: 'lane1',
+    day: 'Sun',
+    date: '14.11.2021',
+    style: laneStyle
+  },
+  // Mon
+  {
+    cards: [
+      {
+        ...card,
+        id: 'Card21',
+        laneId: 'lane2',
+        metadata: {
+          id: 'Card21'
         },
-        {
-          ...card,
-          id: 'Card42',
-          laneId: 'lane4',
-          metadata: {
-            id: 'Card42'
-          },
-          name: 'Abdul Cader',
-          startDate: '30.01.2020',
-          occurences: 1,
-          address: 'Makkah Clock Royal Tower (Fairmont) Emaar Hotel',
-          service: {
-            scheduled: true,
-            refill: true,
-            highene: true
-          }
+        name: 'Abdulla Sherieff',
+        startDate: '19.05.2021',
+        occurences: 8,
+        address: 'Panda Retail Company Panda 3',
+        service: {
+          scheduled: true,
+          type: '#',
+          highene: true
         }
-      ],
-      currentPage: 4,
-      id: 'lane4',
-      day: 'Wed',
-      date: '17.11.2021',
-      style: laneStyle
-    },
-    // Thu
-    {
-      cards: [
-        {
-          ...card,
-          cardColor: '#b5025b',
-          id: 'Card51',
-          laneId: 'lane5',
-          metadata: {
-            id: 'Card51'
-          },
-          name: 'Abbas Qureshi',
-          startDate: '18.11.2021',
-          occurences: 0,
-          address: 'Panda Retail Company Thahassusi makkah 225',
-          service: {
-            scheduled: true,
-            maintenance: true
-          }
+      },
+      {
+        ...card,
+        id: 'Card22',
+        laneId: 'lane2',
+        metadata: {
+          id: 'Card22'
         },
-        {
-          ...card,
-          id: 'Card52',
-          laneId: 'lane5',
-          metadata: {
-            id: 'Card52'
-          },
-          name: 'Abdul Cader',
-          startDate: '23.05.2021',
-          occurences: 9,
-          address: 'Support Services King Abdullah Medical City Makkah',
-          service: {
-            refill: true,
-            highene: true
-          }
+        name: 'Abdulla Sherieff',
+        startDate: '19.05.2021',
+        occurences: 8,
+        address: 'Panda Retail Company Panda 1',
+        service: {
+          scheduled: true,
+          type: '#',
+          highene: true
         }
-      ],
-      currentPage: 5,
-      id: 'lane5',
-      day: 'Thu',
-      date: '18.11.2021',
-      style: laneStyle
-    },
-    // Fri
-    {
-      cards: [
-        {
-          ...card,
-          cardColor: '#b5025b',
-          id: 'Card61',
-          laneId: 'lane6',
-          metadata: {
-            id: 'Card61'
-          },
-          name: 'Abbas Qureshi',
-          startDate: '23.05.2021',
-          occurences: -18,
-          address: 'Panda Retail Company Thahassusi makkah 225',
-          service: {
-            scheduled: true,
-            audit: true
-          }
+      }
+    ],
+    currentPage: 2,
+    id: 'lane2',
+    day: 'Mon',
+    date: '15.11.2021',
+    style: laneStyle
+  },
+  // Tue
+  {
+    cards: [
+      {
+        ...card,
+        id: 'Card31',
+        laneId: 'lane3',
+        metadata: {
+          id: 'Card31'
         },
-        {
-          ...card,
-          cardColor: '#b5025b',
-          id: 'Card62',
-          laneId: 'lane6',
-          metadata: {
-            id: 'Card62'
-          },
-          name: 'Abbas Qureshi',
-          startDate: '23.05.2021',
-          occurences: -18,
-          address: 'Panda Retail Company Hamdania 242',
-          service: {
-            audit: true,
-            highene: true
-          }
+        name: 'Abdul Cader',
+        startDate: '21.07.2020',
+        occurences: 0,
+        address: 'Samba Financial Groug Bawadi branch',
+        service: {
+          scheduled: true,
+          refill: true,
+          highene: true
         }
-      ],
-      currentPage: 6,
-      id: 'lane6',
-      day: 'Fri',
-      date: '19.11.2021',
-      style: laneStyle
-    },
-    // Sat
-    {
-      cards: [
-        {
-          ...card,
-          cardColor: '#62f840',
-          id: 'Card71',
-          laneId: 'lane7',
-          metadata: {
-            id: 'Card71'
-          },
-          name: 'Anid Muhammadali',
-          startDate: '05.05.2021',
-          occurences: 2,
-          address: 'Emirates National Poultry Farms L.L.C Al Ain',
-          service: {
-            scheduled: true,
-            maintenance: true
-          }
+      },
+      {
+        ...card,
+        id: 'Card32',
+        laneId: 'lane3',
+        metadata: {
+          id: 'Card32'
         },
-        {
-          ...card,
-          cardColor: '#b5025b',
-          id: 'Card72',
-          laneId: 'lane7',
-          metadata: {
-            id: 'Card72'
-          },
-          name: 'Afsal Basheer',
-          startDate: '24.05.2021',
-          occurences: 4,
-          address: 'Panda Retail Company Panda 46, Jubail',
-          service: {
-            scheduled: true,
-            refill: true
-          }
+        name: 'Abdul Cader',
+        startDate: '20.07.2020',
+        occurences: 0,
+        address: 'Samba Financial Group Faiha building branch',
+        service: {
+          scheduled: true,
+          refill: true,
+          highene: true
         }
-      ],
-      currentPage: 7,
-      id: 'lane7',
-      day: 'Sat',
-      date: '20.11.2021',
-      style: laneStyle
-    },
-    // Sun
-    {
-      cards: [
-        {
-          ...card,
-          cardColor: '#b5025b',
-          id: 'Card81',
-          laneId: 'lane8',
-          metadata: {
-            id: 'Card81'
-          },
-          name: 'Abbas Qures',
-          startDate: '19.05.2021',
-          occurences: 0,
-          address: 'Panda Retail Comoany Al Awali makkah 20011',
-          service: {
-            scheduled: true,
-            maintenance: true
-          }
+      }
+    ],
+    currentPage: 3,
+    id: 'lane3',
+    day: 'Tue',
+    date: '16.11.2021',
+    style: laneStyle
+  },
+  // Wed
+  {
+    cards: [
+      {
+        ...card,
+        id: 'Card41',
+        laneId: 'lane4',
+        metadata: {
+          id: 'Card41'
         },
-        {
-          ...card,
-          id: 'Card82',
-          laneId: 'lane8',
-          metadata: {
-            id: 'Card82'
-          },
-          name: 'Abdul Cader',
-          startDate: '23.03.2021',
-          occurences: 10,
-          address: 'Dr. Amal Zabeedi - Makkah Makkah branch',
-          service: {
-            scheduled: true,
-            maintenance: true,
-            highene: true
-          }
+        name: 'Abdul Cader',
+        startDate: '23.05.2021',
+        occurences: 90,
+        address: 'Panda Retail Company Makkah iskan 220',
+        service: {
+          scheduled: true,
+          refill: true
         }
-      ],
-      currentPage: 8,
-      id: 'lane8',
-      day: 'Sun',
-      date: '21.11.2021',
-      style: laneStyle
-    },
-    // Mon
-    {
-      cards: [
-        {
-          ...card,
-          id: 'Card91',
-          laneId: 'lane9',
-          metadata: {
-            id: 'Card91'
-          },
-          name: 'Abdul Cader',
-          startDate: '06.05.2021',
-          occurences: 6,
-          address: 'Mawred Al Baraka Co Hamdania',
-          service: {
-            refill: true,
-            highene: true
-          }
+      },
+      {
+        ...card,
+        id: 'Card42',
+        laneId: 'lane4',
+        metadata: {
+          id: 'Card42'
         },
-        {
-          ...card,
-          id: 'Card92',
-          laneId: 'lane9',
-          metadata: {
-            id: 'Card92'
-          },
-          name: 'Abdul Cader',
-          startDate: '02.05.2021',
-          occurences: 0,
-          address: 'Elaf Kindah Hotel Makkah ELAF KINDAH',
-          service: {
-            scheduled: true,
-            refill: true
-          }
+        name: 'Abdul Cader',
+        startDate: '30.01.2020',
+        occurences: 1,
+        address: 'Makkah Clock Royal Tower (Fairmont) Emaar Hotel',
+        service: {
+          scheduled: true,
+          refill: true,
+          highene: true
         }
-      ],
-      currentPage: 9,
-      id: 'lane9',
-      day: 'Mon',
-      date: '22.11.2021',
-      style: laneStyle
-    },
-    // Tue
-    {
-      cards: [
-        {
-          ...card,
-          cardColor: '#b5025b',
-          id: 'Card101',
-          laneId: 'lane10',
-          metadata: {
-            id: 'Card101'
-          },
-          name: 'Abbas Quresh',
-          startDate: '29.09.2020',
-          occurences: 0,
-          address: 'Reza Food Services Co Ltd McDonalds MOHAMEDIA',
-          service: {
-            audit: true,
-            highene: true
-          }
+      }
+    ],
+    currentPage: 4,
+    id: 'lane4',
+    day: 'Wed',
+    date: '17.11.2021',
+    style: laneStyle
+  },
+  // Thu
+  {
+    cards: [
+      {
+        ...card,
+        cardColor: '#b5025b',
+        id: 'Card51',
+        laneId: 'lane5',
+        metadata: {
+          id: 'Card51'
         },
-        {
-          ...card,
-          id: 'Card102',
-          laneId: 'lane10',
-          metadata: {
-            id: 'Card102'
-          },
-          name: 'Abdul Cader',
-          startDate: '14.04.2021',
-          occurences: 7,
-          address: 'Reza Food Services Co Ltd Corniche road branch',
-          service: {
-            refill: true,
-            highene: true
-          }
+        name: 'Abbas Qureshi',
+        startDate: '18.11.2021',
+        occurences: 0,
+        address: 'Panda Retail Company Thahassusi makkah 225',
+        service: {
+          scheduled: true,
+          maintenance: true
         }
-      ],
-      currentPage: 10,
-      id: 'lane10',
-      day: 'Tue',
-      date: '23.11.2021',
-      style: laneStyle
-    }
-  ]
-};
+      },
+      {
+        ...card,
+        id: 'Card52',
+        laneId: 'lane5',
+        metadata: {
+          id: 'Card52'
+        },
+        name: 'Abdul Cader',
+        startDate: '23.05.2021',
+        occurences: 9,
+        address: 'Support Services King Abdullah Medical City Makkah',
+        service: {
+          refill: true,
+          highene: true
+        }
+      }
+    ],
+    currentPage: 5,
+    id: 'lane5',
+    day: 'Thu',
+    date: '18.11.2021',
+    style: laneStyle
+  },
+  // Fri
+  {
+    cards: [
+      {
+        ...card,
+        cardColor: '#b5025b',
+        id: 'Card61',
+        laneId: 'lane6',
+        metadata: {
+          id: 'Card61'
+        },
+        name: 'Abbas Qureshi',
+        startDate: '23.05.2021',
+        occurences: -18,
+        address: 'Panda Retail Company Thahassusi makkah 225',
+        service: {
+          scheduled: true,
+          audit: true
+        }
+      },
+      {
+        ...card,
+        cardColor: '#b5025b',
+        id: 'Card62',
+        laneId: 'lane6',
+        metadata: {
+          id: 'Card62'
+        },
+        name: 'Abbas Qureshi',
+        startDate: '23.05.2021',
+        occurences: -18,
+        address: 'Panda Retail Company Hamdania 242',
+        service: {
+          audit: true,
+          highene: true
+        }
+      }
+    ],
+    currentPage: 6,
+    id: 'lane6',
+    day: 'Fri',
+    date: '19.11.2021',
+    style: laneStyle
+  },
+  // Sat
+  {
+    cards: [
+      {
+        ...card,
+        cardColor: '#62f840',
+        id: 'Card71',
+        laneId: 'lane7',
+        metadata: {
+          id: 'Card71'
+        },
+        name: 'Anid Muhammadali',
+        startDate: '05.05.2021',
+        occurences: 2,
+        address: 'Emirates National Poultry Farms L.L.C Al Ain',
+        service: {
+          scheduled: true,
+          maintenance: true
+        }
+      },
+      {
+        ...card,
+        cardColor: '#b5025b',
+        id: 'Card72',
+        laneId: 'lane7',
+        metadata: {
+          id: 'Card72'
+        },
+        name: 'Afsal Basheer',
+        startDate: '24.05.2021',
+        occurences: 4,
+        address: 'Panda Retail Company Panda 46, Jubail',
+        service: {
+          scheduled: true,
+          refill: true
+        }
+      }
+    ],
+    currentPage: 7,
+    id: 'lane7',
+    day: 'Sat',
+    date: '20.11.2021',
+    style: laneStyle
+  },
+  // Sun
+  {
+    cards: [
+      {
+        ...card,
+        cardColor: '#b5025b',
+        id: 'Card81',
+        laneId: 'lane8',
+        metadata: {
+          id: 'Card81'
+        },
+        name: 'Abbas Qures',
+        startDate: '19.05.2021',
+        occurences: 0,
+        address: 'Panda Retail Comoany Al Awali makkah 20011',
+        service: {
+          scheduled: true,
+          maintenance: true
+        }
+      },
+      {
+        ...card,
+        id: 'Card82',
+        laneId: 'lane8',
+        metadata: {
+          id: 'Card82'
+        },
+        name: 'Abdul Cader',
+        startDate: '23.03.2021',
+        occurences: 10,
+        address: 'Dr. Amal Zabeedi - Makkah Makkah branch',
+        service: {
+          scheduled: true,
+          maintenance: true,
+          highene: true
+        }
+      }
+    ],
+    currentPage: 8,
+    id: 'lane8',
+    day: 'Sun',
+    date: '21.11.2021',
+    style: laneStyle
+  },
+  // Mon
+  {
+    cards: [
+      {
+        ...card,
+        id: 'Card91',
+        laneId: 'lane9',
+        metadata: {
+          id: 'Card91'
+        },
+        name: 'Abdul Cader',
+        startDate: '06.05.2021',
+        occurences: 6,
+        address: 'Mawred Al Baraka Co Hamdania',
+        service: {
+          refill: true,
+          highene: true
+        }
+      },
+      {
+        ...card,
+        id: 'Card92',
+        laneId: 'lane9',
+        metadata: {
+          id: 'Card92'
+        },
+        name: 'Abdul Cader',
+        startDate: '02.05.2021',
+        occurences: 0,
+        address: 'Elaf Kindah Hotel Makkah ELAF KINDAH',
+        service: {
+          scheduled: true,
+          refill: true
+        }
+      }
+    ],
+    currentPage: 9,
+    id: 'lane9',
+    day: 'Mon',
+    date: '22.11.2021',
+    style: laneStyle
+  },
+  // Tue
+  {
+    cards: [
+      {
+        ...card,
+        cardColor: '#b5025b',
+        id: 'Card101',
+        laneId: 'lane10',
+        metadata: {
+          id: 'Card101'
+        },
+        name: 'Abbas Quresh',
+        startDate: '29.09.2020',
+        occurences: 0,
+        address: 'Reza Food Services Co Ltd McDonalds MOHAMEDIA',
+        service: {
+          audit: true,
+          highene: true
+        }
+      },
+      {
+        ...card,
+        id: 'Card102',
+        laneId: 'lane10',
+        metadata: {
+          id: 'Card102'
+        },
+        name: 'Abdul Cader',
+        startDate: '14.04.2021',
+        occurences: 7,
+        address: 'Reza Food Services Co Ltd Corniche road branch',
+        service: {
+          refill: true,
+          highene: true
+        }
+      }
+    ],
+    currentPage: 10,
+    id: 'lane10',
+    day: 'Tue',
+    date: '23.11.2021',
+    style: laneStyle
+  }
+];
 
 export const serviceMens = [
   { name: 'Abbas Qureshi', colorCode: '#b5025b' },

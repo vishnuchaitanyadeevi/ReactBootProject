@@ -54,3 +54,33 @@
 .service-type-txt-clr {
   color: #000;
 }
+
+.arr-icn {
+  color: #01a9d9;
+  width: 25px;
+  height: 25px;
+  margin-right: -10px;
+  cursor: pointer;
+}
+
+.mr-1rm {
+  margin-right: 1rem;
+}
+
+.mt-1rm {
+  margin-top: 1rem;
+}
+
+.mt-half-rm {
+  margin-top: 0.5rem;
+}
+
+.ml-1rm {
+  margin-left: 1rem;
+}
+
+.disabled {
+  color: #8f8f8f;
+  cursor: not-allowed;
+  pointer-events: none;
+}

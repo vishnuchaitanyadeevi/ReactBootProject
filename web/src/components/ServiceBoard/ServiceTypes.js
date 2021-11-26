@@ -12,8 +12,8 @@ const ServiceTypes = () => {
   const { COMPLETE, SCHEDULE, NOT_COMPLETE, CANCELLED, REFILL, MAINTENANCE, CALL_OUT, AUDIT } = SERVICE_TYPES;
   return (
     <Grid container spacing={3} className="service-type-grid">
-      <Grid style={{ margin: '1rem' }} item xs={12} sm={6} />
-      <Grid style={{ margin: '1rem' }} item xs={12} sm={5}>
+      <Grid style={{ margin: '1rem' }} item xs={12} md={6} />
+      <Grid style={{ margin: '1rem' }} item xs={12} md={5}>
         <Grid style={{ marginLeft: '4rem', marginBottom: '1rem' }} item xs={12} sm={12}>
           <Typography variant="h6">Service status icons:</Typography>
         </Grid>

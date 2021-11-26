@@ -30,3 +30,10 @@ export const SERVICE_TYPES = {
   CALL_OUT: 'callOut',
   AUDIT: 'audit'
 };
+
+export const GROUP_BY = {
+  SERVICE_MEN: 'servicemen',
+  CUSTOMER: 'customer'
+};
+
+export const MAX_LANES = 3;
