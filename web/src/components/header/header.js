@@ -11,13 +11,13 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-export default function ProminentAppBar({ header, children }) {
+export default function ProminentAppBar({ header, children, height }) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <AppBar position="static" className="header">
-        <Toolbar className="toolBar">
+        <Toolbar className="toolBar" style={{ minHeight: height }}>
           <Typography className="header" variant="h5">
             {header}
             {children}
