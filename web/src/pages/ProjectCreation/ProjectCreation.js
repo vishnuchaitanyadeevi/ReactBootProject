@@ -97,7 +97,7 @@ function ProjectCreation() {
 
         {/* Grid for project details section */}
         <Grid item xs={12} sm={6}>
-          <Typography variant="h5" className="form_sub_title_cls">
+          <Typography variant="body2" className="form_sub_title_cls">
             Project Details
           </Typography>
 
