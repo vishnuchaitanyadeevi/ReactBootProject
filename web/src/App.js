@@ -21,11 +21,16 @@ export default function App() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === '/login') {
-      // if (localStorage.getItem(TOKEN_KEY)) navigate('/');
+    if (localStorage.getItem('username')) {
+      navigate('/home');
+    } else {
+      navigate('/login');
     }
-    // else if (localStorage.getItem(TOKEN_KEY)) navigate(location);
-    else navigate('/login'); // eslint-disable-next-line react-hooks/exhaustive-deps
+    // if (location.pathname === '/login') {
+    //   // if (localStorage.getItem(TOKEN_KEY)) navigate('/');
+    // }
+    // // else if (localStorage.getItem(TOKEN_KEY)) navigate(location);
+    // else navigate('/login'); // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => {};
   }, []);
 

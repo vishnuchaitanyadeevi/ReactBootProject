@@ -30,6 +30,7 @@ const sidebarConfig = [
   {
     items: [
       { title: 'dashboard', path: PATH_DASHBOARD.general.home },
+      { title: 'service board', path: PATH_DASHBOARD.general.service },
       {
         title: 'customer',
         path: '',
@@ -93,6 +94,7 @@ const sidebarConfig = [
           { title: 'Invoice', path: '/invoice' },
           { title: 'Pay', path: '/pay' },
           { title: 'Components', path: '/components' },
+          { title: 'Project Creation', path: '/ProjectCreation' },
           { title: 'Contracts Creations', path: '/contracts-creation' }
         ]
       }

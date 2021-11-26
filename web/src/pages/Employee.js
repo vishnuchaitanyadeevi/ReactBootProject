@@ -251,10 +251,10 @@ function Employee(isFormLoaded) {
   if (isFormLoaded.isFormLoaded)
     return (
       <div>
-        <div align="center">
+        <div>
           <Grid>
             <Paper elevation={20} style={paperStyle}>
-              <Grid align="center" />
+              <Grid />
               <FormikProvider value={formik}>
                 <Form onSubmit={formik.handleSubmit}>
                   <Container>
