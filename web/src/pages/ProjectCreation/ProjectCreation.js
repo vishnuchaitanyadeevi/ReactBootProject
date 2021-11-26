@@ -14,6 +14,7 @@ import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget'
 import RadioGroupComponent from './RadioGroupComponent';
 import BasicDatePicker from '../../components/pickers/BasicDatePicker';
 import UploadFile from '../../components/UploadFile';
+import ProjectTable from './ProjectList';
 import './ProjectCreation.scss';
 
 const projectLocation = [
@@ -65,7 +66,10 @@ function ProjectCreation() {
   const handleChangeInvoiceRecipient = (e) => console.log('Invoice recipient', e.target.value);
   const handleChangeProjectEndDate = (e) => console.log('End date', e.target.value);
   const [axDefaultexpanded, setAxDefaultexpanded] = useState(true);
+  const [financialDimensionExpanded, setFinancialDimensionExpanded] = useState(true);
   const handleChange = (panel) => (event, isExpanded) => setAxDefaultexpanded(isExpanded ? panel : false);
+  const handleChangeFinancialDimension = (panel) => (event, isExpanded) =>
+    setFinancialDimensionExpanded(isExpanded ? panel : false);
   // handle change selected file
   const handleUploadProject = useCallback((acceptedFiles) => {
     setUploadProject({
@@ -93,7 +97,7 @@ function ProjectCreation() {
 
         {/* Grid for project details section */}
         <Grid item xs={12} sm={6}>
-          <Typography variant="body2" className="form_sub_title_cls">
+          <Typography variant="h5" className="form_sub_title_cls">
             Project Details
           </Typography>
 
@@ -348,6 +352,29 @@ function ProjectCreation() {
                 title="Agreement / LPO No."
               />
             </Grid>
+            <Grid
+              item
+              xs={12}
+              xl={12}
+              md={12}
+              hidden={!(financialDimensionExpanded === 'panel2' || financialDimensionExpanded === true)}
+            >
+              <Accordion style={{ boxShadow: 'none' }} fullWidth>
+                <AccordionSummary
+                  style={{ display: 'flex', alignItems: 'center', flexDirection: 'row-reverse' }}
+                  expandIcon={<ArrowRight />}
+                  aria-controls="panel1d-content"
+                  id="panel1d-header"
+                >
+                  <Typography variant="body2" className="form_sub_title_cls">
+                    Financial Dimensions
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography> Lorem ipsum. </Typography>
+                </AccordionDetails>
+              </Accordion>
+            </Grid>
           </Grid>
         </Grid>
         {/* Grid for button section */}
@@ -365,6 +392,12 @@ function ProjectCreation() {
             </Button>
           </Grid>
         </Grid>
+
+        {/* <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <ProjectTable />
+          </Grid>
+        </Grid> */}
       </Grid>
     </Grid>
   );
