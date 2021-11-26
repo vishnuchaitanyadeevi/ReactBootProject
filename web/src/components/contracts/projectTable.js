@@ -3,11 +3,12 @@ import React, { Fragment, useState, useCallback } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
-import { Button, Grid } from '@mui/material';
+import { Button } from 'primereact/button';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { Toast } from 'primereact/toast';
-import jsonData from '../../utils/create-project-table-data.json';
+import ngPrimeGrid from '../ngPrimeGrid';
+import jsonData from '../../utils/project-table-data.json';
 import '../../Styles/app.scss';
 
 export default function ProjectTable() {
@@ -40,11 +41,9 @@ export default function ProjectTable() {
   };
   return (
     <div>
-      <Grid item xs={12} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button onClick={addNewProject} variant="contained">
-          Add New Service Subject
-        </Button>
-      </Grid>
+      <div>
+        <Button label="Add New Project" onClick={addNewProject} />
+      </div>
       <DataTable
         value={tableData}
         showGridlines
@@ -58,33 +57,30 @@ export default function ProjectTable() {
         onRowEditChange={onRowEditChange}
         dataKey="id"
       >
+        <Column field="status" header="Status" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
         <Column
-          field="itemCode"
-          header="Item Code"
+          field="prjno"
+          header="Project Name"
           editor={(options) => textEditor(options)}
-          style={{ width: '20%' }}
+          style={{ width: '10%' }}
         />
         <Column
-          field="itemName"
-          header="Item Name"
+          field="lcnm"
+          header="Location Name"
           editor={(options) => textEditor(options)}
-          style={{ width: '20%' }}
+          style={{ width: '10%' }}
         />
-        <Column field="sla" header="SLA" editor={(options) => textEditor(options)} style={{ width: '20%' }} />
-        <Column field="oStatus" header="O/status" editor={(options) => textEditor(options)} style={{ width: '20%' }} />
         <Column
-          field="serialNumber"
-          header="Serial Number"
+          field="bspct"
+          header="Business ProjCat"
           editor={(options) => textEditor(options)}
-          style={{ width: '20%' }}
+          style={{ width: '10%' }}
         />
-        <Column field="specialNotes" header="Special Notes" editor={(options) => textEditor(options)} />
-        <Column field="qty" header="Qty" editor={(options) => textEditor(options)} />
-        <Column
-          field="serviceSubjOwnerShip"
-          header="Service Subject Ownership"
-          editor={(options) => textEditor(options)}
-        />
+        <Column field="sdt" header="Start Date" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
+        <Column field="edt" header="End Date" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
+        <Column field="extp" header="Expiry Type" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
+        <Column field="grpd" header="Grouped" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
+        <Column field="prm" header="Primary" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
         <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }} />
       </DataTable>
     </div>

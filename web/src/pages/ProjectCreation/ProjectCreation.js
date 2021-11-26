@@ -111,23 +111,29 @@ function ProjectCreation() {
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label="Project No." />
+              <TextField fullWidth label="Project No." size="small" />
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label="Region" />
+              <TextField fullWidth label="Region" size="small" />
             </Grid>
 
             <Grid item xs={12} sm={12}>
-              <TextField fullWidth label="Project Name" />
+              <TextField fullWidth label="Project Name" size="small" />
             </Grid>
 
             <Grid item xs={12} sm={12}>
-              <AutocompleteWidget options={projectLocation} label="Project Location" disablePortal autoSelect />
+              <AutocompleteWidget
+                options={projectLocation}
+                label="Project Location"
+                disablePortal
+                autoSelect
+                size="small"
+              />
             </Grid>
 
             <Grid item xs={12} sm={12}>
-              <AutocompleteWidget options={projectLocation} label="Project SLA" disablePortal autoSelect />
+              <AutocompleteWidget options={projectLocation} label="Project SLA" disablePortal autoSelect size="small" />
             </Grid>
 
             <Grid item xs={12} sm={12}>
@@ -137,17 +143,23 @@ function ProjectCreation() {
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <AutocompleteWidget options={projectLocation} label="Business Type" disablePortal autoSelect />
+              <AutocompleteWidget
+                options={projectLocation}
+                label="Business Type"
+                disablePortal
+                autoSelect
+                size="small"
+              />
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <AutocompleteWidget options={projectLocation} label="Sub-type" disablePortal autoSelect />
+              <AutocompleteWidget options={projectLocation} label="Sub-type" disablePortal autoSelect size="small" />
             </Grid>
             <Grid item xs={12} sm={12}>
-              <BasicDatePicker label="Project Signed On" />
+              <BasicDatePicker label="Project Signed On" inputFormat="dd-MM-yyyy" views={['year', 'month', 'day']} />
             </Grid>
             <Grid item xs={12} sm={12}>
-              <BasicDatePicker label="Project Start Date" />
+              <BasicDatePicker label="Project Start Date" inputFormat="dd-MM-yyyy" views={['year', 'month', 'day']} />
             </Grid>
             <Grid item xs={12} sm={6}>
               <RadioGroupComponent
@@ -157,13 +169,25 @@ function ProjectCreation() {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <BasicDatePicker label="Project End Date" />
+              <BasicDatePicker label="Project End Date" inputFormat="dd-MM-yyyy" views={['year', 'month', 'day']} />
             </Grid>
             <Grid item xs={12} sm={12}>
-              <AutocompleteWidget options={projectLocation} label="Project Status" disablePortal autoSelect />
+              <AutocompleteWidget
+                options={projectLocation}
+                label="Project Status"
+                disablePortal
+                autoSelect
+                size="small"
+              />
             </Grid>
             <Grid item xs={12} sm={12}>
-              <AutocompleteWidget options={projectLocation} label="Project Classification" disablePortal autoSelect />
+              <AutocompleteWidget
+                options={projectLocation}
+                label="Project Classification"
+                disablePortal
+                autoSelect
+                size="small"
+              />
             </Grid>
             <Grid style={{ marginTop: '0.3rem' }} item xs={12} sm={12}>
               <TextField
@@ -172,13 +196,14 @@ function ProjectCreation() {
                 InputProps={{
                   endAdornment: <InputAdornment position="end">%</InputAdornment>
                 }}
+                size="small"
               />
             </Grid>
             <Grid item xs={12} sm={12}>
-              <AutocompleteWidget options={projectLocation} label="Salesman" disablePortal autoSelect />
+              <AutocompleteWidget options={projectLocation} label="Salesman" disablePortal autoSelect size="small" />
             </Grid>
             <Grid item xs={12} sm={12}>
-              <AutocompleteWidget options={projectLocation} label="Serviceman" disablePortal autoSelect />
+              <AutocompleteWidget options={projectLocation} label="Serviceman" disablePortal autoSelect size="small" />
             </Grid>
 
             <Grid item xs={12} sm={12}>
@@ -187,10 +212,10 @@ function ProjectCreation() {
               </Typography>
             </Grid>
             <Grid item xs={12} sm={12}>
-              <TextField fullWidth label="Special Attention / Notes" />
+              <TextField fullWidth label="Special Attention / Notes" size="small" />
             </Grid>
             <Grid item xs={12} sm={12}>
-              <TextField fullWidth label="Scope of Project" />
+              <TextField fullWidth label="Scope of Project" size="small" />
             </Grid>
             <Grid item xs={12} sm={12}>
               <UploadFile
@@ -201,7 +226,7 @@ function ProjectCreation() {
                 onDrop={handleUploadProject}
                 onRemove={handleRemove}
                 backgroundColor="#70cd71"
-                title="Upload Project (pdf)"
+                buttonLabel="Upload Project (pdf)"
               />
             </Grid>
             <Grid item xs={12} xl={12} md={12} hidden={!(axDefaultexpanded === 'panel1' || axDefaultexpanded === true)}>
@@ -241,6 +266,7 @@ function ProjectCreation() {
                     endAdornment: <InputAdornment position="end">Day(s)</InputAdornment>
                   }}
                   type="number"
+                  size="small"
                 />
               </Grid>
             </Grid>
@@ -297,6 +323,7 @@ function ProjectCreation() {
                   endAdornment: <InputAdornment position="end">Day(s)</InputAdornment>
                 }}
                 type="number"
+                size="small"
               />
             </Grid>
             <Grid item xs={12} sm={12}>
@@ -306,6 +333,7 @@ function ProjectCreation() {
                 InputProps={{
                   endAdornment: <InputAdornment position="start">SAR</InputAdornment>
                 }}
+                size="small"
               />
             </Grid>
             <Grid item xs={12} sm={12}>
@@ -314,31 +342,37 @@ function ProjectCreation() {
               </Typography>
             </Grid>
             <Grid item xs={12} sm={12}>
-              <AutocompleteWidget options={projectLocation} label="Select Various Roles" disablePortal autoSelect />
+              <AutocompleteWidget
+                options={projectLocation}
+                label="Select Various Roles"
+                disablePortal
+                autoSelect
+                size="small"
+              />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label="Name" />
+              <TextField fullWidth label="Name" size="small" />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label="Position" />
+              <TextField fullWidth label="Position" size="small" />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label="Address" />
+              <TextField fullWidth label="Address" size="small" />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label="Phone No." />
+              <TextField fullWidth label="Phone No." size="small" />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label="Fax No." />
+              <TextField fullWidth label="Fax No." size="small" />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label="Mobile No." />
+              <TextField fullWidth label="Mobile No." size="small" />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label="e-mail ID" />
+              <TextField fullWidth label="e-mail ID" size="small" />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label="Note" />
+              <TextField fullWidth label="Note" size="small" />
             </Grid>
             <Grid item xs={12} sm={12}>
               <UploadFile
@@ -349,7 +383,7 @@ function ProjectCreation() {
                 onDrop={handleUploadProject}
                 onRemove={handleRemove}
                 backgroundColor="#70cd71"
-                title="Agreement / LPO No."
+                buttonLabel="Agreement / LPO No."
               />
             </Grid>
             <Grid
@@ -380,14 +414,16 @@ function ProjectCreation() {
         {/* Grid for button section */}
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12} style={{ display: 'flex', justifyContent: 'center', margin: '1rem' }}>
-            <Button variant="contained">Back</Button>
+            <Button variant="contained" color="secondary">
+              Back
+            </Button>
             <Button variant="contained" style={{ marginLeft: '1rem' }}>
               Save
             </Button>
-            <Button style={{ marginLeft: '1rem' }} variant="contained">
+            <Button style={{ marginLeft: '1rem' }} variant="contained" color="warning">
               Terminate Project
             </Button>
-            <Button style={{ marginLeft: '1rem' }} variant="contained">
+            <Button style={{ marginLeft: '1rem' }} variant="contained" color="secondary">
               Renew
             </Button>
           </Grid>
