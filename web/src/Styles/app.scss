@@ -61,6 +61,60 @@ table.data-grid tr td.cell {
   z-index: 1100;
 }
 
+// dataTable styles
+
+.headerFont {
+  font-size: small !important;
+  height: 25px;
+}
+
+.p-datatable-scrollable .p-datatable-thead > tr, .p-datatable-scrollable .p-datatable-tbody > tr, .p-datatable-scrollable .p-datatable-tfoot > tr {
+  font-size: small !important;
+}
+
+.p-column-filter-row .p-column-filter-element {
+  // flex: 1 1 auto;
+  width: 100% !important;
+  padding: 0;
+  margin: 0;
+  /* height: 25
+px
+; */
+}
+
+.p-inputtext {
+  margin: 0 !important;
+  padding: 2px !important;
+}
+
+.p-paginator-page, .p-paginator-next, .p-paginator-last, .p-paginator-first, .p-paginator-prev, .p-paginator-current {
+  height: 2rem!important;
+  min-width: 2rem!important;
+}
+
+.p-paginator {
+  padding: 0px;
+}
+
+.p-paginator .p-dropdown {
+  margin-left: 0.5rem;
+  height: 2rem !important;
+}
+
+.p-paginator .p-dropdown .p-dropdown-label {
+  padding: 3px 0px 0px 1px !important;
+}
+
+.p-datatable .p-datatable-tbody > tr {
+  height: 1.65rem !important;
+}
+
+.p-input-icon-left > .p-inputtext {
+  padding-left: 2rem !important;
+  padding-top: 0.25rem !important;
+  padding-bottom: 0.25rem !important;
+}
+
 /*
 .labelFontSize{
    font-size: 13px; 

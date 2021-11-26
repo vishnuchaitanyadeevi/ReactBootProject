@@ -146,7 +146,7 @@ function Data() {
             <InputText className="p-inputtext-sm" type="search" placeholder="On-hand" />
           </td>
           <td>
-            <InputText className="p-inputtext-sm" type="search" placeholder="On-wan" />
+            <InputText className="p-inputtext-sm" type="search" placeholder="Van Stock" />
           </td>
           <td>
             <InputText className="p-inputtext-sm" type="search" placeholder="From-wan" />
@@ -171,6 +171,8 @@ function Data() {
             size="small"
             paginator
             rows={10}
+            headerClassName="headerFont"
+            headerStyle={{ fontSize: 'small', height: '25px' }}
             selection={selected}
             onSelectionChange={(e) => setSelected(e.value)}
             stripedRows
@@ -252,7 +254,8 @@ function Data() {
                 minWidth: '12rem',
                 width: '12rem',
                 paddingBottom: '0.1rem',
-                paddingTop: '0.1rem'
+                paddingTop: '0.1rem',
+                textAlign: 'center'
               }}
               // style={{ flexGrow: 1, flexBasis: '200px' }}
             />
@@ -304,7 +307,7 @@ function Data() {
             <Column
               columnKey="owan"
               field="owan"
-              header="On-wan"
+              header="Van Stock"
               sortable
               editor={(options) => textEditor(options)}
               filter
