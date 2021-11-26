@@ -9,9 +9,8 @@ import {
   Button
 } from '@mui/material';
 import React, { Fragment, useState, useCallback } from 'react';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { ArrowRight, ArrowLeft } from '@mui/icons-material/';
+import { ArrowRight, ArrowLeft, UploadFileOutlined } from '@mui/icons-material/';
 import ProjectTable from '../../components/contracts/projectTable';
 import BasicDatePicker from '../../components/pickers/BasicDatePicker';
 import UploadFile from '../../components/UploadFile';
@@ -149,7 +148,7 @@ export default function ContractsCreation() {
             onRemove={handleRemove}
             backgroundColor="green"
             buttonLabel="Upload Contract"
-            startIcon={<PhotoCamera />}
+            startIcon={<UploadFileOutlined />}
           />
         </Grid>
       </Grid>

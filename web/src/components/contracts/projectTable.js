@@ -57,20 +57,30 @@ export default function ProjectTable() {
         onRowEditChange={onRowEditChange}
         dataKey="id"
       >
-        <Column field="status" header="Status" editor={(options) => textEditor(options)} style={{ width: '20%' }} />
-        {/* <Column field="prjno" header="Project Name" editor={(options) => textEditor(options)} style={{ width: '20%' }} />
-        <Column field="lcnm" header="Location Name" editor={(options) => textEditor(options)} style={{ width: '20%' }} /> */}
+        <Column field="status" header="Status" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
+        <Column
+          field="prjno"
+          header="Project Name"
+          editor={(options) => textEditor(options)}
+          style={{ width: '10%' }}
+        />
+        <Column
+          field="lcnm"
+          header="Location Name"
+          editor={(options) => textEditor(options)}
+          style={{ width: '10%' }}
+        />
         <Column
           field="bspct"
           header="Business ProjCat"
           editor={(options) => textEditor(options)}
-          style={{ width: '20%' }}
+          style={{ width: '10%' }}
         />
-        <Column field="sdt" header="Start Date" editor={(options) => textEditor(options)} style={{ width: '20%' }} />
-        <Column field="edt" header="End Date" editor={(options) => textEditor(options)} style={{ width: '20%' }} />
-        <Column field="extp" header="Expiry Type" editor={(options) => textEditor(options)} style={{ width: '20%' }} />
-        <Column field="grpd" header="Grouped" editor={(options) => textEditor(options)} style={{ width: '20%' }} />
-        <Column field="prm" header="Primary" editor={(options) => textEditor(options)} style={{ width: '20%' }} />
+        <Column field="sdt" header="Start Date" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
+        <Column field="edt" header="End Date" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
+        <Column field="extp" header="Expiry Type" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
+        <Column field="grpd" header="Grouped" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
+        <Column field="prm" header="Primary" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
         <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }} />
       </DataTable>
     </div>
