@@ -337,7 +337,7 @@ function ProjectCreation() {
               />
             </Grid>
             <Grid item xs={12} sm={12}>
-              <Typography variant="body2" style={{ textDecoration: 'underline' }}>
+              <Typography variant="body2" style={{ textDecoration: 'underline', fontWeight: 'bold' }}>
                 Signatory Information
               </Typography>
             </Grid>
@@ -429,11 +429,9 @@ function ProjectCreation() {
           </Grid>
         </Grid>
 
-        {/* <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <ProjectTable />
-          </Grid>
-        </Grid> */}
+        <Grid rowSpacing={1} columnSpacing={1} item xs={12} lg={12} justifyContent="center">
+          <ProjectTable />
+        </Grid>
       </Grid>
     </Grid>
   );
