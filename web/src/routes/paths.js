@@ -40,7 +40,8 @@ export const PATH_DASHBOARD = {
     contracts: path(ROOTS_DASHBOARD, '/contracts'),
     analytics: path(ROOTS_DASHBOARD, '/analytics'),
     banking: path(ROOTS_DASHBOARD, '/banking'),
-    booking: path(ROOTS_DASHBOARD, '/booking')
+    booking: path(ROOTS_DASHBOARD, '/booking'),
+    service: path(ROOTS_DASHBOARD, '/service')
   },
   mail: {
     root: path(ROOTS_DASHBOARD, '/mail'),
