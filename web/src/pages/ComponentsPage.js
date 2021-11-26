@@ -96,6 +96,7 @@ function ComponentsPage() {
               onRemove={handleRemove}
               backgroundColor="green"
               startIcon={<PhotoCamera />}
+              title="Upload"
             />
           </Grid>
         </Grid>
