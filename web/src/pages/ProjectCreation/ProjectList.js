@@ -41,7 +41,7 @@ export default function ProjectTable() {
   return (
     <div>
       <Grid item xs={12} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button onClick={addNewProject} variant="contained">
+        <Button onClick={addNewProject} variant="contained" style={{ marginBottom: '1rem' }}>
           Add New Service Subject
         </Button>
       </Grid>
