@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { Navigate, useRoutes, useLocation } from 'react-router-dom';
 // layouts
+import ContractsCreation from '../pages/contracts/ContractsCreation';
 import DashboardLayout from '../layouts/dashboard';
 import LogoOnlyLayout from '../layouts/LogoOnlyLayout';
 // components
@@ -97,6 +98,10 @@ export default function Router() {
         {
           path: '/dashboard/service',
           element: <ServiceDashboardPage />
+        },
+        {
+          path: '/contracts-creation',
+          element: <ContractsCreation />
         }
       ]
     },
