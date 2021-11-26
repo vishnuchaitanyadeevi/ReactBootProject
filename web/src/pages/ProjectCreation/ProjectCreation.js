@@ -429,11 +429,9 @@ function ProjectCreation() {
           </Grid>
         </Grid>
 
-        {/* <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <ProjectTable />
-          </Grid>
-        </Grid> */}
+        <Grid rowSpacing={1} columnSpacing={1} item xs={12} lg={12} justifyContent="center">
+          <ProjectTable />
+        </Grid>
       </Grid>
     </Grid>
   );
