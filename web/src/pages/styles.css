@@ -59,3 +59,7 @@ h1,
 h3 {
 	text-align: center;
 }
+
+.css-3yhpc8-MuiGrid-root>.MuiGrid-item {
+  padding-top: 8px;
+}
