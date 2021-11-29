@@ -74,5 +74,231 @@
         "location": "Kuwait"
       }
     ]
+  },
+  {
+    "id": "1003",
+    "status": "Running",
+    "contract_number": "HSDCJD_0130",
+    "contract_sign_on": "01-05-2013",
+    "contract_start_date": "01-05-2013",
+    "customer": "Impact BBDO [HSD_JED_00291]",
+    "salesman": "Naveed",
+    "projects": [
+      {
+        "id": "1004",
+        "status": "Success",
+        "project_number": "PRNO_0044",
+        "project_start_date": "01-05-2013",
+        "end_date": "08-06-2013",
+        "business": "Information Technology",
+        "location": "Saudi Arabia"
+      },
+      {
+        "id": "1005",
+        "status": "Pending",
+        "project_number": "PRNO_0045",
+        "project_start_date": "01-04-2013",
+        "end_date": "11-04-2013",
+        "business": "Hospitality",
+        "location": "Qatar"
+      },
+      {
+        "id": "1006",
+        "status": "Returned",
+        "project_number": "PRNO_0046",
+        "project_start_date": "01-02-2012",
+        "end_date": "15-03-2012",
+        "business": "Organization",
+        "location": "Kuwait"
+      },
+      {
+        "id": "1007",
+        "status": "Success",
+        "project_number": "PRNO_0047",
+        "project_start_date": "01-08-2012",
+        "end_date": "15-08-2012",
+        "business": "Organization",
+        "location": "Bahrain"
+      }
+    ]
+  },
+  {
+    "id": "1004",
+    "status": "Pending",
+    "contract_number": "HSDCJD_0131",
+    "contract_sign_on": "01-05-2015",
+    "contract_start_date": "01-05-2015",
+    "customer": "Impact BBDO [HSD_JED_00292]",
+    "salesman": "Ramzi",
+    "projects": [
+      {
+        "id": "1008",
+        "status": "Success",
+        "project_number": "PRNO_0045",
+        "project_start_date": "01-05-2015",
+        "end_date": "08-06-2015",
+        "business": "Information Technology",
+        "location": "Qatar"
+      },
+      {
+        "id": "1009",
+        "status": "Pending",
+        "project_number": "PRNO_0045",
+        "project_start_date": "01-04-2013",
+        "end_date": "11-04-2013",
+        "business": "Hospitality",
+        "location": "Qatar"
+      },
+      {
+        "id": "1010",
+        "status": "Returned",
+        "project_number": "PRNO_0046",
+        "project_start_date": "01-02-2012",
+        "end_date": "15-03-2012",
+        "business": "Organization",
+        "location": "Kuwait"
+      },
+      {
+        "id": "1011",
+        "status": "Success",
+        "project_number": "PRNO_0047",
+        "project_start_date": "01-08-2012",
+        "end_date": "15-08-2012",
+        "business": "Organization",
+        "location": "Bahrain"
+      }
+    ]
+  },
+  {
+    "id": "1005",
+    "status": "Success",
+    "contract_number": "HSDCJD_0128",
+    "contract_sign_on": "01-01-2012",
+    "contract_start_date": "01-01-2012",
+    "customer": "Impact BBDO [HSD_JED_00289]",
+    "salesman": "Ubaid",
+    "projects": [
+      {
+        "id": "1000",
+        "status": "Success",
+        "project_number": "PRNO_001",
+        "project_start_date": "01-02-2012",
+        "end_date": "08-03-2012",
+        "business": "Information Technology",
+        "location": "UAE"
+      },
+      {
+        "id": "1001",
+        "status": "Pending",
+        "project_number": "PRNO_002",
+        "project_start_date": "01-02-2012",
+        "end_date": "11-03-2012",
+        "business": "Hospitality",
+        "location": "Qatar"
+      },
+      {
+        "id": "1003",
+        "status": "Returned",
+        "project_number": "PRNO_003",
+        "project_start_date": "01-02-2012",
+        "end_date": "15-03-2012",
+        "business": "Organization",
+        "location": "Kuwait"
+      }
+    ]
+  },
+  {
+    "id": "1006",
+    "status": "Pending",
+    "contract_number": "HSDCJD_0131",
+    "contract_sign_on": "01-05-2015",
+    "contract_start_date": "01-05-2015",
+    "customer": "Impact BBDO [HSD_JED_00292]",
+    "salesman": "Ramzi",
+    "projects": [
+      {
+        "id": "1008",
+        "status": "Success",
+        "project_number": "PRNO_0045",
+        "project_start_date": "01-05-2015",
+        "end_date": "08-06-2015",
+        "business": "Information Technology",
+        "location": "Qatar"
+      },
+      {
+        "id": "1009",
+        "status": "Pending",
+        "project_number": "PRNO_0045",
+        "project_start_date": "01-04-2013",
+        "end_date": "11-04-2013",
+        "business": "Hospitality",
+        "location": "Qatar"
+      },
+      {
+        "id": "1010",
+        "status": "Returned",
+        "project_number": "PRNO_0046",
+        "project_start_date": "01-02-2012",
+        "end_date": "15-03-2012",
+        "business": "Organization",
+        "location": "Kuwait"
+      },
+      {
+        "id": "1011",
+        "status": "Success",
+        "project_number": "PRNO_0047",
+        "project_start_date": "01-08-2012",
+        "end_date": "15-08-2012",
+        "business": "Organization",
+        "location": "Bahrain"
+      }
+    ]
+  },
+  {
+    "id": "1007",
+    "status": "Pending",
+    "contract_number": "HSDCJD_0131",
+    "contract_sign_on": "01-05-2015",
+    "contract_start_date": "01-05-2015",
+    "customer": "Impact BBDO [HSD_JED_00292]",
+    "salesman": "Ramzi",
+    "projects": [
+      {
+        "id": "1008",
+        "status": "Success",
+        "project_number": "PRNO_0045",
+        "project_start_date": "01-05-2015",
+        "end_date": "08-06-2015",
+        "business": "Information Technology",
+        "location": "Qatar"
+      },
+      {
+        "id": "1009",
+        "status": "Pending",
+        "project_number": "PRNO_0045",
+        "project_start_date": "01-04-2013",
+        "end_date": "11-04-2013",
+        "business": "Hospitality",
+        "location": "Qatar"
+      },
+      {
+        "id": "1010",
+        "status": "Returned",
+        "project_number": "PRNO_0046",
+        "project_start_date": "01-02-2012",
+        "end_date": "15-03-2012",
+        "business": "Organization",
+        "location": "Kuwait"
+      },
+      {
+        "id": "1011",
+        "status": "Success",
+        "project_number": "PRNO_0047",
+        "project_start_date": "01-08-2012",
+        "end_date": "15-08-2012",
+        "business": "Organization",
+        "location": "Bahrain"
+      }
+    ]
   }
 ]
