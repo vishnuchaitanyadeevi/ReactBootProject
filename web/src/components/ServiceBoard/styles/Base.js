@@ -159,13 +159,12 @@ export const RightContent = styled.span`
   font-size: 13px;
 `;
 export const CardWrapper = styled.article`
-  border-bottom: 1px solid #ccc;
   background-color: #fff;
   position: relative;
   cursor: pointer;
   max-width: 250px;
   margin-bottom: 7px;
-  min-width: 230px;
+  // min-width: 230px;
 `;
 
 export const MovableCardWrapper = styled(CardWrapper)`

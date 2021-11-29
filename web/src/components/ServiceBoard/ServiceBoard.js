@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Board from 'react-trello';
 
-import CustomCard from './CustomeCard';
+import CustomCard from './CustomCard';
 import CustomLaneHeader from './CustomLaneHeader';
 
 import './ServiceBoard.css';
@@ -34,7 +33,9 @@ export default function ServiceBoard({ data = [] }) {
       draggable
       tagStyle={{ fontSize: '80%' }}
       style={{
-        backgroundColor: '#000'
+        backgroundColor: '#000',
+        paddingLeft: '0',
+        paddingRight: '2.1rem'
       }}
       onCardClick={onCardClickHandler}
       handleDragEnd={onCardDragEndHandler}

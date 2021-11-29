@@ -36,4 +36,4 @@ export const GROUP_BY = {
   CUSTOMER: 'customer'
 };
 
-export const MAX_LANES = 3;
+export const MAX_LANES = 10;

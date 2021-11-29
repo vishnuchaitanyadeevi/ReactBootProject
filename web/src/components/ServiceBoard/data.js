@@ -2,12 +2,15 @@ const card = {
   cardColor: '#66ff00',
   cardStyle: {
     borderRadius: 6,
-    marginBottom: 15
+    marginBottom: 15,
+    backgroundColor: '#424242'
   }
 };
 
 const laneStyle = {
-  backgroundColor: '#424242'
+  backgroundColor: 'transparent',
+  width: '11rem',
+  marginRight: '-2.7rem'
 };
 
 export const serviceData = [
