@@ -43,7 +43,8 @@ export default function Login() {
           <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
             Hi, Welcome Back
           </Typography>
-          <img src="/static/illustrations/illustration_login.png" alt="login" />
+          <img src="/static/home/rezaLogo.png" alt="reza" style={{ padding: '0 1.1rem 0 1.1rem' }} />
+          <img src="/static/home/omslogo.png" alt="oms" />
         </SectionStyle>
       </MHidden>
 
