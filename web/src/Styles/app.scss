@@ -68,7 +68,7 @@ table.data-grid tr td.cell {
   height: 25px;
 }
 
-.p-datatable-scrollable .p-datatable-thead > tr, .p-datatable-scrollable .p-datatable-tbody > tr, .p-datatable-scrollable .p-datatable-tfoot > tr {
+.p-datatable-scrollable .p-datatable-thead > tr, .p-datatable-scrollable .p-datatable-tbody > tr, .p-datatable-scrollable .p-datatable-tfoot > tr, .p-datatable-table .p-datatable-thead > tr, .p-datatable-table .p-datatable-tbody > tr {
   font-size: small !important;
 }
 
@@ -105,7 +105,7 @@ px
   padding: 3px 0px 0px 1px !important;
 }
 
-.p-datatable .p-datatable-tbody > tr {
+.p-datatable .p-datatable-tbody > tr, .p-datatable-table .p-datatable-tbody > tr {
   height: 1.65rem !important;
 }
 
@@ -113,6 +113,10 @@ px
   padding-left: 2rem !important;
   padding-top: 0.25rem !important;
   padding-bottom: 0.25rem !important;
+}
+
+.p-datatable.p-datatable-sm .p-datatable-tbody > tr > td {
+  padding: 0.1rem 0.5rem;
 }
 
 /*

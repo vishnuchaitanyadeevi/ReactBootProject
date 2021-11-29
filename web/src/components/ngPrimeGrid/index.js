@@ -117,7 +117,7 @@ function PrimeGrid() {
 
   return (
     <div>
-      <div className="rel">
+      <div>
         <div>
           <Grid>
             <ProminentAppBar height="15px" />
