@@ -22,7 +22,7 @@ export const serviceData = [
           id: 'Card11'
         },
         name: 'Abdul Cader',
-        startDate: '19.2.2020',
+        startDate: '19-2-2020',
         occurences: 3,
         address: 'Le Meridian Towers Kudai-Makkah Kudai road makkah',
         service: {
@@ -44,7 +44,7 @@ export const serviceData = [
           id: 'Card12'
         },
         name: 'Abdul Cader',
-        startDate: '20.07.2020',
+        startDate: '20-07-2020',
         occurences: 0,
         address: 'Samba Financial Group Fayha office branch',
         service: {
@@ -61,7 +61,7 @@ export const serviceData = [
           id: 'Card13'
         },
         name: 'Abdul Cader',
-        startDate: '17.01.2021',
+        startDate: '17-01-2021',
         occurences: 0,
         address: 'Tamimi Global Co Ltd (TAFGA) Dialysis centre near red sea mall',
         service: {
@@ -74,7 +74,7 @@ export const serviceData = [
     currentPage: 1,
     id: 'lane1',
     day: 'Sun',
-    date: '14.11.2021',
+    date: '14-11-2021',
     style: laneStyle
   },
   // Mon
@@ -88,7 +88,7 @@ export const serviceData = [
           id: 'Card21'
         },
         name: 'Abdulla Sherieff',
-        startDate: '19.05.2021',
+        startDate: '19-05-2021',
         occurences: 8,
         address: 'Panda Retail Company Panda 3',
         service: {
@@ -105,7 +105,7 @@ export const serviceData = [
           id: 'Card22'
         },
         name: 'Abdulla Sherieff',
-        startDate: '19.05.2021',
+        startDate: '19-05-2021',
         occurences: 8,
         address: 'Panda Retail Company Panda 1',
         service: {
@@ -118,7 +118,7 @@ export const serviceData = [
     currentPage: 2,
     id: 'lane2',
     day: 'Mon',
-    date: '15.11.2021',
+    date: '15-11-2021',
     style: laneStyle
   },
   // Tue
@@ -132,7 +132,7 @@ export const serviceData = [
           id: 'Card31'
         },
         name: 'Abdul Cader',
-        startDate: '21.07.2020',
+        startDate: '21-07-2020',
         occurences: 0,
         address: 'Samba Financial Groug Bawadi branch',
         service: {
@@ -149,7 +149,7 @@ export const serviceData = [
           id: 'Card32'
         },
         name: 'Abdul Cader',
-        startDate: '20.07.2020',
+        startDate: '20-07-2020',
         occurences: 0,
         address: 'Samba Financial Group Faiha building branch',
         service: {
@@ -162,7 +162,7 @@ export const serviceData = [
     currentPage: 3,
     id: 'lane3',
     day: 'Tue',
-    date: '16.11.2021',
+    date: '16-11-2021',
     style: laneStyle
   },
   // Wed
@@ -176,7 +176,7 @@ export const serviceData = [
           id: 'Card41'
         },
         name: 'Abdul Cader',
-        startDate: '23.05.2021',
+        startDate: '23-05-2021',
         occurences: 90,
         address: 'Panda Retail Company Makkah iskan 220',
         service: {
@@ -192,7 +192,7 @@ export const serviceData = [
           id: 'Card42'
         },
         name: 'Abdul Cader',
-        startDate: '30.01.2020',
+        startDate: '30-01-2020',
         occurences: 1,
         address: 'Makkah Clock Royal Tower (Fairmont) Emaar Hotel',
         service: {
@@ -205,7 +205,7 @@ export const serviceData = [
     currentPage: 4,
     id: 'lane4',
     day: 'Wed',
-    date: '17.11.2021',
+    date: '17-11-2021',
     style: laneStyle
   },
   // Thu
@@ -220,7 +220,7 @@ export const serviceData = [
           id: 'Card51'
         },
         name: 'Abbas Qureshi',
-        startDate: '18.11.2021',
+        startDate: '18-11-2021',
         occurences: 0,
         address: 'Panda Retail Company Thahassusi makkah 225',
         service: {
@@ -236,7 +236,7 @@ export const serviceData = [
           id: 'Card52'
         },
         name: 'Abdul Cader',
-        startDate: '23.05.2021',
+        startDate: '23-05-2021',
         occurences: 9,
         address: 'Support Services King Abdullah Medical City Makkah',
         service: {
@@ -248,7 +248,7 @@ export const serviceData = [
     currentPage: 5,
     id: 'lane5',
     day: 'Thu',
-    date: '18.11.2021',
+    date: '18-11-2021',
     style: laneStyle
   },
   // Fri
@@ -263,7 +263,7 @@ export const serviceData = [
           id: 'Card61'
         },
         name: 'Abbas Qureshi',
-        startDate: '23.05.2021',
+        startDate: '23-05-2021',
         occurences: -18,
         address: 'Panda Retail Company Thahassusi makkah 225',
         service: {
@@ -280,7 +280,7 @@ export const serviceData = [
           id: 'Card62'
         },
         name: 'Abbas Qureshi',
-        startDate: '23.05.2021',
+        startDate: '23-05-2021',
         occurences: -18,
         address: 'Panda Retail Company Hamdania 242',
         service: {
@@ -292,7 +292,7 @@ export const serviceData = [
     currentPage: 6,
     id: 'lane6',
     day: 'Fri',
-    date: '19.11.2021',
+    date: '19-11-2021',
     style: laneStyle
   },
   // Sat
@@ -307,7 +307,7 @@ export const serviceData = [
           id: 'Card71'
         },
         name: 'Anid Muhammadali',
-        startDate: '05.05.2021',
+        startDate: '05-05-2021',
         occurences: 2,
         address: 'Emirates National Poultry Farms L.L.C Al Ain',
         service: {
@@ -324,7 +324,7 @@ export const serviceData = [
           id: 'Card72'
         },
         name: 'Afsal Basheer',
-        startDate: '24.05.2021',
+        startDate: '24-05-2021',
         occurences: 4,
         address: 'Panda Retail Company Panda 46, Jubail',
         service: {
@@ -336,7 +336,7 @@ export const serviceData = [
     currentPage: 7,
     id: 'lane7',
     day: 'Sat',
-    date: '20.11.2021',
+    date: '20-11-2021',
     style: laneStyle
   },
   // Sun
@@ -351,7 +351,7 @@ export const serviceData = [
           id: 'Card81'
         },
         name: 'Abbas Qures',
-        startDate: '19.05.2021',
+        startDate: '19-05-2021',
         occurences: 0,
         address: 'Panda Retail Comoany Al Awali makkah 20011',
         service: {
@@ -367,7 +367,7 @@ export const serviceData = [
           id: 'Card82'
         },
         name: 'Abdul Cader',
-        startDate: '23.03.2021',
+        startDate: '23-03-2021',
         occurences: 10,
         address: 'Dr. Amal Zabeedi - Makkah Makkah branch',
         service: {
@@ -380,7 +380,7 @@ export const serviceData = [
     currentPage: 8,
     id: 'lane8',
     day: 'Sun',
-    date: '21.11.2021',
+    date: '21-11-2021',
     style: laneStyle
   },
   // Mon
@@ -394,7 +394,7 @@ export const serviceData = [
           id: 'Card91'
         },
         name: 'Abdul Cader',
-        startDate: '06.05.2021',
+        startDate: '06-05-2021',
         occurences: 6,
         address: 'Mawred Al Baraka Co Hamdania',
         service: {
@@ -410,7 +410,7 @@ export const serviceData = [
           id: 'Card92'
         },
         name: 'Abdul Cader',
-        startDate: '02.05.2021',
+        startDate: '02-05-2021',
         occurences: 0,
         address: 'Elaf Kindah Hotel Makkah ELAF KINDAH',
         service: {
@@ -422,7 +422,7 @@ export const serviceData = [
     currentPage: 9,
     id: 'lane9',
     day: 'Mon',
-    date: '22.11.2021',
+    date: '22-11-2021',
     style: laneStyle
   },
   // Tue
@@ -437,7 +437,7 @@ export const serviceData = [
           id: 'Card101'
         },
         name: 'Abbas Quresh',
-        startDate: '29.09.2020',
+        startDate: '29-09-2020',
         occurences: 0,
         address: 'Reza Food Services Co Ltd McDonalds MOHAMEDIA',
         service: {
@@ -453,7 +453,7 @@ export const serviceData = [
           id: 'Card102'
         },
         name: 'Abdul Cader',
-        startDate: '14.04.2021',
+        startDate: '14-04-2021',
         occurences: 7,
         address: 'Reza Food Services Co Ltd Corniche road branch',
         service: {
@@ -465,7 +465,7 @@ export const serviceData = [
     currentPage: 10,
     id: 'lane10',
     day: 'Tue',
-    date: '23.11.2021',
+    date: '23-11-2021',
     style: laneStyle
   }
 ];

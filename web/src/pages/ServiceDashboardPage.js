@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { isArray } from 'lodash';
+import { isArray, orderBy } from 'lodash';
 import { Grid, Stack, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -10,6 +10,7 @@ import ServiceTypes from '../components/ServiceBoard/ServiceTypes';
 import { serviceData } from '../components/ServiceBoard/data';
 
 import { MAX_LANES, GROUP_BY } from '../utils/constants';
+import { sortListOfObjects } from '../utils/utils';
 
 import '../components/ServiceBoard/ServiceBoard.css';
 
@@ -49,7 +50,14 @@ export default function ServiceDashboard() {
 
   const changeData = () => {
     if (isArray(serviceData)) {
-      setData(serviceData.slice(start, MAX_LANES + start));
+      const tempData = serviceData.slice(start, MAX_LANES + start);
+      if (groupBy === CUSTOMER) {
+        // Sorting on address field
+        tempData.forEach((lane) => {
+          lane.cards = sortListOfObjects(lane.cards, 'address');
+        });
+      }
+      setData(tempData);
     }
   };
 
@@ -59,6 +67,7 @@ export default function ServiceDashboard() {
     const val = e.target.value;
     setGroupBy(val);
     alert(`${val} group by is selected`);
+    changeData();
   };
 
   return (
