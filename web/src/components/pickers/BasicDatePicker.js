@@ -19,7 +19,7 @@ export default function BasicDatePicker({ label, minDate, maxDate, inputFormat, 
         maxDate={maxDate}
         label={label}
         views={views === undefined || views === null ? ['year', 'month', 'day', 'hours', 'minutes'] : views}
-        renderInput={(props) => <TextField {...props} />}
+        renderInput={(props) => <TextField fullWidth {...props} size="small" />}
         inputFormat={inputFormat === undefined || inputFormat === null ? 'dd-MM-yyyy hh:mm a' : inputFormat}
       />
     </LocalizationProvider>
