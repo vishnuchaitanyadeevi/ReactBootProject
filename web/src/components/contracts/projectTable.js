@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useCallback } from 'react';
-
+import { Grid } from '@mui/material';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
@@ -40,49 +40,56 @@ export default function ProjectTable() {
     setActiveRowIndex(0);
   };
   return (
-    <div>
-      <div>
+    <Grid container spacing={1}>
+      <Grid item justifyContent="right" display="flex" xs={12} lg={12}>
         <Button label="Add New Project" onClick={addNewProject} />
-      </div>
-      <DataTable
-        value={tableData}
-        showGridlines
-        responsiveLayout="scroll"
-        resizableColumns
-        columnResizeMode="expand"
-        size="small"
-        rows={10}
-        editMode="row"
-        editingRows={editingRows}
-        onRowEditChange={onRowEditChange}
-        dataKey="id"
-      >
-        <Column field="status" header="Status" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
-        <Column
-          field="prjno"
-          header="Project Name"
-          editor={(options) => textEditor(options)}
-          style={{ width: '10%' }}
-        />
-        <Column
-          field="lcnm"
-          header="Location Name"
-          editor={(options) => textEditor(options)}
-          style={{ width: '10%' }}
-        />
-        <Column
-          field="bspct"
-          header="Business ProjCat"
-          editor={(options) => textEditor(options)}
-          style={{ width: '10%' }}
-        />
-        <Column field="sdt" header="Start Date" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
-        <Column field="edt" header="End Date" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
-        <Column field="extp" header="Expiry Type" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
-        <Column field="grpd" header="Grouped" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
-        <Column field="prm" header="Primary" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
-        <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }} />
-      </DataTable>
-    </div>
+      </Grid>
+      <Grid item xs={12} lg={12}>
+        <DataTable
+          value={tableData}
+          showGridlines
+          responsiveLayout="scroll"
+          resizableColumns
+          columnResizeMode="expand"
+          size="small"
+          rows={10}
+          editMode="row"
+          editingRows={editingRows}
+          onRowEditChange={onRowEditChange}
+          dataKey="id"
+        >
+          <Column field="status" header="Status" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
+          <Column
+            field="prjno"
+            header="Project Name"
+            editor={(options) => textEditor(options)}
+            style={{ width: '10%' }}
+          />
+          <Column
+            field="lcnm"
+            header="Location Name"
+            editor={(options) => textEditor(options)}
+            style={{ width: '10%' }}
+          />
+          <Column
+            field="bspct"
+            header="Business ProjCat"
+            editor={(options) => textEditor(options)}
+            style={{ width: '10%' }}
+          />
+          <Column field="sdt" header="Start Date" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
+          <Column field="edt" header="End Date" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
+          <Column
+            field="extp"
+            header="Expiry Type"
+            editor={(options) => textEditor(options)}
+            style={{ width: '10%' }}
+          />
+          <Column field="grpd" header="Grouped" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
+          <Column field="prm" header="Primary" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
+          <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }} />
+        </DataTable>
+      </Grid>
+    </Grid>
   );
 }

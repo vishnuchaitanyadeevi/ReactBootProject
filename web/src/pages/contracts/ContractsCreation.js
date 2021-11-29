@@ -8,9 +8,8 @@ import {
   Stack,
   Button
 } from '@mui/material';
-import React, { Fragment, useState, useCallback } from 'react';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { ArrowRight, ArrowLeft, UploadFileOutlined } from '@mui/icons-material/';
+import React, { useState, useCallback } from 'react';
+import { ArrowRight, UploadFileOutlined } from '@mui/icons-material/';
 import ProjectTable from '../../components/contracts/projectTable';
 import BasicDatePicker from '../../components/pickers/BasicDatePicker';
 import UploadFile from '../../components/UploadFile';
@@ -48,9 +47,9 @@ export default function ContractsCreation() {
     setMultipleImages({ ...multipleImages, images: filteredItems });
   };
   return (
-    <Grid container spacing={3} padding={3}>
-      <Grid container rowSpacing={2} columnSpacing={1} item xs={12} lg={6}>
-        <h2>Customer Details</h2>
+    <Grid container spacing={2} padding={3}>
+      <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
+        <Typography variant="h4">Customer Details</Typography>
         <Grid container spacing={1} item xs={12} xl={6}>
           <Grid item xs={12} xl={6} md={6}>
             <AutocompleteWidget options={countryArr} size="small" label="Country" disablePortal autoSelect />
@@ -76,8 +75,8 @@ export default function ContractsCreation() {
           <AutocompleteWidget options={salesmanArr} size="small" label="Salesman" disablePortal autoSelect />
         </Grid>
       </Grid>
-      <Grid container rowSpacing={2} columnSpacing={1} item xs={12} lg={6}>
-        <h2>Contract Details</h2>
+      <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
+        <Typography variant="h4">Contract Details</Typography>
         <Grid container spacing={1} item xs={12} xl={6}>
           <Grid item xs={12} xl={6} md={6}>
             <TextField fullWidth label="Contract No." size="small" />
@@ -99,8 +98,8 @@ export default function ContractsCreation() {
           <AutocompleteWidget options={statusArr} size="small" label="Status" defaultValue="Active" />
         </Grid>
       </Grid>
-      <Grid container rowSpacing={2} columnSpacing={1} item xs={12} lg={6}>
-        <h2>Signatory Information</h2>
+      <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
+        <Typography variant="h4">Signatory Information</Typography>
         <Grid item xs={12} xl={6} md={6} />
         <Grid item xs={12} xl={6} md={6}>
           <AutocompleteWidget options={rolesArr} size="small" label="Role" defaultValue="Primary" />
@@ -131,7 +130,7 @@ export default function ContractsCreation() {
         </Grid>
       </Grid>
       <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
-        <h2>Additional Information</h2>
+        <Typography variant="h4">Additional Information</Typography>
         <Grid item xs={12} xl={12} md={12}>
           <TextField multiline minRows={3} fullWidth label="Special Attention / Notes" size="small" />
         </Grid>
@@ -159,11 +158,8 @@ export default function ContractsCreation() {
           onChange={handleChange('panel1')}
         >
           <AccordionSummary expandIcon={<ArrowRight />} aria-controls="panel1a-content" id="panel1a-header">
-            <h2>AX Default Fields</h2>
+            <Typography variant="h4">AX Default Fields</Typography>
           </AccordionSummary>
-        </Accordion>
-        <Grid item xs={12} xl={6} md={6} />
-        <Grid item xs={12} xl={8} md={8}>
           <AccordionDetails
             id="panel1a-content"
             hidden={!(axDefaultexpanded === 'panel1' || axDefaultexpanded === true)}
@@ -187,11 +183,11 @@ export default function ContractsCreation() {
               </Grid>
             </Grid>
           </AccordionDetails>
-        </Grid>
+        </Accordion>
         <Grid item xs={12} xl={4} md={4} hidden={!(axDefaultexpanded === 'panel1' || axDefaultexpanded === true)}>
           <Accordion fullWidth>
             <AccordionSummary expandIcon={<ArrowRight />} aria-controls="panel2a-content" id="panel2a-header">
-              <Typography>Financial Dimensions</Typography>
+              <Typography variant="h4">Financial Dimensions</Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Typography> Lorem ipsum. </Typography>

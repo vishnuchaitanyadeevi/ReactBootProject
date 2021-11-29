@@ -12,7 +12,8 @@ export default function Input(theme) {
         input: {
           '&::placeholder': {
             opacity: 1,
-            color: theme.palette.text.disabled
+            color: theme.palette.text.disabled,
+            fontSize: '0.8rem'
           }
         }
       }
@@ -23,6 +24,13 @@ export default function Input(theme) {
           '&:before': {
             borderBottomColor: theme.palette.grey[500_56]
           }
+        }
+      }
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          fontSize: '0.8rem'
         }
       }
     },
@@ -57,7 +65,8 @@ export default function Input(theme) {
             '& .MuiOutlinedInput-notchedOutline': {
               borderColor: theme.palette.action.disabledBackground
             }
-          }
+          },
+          fontSize: '0.8rem'
         }
       }
     }
