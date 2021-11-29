@@ -92,12 +92,12 @@ function ProjectCreation() {
     <Grid className="project_creation_main_grid">
       <Grid container spacing={3}>
         <Grid className="main_title_cls" item xs={12}>
-          <Typography variant="subtitle1">Create Project</Typography>
+          <Typography variant="h4">Create Project</Typography>
         </Grid>
 
         {/* Grid for project details section */}
         <Grid item xs={12} sm={6}>
-          <Typography variant="body2" className="form_sub_title_cls">
+          <Typography variant="h4" className="form_sub_title_cls">
             Project Details
           </Typography>
 
@@ -137,7 +137,7 @@ function ProjectCreation() {
             </Grid>
 
             <Grid item xs={12} sm={12}>
-              <Typography variant="body2" className="form_sub_title_cls">
+              <Typography variant="h5" className="form_sub_title_cls">
                 Project Business Category
               </Typography>
             </Grid>
@@ -207,7 +207,7 @@ function ProjectCreation() {
             </Grid>
 
             <Grid item xs={12} sm={12}>
-              <Typography variant="body2" className="form_sub_title_cls">
+              <Typography variant="h4" className="form_sub_title_cls">
                 Additional Information
               </Typography>
             </Grid>
@@ -237,7 +237,7 @@ function ProjectCreation() {
                   aria-controls="panel1d-content"
                   id="panel1d-header"
                 >
-                  <Typography variant="body2" className="form_sub_title_cls">
+                  <Typography variant="h4" className="form_sub_title_cls">
                     Ax Default Fields
                   </Typography>
                 </AccordionSummary>
@@ -251,7 +251,7 @@ function ProjectCreation() {
 
         {/* Grid for service frequency settings details */}
         <Grid item xs={12} sm={6}>
-          <Typography variant="body2" className="form_sub_title_cls">
+          <Typography variant="h4" className="form_sub_title_cls">
             Service Frequency Settings
           </Typography>
 
@@ -272,9 +272,7 @@ function ProjectCreation() {
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <Typography variant="body2" style={{ textDecoration: 'underline' }}>
-                Service Recurrence
-              </Typography>
+              <Typography variant="h5">Service Recurrence</Typography>
               <Grid item xs={12} sm={12} className="service_invoice_recurrence_cls" />
             </Grid>
           </Grid>
@@ -282,9 +280,8 @@ function ProjectCreation() {
           <Grid style={{ marginTop: '0.1rem' }} container spacing={3}>
             <Grid item xs={12} sm={6}>
               <Typography
-                variant="body2"
+                variant="h5"
                 style={{
-                  textDecoration: 'underline',
                   fontWeight: 'bold',
                   marginBottom: '1rem'
                 }}
@@ -299,9 +296,7 @@ function ProjectCreation() {
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <Typography variant="body2" style={{ textDecoration: 'underline' }}>
-                Invoice Recurrence
-              </Typography>
+              <Typography variant="h5">Invoice Recurrence</Typography>
               <Grid item xs={12} sm={12} className="service_invoice_recurrence_cls" />
             </Grid>
           </Grid>
@@ -337,9 +332,7 @@ function ProjectCreation() {
               />
             </Grid>
             <Grid item xs={12} sm={12}>
-              <Typography variant="body2" style={{ textDecoration: 'underline', fontWeight: 'bold' }}>
-                Signatory Information
-              </Typography>
+              <Typography variant="h4">Signatory Information</Typography>
             </Grid>
             <Grid item xs={12} sm={12}>
               <AutocompleteWidget
@@ -400,7 +393,7 @@ function ProjectCreation() {
                   aria-controls="panel1d-content"
                   id="panel1d-header"
                 >
-                  <Typography variant="body2" className="form_sub_title_cls">
+                  <Typography variant="h4" className="form_sub_title_cls">
                     Financial Dimensions
                   </Typography>
                 </AccordionSummary>
