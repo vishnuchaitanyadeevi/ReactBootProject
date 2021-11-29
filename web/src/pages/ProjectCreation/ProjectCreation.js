@@ -122,7 +122,7 @@ function ProjectCreation() {
               <TextField fullWidth label="Project Name" size="small" />
             </Grid>
 
-            <Grid item xs={12} sm={12}>
+            <Grid item xs={12} sm={6}>
               <AutocompleteWidget
                 options={projectLocation}
                 label="Project Location"
@@ -132,7 +132,7 @@ function ProjectCreation() {
               />
             </Grid>
 
-            <Grid item xs={12} sm={12}>
+            <Grid item xs={12} sm={6}>
               <AutocompleteWidget options={projectLocation} label="Project SLA" disablePortal autoSelect size="small" />
             </Grid>
 
@@ -155,10 +155,10 @@ function ProjectCreation() {
             <Grid item xs={12} sm={6}>
               <AutocompleteWidget options={projectLocation} label="Sub-type" disablePortal autoSelect size="small" />
             </Grid>
-            <Grid item xs={12} sm={12}>
+            <Grid item xs={12} sm={6}>
               <BasicDatePicker label="Project Signed On" inputFormat="dd-MM-yyyy" views={['year', 'month', 'day']} />
             </Grid>
-            <Grid item xs={12} sm={12}>
+            <Grid item xs={12} sm={6}>
               <BasicDatePicker label="Project Start Date" inputFormat="dd-MM-yyyy" views={['year', 'month', 'day']} />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -171,7 +171,7 @@ function ProjectCreation() {
             <Grid item xs={12} sm={6}>
               <BasicDatePicker label="Project End Date" inputFormat="dd-MM-yyyy" views={['year', 'month', 'day']} />
             </Grid>
-            <Grid item xs={12} sm={12}>
+            <Grid item xs={12} sm={6}>
               <AutocompleteWidget
                 options={projectLocation}
                 label="Project Status"
@@ -180,7 +180,7 @@ function ProjectCreation() {
                 size="small"
               />
             </Grid>
-            <Grid item xs={12} sm={12}>
+            <Grid item xs={12} sm={6}>
               <AutocompleteWidget
                 options={projectLocation}
                 label="Project Classification"
@@ -199,10 +199,10 @@ function ProjectCreation() {
                 size="small"
               />
             </Grid>
-            <Grid item xs={12} sm={12}>
+            <Grid item xs={12} sm={6}>
               <AutocompleteWidget options={projectLocation} label="Salesman" disablePortal autoSelect size="small" />
             </Grid>
-            <Grid item xs={12} sm={12}>
+            <Grid item xs={12} sm={6}>
               <AutocompleteWidget options={projectLocation} label="Serviceman" disablePortal autoSelect size="small" />
             </Grid>
 
