@@ -4,11 +4,13 @@ import { InputText } from 'primereact/inputtext';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import '../Styles/app.scss';
+import { useNavigate } from 'react-router-dom';
 
 function ContractList({ data, columns, expandedColumns, filters1 }) {
   const [tableData, setTableData] = useState(data);
   const [expandedRows, setExpandedRows] = useState(null);
   const [globalFilter, setGlobalFilter] = useState(null);
+  const navigate = useNavigate();
   const textEditor = (options) => (
     <InputText
       type="text"
@@ -48,6 +50,10 @@ function ContractList({ data, columns, expandedColumns, filters1 }) {
         rows={10}
         scrollable
         scrollHeight="400px"
+        onRowClick={() => {
+          console.log('clicked');
+          navigate('/ProjectCreation', { replace: true });
+        }}
       >
         {expandedColumns && expandedColumns.map((col) => <Column field={col.field} header={col.header} sortable />)}
       </DataTable>
@@ -70,6 +76,10 @@ function ContractList({ data, columns, expandedColumns, filters1 }) {
           // onRowExpand={onRowExpand}
           // onRowCollapse={onRowCollapse}
           rowExpansionTemplate={rowExpansionTemplate}
+          onRowClick={() => {
+            console.log('clicked');
+            navigate('/contracts-creation', { replace: true });
+          }}
           dataKey="id"
           scrollHeight="400px"
           header={header}

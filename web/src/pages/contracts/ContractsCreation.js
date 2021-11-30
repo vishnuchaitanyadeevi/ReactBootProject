@@ -15,6 +15,8 @@ import BasicDatePicker from '../../components/pickers/BasicDatePicker';
 import UploadFile from '../../components/UploadFile';
 import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget';
 import './ContractsCreation.scss';
+import SimpleTable from '../../components/table/simpleTable';
+import jsonData from '../../utils/project-table-data.json';
 
 export default function ContractsCreation() {
   const countryArr = ['SA'];
@@ -46,6 +48,19 @@ export default function ContractsCreation() {
     const filteredItems = multipleImages.images.filter((_file) => _file !== file);
     setMultipleImages({ ...multipleImages, images: filteredItems });
   };
+
+  const columnDataForProjects = [
+    { field: 'status', header: 'Status', editor: null, style: { width: '10%' } },
+    { field: 'prjno', header: 'prjno', editor: null, style: { width: '10%' } },
+    { field: 'prjnm', header: 'prjnm', editor: null, style: { width: '10%' } },
+    { field: 'lcnm', header: 'lcnm', editor: null, style: { width: '10%' } },
+    { field: 'bspct', header: 'bspct', editor: null, style: { width: '15%' } },
+    { field: 'sdt', header: 'sdt', editor: null, style: { width: '10%' } },
+    { field: 'edt', header: 'edt', editor: null, style: { width: '10%' } },
+    { field: 'extp', header: 'extp', editor: null, style: { width: '10%' } },
+    { field: 'grpd', header: 'grpd', editor: null, style: { width: '5%' } },
+    { field: 'prm', header: 'prm', editor: 'checkbox', style: { width: '5%' } }
+  ];
   return (
     <Grid container spacing={2} padding={3}>
       <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
@@ -207,7 +222,20 @@ export default function ContractsCreation() {
         </Stack>
       </Grid>
       <Grid rowSpacing={1} columnSpacing={1} item xs={12} lg={12} justifyContent="center">
-        <ProjectTable />
+        <SimpleTable
+          rowData={jsonData}
+          headerData={columnDataForProjects}
+          editMode="row"
+          showGridlines
+          responsiveLayout="scroll"
+          resizableColumns
+          columnResizeMode="expand"
+          size="small"
+          rows={10}
+          dataKey="id"
+          paginator
+        />
+        {/* <ProjectTable /> */}
       </Grid>
     </Grid>
   );
