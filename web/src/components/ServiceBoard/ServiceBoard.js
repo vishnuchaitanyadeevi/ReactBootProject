@@ -19,10 +19,7 @@ export default function ServiceBoard({ data = [] }) {
     console.log(`${cardId} moved from ${sourceLaneId} to ${targetLaneId} to ${position}: `, cardDetails);
   };
 
-  const onLaneClickHandler = (laneId) => {
-    alert(`${laneId} clicked`);
-    console.log(`${laneId} clicked`);
-  };
+  const onLaneClickHandler = (laneId) => console.log(`${laneId} clicked`);
 
   const onDataChangeHandler = (newData) => console.log(`Data Changed: `, newData);
 
