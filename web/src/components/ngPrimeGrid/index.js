@@ -116,290 +116,286 @@ function PrimeGrid() {
   const paperStyle = { padding: '5px 5px', margin: '20px auto', marginTop: '0px' };
 
   return (
-    <div>
-      <div className="rel">
-        <div>
-          <Grid>
-            <ProminentAppBar height="15px" />
-            <Paper style={paperStyle} elevation={1}>
-              <Grid container spacing={1}>
-                <Grid item xs={12} sm={6} md={4} lg={2}>
-                  <TextField
-                    value={stockFilter}
-                    onChange={(e) => {
-                      setStockFilter(e.target.value);
-                      // filterdata.code = e.target.value;
-                    }}
-                    fullWidth
-                    size="small"
-                    label="Stock Code"
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={2}>
-                  <TextField
-                    value={descFilter}
-                    onChange={(e) => setdescFilter(e.target.value)}
-                    fullWidth
-                    size="small"
-                    label="Description"
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={2}>
-                  <TextField
-                    value={qtyFilter}
-                    onChange={(e) => setqtyFilter(e.target.value)}
-                    fullWidth
-                    size="small"
-                    label="Qty"
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={2}>
-                  <Autocomplete
-                    size="small"
-                    options={['Each', 'Kg']}
-                    value={uomFilter}
-                    renderInput={(params) => <TextField size="small" {...params} label="Inv UOM" />}
-                    fullWidth
-                    onChange={(event, newValue) => {
-                      setuomFilter(newValue);
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={2}>
-                  <TextField
-                    value={hqtyFilter}
-                    onChange={(e) => sethqtyFilter(e.target.value)}
-                    fullWidth
-                    size="small"
-                    label="Hold Qty"
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={2}>
-                  <TextField
-                    value={handFilter}
-                    onChange={(e) => sethandFilter(e.target.value)}
-                    fullWidth
-                    size="small"
-                    label="On-hand"
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={2}>
-                  <TextField
-                    value={owanFilter}
-                    onChange={(e) => setowanFilter(e.target.value)}
-                    fullWidth
-                    size="small"
-                    label="On-wan"
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={2}>
-                  <TextField
-                    value={fwanFilter}
-                    onChange={(e) => setfwanFilter(e.target.value)}
-                    fullWidth
-                    size="small"
-                    label="From-wan"
-                  />
-                </Grid>
-                <Grid item xs={6} sm={3} md={2} lg={1}>
-                  <Button onClick={onStockFilterChange} startIcon={<SearchIcon />} variant="contained">
-                    Filter
-                  </Button>
-                </Grid>
-                <Grid item xs={6} sm={3} md={2} lg={1}>
-                  <Button onClick={clearFilter1} startIcon={<CloseIcon />} variant="contained">
-                    Clear
-                  </Button>
-                </Grid>
-              </Grid>
-            </Paper>
+    <Grid>
+      <Grid>
+        <ProminentAppBar height="15px" />
+        <Paper style={paperStyle} elevation={1}>
+          <Grid container spacing={1}>
+            <Grid item xs={12} sm={6} md={4} lg={2}>
+              <TextField
+                value={stockFilter}
+                onChange={(e) => {
+                  setStockFilter(e.target.value);
+                  // filterdata.code = e.target.value;
+                }}
+                fullWidth
+                size="small"
+                label="Stock Code"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={2}>
+              <TextField
+                value={descFilter}
+                onChange={(e) => setdescFilter(e.target.value)}
+                fullWidth
+                size="small"
+                label="Description"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={2}>
+              <TextField
+                value={qtyFilter}
+                onChange={(e) => setqtyFilter(e.target.value)}
+                fullWidth
+                size="small"
+                label="Qty"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={2}>
+              <Autocomplete
+                size="small"
+                options={['Each', 'Kg']}
+                value={uomFilter}
+                renderInput={(params) => <TextField size="small" {...params} label="Inv UOM" />}
+                fullWidth
+                onChange={(event, newValue) => {
+                  setuomFilter(newValue);
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={2}>
+              <TextField
+                value={hqtyFilter}
+                onChange={(e) => sethqtyFilter(e.target.value)}
+                fullWidth
+                size="small"
+                label="Hold Qty"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={2}>
+              <TextField
+                value={handFilter}
+                onChange={(e) => sethandFilter(e.target.value)}
+                fullWidth
+                size="small"
+                label="On-hand"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={2}>
+              <TextField
+                value={owanFilter}
+                onChange={(e) => setowanFilter(e.target.value)}
+                fullWidth
+                size="small"
+                label="On-wan"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={2}>
+              <TextField
+                value={fwanFilter}
+                onChange={(e) => setfwanFilter(e.target.value)}
+                fullWidth
+                size="small"
+                label="From-wan"
+              />
+            </Grid>
+            <Grid item xs={6} sm={3} md={2} lg={1}>
+              <Button onClick={onStockFilterChange} startIcon={<SearchIcon />} variant="contained">
+                Filter
+              </Button>
+            </Grid>
+            <Grid item xs={6} sm={3} md={2} lg={1}>
+              <Button onClick={clearFilter1} startIcon={<CloseIcon />} variant="contained">
+                Clear
+              </Button>
+            </Grid>
           </Grid>
-          <DataTable
-            value={tableData}
-            showGridlines
-            responsiveLayout="scroll"
-            resizableColumns
-            columnResizeMode="expand"
-            size="small"
-            paginator
-            rows={10}
-            selection={selected}
-            onSelectionChange={(e) => setSelected(e.value)}
-            stripedRows
-            editMode="row"
-            onRowEditComplete={onRowEditComplete}
-            reorderableColumns
-            dataKey="id"
-            // onRowReorder={onRowReorder}
-            scrollable
-            scrollHeight="400px"
-            header={header}
-            filterDisplay="row"
-            globalFilterFields={['code', 'desc', 'qty', 'uom', 'hqty', 'hand', 'owan', 'fwan']}
-            rowsPerPageOptions={[10, 20, 50, 100]}
-            globalFilter={globalFilter}
-            style={{ marginTop: '10px' }}
-            filters={filters1}
-          >
-            {/* <Column columnKey="rowreorder" field="rowreorder" rowReorder style={{ width: '3em' }} /> */}
-            <Column
-              columnKey="selection"
-              field="selection"
-              selectionMode="multiple"
-              reorderable={false}
-              style={{
-                minWidth: '3rem',
-                width: '3rem',
-                paddingBottom: '0.1rem',
-                paddingTop: '0.1rem'
-              }}
-            />
-            <Column
-              columnKey="code"
-              field="code"
-              header="Stock Code"
-              sortable
-              editor={(options) => textEditor(options)}
-              reorderable={false}
-              filter
-              filterclear
-              style={{
-                minWidth: '12rem',
-                width: '12rem',
-                paddingBottom: '0.1rem',
-                paddingTop: '0.1rem'
-              }}
-            />
-            <Column
-              columnKey="desc"
-              field="desc"
-              header="Description"
-              sortable
-              editor={(options) => textEditor(options)}
-              filter
-              style={{
-                minWidth: '12rem',
-                width: '12rem',
-                // Making Ellipsis for lengthy descriptions
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
-                // display: 'block',
-                paddingBottom: '0.1rem',
-                paddingTop: '0.1rem'
-              }}
-            />
-            <Column
-              columnKey="qty"
-              field="qty"
-              header="Qty"
-              sortable
-              editor={(options) => textEditor(options)}
-              filter
-              style={{
-                minWidth: '12rem',
-                width: '12rem',
-                paddingBottom: '0.1rem',
-                paddingTop: '0.1rem'
-              }}
-            />
-            <Column
-              columnKey="uom"
-              field="uom"
-              header="Inv UOM"
-              sortable
-              editor={(options) => textEditor(options)}
-              filter
-              style={{
-                minWidth: '12rem',
-                width: '12rem',
-                paddingBottom: '0.1rem',
-                paddingTop: '0.1rem'
-              }}
-            />
-            <Column
-              columnKey="hqty"
-              field="hqty"
-              header="Hold Qty"
-              sortable
-              editor={(options) => textEditor(options)}
-              filter
-              style={{
-                minWidth: '12rem',
-                width: '12rem',
-                paddingBottom: '0.1rem',
-                paddingTop: '0.1rem'
-              }}
-            />
-            <Column
-              columnKey="hand"
-              field="hand"
-              header="On-hand"
-              sortable
-              editor={(options) => textEditor(options)}
-              filter
-              style={{
-                minWidth: '12rem',
-                width: '12rem',
-                paddingBottom: '0.1rem',
-                paddingTop: '0.1rem'
-              }}
-            />
-            <Column
-              columnKey="owan"
-              field="owan"
-              header="On-wan"
-              sortable
-              editor={(options) => textEditor(options)}
-              filter
-              style={{
-                minWidth: '12rem',
-                width: '12rem',
-                paddingBottom: '0.1rem',
-                paddingTop: '0.1rem'
-              }}
-            />
-            <Column
-              columnKey="fwan"
-              field="fwan"
-              header="From-wan"
-              sortable
-              editor={(options) => textEditor(options)}
-              filter
-              style={{
-                minWidth: '12rem',
-                width: '12rem',
-                paddingBottom: '0.1rem',
-                paddingTop: '0.1rem'
-              }}
-            />
-            <Column
-              columnKey="edit"
-              rowEditor
-              headerstyle={{ width: '10%', minWidth: '8rem' }}
-              bodyStyle={{ textAlign: 'center' }}
-              style={{
-                minWidth: '5rem',
-                maxWidth: '5rem',
-                paddingBottom: '0.1rem',
-                paddingTop: '0.1rem'
-              }}
-              reorderable={false}
-            />
-            <Column
-              columnKey="details"
-              body={detailsBody}
-              style={{
-                minWidth: '6rem',
-                width: '6rem',
-                paddingBottom: '0.1rem',
-                paddingTop: '0.1rem'
-              }}
-            />
-          </DataTable>
-        </div>
-      </div>
-    </div>
+        </Paper>
+      </Grid>
+      <DataTable
+        value={tableData}
+        showGridlines
+        responsiveLayout="scroll"
+        resizableColumns
+        columnResizeMode="expand"
+        size="small"
+        paginator
+        rows={10}
+        selection={selected}
+        onSelectionChange={(e) => setSelected(e.value)}
+        stripedRows
+        editMode="row"
+        onRowEditComplete={onRowEditComplete}
+        reorderableColumns
+        dataKey="id"
+        // onRowReorder={onRowReorder}
+        scrollable
+        scrollHeight="400px"
+        header={header}
+        filterDisplay="row"
+        globalFilterFields={['code', 'desc', 'qty', 'uom', 'hqty', 'hand', 'owan', 'fwan']}
+        rowsPerPageOptions={[10, 20, 50, 100]}
+        globalFilter={globalFilter}
+        style={{ marginTop: '10px' }}
+        filters={filters1}
+      >
+        {/* <Column columnKey="rowreorder" field="rowreorder" rowReorder style={{ width: '3em' }} /> */}
+        <Column
+          columnKey="selection"
+          field="selection"
+          selectionMode="multiple"
+          reorderable={false}
+          style={{
+            minWidth: '3rem',
+            width: '3rem',
+            paddingBottom: '0.1rem',
+            paddingTop: '0.1rem'
+          }}
+        />
+        <Column
+          columnKey="code"
+          field="code"
+          header="Stock Code"
+          sortable
+          editor={(options) => textEditor(options)}
+          reorderable={false}
+          filter
+          filterclear
+          style={{
+            minWidth: '12rem',
+            width: '12rem',
+            paddingBottom: '0.1rem',
+            paddingTop: '0.1rem'
+          }}
+        />
+        <Column
+          columnKey="desc"
+          field="desc"
+          header="Description"
+          sortable
+          editor={(options) => textEditor(options)}
+          filter
+          style={{
+            minWidth: '12rem',
+            width: '12rem',
+            // Making Ellipsis for lengthy descriptions
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+            // display: 'block',
+            paddingBottom: '0.1rem',
+            paddingTop: '0.1rem'
+          }}
+        />
+        <Column
+          columnKey="qty"
+          field="qty"
+          header="Qty"
+          sortable
+          editor={(options) => textEditor(options)}
+          filter
+          style={{
+            minWidth: '12rem',
+            width: '12rem',
+            paddingBottom: '0.1rem',
+            paddingTop: '0.1rem'
+          }}
+        />
+        <Column
+          columnKey="uom"
+          field="uom"
+          header="Inv UOM"
+          sortable
+          editor={(options) => textEditor(options)}
+          filter
+          style={{
+            minWidth: '12rem',
+            width: '12rem',
+            paddingBottom: '0.1rem',
+            paddingTop: '0.1rem'
+          }}
+        />
+        <Column
+          columnKey="hqty"
+          field="hqty"
+          header="Hold Qty"
+          sortable
+          editor={(options) => textEditor(options)}
+          filter
+          style={{
+            minWidth: '12rem',
+            width: '12rem',
+            paddingBottom: '0.1rem',
+            paddingTop: '0.1rem'
+          }}
+        />
+        <Column
+          columnKey="hand"
+          field="hand"
+          header="On-hand"
+          sortable
+          editor={(options) => textEditor(options)}
+          filter
+          style={{
+            minWidth: '12rem',
+            width: '12rem',
+            paddingBottom: '0.1rem',
+            paddingTop: '0.1rem'
+          }}
+        />
+        <Column
+          columnKey="owan"
+          field="owan"
+          header="On-wan"
+          sortable
+          editor={(options) => textEditor(options)}
+          filter
+          style={{
+            minWidth: '12rem',
+            width: '12rem',
+            paddingBottom: '0.1rem',
+            paddingTop: '0.1rem'
+          }}
+        />
+        <Column
+          columnKey="fwan"
+          field="fwan"
+          header="From-wan"
+          sortable
+          editor={(options) => textEditor(options)}
+          filter
+          style={{
+            minWidth: '12rem',
+            width: '12rem',
+            paddingBottom: '0.1rem',
+            paddingTop: '0.1rem'
+          }}
+        />
+        <Column
+          columnKey="edit"
+          rowEditor
+          headerstyle={{ width: '10%', minWidth: '8rem' }}
+          bodyStyle={{ textAlign: 'center' }}
+          style={{
+            minWidth: '5rem',
+            maxWidth: '5rem',
+            paddingBottom: '0.1rem',
+            paddingTop: '0.1rem'
+          }}
+          reorderable={false}
+        />
+        <Column
+          columnKey="details"
+          body={detailsBody}
+          style={{
+            minWidth: '6rem',
+            width: '6rem',
+            paddingBottom: '0.1rem',
+            paddingTop: '0.1rem'
+          }}
+        />
+      </DataTable>
+    </Grid>
   );
 }
 
