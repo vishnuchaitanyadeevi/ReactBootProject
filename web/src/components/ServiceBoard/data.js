@@ -78,7 +78,13 @@ export const serviceData = [
     id: 'lane1',
     day: 'Sun',
     date: '14-11-2021',
-    style: laneStyle
+    style: laneStyle,
+    serviceMensOnLeave: [
+      { name: 'Abbas Qureshi', colorCode: '#b5025b' },
+      { name: 'Abdul Cader', colorCode: '#66ff00' },
+      { name: 'Abdulla Sherieff', colorCode: '#8ad22e' },
+      { name: 'Abid Muhammadali', colorCode: '#62f840' }
+    ]
   },
   // Mon
   {
@@ -122,7 +128,13 @@ export const serviceData = [
     id: 'lane2',
     day: 'Mon',
     date: '15-11-2021',
-    style: laneStyle
+    style: laneStyle,
+    serviceMensOnLeave: [
+      { name: 'Tughlaque Shaikh', colorCode: '#0000ff' },
+      { name: 'Valentine Gonzalves', colorCode: '#ffcc66' },
+      { name: 'Venkateshwaru Shri', colorCode: '#cc541f' },
+      { name: 'Yaseen Muhammed', colorCode: '#cc9999' }
+    ]
   },
   // Tue
   {
@@ -166,7 +178,15 @@ export const serviceData = [
     id: 'lane3',
     day: 'Tue',
     date: '16-11-2021',
-    style: laneStyle
+    style: laneStyle,
+    serviceMensOnLeave: [
+      { name: 'Praveen', colorCode: '#ac54a1' },
+      { name: 'Ramshad Thazhath', colorCode: '#98ff1f' },
+      { name: 'Rey Formoso', colorCode: '#ff0066' },
+      { name: 'Rinshad Said Ali', colorCode: '#ffcc33' },
+      { name: 'Riyas', colorCode: '#65839a' },
+      { name: 'Roland Talisaysay', colorCode: '#ff9900' }
+    ]
   },
   // Wed
   {
@@ -209,7 +229,19 @@ export const serviceData = [
     id: 'lane4',
     day: 'Wed',
     date: '17-11-2021',
-    style: laneStyle
+    style: laneStyle,
+    serviceMensOnLeave: [
+      { name: 'Christopher Prontes', colorCode: '#8dff42' },
+      { name: 'Cornelio Jr. Ferrer', colorCode: '#9933ff' },
+      { name: 'Deril Davies', colorCode: '#67f8e2' },
+      { name: 'Dinesh Devadhas', colorCode: '#2000e0' },
+      { name: 'Eldho', colorCode: '#fa05db' },
+      { name: 'Fazal Rahiman', colorCode: '#6eff42' },
+      { name: 'Ferdinand Singson', colorCode: '#d911b1' },
+      { name: 'Genesis Tulipas', colorCode: '#ca82e8' },
+      { name: 'Hamza Khamayseh', colorCode: '#e58589' },
+      { name: 'Hussain Pareed', colorCode: '#1b1b1b' }
+    ]
   },
   // Thu
   {
@@ -252,7 +284,16 @@ export const serviceData = [
     id: 'lane5',
     day: 'Thu',
     date: '18-11-2021',
-    style: laneStyle
+    style: laneStyle,
+    serviceMensOnLeave: [
+      { name: 'Mohammed Mahmood', colorCode: '#6600cc' },
+      { name: 'Muftahuddin P', colorCode: '#9dcf16' },
+      { name: 'Muhammed Siraj', colorCode: '#12d6ee' },
+      { name: 'Rinshad Said Ali', colorCode: '#ffcc33' },
+      { name: 'Riyas', colorCode: '#65839a' },
+      { name: 'Sharafali Kalat', colorCode: '#ffcc66' },
+      { name: 'Shehabudeen', colorCode: '#cc0000' }
+    ]
   },
   // Fri
   {
@@ -296,7 +337,13 @@ export const serviceData = [
     id: 'lane6',
     day: 'Fri',
     date: '19-11-2021',
-    style: laneStyle
+    style: laneStyle,
+    serviceMensOnLeave: [
+      { name: 'Marcos Jr. Movida', colorCode: '#666633' },
+      { name: 'Rey Formoso', colorCode: '#ff0066' },
+      { name: 'Sameera Perera', colorCode: '#a18bd6' },
+      { name: 'Shabab Alikundil', colorCode: '#33ffcc' }
+    ]
   },
   // Sat
   {
@@ -340,7 +387,14 @@ export const serviceData = [
     id: 'lane7',
     day: 'Sat',
     date: '20-11-2021',
-    style: laneStyle
+    style: laneStyle,
+    serviceMensOnLeave: [
+      { name: 'Muhammed Siraj', colorCode: '#12d6ee' },
+      { name: 'Rey Formoso', colorCode: '#ff0066' },
+      { name: 'Rinshad Said Ali', colorCode: '#ffcc33' },
+      { name: 'Sidheeque Ali', colorCode: '#666633' },
+      { name: 'Sonny Magdalena', colorCode: '#ffcc66' }
+    ]
   },
   // Sun
   {
@@ -384,7 +438,8 @@ export const serviceData = [
     id: 'lane8',
     day: 'Sun',
     date: '21-11-2021',
-    style: laneStyle
+    style: laneStyle,
+    serviceMensOnLeave: [{ name: 'Eldho', colorCode: '#fa05db' }]
   },
   // Mon
   {
@@ -426,7 +481,12 @@ export const serviceData = [
     id: 'lane9',
     day: 'Mon',
     date: '22-11-2021',
-    style: laneStyle
+    style: laneStyle,
+    serviceMensOnLeave: [
+      { name: 'Mohammed Faizaan', colorCode: '#74beba' },
+      { name: 'Mohammed Mahmood', colorCode: '#6600cc' },
+      { name: 'Ramshad Thazhath', colorCode: '#98ff1f' }
+    ]
   },
   // Tue
   {
@@ -469,7 +529,12 @@ export const serviceData = [
     id: 'lane10',
     day: 'Tue',
     date: '23-11-2021',
-    style: laneStyle
+    style: laneStyle,
+    serviceMensOnLeave: [
+      { name: 'Ramshad Thazhath', colorCode: '#98ff1f' },
+      { name: 'Tabish Mirza', colorCode: '#bd7eb4' },
+      { name: 'Tughlaque Shaikh', colorCode: '#0000ff' }
+    ]
   }
 ];
 

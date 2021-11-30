@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { isArray, orderBy } from 'lodash';
-import { Grid, Stack, RadioGroup, FormControlLabel, Radio } from '@mui/material';
+import { isArray } from 'lodash';
+import { Grid, Stack, RadioGroup, FormControlLabel, Radio, Button } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
@@ -71,7 +71,10 @@ export default function ServiceDashboard() {
   };
 
   return (
-    <Grid container className="service-men-grid">
+    <Grid container className="service-board-grid">
+      <Grid item xs={12} md={12}>
+        <ServiceTypes showTitle={false} emptyGridLen={3} iconsGridLen={8} leftMrgn="10rem" />
+      </Grid>
       <Grid item xs={12} md={2}>
         <Stack>
           <span className="ml-1rm mt-1rm">
@@ -80,20 +83,31 @@ export default function ServiceDashboard() {
             <ArrowBackIosIcon onClick={handlePrevDay} className={`arr-icn ml-1rm ${start === 0 && 'disabled'}`} />
             <ArrowForwardIosIcon
               onClick={handleNextDay}
-              className={`arr-icn mr-1rm ml-1rm ${start > serviceDataLen && 'disabled'}`}
+              className={`arr-icn mr-1rm ml-1rm ${
+                (start > serviceDataLen || start + MAX_LANES >= serviceDataLen) && 'disabled'
+              }`}
             />
             <ArrowForwardIosIcon
               onClick={handleNextWeek}
-              className={`arr-icn ${start > serviceDataLen - start && 'disabled'}`}
+              className={`arr-icn ${
+                (start > serviceDataLen - start || start + MAX_LANES >= serviceDataLen) && 'disabled'
+              }`}
             />
             <ArrowForwardIosIcon
               onClick={handleNextWeek}
-              className={`arr-icn ${start > serviceDataLen - start && 'disabled'}`}
+              className={`arr-icn ${
+                (start > serviceDataLen - start || start + MAX_LANES >= serviceDataLen) && 'disabled'
+              }`}
             />
           </span>
         </Stack>
       </Grid>
-      <Grid item xs={12} md={7} />
+      <Grid item xs={12} md={6} />
+      <Grid item xs={12} md={1}>
+        <Button variant="contained" className="mt-half-rm add-callout-btn">
+          Add CallOut
+        </Button>
+      </Grid>
       <Grid item xs={12} md={3}>
         <RadioGroup
           row

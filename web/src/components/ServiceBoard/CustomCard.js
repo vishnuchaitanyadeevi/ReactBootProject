@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Grid, Tooltip } from '@mui/material';
 import HandymanIcon from '@mui/icons-material/Handyman';
 import PanToolIcon from '@mui/icons-material/PanTool';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
@@ -35,75 +35,64 @@ export default function CustomCard({
         </Grid>
         <Grid>
           <span style={{ visibility: 'hidden' }}>''</span>
-          {service.audit && <span className="service-type-icons circle">A</span>}
-          {service.maintenance && <span className="service-type-icons circle">M</span>}
-          {service.refill && <span className="service-type-icons circle">R</span>}
-          {service.callOut && <span className="service-type-icons circle">C</span>}
+          {service.audit && (
+            <Tooltip title="Audit" arrow>
+              <span className="service-type-icons circle">A</span>
+            </Tooltip>
+          )}
+          {service.Maintainance && (
+            <Tooltip title="Audit" arrow>
+              <span className="service-type-icons circle">M</span>
+            </Tooltip>
+          )}
+          {service.refill && (
+            <Tooltip title="Refill" arrow>
+              <span className="service-type-icons circle">R</span>
+            </Tooltip>
+          )}
+          {service.callOut && (
+            <Tooltip title="CallOut" arrow>
+              <span className="service-type-icons circle">C</span>
+            </Tooltip>
+          )}
           {service.highene && (
-            <span className="service-type-icons">
-              <PanToolIcon className="service-icon" />
-            </span>
+            <Tooltip title="Highene" arrow>
+              <span className="service-type-icons">
+                <PanToolIcon className="service-icon" />
+              </span>
+            </Tooltip>
           )}
           {service.scheduled && (
-            <span className="service-type-icons">
-              <HandymanIcon className="service-icon" />
-            </span>
+            <Tooltip title="Scheduled" arrow>
+              <span className="service-type-icons">
+                <HandymanIcon className="service-icon" />
+              </span>
+            </Tooltip>
           )}
           {service.complete && (
-            <span className="service-type-icons">
-              <CheckCircleOutlinedIcon className="service-icon" />
-            </span>
+            <Tooltip title="Completed" arrow>
+              <span className="service-type-icons">
+                <CheckCircleOutlinedIcon className="service-icon" />
+              </span>
+            </Tooltip>
           )}
           {service.notCompleted && (
-            <span className="service-type-icons">
-              <RunningWithErrorsOutlinedIcon className="service-icon" />
-            </span>
+            <Tooltip title="Not Completed" arrow>
+              <span className="service-type-icons">
+                <RunningWithErrorsOutlinedIcon className="service-icon" />
+              </span>
+            </Tooltip>
           )}
           {service.cancelled && (
-            <span className="service-type-icons">
-              <HighlightOffOutlinedIcon className="service-icon" />
-            </span>
+            <Tooltip title="Canceled" arrow>
+              <span className="service-type-icons">
+                <HighlightOffOutlinedIcon className="service-icon" />
+              </span>
+            </Tooltip>
           )}
         </Grid>
         <Grid style={{ fontWeight: 'bold' }}>{address}</Grid>
       </Grid>
-      {/* <div className="custom-card-section" style={{ color: '#4C4C4C' }}>
-        <div>
-          {startDate} [{occurences}]
-        </div>
-        <div>
-          {service.audit && <span className="service-type-icons circle">A</span>}
-          {service.maintenance && <span className="service-type-icons circle">M</span>}
-          {service.refill && <span className="service-type-icons circle">R</span>}
-          {service.callOut && <span className="service-type-icons circle">C</span>}
-          {service.highene && (
-            <span className="service-type-icons">
-              <PanToolIcon className="service-icon" />
-            </span>
-          )}
-          {service.scheduled && (
-            <span className="service-type-icons">
-              <HandymanIcon className="service-icon" />
-            </span>
-          )}
-          {service.complete && (
-            <span className="service-type-icons">
-              <CheckCircleOutlinedIcon className="service-icon" />
-            </span>
-          )}
-          {service.notCompleted && (
-            <span className="service-type-icons">
-              <RunningWithErrorsOutlinedIcon className="service-icon" />
-            </span>
-          )}
-          {service.cancelled && (
-            <span className="service-type-icons">
-              <HighlightOffOutlinedIcon className="service-icon" />
-            </span>
-          )}
-        </div>
-        <div style={{ fontWeight: 'bold' }}>{address}</div>
-      </div> */}
     </MovableCardWrapper>
   );
 }

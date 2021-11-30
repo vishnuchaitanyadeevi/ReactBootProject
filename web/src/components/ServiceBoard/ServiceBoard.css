@@ -18,6 +18,7 @@
 .service-type-icons {
   float: right;
   margin-left: 5px;
+  cursor: pointer;
 }
 
 .circle {
@@ -35,9 +36,7 @@
   height: 18px;
 }
 
-.service-men-grid {
-  background-color: #000;
-  color: #fff;
+.service-board-grid {
   height: 100%;
 }
 
@@ -52,6 +51,14 @@
   height: 20px;
   border: 2px solid;
   margin-top: 3px;
+}
+
+.service-men-on-leave {
+  border-radius: 50%;
+  border: 2px solid;
+  font-size: 2px;
+  margin-left: 5px;
+  cursor: pointer;
 }
 
 .service-type-grid {
@@ -115,6 +122,14 @@
   width: 8rem;
 }
 
+.custom-header-section {
+  padding: 10px;
+  margin-bottom: -5px;
+  width: 8rem;
+  margin-left: 1rem;
+  background-color: #424242;
+}
+
 .custom-header {
   display: flex;
   flex-direction: row;
@@ -122,9 +137,8 @@
   font-size: 14px;
   font-weight: bold;
   color: #8e9488;
-  padding: 10px;
-  margin-bottom: -5px;
-  width: 8rem;
-  margin-left: 1rem;
-  background-color: #424242;
+}
+
+.add-callout-btn {
+  background-color: #01a9d9;
 }

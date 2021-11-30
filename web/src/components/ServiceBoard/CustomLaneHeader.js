@@ -1,9 +1,22 @@
-export default function CustomLaneHeader({ day, date }) {
+import { Grid, Tooltip } from '@mui/material';
+import { isArray } from 'lodash';
+
+export default function CustomLaneHeader({ day, date, serviceMensOnLeave }) {
   return (
-    <div>
+    <Grid className="custom-header-section">
       <header className="custom-header">
         {day} {date}
       </header>
-    </div>
+      {isArray(serviceMensOnLeave) &&
+        serviceMensOnLeave.map((men) => (
+          <Tooltip title={men.name} arrow>
+            <span
+              className="service-men-on-leave"
+              style={{ backgroundColor: men.colorCode, borderColor: men.colorCode }}
+            />
+          </Tooltip>
+        ))}
+      ;
+    </Grid>
   );
 }

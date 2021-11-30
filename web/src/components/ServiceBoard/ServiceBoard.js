@@ -33,7 +33,7 @@ export default function ServiceBoard({ data = [] }) {
       draggable
       tagStyle={{ fontSize: '80%' }}
       style={{
-        backgroundColor: '#000',
+        backgroundColor: 'transparent',
         paddingLeft: '0',
         paddingRight: '2.1rem'
       }}
