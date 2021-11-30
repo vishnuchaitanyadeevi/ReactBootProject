@@ -38,6 +38,7 @@
 
 .service-board-grid {
   height: 100%;
+  margin-top: -2rem;
 }
 
 .service-mens-stack {
@@ -154,6 +155,9 @@
 
 .add-callout-btn {
   background-color: #01a9d9;
+  float: right;
+  margin-top: -1rem;
+  margin-bottom: -1rem;
 }
 
 .show-more-icn {

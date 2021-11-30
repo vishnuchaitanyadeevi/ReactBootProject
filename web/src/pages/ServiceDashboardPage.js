@@ -75,6 +75,11 @@ export default function ServiceDashboard() {
       <Grid item xs={12} md={12}>
         <ServiceTypes showTitle={false} emptyGridLen={3} iconsGridLen={8} leftMrgn="10rem" />
       </Grid>
+      <Grid item xs={12} md={12}>
+        <Button variant="contained" className="mt-half-rm add-callout-btn mr-1rm">
+          Add CallOut
+        </Button>
+      </Grid>
       <Grid item xs={12} md={2}>
         <Stack>
           <span className="ml-1rm mt-1rm">
@@ -102,12 +107,7 @@ export default function ServiceDashboard() {
           </span>
         </Stack>
       </Grid>
-      <Grid item xs={12} md={6} />
-      <Grid item xs={12} md={1}>
-        <Button variant="contained" className="mt-half-rm add-callout-btn">
-          Add CallOut
-        </Button>
-      </Grid>
+      <Grid item xs={12} md={7} />
       <Grid item xs={12} md={3}>
         <RadioGroup
           row
