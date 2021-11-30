@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 import { NavLink as RouterLink, matchPath, useLocation } from 'react-router-dom';
@@ -63,7 +63,7 @@ NavItem.propTypes = {
 function NavItem({ item, active }) {
   const { t } = useTranslation();
   const theme = useTheme();
-  const isActiveRoot = active(item.path);
+  let isActiveRoot = active(item.path);
   const { title, path, icon, info, children } = item;
   const [open, setOpen] = useState(isActiveRoot);
 
@@ -71,6 +71,9 @@ function NavItem({ item, active }) {
     setOpen((prev) => !prev);
   };
 
+  useEffect(() => {
+    setOpen(isActiveRoot);
+  }, [isActiveRoot]);
   const activeRootStyle = {
     color: '#2ECC71',
     fontWeight: 'fontWeightMedium',
@@ -79,11 +82,17 @@ function NavItem({ item, active }) {
   };
 
   const activeSubStyle = {
-    color: 'text.primary',
+    color: '#2ECC71',
     fontWeight: 'fontWeightMedium'
   };
 
   if (children) {
+    children.map((childrenItem) => {
+      if (active(childrenItem.path)) {
+        isActiveRoot = true;
+      }
+      return null;
+    });
     return (
       <>
         <ListItemStyle

@@ -65,7 +65,6 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     useCollapseDrawer();
 
   useEffect(() => {
-    console.log(isOpenSidebar);
     // if (isOpenSidebar) {
     //   onCloseSidebar();
     // }
