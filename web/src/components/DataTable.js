@@ -5,16 +5,23 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import '../Styles/app.scss';
 
-function ContractList({ data, columns, expandedColumns, filters1, onRowClick, onChildRowClick }) {
+function ContractList({ data, columns, expandedColumns, filters1, globalFilters, onRowClick, onChildRowClick }) {
   const [tableData, setTableData] = useState(data);
+  const [selected, setSelected] = useState(null);
   const [expandedRows, setExpandedRows] = useState(null);
   const [globalFilter, setGlobalFilter] = useState(null);
+  const onRowEditComplete = (e) => {
+    const _tableData = [...tableData];
+    const { newData, index } = e;
+    _tableData[index] = newData;
+    setTableData(_tableData);
+  };
   const textEditor = (options) => (
     <InputText
       type="text"
       value={options.value}
       onChange={(e) => options.editorCallback(e.target.value)}
-      style={{ minWidth: '12rem' }}
+      style={{ minWidth: '20rem' }}
     />
   );
   const header = (
@@ -58,6 +65,7 @@ function ContractList({ data, columns, expandedColumns, filters1, onRowClick, on
     <div className="datatable-rowexpansion-demo">
       <div className="card">
         <DataTable
+          editMode="row"
           value={tableData}
           expandedRows={expandedRows}
           showGridlines
@@ -67,28 +75,51 @@ function ContractList({ data, columns, expandedColumns, filters1, onRowClick, on
           size="small"
           paginator
           rows={10}
+          filterDisplay="row"
           onRowToggle={(e) => setExpandedRows(e.data)}
-          // onRowExpand={onRowExpand}
-          // onRowCollapse={onRowCollapse}
           rowExpansionTemplate={rowExpansionTemplate}
           onRowClick={onRowClick}
           dataKey="id"
           scrollHeight="400px"
           header={header}
           globalFilter={globalFilter}
-          globalFilterFields={[
-            'id',
-            'status',
-            'contract_number',
-            'contract_sign_on',
-            'contract_start_date',
-            'customer',
-            'salesman'
-          ]}
+          globalFilterFields={globalFilters}
           filters={filters1}
+          onRowEditComplete={onRowEditComplete}
+          reorderableColumns
+          stripedRows
+          rowsPerPageOptions={[10, 20, 50, 100]}
+          selection={selected}
+          onSelectionChange={(e) => setSelected(e.value)}
         >
           <Column expander style={{ width: '3em' }} />
-          {columns && columns.map((col) => <Column field={col.field} header={col.header} sortable />)}
+          {columns &&
+            columns.map((col) => (
+              <Column
+                field={col.field}
+                header={col.header}
+                sortable
+                editor={(options) => textEditor(options)}
+                columnKey={col.id}
+                filter
+                filterType="text"
+                filterPlaceholder={`${col.header}`}
+                style={{ minWidth: '12rem' }}
+              />
+            ))}
+          <Column
+            columnKey="edit"
+            rowEditor
+            headerstyle={{ width: '10%', minWidth: '8rem' }}
+            bodyStyle={{ textAlign: 'center' }}
+            style={{
+              minWidth: '5rem',
+              maxWidth: '5rem',
+              paddingBottom: '0.1rem',
+              paddingTop: '0.1rem'
+            }}
+            reorderable={false}
+          />
         </DataTable>
       </div>
     </div>
