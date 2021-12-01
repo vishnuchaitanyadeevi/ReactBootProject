@@ -8,6 +8,7 @@ import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { Toast } from 'primereact/toast';
 import Checkbox from '@mui/material/Checkbox';
+import { FilterMatchMode } from 'primereact/api';
 import ngPrimeGrid from '../ngPrimeGrid';
 import jsonData from '../../utils/project-table-data.json';
 import '../../Styles/app.scss';
@@ -15,6 +16,7 @@ import '../../Styles/app.scss';
 export default function SimpleTable({ rowData, headerData, ...other }) {
   const [tableData, setTableData] = useState(rowData);
   const [editingRows, setEditingRows] = useState({});
+  const [filterState, setFilterState] = useState({});
   const onRowEditChange = (e) => {
     console.log(e);
     setEditingRows(e.data);
@@ -65,18 +67,30 @@ export default function SimpleTable({ rowData, headerData, ...other }) {
     setTableData(currentTableData);
     setActiveRowIndex(0);
   };
+
+  const isEmpty = (obj) => Object.keys(obj).length === 0;
+  if (isEmpty(filterState)) {
+    const filterSetData = {};
+    headerData.map((headerElement) => {
+      filterSetData[headerElement.field] = { value: null, matchMode: FilterMatchMode.CONTAINS };
+      return null;
+    });
+    console.log(filterSetData);
+    setFilterState(filterSetData);
+  }
+
   return (
     <Grid container spacing={1}>
       <Grid item xs={12} lg={12}>
-        <DataTable value={tableData} editingRows={editingRows} onRowEditChange={onRowEditChange} {...other}>
+        <DataTable
+          value={tableData}
+          editingRows={editingRows}
+          onRowEditChange={onRowEditChange}
+          filters={filterState}
+          {...other}
+        >
           {headerData.map((headerElement) => (
-            <Column
-              field={headerElement.field}
-              header={headerElement.header}
-              editor={(options) => switchEditor(headerElement.editor, options)}
-              style={headerElement.style}
-              filter
-            />
+            <Column editor={(options) => switchEditor(headerElement.editorElement, options)} {...headerElement} />
           ))}
           <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }} />
         </DataTable>

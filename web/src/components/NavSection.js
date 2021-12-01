@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 import { NavLink as RouterLink, matchPath, useLocation } from 'react-router-dom';
@@ -71,9 +71,6 @@ function NavItem({ item, active }) {
     setOpen((prev) => !prev);
   };
 
-  useEffect(() => {
-    setOpen(isActiveRoot);
-  }, [isActiveRoot]);
   const activeRootStyle = {
     color: '#2ECC71',
     fontWeight: 'fontWeightMedium',
@@ -90,6 +87,7 @@ function NavItem({ item, active }) {
     children.map((childrenItem) => {
       if (active(childrenItem.path)) {
         isActiveRoot = true;
+        if (!open) setOpen(isActiveRoot);
       }
       return null;
     });
