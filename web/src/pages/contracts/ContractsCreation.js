@@ -50,16 +50,16 @@ export default function ContractsCreation() {
   };
 
   const columnDataForProjects = [
-    { field: 'status', header: 'Status', editor: null, style: { width: '10%' } },
-    { field: 'prjno', header: 'prjno', editor: null, style: { width: '10%' } },
-    { field: 'prjnm', header: 'prjnm', editor: null, style: { width: '10%' } },
-    { field: 'lcnm', header: 'lcnm', editor: null, style: { width: '10%' } },
-    { field: 'bspct', header: 'bspct', editor: null, style: { width: '15%' } },
-    { field: 'sdt', header: 'sdt', editor: null, style: { width: '10%' } },
-    { field: 'edt', header: 'edt', editor: null, style: { width: '10%' } },
-    { field: 'extp', header: 'extp', editor: null, style: { width: '10%' } },
-    { field: 'grpd', header: 'grpd', editor: null, style: { width: '5%' } },
-    { field: 'prm', header: 'prm', editor: 'checkbox', style: { width: '5%' } }
+    { field: 'status', header: 'Status', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+    { field: 'prjno', header: 'prjno', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+    { field: 'prjnm', header: 'prjnm', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+    { field: 'lcnm', header: 'lcnm', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+    { field: 'bspct', header: 'bspct', editorElement: null, style: { width: '15%' }, sortable: true, filter: true },
+    { field: 'sdt', header: 'sdt', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+    { field: 'edt', header: 'edt', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+    { field: 'extp', header: 'extp', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+    { field: 'grpd', header: 'grpd', editorElement: null, style: { width: '5%' }, sortable: true, filter: true },
+    { field: 'prm', header: 'prm', editorElement: 'checkbox', style: { width: '5%' }, sortable: true, filter: true }
   ];
   return (
     <Grid container spacing={2} padding={3}>
@@ -234,6 +234,8 @@ export default function ContractsCreation() {
           rows={10}
           dataKey="id"
           paginator
+          filterDisplay="row"
+          reorderableColumns
         />
         {/* <ProjectTable /> */}
       </Grid>
