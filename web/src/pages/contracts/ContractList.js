@@ -51,15 +51,20 @@ function ContractList() {
   };
 
   const [filters1, setFilters1] = useState({
+    id: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    status: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    contractNumber: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    contractSignOn: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    contractStartDate: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    customer: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    salesman: { value: null, matchMode: FilterMatchMode.CONTAINS },
     country: { value: null, matchMode: FilterMatchMode.CONTAINS },
     office: { value: null, matchMode: FilterMatchMode.CONTAINS },
     business: { value: null, matchMode: FilterMatchMode.CONTAINS },
     businessSubType: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    status: { value: null, matchMode: FilterMatchMode.CONTAINS },
     customerName: { value: null, matchMode: FilterMatchMode.CONTAINS },
     location: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    contract: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    salesman: { value: null, matchMode: FilterMatchMode.CONTAINS }
+    contract: { value: null, matchMode: FilterMatchMode.CONTAINS }
   });
   const handleChangeFilter = (key, val) => setFilters1({ ...filters1, [key]: val });
   const [colName, setColName] = useState([
@@ -74,19 +79,19 @@ function ContractList() {
       field: 'status'
     },
     {
-      id: 'contract_number',
+      id: 'contractNumber',
       header: 'Contract Number',
-      field: 'contract_number'
+      field: 'contractNumber'
     },
     {
-      id: 'contract_sign_on',
+      id: 'contractSignOn',
       header: 'Contract Sign On',
-      field: 'contract_sign_on'
+      field: 'contractSignOn'
     },
     {
-      id: 'contract_start_date',
+      id: 'contractStartDate',
       header: 'Contract Start Date',
-      field: 'contract_start_date'
+      field: 'contractStartDate'
     },
     {
       id: 'customer',
@@ -145,6 +150,20 @@ function ContractList() {
     { label: 'Kuwait', value: 'Kuwait' },
     { label: 'Iraq', value: 'Iraq' },
     { label: 'Bahrain', value: 'Bahrain' }
+  ];
+  const globalFilters = [
+    'id',
+    'status',
+    'contractNumber',
+    'contractSignOn',
+    'contractStartDate',
+    'customer',
+    'salesman'
+  ];
+  const statusData = [
+    { label: 'Success', value: 'Success' },
+    { label: 'Pending', value: 'Pending' },
+    { label: 'Running', value: 'Running' }
   ];
 
   const navigate = useNavigate();
@@ -208,7 +227,15 @@ function ContractList() {
           />
         </Grid>
         <Grid item xs={6} sm={2}>
-          <AutocompleteWidget options={projectLocation} label="Status" disablePortal autoSelect size="small" />
+          <AutocompleteWidget
+            options={statusData}
+            label="Status"
+            disablePortal
+            autoSelect
+            size="small"
+            onChange={(event, newValue) => setStatus(newValue?.value)}
+            defaultValue={status}
+          />
         </Grid>
         <Grid item xs={6} sm={2}>
           <TextField
@@ -254,6 +281,7 @@ function ContractList() {
             columns={colName}
             expandedColumns={expandColName}
             filters1={filters1}
+            globalFilters={globalFilters}
             onRowClick={navigateToContractCreation}
             onChildRowClick={navigateToProjectCreation}
           />
