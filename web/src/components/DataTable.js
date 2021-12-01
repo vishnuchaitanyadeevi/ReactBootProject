@@ -5,7 +5,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import '../Styles/app.scss';
 
-function ContractList({ data, columns, expandedColumns, filters1, globalFilters }) {
+function ContractList({ data, columns, expandedColumns, filters1, globalFilters, onRowClick, onChildRowClick }) {
   const [tableData, setTableData] = useState(data);
   const [selected, setSelected] = useState(null);
   const [expandedRows, setExpandedRows] = useState(null);
@@ -55,6 +55,7 @@ function ContractList({ data, columns, expandedColumns, filters1, globalFilters 
         rows={10}
         scrollable
         scrollHeight="400px"
+        onRowClick={onChildRowClick}
       >
         {expandedColumns && expandedColumns.map((col) => <Column field={col.field} header={col.header} sortable />)}
       </DataTable>
@@ -77,6 +78,7 @@ function ContractList({ data, columns, expandedColumns, filters1, globalFilters 
           filterDisplay="row"
           onRowToggle={(e) => setExpandedRows(e.data)}
           rowExpansionTemplate={rowExpansionTemplate}
+          onRowClick={onRowClick}
           dataKey="id"
           scrollHeight="400px"
           header={header}

@@ -3,6 +3,7 @@ import { Grid, Typography, TextField, Button, Divider } from '@mui/material';
 import { FilterMatchMode } from 'primereact/api';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
+import { useNavigate } from 'react-router-dom';
 import DataTable from '../../components/DataTable';
 import contractData from '../../utils/Contract-List-Data.json';
 import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget';
@@ -164,6 +165,17 @@ function ContractList() {
     { label: 'Pending', value: 'Pending' },
     { label: 'Running', value: 'Running' }
   ];
+
+  const navigate = useNavigate();
+
+  const navigateToProjectCreation = () => {
+    navigate('/ProjectCreation', { replace: true });
+  };
+
+  const navigateToContractCreation = () => {
+    navigate('/contracts-creation', { replace: true });
+  };
+
   return (
     <Grid className="contract_list_main_cls">
       <Grid container spacing={3}>
@@ -178,11 +190,17 @@ function ContractList() {
         <Grid item xs={12} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Grid style={{ display: 'flex', alignItems: 'center' }}>
             <TextField label="Project Number" size="small" />
-            <Button variant="contained" color="primary" style={{ marginLeft: '1rem' }} size="small">
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ marginLeft: '1rem' }}
+              size="small"
+              onClick={navigateToProjectCreation}
+            >
               Open Project
             </Button>
           </Grid>
-          <Button variant="contained" color="primary" size="small">
+          <Button variant="contained" color="primary" size="small" onClick={navigateToContractCreation}>
             Add New Contract
           </Button>
         </Grid>
@@ -264,6 +282,8 @@ function ContractList() {
             expandedColumns={expandColName}
             filters1={filters1}
             globalFilters={globalFilters}
+            onRowClick={navigateToContractCreation}
+            onChildRowClick={navigateToProjectCreation}
           />
         </Grid>
       </Grid>
