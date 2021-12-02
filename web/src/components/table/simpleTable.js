@@ -9,7 +9,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { Toast } from 'primereact/toast';
 import Checkbox from '@mui/material/Checkbox';
 import { FilterMatchMode } from 'primereact/api';
-import ngPrimeGrid from '../ngPrimeGrid';
+// import ngPrimeGrid from '../ngPrimeGrid';
 import jsonData from '../../utils/project-table-data.json';
 import '../../Styles/app.scss';
 
