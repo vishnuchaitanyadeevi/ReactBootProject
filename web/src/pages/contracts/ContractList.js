@@ -176,6 +176,9 @@ function ContractList() {
     navigate('/contracts-creation', { replace: true });
   };
 
+  const numericFields = ['id', 'contractNumber'];
+  const numericFieldsExpandedData = ['id', 'project_number'];
+
   return (
     <Grid className="contract_list_main_cls">
       <Grid container spacing={3}>
@@ -284,6 +287,8 @@ function ContractList() {
             globalFilters={globalFilters}
             onRowClick={navigateToContractCreation}
             onChildRowClick={navigateToProjectCreation}
+            numericFields={numericFields}
+            numericFieldsExpandedData={numericFieldsExpandedData}
           />
         </Grid>
       </Grid>
