@@ -63,7 +63,7 @@ NavItem.propTypes = {
 function NavItem({ item, active }) {
   const { t } = useTranslation();
   const theme = useTheme();
-  const isActiveRoot = active(item.path);
+  let isActiveRoot = active(item.path);
   const { title, path, icon, info, children } = item;
   const [open, setOpen] = useState(isActiveRoot);
 
@@ -79,11 +79,18 @@ function NavItem({ item, active }) {
   };
 
   const activeSubStyle = {
-    color: 'text.primary',
+    color: '#2ECC71',
     fontWeight: 'fontWeightMedium'
   };
 
   if (children) {
+    children.map((childrenItem) => {
+      if (active(childrenItem.path)) {
+        isActiveRoot = true;
+        if (!open) setOpen(isActiveRoot);
+      }
+      return null;
+    });
     return (
       <>
         <ListItemStyle

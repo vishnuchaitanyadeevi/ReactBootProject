@@ -15,6 +15,8 @@ import BasicDatePicker from '../../components/pickers/BasicDatePicker';
 import UploadFile from '../../components/UploadFile';
 import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget';
 import './ContractsCreation.scss';
+import SimpleTable from '../../components/table/simpleTable';
+import jsonData from '../../utils/project-table-data.json';
 
 export default function ContractsCreation() {
   const countryArr = ['SA'];
@@ -46,6 +48,19 @@ export default function ContractsCreation() {
     const filteredItems = multipleImages.images.filter((_file) => _file !== file);
     setMultipleImages({ ...multipleImages, images: filteredItems });
   };
+
+  const columnDataForProjects = [
+    { field: 'status', header: 'Status', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+    { field: 'prjno', header: 'prjno', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+    { field: 'prjnm', header: 'prjnm', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+    { field: 'lcnm', header: 'lcnm', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+    { field: 'bspct', header: 'bspct', editorElement: null, style: { width: '15%' }, sortable: true, filter: true },
+    { field: 'sdt', header: 'sdt', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+    { field: 'edt', header: 'edt', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+    { field: 'extp', header: 'extp', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+    { field: 'grpd', header: 'grpd', editorElement: null, style: { width: '5%' }, sortable: true, filter: true },
+    { field: 'prm', header: 'prm', editorElement: 'checkbox', style: { width: '5%' }, sortable: true, filter: true }
+  ];
   return (
     <Grid container spacing={2} padding={3}>
       <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
@@ -207,7 +222,22 @@ export default function ContractsCreation() {
         </Stack>
       </Grid>
       <Grid rowSpacing={1} columnSpacing={1} item xs={12} lg={12} justifyContent="center">
-        <ProjectTable />
+        <SimpleTable
+          rowData={jsonData}
+          headerData={columnDataForProjects}
+          editMode="row"
+          showGridlines
+          responsiveLayout="scroll"
+          resizableColumns
+          columnResizeMode="expand"
+          size="small"
+          rows={10}
+          dataKey="id"
+          paginator
+          filterDisplay="row"
+          reorderableColumns
+        />
+        {/* <ProjectTable /> */}
       </Grid>
     </Grid>
   );

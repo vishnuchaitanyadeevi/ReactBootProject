@@ -13,7 +13,7 @@ export default function Input(theme) {
           '&::placeholder': {
             opacity: 1,
             color: theme.palette.text.disabled,
-            fontSize: '0.8rem'
+            fontSize: '0.7rem'
           }
         }
       }
@@ -30,7 +30,7 @@ export default function Input(theme) {
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          fontSize: '0.8rem'
+          fontSize: '0.7rem'
         }
       }
     },
@@ -66,7 +66,7 @@ export default function Input(theme) {
               borderColor: theme.palette.action.disabledBackground
             }
           },
-          fontSize: '0.8rem'
+          fontSize: '0.7rem'
         }
       }
     }

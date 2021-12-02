@@ -134,6 +134,10 @@ px
   height: 1.65rem !important;
 }
 
+.datatable-rowexpansion-demo .p-datatable-resizable .p-datatable-tbody > tr :hover{
+  cursor: pointer;
+}
+
 .p-input-icon-left > .p-inputtext {
   padding-left: 2rem !important;
   padding-top: 0.25rem !important;
