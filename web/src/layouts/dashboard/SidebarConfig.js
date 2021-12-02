@@ -95,7 +95,8 @@ const sidebarConfig = [
           { title: 'Pay', path: '/pay' },
           { title: 'Components', path: '/components' },
           { title: 'Project Creation', path: '/ProjectCreation' },
-          { title: 'Contracts Creations', path: '/contracts-creation' }
+          { title: 'Contracts Creations', path: '/contracts-creation' },
+          { title: 'Contracts List', path: '/contractsList' }
         ]
       }
     ]

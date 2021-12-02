@@ -1,7 +1,8 @@
 import 'primeicons/primeicons.css';
-import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.css';
-import React, { useState } from 'react';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import { Helmet } from 'react-helmet';
+import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
@@ -9,14 +10,21 @@ import { TextField, Grid, Paper, Button, Autocomplete } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import { FilterMatchMode } from 'primereact/api';
+import { useDispatch, connect } from 'react-redux';
+import { ThemeSettingChange } from '../../redux/actions/themeSettingsActions';
+import useSettings from '../../hooks/useSettings';
 import jsonData from '../../utils/tabledata.json';
 import filterData from '../../utils/filterdata.json';
 import FilterComponent from '../FilterComponent';
 import ProminentAppBar from '../header/header';
+import '../../Styles/app.scss';
 
-/// import '../Styles/app.scss';
-
-function PrimeGrid() {
+function PrimeGrid(theme) {
+  const { themeMode, onChangeMode } = useSettings();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(ThemeSettingChange());
+  });
   const [tableData, setTableData] = useState(jsonData);
   const [selected, setSelected] = useState(null);
   const onRowEditComplete = (e) => {
@@ -117,6 +125,12 @@ function PrimeGrid() {
 
   return (
     <Grid>
+      <Helmet>
+        <link
+          rel="stylesheet"
+          href={`https://unpkg.com/primereact/resources/themes/lara-${themeMode}-indigo/theme.css`}
+        />
+      </Helmet>
       <Grid>
         <ProminentAppBar height="15px" />
         <Paper style={paperStyle} elevation={1}>
@@ -223,7 +237,6 @@ function PrimeGrid() {
         rows={10}
         selection={selected}
         onSelectionChange={(e) => setSelected(e.value)}
-        stripedRows
         editMode="row"
         onRowEditComplete={onRowEditComplete}
         reorderableColumns
@@ -399,4 +412,11 @@ function PrimeGrid() {
   );
 }
 
-export default PrimeGrid;
+function mapStateToProps(state) {
+  const { theme } = state.ThemeReducer;
+  return {
+    theme
+  };
+}
+
+export default connect(mapStateToProps)(PrimeGrid);
