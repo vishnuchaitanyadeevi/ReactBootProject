@@ -359,7 +359,7 @@ function PrimeGrid(theme) {
         <Column
           columnKey="owan"
           field="owan"
-          header="On-wan"
+          header="Van-Stock"
           sortable
           editor={(options) => textEditor(options)}
           filter
