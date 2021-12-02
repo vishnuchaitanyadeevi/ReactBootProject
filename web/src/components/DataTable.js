@@ -5,7 +5,17 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import '../Styles/app.scss';
 
-function ContractList({ data, columns, expandedColumns, filters1, globalFilters, onRowClick, onChildRowClick }) {
+function ContractList({
+  data,
+  columns,
+  expandedColumns,
+  filters1,
+  globalFilters,
+  onRowClick,
+  onChildRowClick,
+  numericFields,
+  numericFieldsExpandedData
+}) {
   const [tableData, setTableData] = useState(data);
   const [selected, setSelected] = useState(null);
   const [expandedRows, setExpandedRows] = useState(null);
@@ -21,7 +31,7 @@ function ContractList({ data, columns, expandedColumns, filters1, globalFilters,
       type="text"
       value={options.value}
       onChange={(e) => options.editorCallback(e.target.value)}
-      style={{ minWidth: '20rem' }}
+      style={{ fontSize: '0.8rem' }}
     />
   );
   const header = (
@@ -56,8 +66,18 @@ function ContractList({ data, columns, expandedColumns, filters1, globalFilters,
         scrollable
         scrollHeight="400px"
         onRowClick={onChildRowClick}
+        filterDisplay="row"
       >
-        {expandedColumns && expandedColumns.map((col) => <Column field={col.field} header={col.header} sortable />)}
+        {expandedColumns &&
+          expandedColumns.map((col) => (
+            <Column
+              field={col.field}
+              header={col.header}
+              sortable
+              filter
+              style={{ justifyContent: `${numericFieldsExpandedData.includes(col.field) ? 'center' : ''}` }}
+            />
+          ))}
       </DataTable>
     </div>
   );
@@ -70,7 +90,6 @@ function ContractList({ data, columns, expandedColumns, filters1, globalFilters,
           expandedRows={expandedRows}
           showGridlines
           responsiveLayout="scroll"
-          resizableColumns
           columnResizeMode="expand"
           size="small"
           paginator
@@ -103,8 +122,10 @@ function ContractList({ data, columns, expandedColumns, filters1, globalFilters,
                 columnKey={col.id}
                 filter
                 filterType="text"
-                filterPlaceholder={`${col.header}`}
-                style={{ minWidth: '12rem' }}
+                style={{
+                  textAlign: `${numericFields.includes(col.field) ? 'center' : ''}`,
+                  minWidth: '12rem'
+                }}
               />
             ))}
           <Column
