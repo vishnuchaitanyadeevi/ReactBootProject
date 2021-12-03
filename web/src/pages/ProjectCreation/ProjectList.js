@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useCallback } from 'react';
-
+import { Helmet } from 'react-helmet';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
@@ -7,10 +7,12 @@ import { Button, Grid } from '@mui/material';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { Toast } from 'primereact/toast';
+import useSettings from '../../hooks/useSettings';
 import jsonData from '../../utils/create-project-table-data.json';
 import '../../Styles/app.scss';
 
 export default function ProjectTable() {
+  const { themeMode, onChangeMode } = useSettings();
   const [tableData, setTableData] = useState(jsonData);
   const [editingRows, setEditingRows] = useState({});
   const onRowEditChange = (e) => {
@@ -40,6 +42,12 @@ export default function ProjectTable() {
   };
   return (
     <div>
+      <Helmet>
+        <link
+          rel="stylesheet"
+          href={`https://unpkg.com/primereact/resources/themes/lara-${themeMode}-indigo/theme.css`}
+        />
+      </Helmet>
       <Grid item xs={12} style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button onClick={addNewProject} variant="contained" style={{ marginBottom: '1rem' }}>
           Add New Service Subject
