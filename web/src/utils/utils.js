@@ -1,5 +1,6 @@
 import moment from 'moment';
 import 'moment-timezone';
+import { PATTERN, REGX_TYPE } from './constants';
 
 export const setLocalStorageItem = (key, val) => localStorage.setItem(key, val);
 
@@ -56,3 +57,17 @@ export const sortListOfObjects = (list, key) => {
   });
   return list;
 };
+
+export const isValidStr = (str, type) => {
+  const { NUM } = REGX_TYPE;
+  switch (type) {
+    case NUM:
+      return /^\d+$/.test(str);
+    default:
+      return false;
+  }
+};
+
+// Validation patterns
+export const isEmail = (str) => !PATTERN.EMAIL.test(str);
+export const isPhone = (str) => !PATTERN.PHONE.test(str);

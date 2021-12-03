@@ -90,7 +90,28 @@ px
   margin: 0 !important;
   padding: 2px !important;
 }
+/*
+.p-inputtext:focus {
+  outline-color: #00AB55 !important;
+  border-color: #00AB55 !important;
+}
 
+.p-inputtext:active {
+  outline-color: #00AB55 !important;
+  border-color: #00AB55 !important;
+  box-shadow: none !important;
+}
+
+.p-checkbox .p-checkbox-box.p-highlight {
+  border-color: #00AB55;
+  background: #00AB55;
+}
+
+.p-inputtext:hover {
+  outline-color: black !important;
+  border-color: black !important;
+}
+*/
 .p-paginator-page, .p-paginator-next, .p-paginator-last, .p-paginator-first, .p-paginator-prev, .p-paginator-current {
   height: 2rem!important;
   min-width: 2rem!important;
@@ -111,6 +132,10 @@ px
 
 .p-datatable .p-datatable-tbody > tr, .p-datatable-table .p-datatable-tbody > tr {
   height: 1.65rem !important;
+}
+
+.datatable-rowexpansion-demo .p-datatable-resizable .p-datatable-tbody > tr :hover{
+  cursor: pointer;
 }
 
 .p-input-icon-left > .p-inputtext {

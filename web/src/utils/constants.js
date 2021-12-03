@@ -37,3 +37,14 @@ export const GROUP_BY = {
 };
 
 export const MAX_LANES = 10;
+
+export const REGX_TYPE = {
+  NUM: 'num'
+};
+
+// validations regex
+export const PATTERN = {
+  EMAIL: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+  // PHONE: /^(?!0000000000)(?!000-000-0000)(?:\?1[-.●]?)?\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/
+  PHONE: /^\([2-9][\d]{2}\) [\d]{3}-[\d]{4}$/
+};

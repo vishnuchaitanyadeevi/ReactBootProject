@@ -89,14 +89,14 @@ const sidebarConfig = [
         title: 'Demo',
         path: '',
         children: [
+          { title: 'Project Creation', path: '/ProjectCreation' },
+          { title: 'Contracts Creations', path: '/contracts-creation' },
+          { title: 'Contracts List', path: '/contractsList' },
           { title: 'Employee', path: '/employee' },
           { title: 'Data', path: '/data' },
           { title: 'Invoice', path: '/invoice' },
           { title: 'Pay', path: '/pay' },
-          { title: 'Components', path: '/components' },
-          { title: 'Project Creation', path: '/ProjectCreation' },
-          { title: 'Contracts Creations', path: '/contracts-creation' },
-          { title: 'Contracts List', path: '/contractsList' }
+          { title: 'Components', path: '/components' }
         ]
       }
     ]
