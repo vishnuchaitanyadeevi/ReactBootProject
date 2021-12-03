@@ -3,6 +3,8 @@ import { Grid, Typography, TextField, Button } from '@mui/material';
 import { InputText } from 'primereact/inputtext';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import AutocompleteWidget from './Autocomplete/autocompletWidget';
+import BasicDatePicker from './pickers/BasicDatePicker';
 import '../Styles/app.scss';
 
 function ContractList({
@@ -34,6 +36,49 @@ function ContractList({
       style={{ fontSize: '0.8rem' }}
     />
   );
+  const statusData = [
+    { label: 'Success', value: 'Success' },
+    { label: 'Pending', value: 'Pending' },
+    { label: 'Running', value: 'Running' }
+  ];
+  const handleChangeEditor = (options) => {
+    switch (options?.field) {
+      case 'id':
+        return <TextField type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
+      case 'status':
+        return <TextField type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
+      case 'contractNumber':
+        return <TextField type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
+      case 'contractSignOn':
+        return (
+          <BasicDatePicker
+            label="Contract Signed On"
+            inputFormat="dd-MM-yyyy"
+            views={['year', 'month', 'day']}
+            value={options.value}
+            onChange={(e) => options.editorCallback(e.target.value)}
+            size="large"
+          />
+        );
+      case 'contractStartDate':
+        return (
+          <BasicDatePicker
+            label="Contract Start Date"
+            inputFormat="dd-MM-yyyy"
+            views={['year', 'month', 'day']}
+            value={options.value}
+            onChange={(e) => options.editorCallback(e.target.value)}
+            size="large"
+          />
+        );
+      case 'customer':
+        return <TextField type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
+      case 'salesman':
+        return <TextField type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
+      default:
+        return undefined;
+    }
+  };
   const header = (
     <div className="datatable-crud-demo">
       <div className="table-header">
@@ -118,7 +163,7 @@ function ContractList({
                 field={col.field}
                 header={col.header}
                 sortable
-                editor={(options) => textEditor(options)}
+                editor={(options) => handleChangeEditor(options)}
                 columnKey={col.id}
                 filter
                 filterType="text"
@@ -131,13 +176,13 @@ function ContractList({
           <Column
             columnKey="edit"
             rowEditor
-            headerstyle={{ width: '10%', minWidth: '8rem' }}
+            headerstyle={{ width: '10%', minWidth: '8rem', paddingBottom: '0.1rem', paddingTop: '0.1rem' }}
             bodyStyle={{ textAlign: 'center' }}
             style={{
-              minWidth: '5rem',
-              maxWidth: '5rem',
+              minWidth: '10rem',
+              maxWidth: '10rem',
               paddingBottom: '0.1rem',
-              paddingTop: '0.1rem'
+              paddingTop: '0.8rem'
             }}
             reorderable={false}
           />

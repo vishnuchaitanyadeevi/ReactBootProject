@@ -208,7 +208,7 @@ export default function ContractsCreation() {
             onChange={(e) => updateContractData('name', e.target.value)}
             value={name}
             error={isError && !name}
-            helperText={isError && !name && 'Enter name'}
+            helperText={isError && !name && 'Enter Name'}
             FormHelperTextProps={{ className: 'helper_text_cls' }}
           />
         </Grid>
@@ -220,7 +220,7 @@ export default function ContractsCreation() {
             onChange={(e) => updateContractData('position', e.target.value)}
             value={position}
             error={isError && !position}
-            helperText={isError && !position && 'Enter position'}
+            helperText={isError && !position && 'Enter Position'}
             FormHelperTextProps={{ className: 'helper_text_cls' }}
           />
         </Grid>
@@ -232,7 +232,7 @@ export default function ContractsCreation() {
             onChange={(e) => updateContractData('address', e.target.value)}
             value={address}
             error={isError && !address}
-            helperText={isError && !address && 'Enter address'}
+            helperText={isError && !address && 'Enter Address'}
             FormHelperTextProps={{ className: 'helper_text_cls' }}
           />
         </Grid>
@@ -244,7 +244,7 @@ export default function ContractsCreation() {
             onChange={(e) => updateContractData('phoneNo', e.target.value)}
             value={phoneNo}
             error={isError && !phoneNo}
-            helperText={isError && !phoneNo && 'Enter phoneNo'}
+            helperText={isError && !phoneNo && 'Enter Phone Number'}
             FormHelperTextProps={{ className: 'helper_text_cls' }}
           />
         </Grid>
@@ -256,7 +256,7 @@ export default function ContractsCreation() {
             onChange={(e) => updateContractData('faxNo', e.target.value)}
             value={faxNo}
             error={isError && !faxNo}
-            helperText={isError && !faxNo && 'Enter Fax No.'}
+            helperText={isError && !faxNo && 'Enter Fax Number'}
             FormHelperTextProps={{ className: 'helper_text_cls' }}
           />
         </Grid>
@@ -269,7 +269,8 @@ export default function ContractsCreation() {
             value={mobileNo}
             error={isError && (!mobileNo || isPhone(mobileNo))}
             helperText={
-              (isError && !mobileNo && 'Enter mobile no') || (isError && isPhone(mobileNo) && 'Not valid phone no')
+              (isError && !mobileNo && 'Enter Mobile Number') ||
+              (isError && isPhone(mobileNo) && 'Not Valid Mobile Number')
             }
             FormHelperTextProps={{ className: 'helper_text_cls' }}
           />
@@ -283,7 +284,7 @@ export default function ContractsCreation() {
             value={emailId}
             error={isError && (!emailId || isEmail(emailId))}
             helperText={
-              (isError && !emailId && 'Enter email id') || (isError && isEmail(emailId) && 'Not valid email id')
+              (isError && !emailId && 'Enter Email Id') || (isError && isEmail(emailId) && 'Not Valid Email Id')
             }
             FormHelperTextProps={{ className: 'helper_text_cls' }}
           />
@@ -296,7 +297,7 @@ export default function ContractsCreation() {
             onChange={(e) => updateContractData('note', e.target.value)}
             value={note}
             error={isError && !note}
-            helperText={isError && !note && 'Enter note'}
+            helperText={isError && !note && 'Enter Note'}
             FormHelperTextProps={{ className: 'helper_text_cls' }}
           />
         </Grid>
