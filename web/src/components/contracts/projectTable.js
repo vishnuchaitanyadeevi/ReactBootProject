@@ -10,12 +10,12 @@ import { Toast } from 'primereact/toast';
 import ngPrimeGrid from '../ngPrimeGrid';
 import jsonData from '../../utils/project-table-data.json';
 import '../../Styles/app.scss';
+import SimpleTable from '../table/simpleTable';
 
-export default function ProjectTable() {
-  const [tableData, setTableData] = useState(jsonData);
+export default function ProjectTable({ tableDataInput, columnDataForProjects, ...other }) {
+  const [tableData, setTableData] = useState(tableDataInput);
   const [editingRows, setEditingRows] = useState({});
   const onRowEditChange = (e) => {
-    console.log(e);
     setEditingRows(e.data);
   };
 
@@ -45,50 +45,7 @@ export default function ProjectTable() {
         <Button label="Add New Project" onClick={addNewProject} />
       </Grid>
       <Grid item xs={12} lg={12}>
-        <DataTable
-          value={tableData}
-          showGridlines
-          responsiveLayout="scroll"
-          resizableColumns
-          columnResizeMode="expand"
-          size="small"
-          rows={10}
-          editMode="row"
-          editingRows={editingRows}
-          onRowEditChange={onRowEditChange}
-          dataKey="id"
-        >
-          <Column field="status" header="Status" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
-          <Column
-            field="prjno"
-            header="Project Name"
-            editor={(options) => textEditor(options)}
-            style={{ width: '10%' }}
-          />
-          <Column
-            field="lcnm"
-            header="Location Name"
-            editor={(options) => textEditor(options)}
-            style={{ width: '10%' }}
-          />
-          <Column
-            field="bspct"
-            header="Business ProjCat"
-            editor={(options) => textEditor(options)}
-            style={{ width: '10%' }}
-          />
-          <Column field="sdt" header="Start Date" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
-          <Column field="edt" header="End Date" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
-          <Column
-            field="extp"
-            header="Expiry Type"
-            editor={(options) => textEditor(options)}
-            style={{ width: '10%' }}
-          />
-          <Column field="grpd" header="Grouped" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
-          <Column field="prm" header="Primary" editor={(options) => textEditor(options)} style={{ width: '10%' }} />
-          <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }} />
-        </DataTable>
+        <SimpleTable rowData={tableDataInput} headerData={columnDataForProjects} editingRows={editingRows} {...other} />
       </Grid>
     </Grid>
   );

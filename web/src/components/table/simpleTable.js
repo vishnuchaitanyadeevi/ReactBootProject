@@ -18,7 +18,6 @@ export default function SimpleTable({ rowData, headerData, ...other }) {
   const [editingRows, setEditingRows] = useState({});
   const [filterState, setFilterState] = useState({});
   const onRowEditChange = (e) => {
-    console.log(e);
     setEditingRows(e.data);
   };
 

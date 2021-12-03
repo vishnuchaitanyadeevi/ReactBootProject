@@ -229,7 +229,7 @@ function PrimeGrid() {
             editMode="row"
             onRowEditComplete={onRowEditComplete}
             reorderableColumns
-            dataKey="id"
+            dataKey="code"
             // onRowReorder={onRowReorder}
             scrollable
             scrollHeight="400px"

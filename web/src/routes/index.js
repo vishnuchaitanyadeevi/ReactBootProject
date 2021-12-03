@@ -100,7 +100,11 @@ export default function Router() {
           element: <ServiceDashboardPage />
         },
         {
-          path: '/contracts-creation',
+          path: '/contract/add',
+          element: <ContractsCreation />
+        },
+        {
+          path: '/contract/edit/1',
           element: <ContractsCreation />
         },
         {
