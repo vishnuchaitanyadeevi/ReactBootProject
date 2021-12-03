@@ -7,6 +7,7 @@ import Avatar from '../components/Avatar';
 import alertDialog from '../components/AlertDialog';
 import Dialog from '../components/Dialog';
 import { UploadAvatar } from '../components/upload';
+import CustomersList from '../components/CustomersList';
 import MyComponent from './MyComponent';
 
 function ComponentsPage() {
@@ -181,6 +182,17 @@ function ComponentsPage() {
           </Grid>
           <Grid style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} item xs={12} sm={3}>
             <BasicDatePicker label="Select Date" />
+          </Grid>
+        </Grid>
+        <Divider style={{ backgroundColor: '#212B36', marginTop: '1rem' }} />
+
+        {/* Customers List Picker Component */}
+        <Grid container spacing={3}>
+          <Grid style={{ margin: '1rem' }} item xs={12} sm={12}>
+            <Typography variant="h6">Customers List Component</Typography>
+          </Grid>
+          <Grid style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} item xs={12} sm={3}>
+            <CustomersList />
           </Grid>
         </Grid>
       </div>

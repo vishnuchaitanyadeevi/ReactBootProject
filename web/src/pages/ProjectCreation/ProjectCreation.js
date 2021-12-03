@@ -10,6 +10,7 @@ import {
   Button
 } from '@mui/material';
 import { ArrowRight } from '@mui/icons-material/';
+import useSettings from '../../hooks/useSettings';
 import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget';
 import RadioGroupComponent from './RadioGroupComponent';
 import BasicDatePicker from '../../components/pickers/BasicDatePicker';
@@ -60,6 +61,7 @@ const endDateTypes = [
 ];
 
 function ProjectCreation() {
+  const { themeMode, onChangeMode } = useSettings();
   const [uploadProject, setUploadProject] = useState({ images: [] });
   const handleChangeExecutionType = (e) => console.log('execution type', e.target.value);
   const handleChangeServiceFrequencySetting = (e) => console.log('service frequency setting', e.target.value);
@@ -273,7 +275,14 @@ function ProjectCreation() {
 
             <Grid item xs={12} sm={6}>
               <Typography variant="h5">Service Recurrence</Typography>
-              <Grid item xs={12} sm={12} className="service_invoice_recurrence_cls" />
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                className={
+                  themeMode === 'light' ? 'service_invoice_recurrence_light' : 'service_invoice_recurrence_dark'
+                }
+              />
             </Grid>
           </Grid>
 
@@ -297,7 +306,14 @@ function ProjectCreation() {
 
             <Grid item xs={12} sm={6}>
               <Typography variant="h5">Invoice Recurrence</Typography>
-              <Grid item xs={12} sm={12} className="service_invoice_recurrence_cls" />
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                className={
+                  themeMode === 'light' ? 'service_invoice_recurrence_light' : 'service_invoice_recurrence_dark'
+                }
+              />
             </Grid>
           </Grid>
 

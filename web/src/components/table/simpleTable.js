@@ -15,7 +15,7 @@ import useSettings from '../../hooks/useSettings';
 import jsonData from '../../utils/project-table-data.json';
 import '../../Styles/app.scss';
 
-export default function SimpleTable({ rowData, headerData, ...other }) {
+export default function SimpleTable({ rowData, headerData, editOption, ...other }) {
   const { themeMode, onChangeMode } = useSettings();
   const [tableData, setTableData] = useState(rowData);
   const [editingRows, setEditingRows] = useState({});
@@ -100,7 +100,9 @@ export default function SimpleTable({ rowData, headerData, ...other }) {
           {headerData.map((headerElement) => (
             <Column editor={(options) => switchEditor(headerElement.editorElement, options)} {...headerElement} />
           ))}
-          <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }} />
+          {editOption ? (
+            <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }} />
+          ) : null}
         </DataTable>
       </Grid>
     </Grid>
