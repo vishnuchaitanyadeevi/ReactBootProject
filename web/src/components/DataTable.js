@@ -176,13 +176,13 @@ function ContractList({
           <Column
             columnKey="edit"
             rowEditor
-            headerstyle={{ width: '10%', minWidth: '8rem' }}
+            headerstyle={{ width: '10%', minWidth: '8rem', paddingBottom: '0.1rem', paddingTop: '0.1rem' }}
             bodyStyle={{ textAlign: 'center' }}
             style={{
-              minWidth: '5rem',
-              maxWidth: '5rem',
+              minWidth: '10rem',
+              maxWidth: '10rem',
               paddingBottom: '0.1rem',
-              paddingTop: '0.1rem'
+              paddingTop: '0.8rem'
             }}
             reorderable={false}
           />
