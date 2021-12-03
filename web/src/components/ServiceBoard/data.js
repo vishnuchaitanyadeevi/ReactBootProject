@@ -1233,7 +1233,7 @@ export const serviceTypes = [
   { name: 'NotCompleted', colorCode: '#e3aa20', type: 'notCompleted' },
   { name: 'Canceled', colorCode: '#ee3327', type: 'cancelled' },
   { name: 'Refill', colorCode: '#d5dfe5', type: 'refill' },
-  { name: 'Maintainance', colorCode: '#d5dfe5', type: 'maintenance' },
+  { name: 'Maintenance', colorCode: '#d5dfe5', type: 'maintenance' },
   { name: 'CallOut', colorCode: '#009fda', type: 'callOut' },
   { name: 'Audit', colorCode: '#d5dfe5', type: 'audit' }
 ];
