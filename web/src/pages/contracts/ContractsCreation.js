@@ -18,6 +18,7 @@ import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget'
 import './ContractsCreation.scss';
 import SimpleTable from '../../components/table/simpleTable';
 import jsonData from '../../utils/project-table-data.json';
+import { isEmail, isPhone } from '../../utils/utils';
 
 export default function ContractsCreation() {
   const countryArr = ['SA'];
@@ -32,6 +33,43 @@ export default function ContractsCreation() {
   const [axDefaultexpanded, setAxDefaultexpanded] = useState(true);
   // const [tableData, setTableData] = useState({});
   let tableData = [];
+  const [contractData, setContractData] = useState({
+    // customer details
+    country: '',
+    region: '',
+    customerNo: '',
+    customerName: '',
+    customerAddress: '',
+    crNo: '',
+    salesman: '',
+    // contract details
+    contractNo: '',
+    contractName: '',
+    contractSignOn: '',
+    contractStartDate: '',
+    generalDiscount: '',
+    status: '',
+    // Signatory information
+    role: '',
+    name: '',
+    position: '',
+    address: '',
+    phoneNo: '',
+    faxNo: '',
+    mobileNo: '',
+    emailId: '',
+    note: '',
+    // Additional information
+    specialAttention: '',
+    scopeOfContract: '',
+    uploadContractFile: '',
+    // AX default fields
+    legalEntity: '',
+    transactionCurrency: '',
+    accountCurrency: '',
+    fundingType: ''
+  });
+  const [isError, setIsError] = useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setAxDefaultexpanded(isExpanded ? panel : false);
   };
