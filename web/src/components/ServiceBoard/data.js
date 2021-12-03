@@ -7,11 +7,7 @@ const card = {
 
 const laneStyle = {
   backgroundColor: 'transparent',
-  // width: '11rem',
   width: '9rem',
-  /*  direction change CSS */
-  // marginRight: '-2.7rem',
-  /*  direction change CSS */
   height: '90vh',
   margin: '-0.2rem'
 };
