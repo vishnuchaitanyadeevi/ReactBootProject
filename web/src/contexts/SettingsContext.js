@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { createContext } from 'react';
+import { LANGUAGE_CODES } from '../utils/constants';
 // hooks
 import useLocalStorage from '../hooks/useLocalStorage';
 // theme
@@ -103,8 +104,10 @@ const initialState = {
   onChangeMode: () => {},
   onChangeDirection: () => {},
   onChangeColor: () => {},
+  onChangeLang: () => {},
   setColor: PRIMARY_COLOR[0],
-  colorOption: []
+  colorOption: [],
+  lang: LANGUAGE_CODES.EN
 };
 
 const SettingsContext = createContext(initialState);
@@ -118,6 +121,10 @@ function SettingsProvider({ children }) {
     themeMode: 'light',
     themeDirection: 'ltr',
     themeColor: 'default'
+  });
+
+  const [lang, setLang] = useLocalStorage('lang', {
+    lang: LANGUAGE_CODES.EN
   });
 
   const onChangeMode = (event) => {
@@ -141,16 +148,23 @@ function SettingsProvider({ children }) {
     });
   };
 
+  const onChangeLang = (lang) => {
+    setLang(lang);
+  };
+
   return (
     <SettingsContext.Provider
       value={{
         ...settings,
+        lang,
         // Mode
         onChangeMode,
         // Direction
         onChangeDirection,
         // Color
         onChangeColor,
+        // Lang
+        onChangeLang,
         setColor: SetColor(settings.themeColor),
         colorOption: PRIMARY_COLOR.map((color) => ({
           name: color.name,

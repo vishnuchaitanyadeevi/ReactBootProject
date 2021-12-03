@@ -45,7 +45,7 @@
   "Demo": "تجريبي",
   "Logout": "تسجيل خروج",
   "Change Password": "تغيير كلمة المرور",
-  "serviceBoard": "service board",
+  "serviceBoard": "مجلس الخدمة",
   "serviceDashboard": {
     "addCallOut": "إضافة مكالمة",
     "sortBy": "صنف حسب",
@@ -58,6 +58,8 @@
     "refill": "اعادة تعبئه",
     "maintenance": "صيانة",
     "callOut": "صرخ",
-    "audit": "مراجعة"
+    "audit": "مراجعة",
+    "highene": "هايين",
+    "service": "خدمة"
   }
 }

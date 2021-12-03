@@ -1,9 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Grid, Tooltip, Popover } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { isArray } from 'lodash';
 
+import { COLOR_CODES } from './data';
+import { THEME } from '../../utils/constants';
+import useSettings from '../../hooks/useSettings';
+
 export default function CustomLaneHeader({ day, date, serviceMensOnLeave }) {
+  const { t } = useTranslation();
+  const { themeMode } = useSettings();
+  const { DRK, LGT } = COLOR_CODES;
+
+  const [colorCode, setColorCode] = useState(themeMode === THEME.LIGHT ? LGT : DRK);
+  const {
+    CARD: { BG, TXT }
+  } = colorCode;
+
   const MAX_SHOW = 5;
   const [maxLeave, setMaxLeave] = useState(isArray(serviceMensOnLeave) && serviceMensOnLeave.length > MAX_SHOW);
 
@@ -18,8 +32,10 @@ export default function CustomLaneHeader({ day, date, serviceMensOnLeave }) {
 
   const open = Boolean(anchorEl);
 
+  useEffect(() => setColorCode(themeMode === THEME.LIGHT ? LGT : DRK), [themeMode]);
+
   return (
-    <Grid className="custom-header-section">
+    <Grid className="custom-header-section" style={{ backgroundColor: BG, color: TXT }}>
       <header className="custom-header">
         {day} {date}
       </header>
@@ -34,7 +50,7 @@ export default function CustomLaneHeader({ day, date, serviceMensOnLeave }) {
                 />
               </Tooltip>
             ))}
-            <ExpandMoreIcon className="show-more-icn" onClick={handleClick} />
+            <ExpandMoreIcon className="show-more-icn" onClick={handleClick} style={{ color: TXT }} />
             <Popover
               id="more-servicemen"
               open={open}

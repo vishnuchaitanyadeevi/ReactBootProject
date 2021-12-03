@@ -49,7 +49,7 @@
     "addCallOut": "Add CallOut",
     "sortBy": "Sort By",
     "serviceMen": "Servicemen",
-    "customer": "customer",
+    "customers": "Customers",
     "complete": "Completed",
     "scheduled": "Scheduled",
     "notCompleted": "Not Completed",
@@ -57,7 +57,9 @@
     "refill": "Refill",
     "maintenance": "Maintainance",
     "callOut": "CallOut",
-    "audit": "Audit"
+    "audit": "Audit",
+    "highene": "Highene",
+    "service": "Service"
   }
 }
   

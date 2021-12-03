@@ -28,7 +28,7 @@ const MENU_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function AccountPopover() {
-  const { onChangeDirection } = useSettings();
+  const { onChangeDirection, onChangeLang } = useSettings();
   const { t, i18n } = useTranslation();
   const { EN, AR } = LANGUAGE_CODES;
   const [language, setLanguage] = useState(EN);
@@ -56,6 +56,7 @@ export default function AccountPopover() {
   useEffect(() => {
     onChangeDirection({ target: { value: LANGUAGES_CODES_RTL_ORIENTATION.includes(language) ? 'rtl' : 'ltr' } });
     i18n.changeLanguage(language);
+    onChangeLang(language);
   }, [language]);
   return (
     <>

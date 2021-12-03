@@ -1,9 +1,14 @@
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Grid, Tooltip } from '@mui/material';
 import HandymanIcon from '@mui/icons-material/Handyman';
 import PanToolIcon from '@mui/icons-material/PanTool';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import RunningWithErrorsOutlinedIcon from '@mui/icons-material/RunningWithErrorsOutlined';
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
+import { COLOR_CODES } from './data';
+import { THEME } from '../../utils/constants';
+import useSettings from '../../hooks/useSettings';
 
 import { MovableCardWrapper } from './styles/Base';
 
@@ -18,8 +23,23 @@ export default function CustomCard({
   cardStyle,
   cardColor
 }) {
+  const { t } = useTranslation();
+  const { themeMode } = useSettings();
+  const { DRK, LGT } = COLOR_CODES;
+
+  const [colorCode, setColorCode] = useState(themeMode === THEME.LIGHT ? LGT : DRK);
+  const {
+    CARD: { BG, TXT }
+  } = colorCode;
+
+  useEffect(() => setColorCode(themeMode === THEME.LIGHT ? LGT : DRK), [themeMode]);
+
   return (
-    <MovableCardWrapper onClick={onClick} style={cardStyle} className={className}>
+    <MovableCardWrapper
+      onClick={onClick}
+      style={{ ...cardStyle, backgroundColor: BG, color: TXT }}
+      className={className}
+    >
       <header
         className="custom-card-header"
         style={{
@@ -29,62 +49,62 @@ export default function CustomCard({
         <div style={{ fontSize: 14, fontWeight: 'bold' }}>{name}</div>
         {/* {showDeleteButton && <DeleteButton onClick={clickDelete} />} */}
       </header>
-      <Grid className="custom-card-section" style={{ color: '#f1f1f1' }}>
+      <Grid className="custom-card-section">
         <Grid>
           {startDate} [{occurences}]
         </Grid>
         <Grid>
           <span style={{ visibility: 'hidden' }}>''</span>
           {service.audit && (
-            <Tooltip title="Audit" arrow>
+            <Tooltip title={t('serviceDashboard.audit')} arrow>
               <span className="service-type-icons circle">A</span>
             </Tooltip>
           )}
           {service.maintenance && (
-            <Tooltip title="Audit" arrow>
+            <Tooltip title={t('serviceDashboard.maintenance')} arrow>
               <span className="service-type-icons circle">M</span>
             </Tooltip>
           )}
           {service.refill && (
-            <Tooltip title="Refill" arrow>
+            <Tooltip title={t('serviceDashboard.refill')} arrow>
               <span className="service-type-icons circle">R</span>
             </Tooltip>
           )}
           {service.callOut && (
-            <Tooltip title="CallOut" arrow>
+            <Tooltip title={t('serviceDashboard.callOut')} arrow>
               <span className="service-type-icons circle">C</span>
             </Tooltip>
           )}
           {service.highene && (
-            <Tooltip title="Highene" arrow>
+            <Tooltip title={t('serviceDashboard.highene')} arrow>
               <span className="service-type-icons">
                 <PanToolIcon className="service-icon" />
               </span>
             </Tooltip>
           )}
           {service.scheduled && (
-            <Tooltip title="Scheduled" arrow>
+            <Tooltip title={t('serviceDashboard.scheduled')} arrow>
               <span className="service-type-icons">
                 <HandymanIcon className="service-icon" />
               </span>
             </Tooltip>
           )}
           {service.complete && (
-            <Tooltip title="Completed" arrow>
+            <Tooltip title={t('serviceDashboard.completed')} arrow>
               <span className="service-type-icons">
                 <CheckCircleOutlinedIcon className="service-icon" />
               </span>
             </Tooltip>
           )}
           {service.notCompleted && (
-            <Tooltip title="Not Completed" arrow>
+            <Tooltip title={t('serviceDashboard.notCompleted')} arrow>
               <span className="service-type-icons">
                 <RunningWithErrorsOutlinedIcon className="service-icon" />
               </span>
             </Tooltip>
           )}
           {service.cancelled && (
-            <Tooltip title="Canceled" arrow>
+            <Tooltip title={t('serviceDashboard.canceled')} arrow>
               <span className="service-type-icons">
                 <HighlightOffOutlinedIcon className="service-icon" />
               </span>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { isArray } from 'lodash';
-import { Grid, Stack, Button, MenuItem, TextField, Popover } from '@mui/material';
+import { Grid, Stack, Button, MenuItem, TextField, Popover, Tooltip } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
@@ -10,22 +10,34 @@ import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
 import ServiceBoard from '../components/ServiceBoard/ServiceBoard';
 import ServiceMens from '../components/ServiceBoard/ServiceMens';
 import ServiceTypes from '../components/ServiceBoard/ServiceTypes';
-import { serviceData } from '../components/ServiceBoard/data';
+import { serviceDataEn, serviceDataAr, COLOR_CODES } from '../components/ServiceBoard/data';
 
-import { MAX_LANES, GROUP_BY } from '../utils/constants';
+import { MAX_LANES, GROUP_BY, THEME, LANGUAGE_CODES } from '../utils/constants';
 import { sortListOfObjects } from '../utils/utils';
+import useSettings from '../hooks/useSettings';
 
 import '../components/ServiceBoard/ServiceBoard.css';
 
 export default function ServiceDashboard() {
   const { t } = useTranslation();
+  const { lang } = useSettings();
+
   const { SERVICE_MEN, CUSTOMER } = GROUP_BY;
+  const [serviceData, setServiceData] = useState(serviceDataEn);
   const serviceDataLen = serviceData.length;
   const [start, setStart] = useState(0);
   const [data, setData] = useState([]);
   const [sortBy, setSortBy] = useState(SERVICE_MEN);
   const [servicemenAnchorEl, setServicemenAnchorEl] = useState(null);
   const [serviceTypeAnchorEl, setServiceTypeAnchorEl] = useState(null);
+
+  const { themeMode } = useSettings();
+  const { DRK, LGT } = COLOR_CODES;
+
+  const [colorCode, setColorCode] = useState(themeMode === THEME.LIGHT ? LGT : DRK);
+  const {
+    FILTER_BOX: { BORDER }
+  } = colorCode;
 
   const checkValidUpdateForStart = (value) => {
     switch (true) {
@@ -85,8 +97,6 @@ export default function ServiceDashboard() {
     }
   };
 
-  useEffect(changeData, [start]);
-
   const handleSortByChange = (e) => {
     const val = e.target.value;
     setSortBy(val);
@@ -94,11 +104,17 @@ export default function ServiceDashboard() {
     changeData();
   };
 
+  useEffect(changeData, [start, serviceData]);
+  useEffect(() => setColorCode(themeMode === THEME.LIGHT ? LGT : DRK), [themeMode]);
+  useEffect(() => {
+    setServiceData(lang === LANGUAGE_CODES.AR ? serviceDataAr : serviceDataEn);
+  }, [lang]);
+
   return (
     <>
       <Grid container>
         <Grid item xs={12}>
-          <div className="filter-section" />
+          <div className="filter-section" style={{ borderColor: BORDER }} />
         </Grid>
         <Grid item xs={12} md={2}>
           <Stack>
@@ -129,14 +145,16 @@ export default function ServiceDashboard() {
         </Grid>
         <Grid item xs={12} md={6.5} />
         <Grid item xs={12} md={2}>
-          <Button variant="contained" className="mt-half-rm add-callout-btn mr-1rm">
+          <Button variant="contained" className="mt-half-rm add-callout-btn mr-1rm pointer-cls">
             {t('serviceDashboard.addCallOut')}
           </Button>
-          <SupervisedUserCircleIcon
-            className="mt-half-rm mr-1rm"
-            style={{ float: 'right' }}
-            onClick={handleServicemenClick}
-          />
+          <Tooltip title={t(`serviceDashboard.serviceMen`)} arrow>
+            <SupervisedUserCircleIcon
+              className="mt-half-rm mr-1rm pointer-cls"
+              style={{ float: 'right' }}
+              onClick={handleServicemenClick}
+            />
+          </Tooltip>
           <Popover
             id="servicemen"
             open={servicemenOpen}
@@ -149,11 +167,13 @@ export default function ServiceDashboard() {
           >
             <ServiceMens />
           </Popover>
-          <HomeRepairServiceIcon
-            className="mt-half-rm mr-1rm"
-            style={{ float: 'right' }}
-            onClick={handleServiceTypeClick}
-          />
+          <Tooltip title={t('serviceDashboard.service')} arrow>
+            <HomeRepairServiceIcon
+              className="mt-half-rm mr-1rm pointer-cls"
+              style={{ float: 'right' }}
+              onClick={handleServiceTypeClick}
+            />
+          </Tooltip>
           <Popover
             id="serviceType"
             open={serviceTypeOpen}
