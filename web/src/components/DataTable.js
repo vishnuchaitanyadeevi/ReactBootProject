@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Grid, Typography, TextField, Button } from '@mui/material';
+import { Helmet } from 'react-helmet';
 import { InputText } from 'primereact/inputtext';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import useSettings from '../hooks/useSettings';
 import '../Styles/app.scss';
 
 function ContractList({
@@ -16,6 +18,7 @@ function ContractList({
   numericFields,
   numericFieldsExpandedData
 }) {
+  const { themeMode, onChangeMode } = useSettings();
   const [tableData, setTableData] = useState(data);
   const [selected, setSelected] = useState(null);
   const [expandedRows, setExpandedRows] = useState(null);
@@ -37,7 +40,7 @@ function ContractList({
   const header = (
     <div className="datatable-crud-demo">
       <div className="table-header">
-        <h4>CONTRACT DETAILS</h4>
+        <h4>CONTRACTS</h4>
         <span className="p-input-icon-left">
           <i className="pi pi-search" />
           <InputText
@@ -83,6 +86,12 @@ function ContractList({
   );
   return (
     <div className="datatable-rowexpansion-demo">
+      <Helmet>
+        <link
+          rel="stylesheet"
+          href={`https://unpkg.com/primereact/resources/themes/lara-${themeMode}-indigo/theme.css`}
+        />
+      </Helmet>
       <div className="card">
         <DataTable
           editMode="row"
