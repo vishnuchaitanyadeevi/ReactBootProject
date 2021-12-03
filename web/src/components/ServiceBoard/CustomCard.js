@@ -40,7 +40,7 @@ export default function CustomCard({
               <span className="service-type-icons circle">A</span>
             </Tooltip>
           )}
-          {service.Maintainance && (
+          {service.maintenance && (
             <Tooltip title="Audit" arrow>
               <span className="service-type-icons circle">M</span>
             </Tooltip>
@@ -91,7 +91,7 @@ export default function CustomCard({
             </Tooltip>
           )}
         </Grid>
-        <Grid style={{ fontWeight: 'bold' }}>{address}</Grid>
+        <span style={{ fontWeight: 'bold' }}>{address}</span>
       </Grid>
     </MovableCardWrapper>
   );

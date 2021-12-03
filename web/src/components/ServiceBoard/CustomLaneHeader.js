@@ -24,17 +24,16 @@ export default function CustomLaneHeader({ day, date, serviceMensOnLeave }) {
         {day} {date}
       </header>
       <Grid>
-        {isArray(serviceMensOnLeave) &&
-          serviceMensOnLeave.slice(0, MAX_SHOW).map((men) => (
-            <Tooltip title={men.name} arrow>
-              <span
-                className="service-men-on-leave"
-                style={{ backgroundColor: men.colorCode, borderColor: men.colorCode }}
-              />
-            </Tooltip>
-          ))}
-        {maxLeave && (
+        {isArray(serviceMensOnLeave) && (
           <>
+            {serviceMensOnLeave.slice(0, MAX_SHOW).map((men) => (
+              <Tooltip title={men.name} arrow>
+                <span
+                  className="service-men-on-leave"
+                  style={{ backgroundColor: men.colorCode, borderColor: men.colorCode }}
+                />
+              </Tooltip>
+            ))}
             <ExpandMoreIcon className="show-more-icn" onClick={handleClick} />
             <Popover
               id="more-servicemen"
@@ -58,7 +57,6 @@ export default function CustomLaneHeader({ day, date, serviceMensOnLeave }) {
             </Popover>
           </>
         )}
-        ;
       </Grid>
     </Grid>
   );

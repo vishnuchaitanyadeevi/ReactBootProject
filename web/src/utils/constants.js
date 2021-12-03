@@ -32,7 +32,7 @@ export const SERVICE_TYPES = {
 };
 
 export const GROUP_BY = {
-  SERVICE_MEN: 'servicemen',
+  SERVICE_MEN: 'serviceMen',
   CUSTOMER: 'customer'
 };
 

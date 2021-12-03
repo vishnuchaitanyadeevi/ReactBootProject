@@ -27,12 +27,11 @@ export default function ServiceBoard({ data = [] }) {
     <Board
       components={{ Card: CustomCard, LaneHeader: CustomLaneHeader }}
       data={{ lanes: data }}
-      draggable
       tagStyle={{ fontSize: '80%' }}
       style={{
         backgroundColor: 'transparent',
-        paddingLeft: '0',
-        paddingRight: '2.1rem'
+        height: '75vh'
+        // overflowY: 'auto'
       }}
       onCardClick={onCardClickHandler}
       handleDragEnd={onCardDragEndHandler}

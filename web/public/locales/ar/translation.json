@@ -44,5 +44,20 @@
   "Export": "يصدر",
   "Demo": "تجريبي",
   "Logout": "تسجيل خروج",
-  "Change Password": "تغيير كلمة المرور"
+  "Change Password": "تغيير كلمة المرور",
+  "serviceBoard": "service board",
+  "serviceDashboard": {
+    "addCallOut": "إضافة مكالمة",
+    "sortBy": "صنف حسب",
+    "serviceMen": "العسكريين",
+    "customers": "عميل",
+    "complete": "مكتمل",
+    "scheduled": "المقرر",
+    "notCompleted": "غير مكتمل",
+    "cancelled": "ألغيت",
+    "refill": "اعادة تعبئه",
+    "maintenance": "صيانة",
+    "callOut": "صرخ",
+    "audit": "مراجعة"
+  }
 }

@@ -1,5 +1,8 @@
-.smooth-dnd-container .vertical {
+/* .smooth-dnd-container .vertical {
   margin-right: -2rem;
+} */
+.jFanTw {
+  min-width: 8rem !important;
 }
 .smooth-dnd-container.horizontal > .smooth-dnd-draggable-wrapper > .smooth-dnd-draggable-wrapper {
   width: 9rem;
@@ -11,7 +14,9 @@
 
 .smooth-dnd-container.vertical > .smooth-dnd-draggable-wrapper {
   width: 8rem;
-  margin-left: 3.8rem;
+  /*  direction change CSS */
+  /* margin-left: 3rem; */
+  /*  direction change CSS */
   border-radius: 12px;
 }
 
@@ -36,10 +41,10 @@
   height: 18px;
 }
 
-.service-board-grid {
+/* .service-board-grid {
   height: 100%;
   margin-top: -2rem;
-}
+} */
 
 .service-mens-stack {
   margin: 0;
@@ -126,7 +131,8 @@
   flex-direction: row;
   justify-content: space-between;
   color: #ffffff;
-  width: 10rem;
+  /* width: 10rem; */
+  width: 8rem;
   margin-bottom: 5px;
 }
 
@@ -140,8 +146,9 @@
   padding: 10px;
   margin-bottom: -5px;
   width: 8rem;
-  margin-left: 1rem;
+  /* margin-left: 1rem; */
   background-color: #424242;
+  height: 4rem;
 }
 
 .custom-header {
@@ -156,8 +163,6 @@
 .add-callout-btn {
   background-color: #01a9d9;
   float: right;
-  margin-top: -1rem;
-  margin-bottom: -1rem;
 }
 
 .show-more-icn {

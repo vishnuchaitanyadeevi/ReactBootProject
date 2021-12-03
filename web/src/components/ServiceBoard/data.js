@@ -2,21 +2,81 @@ const card = {
   cardColor: '#66ff00',
   cardStyle: {
     borderRadius: 6,
-    marginBottom: 15,
     backgroundColor: '#424242'
   }
 };
 
 const laneStyle = {
   backgroundColor: 'transparent',
-  width: '11rem',
-  marginRight: '-2.7rem'
+  // width: '11rem',
+  width: '9rem',
+  /*  direction change CSS */
+  // marginRight: '-2.7rem',
+  /*  direction change CSS */
+  height: '90vh',
+  margin: '-0.2rem'
 };
 
 export const serviceData = [
   // Sun
   {
     cards: [
+      {
+        ...card,
+        id: 'Card11',
+        laneId: 'lane1',
+        metadata: {
+          id: 'Card11'
+        },
+        name: 'Abdul Cader',
+        startDate: '19-2-2020',
+        occurences: 3,
+        address: 'Le Meridian Towers Kudai-Makkah Kudai road makkah',
+        service: {
+          complete: false,
+          notCompleted: false,
+          cancelled: false,
+          scheduled: false,
+          callOut: false,
+          audit: false,
+          refill: true,
+          highene: true
+        }
+      },
+      {
+        ...card,
+        id: 'Card12',
+        laneId: 'lane1',
+        metadata: {
+          id: 'Card12'
+        },
+        name: 'Abdul Cader',
+        startDate: '20-07-2020',
+        occurences: 0,
+        address: 'Samba Financial Group Fayha office branch',
+        service: {
+          scheduled: true,
+          refill: true,
+          highene: true
+        }
+      },
+      {
+        ...card,
+        id: 'Card13',
+        laneId: 'lane1',
+        metadata: {
+          id: 'Card13'
+        },
+        name: 'Abdul Cader',
+        startDate: '17-01-2021',
+        occurences: 0,
+        address: 'Tamimi Global Co Ltd (TAFGA) Dialysis centre near red sea mall',
+        service: {
+          scheduled: true,
+          refill: true,
+          highene: true
+        }
+      },
       {
         ...card,
         id: 'Card11',
@@ -102,8 +162,7 @@ export const serviceData = [
         address: 'Panda Retail Company Panda 3',
         service: {
           scheduled: true,
-          type: '#',
-          highene: true
+          maintenance: true
         }
       },
       {
@@ -119,7 +178,6 @@ export const serviceData = [
         address: 'Panda Retail Company Panda 1',
         service: {
           scheduled: true,
-          type: '#',
           highene: true
         }
       }
@@ -259,8 +317,7 @@ export const serviceData = [
         occurences: 0,
         address: 'Panda Retail Company Thahassusi makkah 225',
         service: {
-          scheduled: true,
-          maintenance: true
+          scheduled: true
         }
       },
       {
@@ -361,8 +418,7 @@ export const serviceData = [
         occurences: 2,
         address: 'Emirates National Poultry Farms L.L.C Al Ain',
         service: {
-          scheduled: true,
-          maintenance: true
+          scheduled: true
         }
       },
       {
@@ -407,13 +463,12 @@ export const serviceData = [
         metadata: {
           id: 'Card81'
         },
-        name: 'Abbas Qures',
+        name: 'Abbas Qureshi',
         startDate: '19-05-2021',
         occurences: 0,
         address: 'Panda Retail Comoany Al Awali makkah 20011',
         service: {
-          scheduled: true,
-          maintenance: true
+          scheduled: true
         }
       },
       {
@@ -429,7 +484,6 @@ export const serviceData = [
         address: 'Dr. Amal Zabeedi - Makkah Makkah branch',
         service: {
           scheduled: true,
-          maintenance: true,
           highene: true
         }
       }
@@ -438,8 +492,7 @@ export const serviceData = [
     id: 'lane8',
     day: 'Sun',
     date: '21-11-2021',
-    style: laneStyle,
-    serviceMensOnLeave: [{ name: 'Eldho', colorCode: '#fa05db' }]
+    style: laneStyle
   },
   // Mon
   {

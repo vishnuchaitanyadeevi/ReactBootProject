@@ -43,6 +43,21 @@
   "Export": "Export",
   "Demo": "Demo",
   "Logout": "Logout",
-  "Change Password": "Change Password"
+  "Change Password": "Change Password",
+  "serviceBoard": "service board",
+  "serviceDashboard": {
+    "addCallOut": "Add CallOut",
+    "sortBy": "Sort By",
+    "serviceMen": "Servicemen",
+    "customer": "customer",
+    "complete": "Completed",
+    "scheduled": "Scheduled",
+    "notCompleted": "Not Completed",
+    "cancelled": "Canceled",
+    "refill": "Refill",
+    "maintenance": "Maintainance",
+    "callOut": "CallOut",
+    "audit": "Audit"
+  }
 }
   
