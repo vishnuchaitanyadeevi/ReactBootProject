@@ -19,6 +19,7 @@ export default function CustomCard({
   startDate,
   occurences,
   address,
+  companyName,
   service,
   cardStyle,
   cardColor
@@ -51,7 +52,9 @@ export default function CustomCard({
       </header>
       <Grid className="custom-card-section">
         <Grid>
-          {startDate} [{occurences}]
+          <Tooltip title={t('serviceDashboard.lastServiceDate')} arrow>
+            {startDate} [{occurences}]
+          </Tooltip>
         </Grid>
         <Grid>
           <span style={{ visibility: 'hidden' }}>''</span>
@@ -111,7 +114,12 @@ export default function CustomCard({
             </Tooltip>
           )}
         </Grid>
-        <span className="custom-card-address">{address}</span>
+        <Tooltip title={t('serviceDashboard.companyName')} arrow>
+          <span className="custom-card-address">{companyName}</span>
+        </Tooltip>
+        <Tooltip title={t('serviceDashboard.companyName')} arrow>
+          <span className="custom-card-address">{address}</span>
+        </Tooltip>
       </Grid>
     </MovableCardWrapper>
   );

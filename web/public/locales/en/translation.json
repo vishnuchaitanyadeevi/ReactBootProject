@@ -59,7 +59,10 @@
     "callOut": "CallOut",
     "audit": "Audit",
     "highene": "Highene",
-    "service": "Service"
+    "service": "Service",
+    "companyName": "Company Name",
+    "customerName": "Customer Name",
+    "lastServiceDate": "Last Service Date"
   }
 }
   

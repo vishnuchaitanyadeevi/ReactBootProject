@@ -26,7 +26,8 @@ export const serviceDataEn = [
         name: 'Abdul Cader',
         startDate: '19-2-2020',
         occurences: 3,
-        address: 'Le Meridian Towers Kudai-Makkah Kudai road makkah',
+        companyName: 'Le Meridian Towers',
+        address: 'Kudai-Makkah Kudai road makkah',
         service: {
           complete: false,
           notCompleted: false,
@@ -48,7 +49,7 @@ export const serviceDataEn = [
         name: 'Abdul Cader',
         startDate: '20-07-2020',
         occurences: 0,
-        address: 'Samba Financial Group Fayha office branch',
+        companyName: 'Samba Financial Group Fayha office branch',
         service: {
           scheduled: true,
           refill: true,
@@ -65,7 +66,7 @@ export const serviceDataEn = [
         name: 'Abdul Cader',
         startDate: '17-01-2021',
         occurences: 0,
-        address: 'Tamimi Global Co Ltd (TAFGA) Dialysis centre near red sea mall',
+        companyName: 'Tamimi Global Co Ltd (TAFGA) Dialysis centre near red sea mall',
         service: {
           scheduled: true,
           refill: true,
@@ -82,7 +83,7 @@ export const serviceDataEn = [
         name: 'Abdul Cader',
         startDate: '19-2-2020',
         occurences: 3,
-        address: 'Le Meridian Towers Kudai-Makkah Kudai road makkah',
+        companyName: 'Le Meridian Towers Kudai-Makkah Kudai road makkah',
         service: {
           complete: false,
           notCompleted: false,
@@ -104,7 +105,7 @@ export const serviceDataEn = [
         name: 'Abdul Cader',
         startDate: '20-07-2020',
         occurences: 0,
-        address: 'Samba Financial Group Fayha office branch',
+        companyName: 'Samba Financial Group Fayha office branch',
         service: {
           scheduled: true,
           refill: true,
@@ -121,7 +122,7 @@ export const serviceDataEn = [
         name: 'Abdul Cader',
         startDate: '17-01-2021',
         occurences: 0,
-        address: 'Tamimi Global Co Ltd (TAFGA) Dialysis centre near red sea mall',
+        companyName: 'Tamimi Global Co Ltd (TAFGA) Dialysis centre near red sea mall',
         service: {
           scheduled: true,
           refill: true,
@@ -154,7 +155,7 @@ export const serviceDataEn = [
         name: 'Abdulla Sherieff',
         startDate: '19-05-2021',
         occurences: 8,
-        address: 'Panda Retail Company Panda 3',
+        companyName: 'Panda Retail Company Panda 3',
         service: {
           scheduled: true,
           maintenance: true
@@ -170,7 +171,7 @@ export const serviceDataEn = [
         name: 'Abdulla Sherieff',
         startDate: '19-05-2021',
         occurences: 8,
-        address: 'Panda Retail Company Panda 1',
+        companyName: 'Panda Retail Company Panda 1',
         service: {
           scheduled: true,
           highene: true
@@ -202,7 +203,7 @@ export const serviceDataEn = [
         name: 'Abdul Cader',
         startDate: '21-07-2020',
         occurences: 0,
-        address: 'Samba Financial Groug Bawadi branch',
+        companyName: 'Samba Financial Groug Bawadi branch',
         service: {
           scheduled: true,
           refill: true,
@@ -219,7 +220,7 @@ export const serviceDataEn = [
         name: 'Abdul Cader',
         startDate: '20-07-2020',
         occurences: 0,
-        address: 'Samba Financial Group Faiha building branch',
+        companyName: 'Samba Financial Group Faiha building branch',
         service: {
           scheduled: true,
           refill: true,
@@ -254,7 +255,7 @@ export const serviceDataEn = [
         name: 'Abdul Cader',
         startDate: '23-05-2021',
         occurences: 90,
-        address: 'Panda Retail Company Makkah iskan 220',
+        companyName: 'Panda Retail Company Makkah iskan 220',
         service: {
           scheduled: true,
           refill: true
@@ -270,7 +271,7 @@ export const serviceDataEn = [
         name: 'Abdul Cader',
         startDate: '30-01-2020',
         occurences: 1,
-        address: 'Makkah Clock Royal Tower (Fairmont) Emaar Hotel',
+        companyName: 'Makkah Clock Royal Tower (Fairmont) Emaar Hotel',
         service: {
           scheduled: true,
           refill: true,
@@ -310,7 +311,7 @@ export const serviceDataEn = [
         name: 'Abbas Qureshi',
         startDate: '18-11-2021',
         occurences: 0,
-        address: 'Panda Retail Company Thahassusi makkah 225',
+        companyName: 'Panda Retail Company Thahassusi makkah 225',
         service: {
           scheduled: true
         }
@@ -325,7 +326,7 @@ export const serviceDataEn = [
         name: 'Abdul Cader',
         startDate: '23-05-2021',
         occurences: 9,
-        address: 'Support Services King Abdullah Medical City Makkah',
+        companyName: 'Support Services King Abdullah Medical City Makkah',
         service: {
           refill: true,
           highene: true
@@ -361,7 +362,7 @@ export const serviceDataEn = [
         name: 'Abbas Qureshi',
         startDate: '23-05-2021',
         occurences: -18,
-        address: 'Panda Retail Company Thahassusi makkah 225',
+        companyName: 'Panda Retail Company Thahassusi makkah 225',
         service: {
           scheduled: true,
           audit: true
@@ -378,7 +379,7 @@ export const serviceDataEn = [
         name: 'Abbas Qureshi',
         startDate: '23-05-2021',
         occurences: -18,
-        address: 'Panda Retail Company Hamdania 242',
+        companyName: 'Panda Retail Company Hamdania 242',
         service: {
           audit: true,
           highene: true
@@ -411,7 +412,7 @@ export const serviceDataEn = [
         name: 'Anid Muhammadali',
         startDate: '05-05-2021',
         occurences: 2,
-        address: 'Emirates National Poultry Farms L.L.C Al Ain',
+        companyName: 'Emirates National Poultry Farms L.L.C Al Ain',
         service: {
           scheduled: true
         }
@@ -427,7 +428,7 @@ export const serviceDataEn = [
         name: 'Afsal Basheer',
         startDate: '24-05-2021',
         occurences: 4,
-        address: 'Panda Retail Company Panda 46, Jubail',
+        companyName: 'Panda Retail Company Panda 46, Jubail',
         service: {
           scheduled: true,
           refill: true
@@ -461,7 +462,7 @@ export const serviceDataEn = [
         name: 'Abbas Qureshi',
         startDate: '19-05-2021',
         occurences: 0,
-        address: 'Panda Retail Comoany Al Awali makkah 20011',
+        companyName: 'Panda Retail Comoany Al Awali makkah 20011',
         service: {
           scheduled: true
         }
@@ -476,7 +477,7 @@ export const serviceDataEn = [
         name: 'Abdul Cader',
         startDate: '23-03-2021',
         occurences: 10,
-        address: 'Dr. Amal Zabeedi - Makkah Makkah branch',
+        companyName: 'Dr. Amal Zabeedi - Makkah Makkah branch',
         service: {
           scheduled: true,
           highene: true
@@ -502,7 +503,7 @@ export const serviceDataEn = [
         name: 'Abdul Cader',
         startDate: '06-05-2021',
         occurences: 6,
-        address: 'Mawred Al Baraka Co Hamdania',
+        companyName: 'Mawred Al Baraka Co Hamdania',
         service: {
           refill: true,
           highene: true
@@ -518,7 +519,7 @@ export const serviceDataEn = [
         name: 'Abdul Cader',
         startDate: '02-05-2021',
         occurences: 0,
-        address: 'Elaf Kindah Hotel Makkah ELAF KINDAH',
+        companyName: 'Elaf Kindah Hotel Makkah ELAF KINDAH',
         service: {
           scheduled: true,
           refill: true
@@ -550,7 +551,7 @@ export const serviceDataEn = [
         name: 'Abbas Quresh',
         startDate: '29-09-2020',
         occurences: 0,
-        address: 'Reza Food Services Co Ltd McDonalds MOHAMEDIA',
+        companyName: 'Reza Food Services Co Ltd McDonalds MOHAMEDIA',
         service: {
           audit: true,
           highene: true
@@ -566,7 +567,7 @@ export const serviceDataEn = [
         name: 'Abdul Cader',
         startDate: '14-04-2021',
         occurences: 7,
-        address: 'Reza Food Services Co Ltd Corniche road branch',
+        companyName: 'Reza Food Services Co Ltd Corniche road branch',
         service: {
           refill: true,
           highene: true
@@ -600,7 +601,7 @@ export const serviceDataAr = [
         name: 'عبد القادر',
         startDate: '19-2-2020',
         occurences: 3,
-        address: 'أبراج الميريديان طريق كدي - مكة كدي مكة',
+        companyName: 'أبراج الميريديان طريق كدي - مكة كدي مكة',
         service: {
           complete: false,
           notCompleted: false,
@@ -622,7 +623,7 @@ export const serviceDataAr = [
         name: 'عبد القادر',
         startDate: '20-07-2020',
         occurences: 0,
-        address: 'فرع مكتب مجموعة سامبا المالية بالفيحاء',
+        companyName: 'فرع مكتب مجموعة سامبا المالية بالفيحاء',
         service: {
           scheduled: true,
           refill: true,
@@ -639,7 +640,7 @@ export const serviceDataAr = [
         name: 'عبد القادر',
         startDate: '17-01-2021',
         occurences: 0,
-        address: 'التميمي العالمية المحدودة (TAFGA) مركز غسيل الكلى بالقرب من رد سي مول',
+        companyName: 'التميمي العالمية المحدودة (TAFGA) مركز غسيل الكلى بالقرب من رد سي مول',
         service: {
           scheduled: true,
           refill: true,
@@ -656,7 +657,7 @@ export const serviceDataAr = [
         name: 'عبد القادر',
         startDate: '19-2-2020',
         occurences: 3,
-        address: 'أبراج الميريديان طريق كدي - مكة كدي مكة',
+        companyName: 'أبراج الميريديان طريق كدي - مكة كدي مكة',
         service: {
           complete: false,
           notCompleted: false,
@@ -678,7 +679,7 @@ export const serviceDataAr = [
         name: 'عبد القادر',
         startDate: '20-07-2020',
         occurences: 0,
-        address: 'فرع مكتب مجموعة سامبا المالية بالفيحاء',
+        companyName: 'فرع مكتب مجموعة سامبا المالية بالفيحاء',
         service: {
           scheduled: true,
           refill: true,
@@ -695,7 +696,7 @@ export const serviceDataAr = [
         name: 'عبد القادر',
         startDate: '17-01-2021',
         occurences: 0,
-        address: 'التميمي العالمية المحدودة (TAFGA) مركز غسيل الكلى بالقرب من رد سي مول',
+        companyName: 'التميمي العالمية المحدودة (TAFGA) مركز غسيل الكلى بالقرب من رد سي مول',
         service: {
           scheduled: true,
           refill: true,
@@ -728,7 +729,7 @@ export const serviceDataAr = [
         name: 'Abdulla Sherieff',
         startDate: '19-05-2021',
         occurences: 8,
-        address: 'شركة بنده للتجزئة 3',
+        companyName: 'شركة بنده للتجزئة 3',
         service: {
           scheduled: true,
           maintenance: true
@@ -744,7 +745,7 @@ export const serviceDataAr = [
         name: 'Abdulla Sherieff',
         startDate: '19-05-2021',
         occurences: 8,
-        address: 'شركة بنده للتجزئة 1',
+        companyName: 'شركة بنده للتجزئة 1',
         service: {
           scheduled: true,
           highene: true
@@ -776,7 +777,7 @@ export const serviceDataAr = [
         name: 'عبد القادر',
         startDate: '21-07-2020',
         occurences: 0,
-        address: 'سامبا المالية جروج فرع البوادي',
+        companyName: 'سامبا المالية جروج فرع البوادي',
         service: {
           scheduled: true,
           refill: true,
@@ -793,7 +794,7 @@ export const serviceDataAr = [
         name: 'عبد القادر',
         startDate: '20-07-2020',
         occurences: 0,
-        address: 'مجموعة سامبا المالية فرع الفيحاء',
+        companyName: 'مجموعة سامبا المالية فرع الفيحاء',
         service: {
           scheduled: true,
           refill: true,
@@ -828,7 +829,7 @@ export const serviceDataAr = [
         name: 'عبد القادر',
         startDate: '23-05-2021',
         occurences: 90,
-        address: 'شركة بنده للتجزئة مكة اسكان 220',
+        companyName: 'شركة بنده للتجزئة مكة اسكان 220',
         service: {
           scheduled: true,
           refill: true
@@ -844,7 +845,7 @@ export const serviceDataAr = [
         name: 'عبد القادر',
         startDate: '30-01-2020',
         occurences: 1,
-        address: 'برج ساعة مكة الملكي (فيرمونت) فندق إعمار',
+        companyName: 'برج ساعة مكة الملكي (فيرمونت) فندق إعمار',
         service: {
           scheduled: true,
           refill: true,
@@ -884,7 +885,7 @@ export const serviceDataAr = [
         name: 'عباس قريشي',
         startDate: '18-11-2021',
         occurences: 0,
-        address: 'شركة بنده للتجزئة Thahassusi مكة 225',
+        companyName: 'شركة بنده للتجزئة Thahassusi مكة 225',
         service: {
           scheduled: true
         }
@@ -899,7 +900,7 @@ export const serviceDataAr = [
         name: 'عبد القادر',
         startDate: '23-05-2021',
         occurences: 9,
-        address: 'الخدمات المساندة مدينة الملك عبدالله الطبية بمكة المكرمة',
+        companyName: 'الخدمات المساندة مدينة الملك عبدالله الطبية بمكة المكرمة',
         service: {
           refill: true,
           highene: true
@@ -935,7 +936,7 @@ export const serviceDataAr = [
         name: 'عباس قريشي',
         startDate: '23-05-2021',
         occurences: -18,
-        address: 'شركة بنده للتجزئة Thahassusi مكة 225',
+        companyName: 'شركة بنده للتجزئة Thahassusi مكة 225',
         service: {
           scheduled: true,
           audit: true
@@ -952,7 +953,7 @@ export const serviceDataAr = [
         name: 'عباس قريشي',
         startDate: '23-05-2021',
         occurences: -18,
-        address: 'شركة بنده للتجزئة الحمدانية 242',
+        companyName: 'شركة بنده للتجزئة الحمدانية 242',
         service: {
           audit: true,
           highene: true
@@ -985,7 +986,7 @@ export const serviceDataAr = [
         name: 'عنيد محمدي',
         startDate: '05-05-2021',
         occurences: 2,
-        address: 'مزارع الإمارات الوطنية للدواجن ش.ذ.م.م العين',
+        companyName: 'مزارع الإمارات الوطنية للدواجن ش.ذ.م.م العين',
         service: {
           scheduled: true
         }
@@ -1001,7 +1002,7 @@ export const serviceDataAr = [
         name: 'افسال بشير',
         startDate: '24-05-2021',
         occurences: 4,
-        address: 'شركة بنده للتجزئة بنده 46 الجبيل',
+        companyName: 'شركة بنده للتجزئة بنده 46 الجبيل',
         service: {
           scheduled: true,
           refill: true
@@ -1035,7 +1036,7 @@ export const serviceDataAr = [
         name: 'عباس قريشي',
         startDate: '19-05-2021',
         occurences: 0,
-        address: 'بنده للتجزئة كوموني العوالي مكة 20011',
+        companyName: 'بنده للتجزئة كوموني العوالي مكة 20011',
         service: {
           scheduled: true
         }
@@ -1050,7 +1051,7 @@ export const serviceDataAr = [
         name: 'عبد القادر',
         startDate: '23-03-2021',
         occurences: 10,
-        address: 'د.امل الزبيدي - فرع مكة المكرمة',
+        companyName: 'د.امل الزبيدي - فرع مكة المكرمة',
         service: {
           scheduled: true,
           highene: true
@@ -1076,7 +1077,7 @@ export const serviceDataAr = [
         name: 'عبد القادر',
         startDate: '06-05-2021',
         occurences: 6,
-        address: 'Mawred Al Baraka Co Hamdania',
+        companyName: 'Mawred Al Baraka Co Hamdania',
         service: {
           refill: true,
           highene: true
@@ -1092,7 +1093,7 @@ export const serviceDataAr = [
         name: 'عبد القادر',
         startDate: '02-05-2021',
         occurences: 0,
-        address: 'فندق إيلاف كندة مكة إيلاف كندة',
+        companyName: 'فندق إيلاف كندة مكة إيلاف كندة',
         service: {
           scheduled: true,
           refill: true
@@ -1124,7 +1125,7 @@ export const serviceDataAr = [
         name: 'عباس قريشي',
         startDate: '29-09-2020',
         occurences: 0,
-        address: 'شركة رضا للخدمات الغذائية المحدودة ماكدونالدز المحمدية',
+        companyName: 'شركة رضا للخدمات الغذائية المحدودة ماكدونالدز المحمدية',
         service: {
           audit: true,
           highene: true
@@ -1140,7 +1141,7 @@ export const serviceDataAr = [
         name: 'عبد القادر',
         startDate: '14-04-2021',
         occurences: 7,
-        address: 'شركة رضا للخدمات الغذائية المحدودة فرع طريق الكورنيش',
+        companyName: 'شركة رضا للخدمات الغذائية المحدودة فرع طريق الكورنيش',
         service: {
           refill: true,
           highene: true
