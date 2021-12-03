@@ -240,7 +240,7 @@ function PrimeGrid(theme) {
         editMode="row"
         onRowEditComplete={onRowEditComplete}
         reorderableColumns
-        dataKey="id"
+        dataKey="code"
         // onRowReorder={onRowReorder}
         scrollable
         scrollHeight="400px"
@@ -359,7 +359,7 @@ function PrimeGrid(theme) {
         <Column
           columnKey="owan"
           field="owan"
-          header="On-wan"
+          header="Van-Stock"
           sortable
           editor={(options) => textEditor(options)}
           filter

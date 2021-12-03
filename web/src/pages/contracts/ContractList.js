@@ -172,9 +172,15 @@ function ContractList() {
     navigate('/ProjectCreation', { replace: true });
   };
 
-  const navigateToContractCreation = () => {
-    navigate('/contracts-creation', { replace: true });
+  const navigateToContractEdition = () => {
+    navigate('/contract/edit/1', { replace: true });
   };
+
+  const navigateToContractAddition = () => {
+    navigate('/contract/add', { replace: true });
+  };
+  const numericFields = ['id', 'contractNumber'];
+  const numericFieldsExpandedData = ['id', 'project_number'];
 
   return (
     <Grid className="contract_list_main_cls">
@@ -200,7 +206,7 @@ function ContractList() {
               Open Project
             </Button>
           </Grid>
-          <Button variant="contained" color="primary" size="small" onClick={navigateToContractCreation}>
+          <Button variant="contained" color="primary" size="small" onClick={navigateToContractAddition}>
             Add New Contract
           </Button>
         </Grid>
@@ -282,8 +288,10 @@ function ContractList() {
             expandedColumns={expandColName}
             filters1={filters1}
             globalFilters={globalFilters}
-            onRowClick={navigateToContractCreation}
+            onRowClick={navigateToContractEdition}
             onChildRowClick={navigateToProjectCreation}
+            numericFields={numericFields}
+            numericFieldsExpandedData={numericFieldsExpandedData}
           />
         </Grid>
       </Grid>
