@@ -85,7 +85,7 @@ function FilterComponent() {
                 onChange={(e) => setowanFilter(e.target.value)}
                 fullWidth
                 size="small"
-                label="On-wan"
+                label="Van-Stock"
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={2}>
