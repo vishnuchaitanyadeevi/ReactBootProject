@@ -1,38 +1,27 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import ListItemText from '@mui/material/ListItemText';
-import ListItem from '@mui/material/ListItem';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import CloseIcon from '@mui/icons-material/Close';
-import Slide from '@mui/material/Slide';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 
-// const Transition = React.forwardRef(function Transition(props, ref) {
-// 	return <Slide direction="up" ref={ref} {...props} />;
-// });
-
-function DialogComponent({ open, handleClose, component }) {
+function DialogComponent({
+  open,
+  handleClose,
+  maxWidth,
+  Title,
+  Content,
+  Actions,
+  titleProps,
+  contentProps,
+  actionProps
+}) {
   return (
-    <div>
-      <Dialog fullScreen open={open} onClose={handleClose}>
-        <AppBar sx={{ position: 'relative' }}>
-          <Toolbar>
-            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
-              <CloseIcon />
-            </IconButton>
-            <Button autoFocus color="inherit" onClick={handleClose}>
-              save
-            </Button>
-          </Toolbar>
-        </AppBar>
-        <List> {component}</List>
-      </Dialog>
-    </div>
+    <Dialog fullWidth maxWidth={maxWidth} open={open} onClose={handleClose}>
+      <DialogTitle {...titleProps}>{Title}</DialogTitle>
+      <DialogContent {...contentProps}>{Content}</DialogContent>
+      <DialogActions {...actionProps}>{Actions}</DialogActions>
+    </Dialog>
   );
 }
 

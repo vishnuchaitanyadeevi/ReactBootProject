@@ -10,6 +10,8 @@ import {
 } from '@mui/material';
 import React, { useState, useCallback } from 'react';
 import { ArrowRight, UploadFileOutlined } from '@mui/icons-material/';
+import SearchIcon from '@mui/icons-material/Search';
+import IconButton from '@mui/material/IconButton';
 import ProjectTable from '../../components/contracts/projectTable';
 import BasicDatePicker from '../../components/pickers/BasicDatePicker';
 import UploadFile from '../../components/UploadFile';
@@ -17,8 +19,10 @@ import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget'
 import './ContractsCreation.scss';
 import SimpleTable from '../../components/table/simpleTable';
 import jsonData from '../../utils/project-table-data.json';
+import CustomersList from '../../components/CustomersList';
 
 export default function ContractsCreation() {
+  const [open, setOpen] = useState(false);
   const countryArr = ['SA'];
   const customerArr = [11, 12, 414352, 5344, 2343];
   const statusArr = ['Active', 'On-Hold', 'Inactive'];
@@ -29,6 +33,11 @@ export default function ContractsCreation() {
   const regionArr = ['Region 1', 'Region 2'];
   const [multipleImages, setMultipleImages] = useState({ images: [] });
   const [axDefaultexpanded, setAxDefaultexpanded] = useState(true);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
   const handleChange = (panel) => (event, isExpanded) => {
     setAxDefaultexpanded(isExpanded ? panel : false);
   };
@@ -75,6 +84,13 @@ export default function ContractsCreation() {
         </Grid>
         <Grid item xs={12} xl={6} md={6}>
           <AutocompleteWidget options={customerArr} size="small" label="Customer No" disablePortal autoSelect />
+        </Grid>
+        <Grid item xs={12} xl={6} md={6}>
+          {/* <Button onClick={handleOpen} startIcon={<SearchIcon />} /> */}
+          <IconButton aria-label="SearchIcon" size="small" color="primary" onClick={handleOpen}>
+            <SearchIcon />
+          </IconButton>
+          {open && <CustomersList openFlag={open} handleCloseDialog={(param) => setOpen(param)} />}
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
           <TextField fullWidth label="Customer Name" size="small" />
