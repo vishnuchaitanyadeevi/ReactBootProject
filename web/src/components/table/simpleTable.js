@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useCallback } from 'react';
 import { Grid } from '@mui/material';
+import { Helmet } from 'react-helmet';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
@@ -9,16 +10,17 @@ import { Dropdown } from 'primereact/dropdown';
 import { Toast } from 'primereact/toast';
 import Checkbox from '@mui/material/Checkbox';
 import { FilterMatchMode } from 'primereact/api';
+import useSettings from '../../hooks/useSettings';
 // import ngPrimeGrid from '../ngPrimeGrid';
 import jsonData from '../../utils/project-table-data.json';
 import '../../Styles/app.scss';
 
 export default function SimpleTable({ rowData, headerData, ...other }) {
+  const { themeMode, onChangeMode } = useSettings();
   const [tableData, setTableData] = useState(rowData);
   const [editingRows, setEditingRows] = useState({});
   const [filterState, setFilterState] = useState({});
   const onRowEditChange = (e) => {
-    console.log(e);
     setEditingRows(e.data);
   };
 
@@ -81,6 +83,12 @@ export default function SimpleTable({ rowData, headerData, ...other }) {
 
   return (
     <Grid container spacing={1}>
+      <Helmet>
+        <link
+          rel="stylesheet"
+          href={`https://unpkg.com/primereact/resources/themes/lara-${themeMode}-indigo/theme.css`}
+        />
+      </Helmet>
       <Grid item xs={12} lg={12}>
         <DataTable
           value={tableData}
