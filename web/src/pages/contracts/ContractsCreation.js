@@ -69,6 +69,50 @@ export default function ContractsCreation() {
     accountCurrency: '',
     fundingType: ''
   });
+
+  // destructing contract data object
+  const {
+    country,
+    region,
+    customerNo,
+    customerName,
+    customerAddress,
+    crNo,
+    salesman,
+    contractNo,
+    contractName,
+    contractSignOn,
+    contractStartDate,
+    generalDiscount,
+    status,
+    role,
+    name,
+    position,
+    address,
+    phoneNo,
+    faxNo,
+    mobileNo,
+    emailId,
+    note,
+    specialAttention,
+    scopeOfContract,
+    uploadContractFile,
+    legalEntity,
+    transactionCurrency,
+    accountCurrency,
+    fundingType
+  } = contractData;
+
+  // HandleChange contract data fuction
+  const updateContractData = (key, val) => setContractData({ ...contractData, [key]: val });
+  const handleClickSaveContract = () => {
+    if (!name || !position || !address || !phoneNo || !faxNo || !mobileNo || !emailId || isEmail(emailId) || !note) {
+      setIsError(true);
+    } else {
+      setIsError(false);
+      console.log('Contract data is...', contractData);
+    }
+  };
   const [isError, setIsError] = useState(false);
   const handleChange = (panel) => (event, isExpanded) => {
     setAxDefaultexpanded(isExpanded ? panel : false);
@@ -181,28 +225,105 @@ export default function ContractsCreation() {
             <AutocompleteWidget options={rolesArr} size="small" label="Role" defaultValue="Primary" />
           </Grid>
           <Grid item xs={12} xl={12} md={12}>
-            <TextField fullWidth label="Name" size="small" />
+            <TextField
+              fullWidth
+              label="Name"
+              size="small"
+              onChange={(e) => updateContractData('name', e.target.value)}
+              value={name}
+              error={isError && !name}
+              helperText={isError && !name && 'Enter Name'}
+              FormHelperTextProps={{ className: 'helper_text_cls' }}
+            />
           </Grid>
           <Grid item xs={12} xl={12} md={12}>
-            <TextField fullWidth label="Position" size="small" />
+            <TextField
+              fullWidth
+              label="Position"
+              size="small"
+              onChange={(e) => updateContractData('position', e.target.value)}
+              value={position}
+              error={isError && !position}
+              helperText={isError && !position && 'Enter Position'}
+              FormHelperTextProps={{ className: 'helper_text_cls' }}
+            />
           </Grid>
           <Grid item xs={12} xl={12} md={12}>
-            <TextField fullWidth label="Address" size="small" />
+            <TextField
+              fullWidth
+              label="Address"
+              size="small"
+              onChange={(e) => updateContractData('address', e.target.value)}
+              value={address}
+              error={isError && !address}
+              helperText={isError && !address && 'Enter Address'}
+              FormHelperTextProps={{ className: 'helper_text_cls' }}
+            />
           </Grid>
           <Grid item xs={12} xl={12} md={12}>
-            <TextField fullWidth label="Phone No." size="small" />
+            <TextField
+              fullWidth
+              label="Phone No."
+              size="small"
+              onChange={(e) => updateContractData('phoneNo', e.target.value)}
+              value={phoneNo}
+              error={isError && !phoneNo}
+              helperText={isError && !phoneNo && 'Enter Phone Number'}
+              FormHelperTextProps={{ className: 'helper_text_cls' }}
+            />
           </Grid>
           <Grid item xs={12} xl={12} md={12}>
-            <TextField fullWidth label="Fax No." size="small" />
+            <TextField
+              fullWidth
+              label="Fax No."
+              size="small"
+              onChange={(e) => updateContractData('faxNo', e.target.value)}
+              value={faxNo}
+              error={isError && !faxNo}
+              helperText={isError && !faxNo && 'Enter Fax Number'}
+              FormHelperTextProps={{ className: 'helper_text_cls' }}
+            />
           </Grid>
           <Grid item xs={12} xl={12} md={12}>
-            <TextField fullWidth label="Mobile No." size="small" />
+            <TextField
+              fullWidth
+              label="Mobile No."
+              size="small"
+              onChange={(e) => updateContractData('mobileNo', e.target.value)}
+              value={mobileNo}
+              error={isError && (!mobileNo || isPhone(mobileNo))}
+              helperText={
+                (isError && !mobileNo && 'Enter Mobile Number') ||
+                (isError && isPhone(mobileNo) && 'Not Valid Mobile Number')
+              }
+              FormHelperTextProps={{ className: 'helper_text_cls' }}
+            />
           </Grid>
           <Grid item xs={12} xl={12} md={12}>
-            <TextField fullWidth label="Email ID" size="small" />
+            <TextField
+              fullWidth
+              label="Email ID"
+              size="small"
+              onChange={(e) => updateContractData('emailId', e.target.value)}
+              value={emailId}
+              error={isError && (!emailId || isEmail(emailId))}
+              helperText={
+                (isError && !emailId && 'Enter Email Id') || (isError && isEmail(emailId) && 'Not Valid Email Id')
+              }
+              FormHelperTextProps={{ className: 'helper_text_cls' }}
+            />
           </Grid>
           <Grid item xs={12} xl={12} md={12}>
-            <TextField fullWidth label="Note" size="small" />
+            <TextField
+              fullWidth
+              label="Note"
+              size="small"
+              onChange={(e) => updateContractData('note', e.target.value)}
+              value={note}
+              error={isError && !note}
+              helperText={isError && !note && 'Enter Note'}
+              FormHelperTextProps={{ className: 'helper_text_cls' }}
+            />
           </Grid>
         </Grid>
         <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
@@ -281,7 +402,9 @@ export default function ContractsCreation() {
             <Button color="secondary" variant="contained" onClick={navigateToContractlist}>
               Back
             </Button>
-            <Button variant="contained">Save</Button>
+            <Button variant="contained" onClick={handleClickSaveContract}>
+              Save
+            </Button>
             <Button color="warning" variant="contained">
               Complete Contract
             </Button>
@@ -409,28 +532,105 @@ export default function ContractsCreation() {
             <AutocompleteWidget options={rolesArr} size="small" label="Role" defaultValue="Primary" />
           </Grid>
           <Grid item xs={12} xl={12} md={12}>
-            <TextField fullWidth label="Name" size="small" />
+            <TextField
+              fullWidth
+              label="Name"
+              size="small"
+              onChange={(e) => updateContractData('name', e.target.value)}
+              value={name}
+              error={isError && !name}
+              helperText={isError && !name && 'Enter Name'}
+              FormHelperTextProps={{ className: 'helper_text_cls' }}
+            />
           </Grid>
           <Grid item xs={12} xl={12} md={12}>
-            <TextField fullWidth label="Position" size="small" />
+            <TextField
+              fullWidth
+              label="Position"
+              size="small"
+              onChange={(e) => updateContractData('position', e.target.value)}
+              value={position}
+              error={isError && !position}
+              helperText={isError && !position && 'Enter Position'}
+              FormHelperTextProps={{ className: 'helper_text_cls' }}
+            />
           </Grid>
           <Grid item xs={12} xl={12} md={12}>
-            <TextField fullWidth label="Address" size="small" />
+            <TextField
+              fullWidth
+              label="Address"
+              size="small"
+              onChange={(e) => updateContractData('address', e.target.value)}
+              value={address}
+              error={isError && !address}
+              helperText={isError && !address && 'Enter Address'}
+              FormHelperTextProps={{ className: 'helper_text_cls' }}
+            />
           </Grid>
           <Grid item xs={12} xl={12} md={12}>
-            <TextField fullWidth label="Phone No." size="small" />
+            <TextField
+              fullWidth
+              label="Phone No."
+              size="small"
+              onChange={(e) => updateContractData('phoneNo', e.target.value)}
+              value={phoneNo}
+              error={isError && !phoneNo}
+              helperText={isError && !phoneNo && 'Enter Phone Number'}
+              FormHelperTextProps={{ className: 'helper_text_cls' }}
+            />
           </Grid>
           <Grid item xs={12} xl={12} md={12}>
-            <TextField fullWidth label="Fax No." size="small" />
+            <TextField
+              fullWidth
+              label="Fax No."
+              size="small"
+              onChange={(e) => updateContractData('faxNo', e.target.value)}
+              value={faxNo}
+              error={isError && !faxNo}
+              helperText={isError && !faxNo && 'Enter Fax Number'}
+              FormHelperTextProps={{ className: 'helper_text_cls' }}
+            />
           </Grid>
           <Grid item xs={12} xl={12} md={12}>
-            <TextField fullWidth label="Mobile No." size="small" />
+            <TextField
+              fullWidth
+              label="Mobile No."
+              size="small"
+              onChange={(e) => updateContractData('mobileNo', e.target.value)}
+              value={mobileNo}
+              error={isError && (!mobileNo || isPhone(mobileNo))}
+              helperText={
+                (isError && !mobileNo && 'Enter Mobile Number') ||
+                (isError && isPhone(mobileNo) && 'Not Valid Mobile Number')
+              }
+              FormHelperTextProps={{ className: 'helper_text_cls' }}
+            />
           </Grid>
           <Grid item xs={12} xl={12} md={12}>
-            <TextField fullWidth label="Email ID" size="small" />
+            <TextField
+              fullWidth
+              label="Email ID"
+              size="small"
+              onChange={(e) => updateContractData('emailId', e.target.value)}
+              value={emailId}
+              error={isError && (!emailId || isEmail(emailId))}
+              helperText={
+                (isError && !emailId && 'Enter Email Id') || (isError && isEmail(emailId) && 'Not Valid Email Id')
+              }
+              FormHelperTextProps={{ className: 'helper_text_cls' }}
+            />
           </Grid>
           <Grid item xs={12} xl={12} md={12}>
-            <TextField fullWidth label="Note" size="small" />
+            <TextField
+              fullWidth
+              label="Note"
+              size="small"
+              onChange={(e) => updateContractData('note', e.target.value)}
+              value={note}
+              error={isError && !note}
+              helperText={isError && !note && 'Enter Note'}
+              FormHelperTextProps={{ className: 'helper_text_cls' }}
+            />
           </Grid>
         </Grid>
         <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
@@ -509,7 +709,9 @@ export default function ContractsCreation() {
             <Button color="secondary" variant="contained" onClick={navigateToContractlist}>
               Back
             </Button>
-            <Button variant="contained">Save</Button>
+            <Button variant="contained" onClick={handleClickSaveContract}>
+              Save
+            </Button>
             <Button color="warning" variant="contained">
               Complete Contract
             </Button>
