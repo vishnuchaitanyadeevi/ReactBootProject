@@ -97,6 +97,9 @@ export default function ServiceDashboard() {
   return (
     <>
       <Grid container>
+        <Grid item xs={12}>
+          <div className="filter-section" />
+        </Grid>
         <Grid item xs={12} md={2}>
           <Stack>
             <span className="ml-1rm mt-1rm">

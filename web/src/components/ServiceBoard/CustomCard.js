@@ -91,7 +91,7 @@ export default function CustomCard({
             </Tooltip>
           )}
         </Grid>
-        <span style={{ fontWeight: 'bold' }}>{address}</span>
+        <span className="custom-card-address">{address}</span>
       </Grid>
     </MovableCardWrapper>
   );
