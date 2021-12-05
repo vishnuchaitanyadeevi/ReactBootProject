@@ -53,7 +53,9 @@ export default function CustomCard({
       <Grid className="custom-card-section">
         <Grid>
           <Tooltip title={t('serviceDashboard.lastServiceDate')} arrow>
-            {startDate} [{occurences}]
+            <span>
+              {startDate} [{occurences}]
+            </span>
           </Tooltip>
         </Grid>
         <Grid>
