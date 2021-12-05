@@ -30,7 +30,7 @@ const sidebarConfig = [
   {
     items: [
       { title: 'dashboard', path: PATH_DASHBOARD.general.home },
-      { title: 'service board', path: PATH_DASHBOARD.general.service },
+      { title: 'serviceBoard', path: PATH_DASHBOARD.general.service },
       {
         title: 'customer',
         path: '',

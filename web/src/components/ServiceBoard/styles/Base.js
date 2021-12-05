@@ -135,10 +135,9 @@ export const LaneFooter = styled.div`
 export const ScrollableLane = styled.div`
   flex: 1;
   overflow-y: auto;
-  min-width: 250px;
   overflow-x: hidden;
   align-self: center;
-  max-height: 90vh;
+  max-height: 60vh !important;
   margin-top: 10px;
   flex-direction: column;
   justify-content: space-between;
@@ -159,13 +158,11 @@ export const RightContent = styled.span`
   font-size: 13px;
 `;
 export const CardWrapper = styled.article`
-  border-bottom: 1px solid #ccc;
   background-color: #fff;
   position: relative;
   cursor: pointer;
   max-width: 250px;
   margin-bottom: 7px;
-  min-width: 230px;
 `;
 
 export const MovableCardWrapper = styled(CardWrapper)`

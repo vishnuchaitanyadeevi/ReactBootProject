@@ -44,5 +44,25 @@
   "Export": "يصدر",
   "Demo": "تجريبي",
   "Logout": "تسجيل خروج",
-  "Change Password": "تغيير كلمة المرور"
+  "Change Password": "تغيير كلمة المرور",
+  "serviceBoard": "مجلس الخدمة",
+  "serviceDashboard": {
+    "addCallOut": "إضافة مكالمة",
+    "sortBy": "صنف حسب",
+    "serviceMen": "العسكريين",
+    "customers": "عميل",
+    "complete": "مكتمل",
+    "scheduled": "المقرر",
+    "notCompleted": "غير مكتمل",
+    "cancelled": "ألغيت",
+    "refill": "اعادة تعبئه",
+    "maintenance": "اعمال صيانة",
+    "callOut": "صرخ",
+    "audit": "مراجعة",
+    "highene": "هايين",
+    "service": "خدمة",
+    "companyName": "اسم الشركة",
+    "customerName": "اسم الزبون",
+    "lastServiceDate": "تاريخ آخر خدمة"
+  }
 }

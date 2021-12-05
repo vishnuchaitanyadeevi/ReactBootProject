@@ -3,6 +3,11 @@ export const LOCAL_STORAGE_KEYS = {
   REFRESH_TOKEN_KEY: 'refreshToken'
 };
 
+export const THEME = {
+  DARK: 'dark',
+  LIGHT: 'light'
+};
+
 export const API_BASE_PATH = 'https://lims-admin-api.azurewebsites.net';
 
 // Valid upload file type constants
@@ -32,11 +37,11 @@ export const SERVICE_TYPES = {
 };
 
 export const GROUP_BY = {
-  SERVICE_MEN: 'servicemen',
-  CUSTOMER: 'customer'
+  SERVICE_MEN: 'serviceMen',
+  CUSTOMER: 'customers'
 };
 
-export const MAX_LANES = 3;
+export const MAX_LANES = 10;
 
 export const REGX_TYPE = {
   NUM: 'num'

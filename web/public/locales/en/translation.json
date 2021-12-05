@@ -43,6 +43,26 @@
   "Export": "Export",
   "Demo": "Demo",
   "Logout": "Logout",
-  "Change Password": "Change Password"
+  "Change Password": "Change Password",
+  "serviceBoard": "service board",
+  "serviceDashboard": {
+    "addCallOut": "Add CallOut",
+    "sortBy": "Sort By",
+    "serviceMen": "Servicemen",
+    "customers": "Customers",
+    "complete": "Completed",
+    "scheduled": "Scheduled",
+    "notCompleted": "Not Completed",
+    "cancelled": "Canceled",
+    "refill": "Refill",
+    "maintenance": "Maintenance",
+    "callOut": "CallOut",
+    "audit": "Audit",
+    "highene": "Highene",
+    "service": "Service",
+    "companyName": "Company Name",
+    "customerName": "Customer Name",
+    "lastServiceDate": "Last Service Date"
+  }
 }
   

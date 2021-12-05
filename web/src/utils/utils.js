@@ -39,6 +39,25 @@ export const mapperFunction = (array) => {
   return mappedArray;
 };
 
+export const sortListOfObjects = (list, key) => {
+  let sortOrder = 1;
+  if (key[0] === '-') {
+    sortOrder = -1;
+    key = key.substr(1);
+  }
+  list.sort((a, b) => {
+    switch (true) {
+      case a[key]?.toLowerCase() < b[key]?.toLowerCase():
+        return -1 * sortOrder;
+      case a[key]?.toLowerCase() > b[key]?.toLowerCase():
+        return 1 * sortOrder;
+      default:
+        return 0;
+    }
+  });
+  return list;
+};
+
 export const isValidStr = (str, type) => {
   const { NUM } = REGX_TYPE;
   switch (type) {
