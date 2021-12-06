@@ -44,15 +44,11 @@ function ContractList({
     { label: 'Pending', value: 'Pending' },
     { label: 'Running', value: 'Running' }
   ];
-  const handleChangeEditor = (options) => {
-    switch (options?.field) {
-      case 'id':
+  const handleChangeEditor = (editorFlag, options) => {
+    switch (editorFlag) {
+      case 'textField':
         return <TextField type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
-      case 'status':
-        return <TextField type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
-      case 'contractNumber':
-        return <TextField type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
-      case 'contractSignOn':
+      case 'date':
         return (
           <BasicDatePicker
             label="Contract Signed On"
@@ -63,21 +59,6 @@ function ContractList({
             size="large"
           />
         );
-      case 'contractStartDate':
-        return (
-          <BasicDatePicker
-            label="Contract Start Date"
-            inputFormat="dd-MM-yyyy"
-            views={['year', 'month', 'day']}
-            value={options.value}
-            onChange={(e) => options.editorCallback(e.target.value)}
-            size="large"
-          />
-        );
-      case 'customer':
-        return <TextField type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
-      case 'salesman':
-        return <TextField type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
       default:
         return undefined;
     }
@@ -172,7 +153,7 @@ function ContractList({
                 field={col.field}
                 header={col.header}
                 sortable
-                editor={(options) => handleChangeEditor(options)}
+                editor={(options) => handleChangeEditor(col.editorElement, options)}
                 columnKey={col.id}
                 filter
                 filterType="text"
