@@ -71,37 +71,44 @@ function ContractList() {
     {
       id: 'id',
       header: 'ID',
-      field: 'id'
+      field: 'id',
+      editorElement: 'textField'
     },
     {
       id: 'status',
       header: 'Status',
-      field: 'status'
+      field: 'status',
+      editorElement: 'textField'
     },
     {
       id: 'contractNumber',
       header: 'Contract Number',
-      field: 'contractNumber'
+      field: 'contractNumber',
+      editorElement: 'textField'
     },
     {
       id: 'contractSignOn',
       header: 'Contract Sign On',
-      field: 'contractSignOn'
+      field: 'contractSignOn',
+      editorElement: 'date'
     },
     {
       id: 'contractStartDate',
       header: 'Contract Start Date',
-      field: 'contractStartDate'
+      field: 'contractStartDate',
+      editorElement: 'date'
     },
     {
       id: 'customer',
       header: 'Customer',
-      field: 'customer'
+      field: 'customer',
+      editorElement: 'textField'
     },
     {
       id: 'salesman',
       header: 'Salesman',
-      field: 'salesman'
+      field: 'salesman',
+      editorElement: 'textField'
     }
   ]);
 
