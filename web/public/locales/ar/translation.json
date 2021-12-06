@@ -63,6 +63,11 @@
     "service": "خدمة",
     "companyName": "اسم الشركة",
     "customerName": "اسم الزبون",
-    "lastServiceDate": "تاريخ آخر خدمة"
+    "lastServiceDate": "تاريخ آخر خدمة",
+    "getPermit": "الحصول على تصريح",
+    "permitReceived": "تم استلام التصريح",
+    "morningJob": "وظيفة الصباح",
+    "dayJob": "عمل نهاري",
+    "nightJob": "وظيفة ليلية"
   }
 }
