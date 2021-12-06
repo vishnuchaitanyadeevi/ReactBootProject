@@ -10,6 +10,8 @@ import {
 } from '@mui/material';
 import React, { useState, useCallback, useEffect } from 'react';
 import { ArrowRight, UploadFileOutlined } from '@mui/icons-material/';
+import SearchIcon from '@mui/icons-material/Search';
+import IconButton from '@mui/material/IconButton';
 import { matchPath, useLocation, useNavigate } from 'react-router-dom';
 import ProjectTable from '../../components/contracts/projectTable';
 import BasicDatePicker from '../../components/pickers/BasicDatePicker';
@@ -18,9 +20,11 @@ import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget'
 import './ContractsCreation.scss';
 import SimpleTable from '../../components/table/simpleTable';
 import jsonData from '../../utils/project-table-data.json';
+import CustomersList from '../../components/CustomersList';
 import { isEmail, isPhone } from '../../utils/utils';
 
 export default function ContractsCreation() {
+  const [open, setOpen] = useState(false);
   const countryArr = ['SA'];
   const customerArr = [11, 12, 414352, 5344, 2343];
   const statusArr = ['Active', 'On-Hold', 'Inactive'];
@@ -31,6 +35,11 @@ export default function ContractsCreation() {
   const regionArr = ['Region 1', 'Region 2'];
   const [multipleImages, setMultipleImages] = useState({ images: [] });
   const [axDefaultexpanded, setAxDefaultexpanded] = useState(true);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
   // const [tableData, setTableData] = useState({});
   let tableData = [];
   const [contractData, setContractData] = useState({
@@ -180,6 +189,12 @@ export default function ContractsCreation() {
           </Grid>
           <Grid item xs={12} xl={6} md={6}>
             <AutocompleteWidget options={customerArr} size="small" label="Customer No" disablePortal autoSelect />
+          </Grid>
+          <Grid item xs={12} xl={6} md={6}>
+            <IconButton aria-label="SearchIcon" size="small" color="primary" onClick={handleOpen}>
+              <SearchIcon />
+            </IconButton>
+            {open && <CustomersList openFlag={open} handleCloseDialog={(param) => setOpen(param)} />}
           </Grid>
           <Grid item xs={12} xl={12} md={12}>
             <TextField fullWidth label="Customer Name" size="small" />
@@ -480,6 +495,12 @@ export default function ContractsCreation() {
               disablePortal
               autoSelect
             />
+          </Grid>
+          <Grid item xs={12} xl={6} md={6}>
+            <IconButton aria-label="SearchIcon" size="small" color="primary" onClick={handleOpen}>
+              <SearchIcon />
+            </IconButton>
+            {open && <CustomersList openFlag={open} handleCloseDialog={(param) => setOpen(param)} />}
           </Grid>
           <Grid item xs={12} xl={12} md={12}>
             <TextField value={formData.customerName} fullWidth label="Customer Name" size="small" />

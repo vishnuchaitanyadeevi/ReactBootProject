@@ -11,8 +11,16 @@
   font-weight: bold;
   margin-bottom: 1rem;
 }
-.service_invoice_recurrence_cls{
+.service_invoice_recurrence_light{
   background-color: #E8E8E8;
+  border: 1px solid #BCB9B9;
+  height: 150px;
+  width: 75%;
+  overflow: auto;
+  margin-top: 0.7rem;
+}
+.service_invoice_recurrence_dark{
+  background-color: #5f5d5d;
   border: 1px solid #BCB9B9;
   height: 150px;
   width: 75%;

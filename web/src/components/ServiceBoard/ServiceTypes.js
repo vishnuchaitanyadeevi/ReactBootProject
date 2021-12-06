@@ -1,46 +1,57 @@
+import { useTranslation } from 'react-i18next';
 import { Stack, Grid, Typography } from '@mui/material';
 import HandymanIcon from '@mui/icons-material/Handyman';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
-import RunningWithErrorsOutlinedIcon from '@mui/icons-material/RunningWithErrorsOutlined';
+import SyncProblemIcon from '@mui/icons-material/SyncProblem';
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
 
 import { serviceTypes } from './data';
 import { SERVICE_TYPES } from '../../utils/constants';
 import './ServiceBoard.css';
 
-const ServiceTypes = () => {
+const ServiceTypes = ({ showTitle = true, emptyGridLen = 6, iconsGridLen = 5, leftMrgn = '4rem' }) => {
+  const { t } = useTranslation();
   const { COMPLETE, SCHEDULE, NOT_COMPLETE, CANCELLED, REFILL, MAINTENANCE, CALL_OUT, AUDIT } = SERVICE_TYPES;
+
+  const getServiceIcon = (icon) => {
+    switch (icon) {
+      case COMPLETE:
+        return <CheckCircleOutlinedIcon style={{ margin: '-4px' }} />;
+      case SCHEDULE:
+        return <HandymanIcon style={{ margin: '1px', fontSize: '15px' }} />;
+      case NOT_COMPLETE:
+        return <SyncProblemIcon style={{ fontSize: '15px' }} />;
+      case REFILL:
+        return <span className="service-type-txt service-type-txt-clr">R</span>;
+      case MAINTENANCE:
+        return <span className="service-type-txt service-type-txt-clr">M</span>;
+      case CALL_OUT:
+        return <span className="service-type-txt">C</span>;
+      case AUDIT:
+        return <span className="service-type-txt service-type-txt-clr">A</span>;
+      case CANCELLED:
+        return <HighlightOffOutlinedIcon style={{ margin: '-4px' }} />;
+      default:
+        return '';
+    }
+  };
+
   return (
-    <Grid container spacing={3} className="service-type-grid">
-      <Grid style={{ margin: '1rem' }} item xs={12} md={6} />
-      <Grid style={{ margin: '1rem' }} item xs={12} md={5}>
-        <Grid style={{ marginLeft: '4rem', marginBottom: '1rem' }} item xs={12} sm={12}>
-          <Typography variant="h6">Service status icons:</Typography>
-        </Grid>
-        <Grid container className="service-mens-stack">
-          {serviceTypes.map((service) => (
-            <Stack>
-              <span
-                className="service-men-clr"
-                style={{ backgroundColor: service.colorCode, borderColor: service.colorCode }}
-              >
-                {service.type === COMPLETE && <CheckCircleOutlinedIcon style={{ margin: '-4px' }} />}
-                {service.type === SCHEDULE && <HandymanIcon style={{ margin: '1px', fontSize: '15px' }} />}
-                {service.type === NOT_COMPLETE && <RunningWithErrorsOutlinedIcon style={{ fontSize: '15px' }} />}
-                {service.type === REFILL && <span className="service-type-txt service-type-txt-clr">R</span>}
-                {service.type === MAINTENANCE && <span className="service-type-txt service-type-txt-clr">M</span>}
-                {service.type === CALL_OUT && <span className="service-type-txt">C</span>}
-                {service.type === AUDIT && <span className="service-type-txt service-type-txt-clr">A</span>}
-                {service.type === CANCELLED && <HighlightOffOutlinedIcon style={{ margin: '-4px' }} />}
-              </span>
-              <Typography variant="body2" gutterBottom ml="2rem" mr={1} mt="-1.3rem">
-                {service.name}
-              </Typography>
-            </Stack>
-          ))}
-        </Grid>
-      </Grid>
-    </Grid>
+    <>
+      {serviceTypes.map((service) => (
+        <Stack style={{ padding: '0.5rem 0 0 0.5rem' }}>
+          <span
+            className="service-men-clr"
+            style={{ backgroundColor: service.colorCode, borderColor: service.colorCode }}
+          >
+            {getServiceIcon(service.type)}
+          </span>
+          <Typography variant="body2" gutterBottom ml="2rem" mr={1} mt="-1.3rem">
+            {t(`serviceDashboard.${service.type}`)}
+          </Typography>
+        </Stack>
+      ))}
+    </>
   );
 };
 

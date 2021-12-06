@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Board from 'react-trello';
 
-import CustomCard from './CustomeCard';
+import CustomCard from './CustomCard';
 import CustomLaneHeader from './CustomLaneHeader';
 
 import './ServiceBoard.css';
@@ -20,10 +19,7 @@ export default function ServiceBoard({ data = [] }) {
     console.log(`${cardId} moved from ${sourceLaneId} to ${targetLaneId} to ${position}: `, cardDetails);
   };
 
-  const onLaneClickHandler = (laneId) => {
-    alert(`${laneId} clicked`);
-    console.log(`${laneId} clicked`);
-  };
+  const onLaneClickHandler = (laneId) => console.log(`${laneId} clicked`);
 
   const onDataChangeHandler = (newData) => console.log(`Data Changed: `, newData);
 
@@ -31,10 +27,11 @@ export default function ServiceBoard({ data = [] }) {
     <Board
       components={{ Card: CustomCard, LaneHeader: CustomLaneHeader }}
       data={{ lanes: data }}
-      draggable
       tagStyle={{ fontSize: '80%' }}
       style={{
-        backgroundColor: '#000'
+        backgroundColor: 'transparent',
+        height: '75vh'
+        // overflowY: 'auto'
       }}
       onCardClick={onCardClickHandler}
       handleDragEnd={onCardDragEndHandler}
