@@ -6,6 +6,12 @@ import PanToolIcon from '@mui/icons-material/PanTool';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import RunningWithErrorsOutlinedIcon from '@mui/icons-material/RunningWithErrorsOutlined';
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
+import QuizRoundedIcon from '@mui/icons-material/QuizRounded';
+import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded';
+import WbSunnyRoundedIcon from '@mui/icons-material/WbSunnyRounded';
+import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
+import Brightness4RoundedIcon from '@mui/icons-material/Brightness4Rounded';
+
 import { COLOR_CODES } from './data';
 import { THEME } from '../../utils/constants';
 import useSettings from '../../hooks/useSettings';
@@ -112,6 +118,41 @@ export default function CustomCard({
             <Tooltip title={t('serviceDashboard.canceled')} arrow>
               <span className="service-type-icons">
                 <HighlightOffOutlinedIcon className="service-icon" />
+              </span>
+            </Tooltip>
+          )}
+          {service.getPermit && (
+            <Tooltip title={t('serviceDashboard.canceled')} arrow>
+              <span className="service-type-icons">
+                <QuizRoundedIcon className="service-icon" />
+              </span>
+            </Tooltip>
+          )}
+          {service.permitReceived && (
+            <Tooltip title={t('serviceDashboard.canceled')} arrow>
+              <span className="service-type-icons">
+                <EventNoteRoundedIcon className="service-icon" />
+              </span>
+            </Tooltip>
+          )}
+          {service.morningJob && (
+            <Tooltip title={t('serviceDashboard.canceled')} arrow>
+              <span className="service-type-icons">
+                <WbSunnyRoundedIcon className="service-icon" />
+              </span>
+            </Tooltip>
+          )}
+          {service.dayJob && (
+            <Tooltip title={t('serviceDashboard.canceled')} arrow>
+              <span className="service-type-icons">
+                <LightModeRoundedIcon className="service-icon" />
+              </span>
+            </Tooltip>
+          )}
+          {service.nightJob && (
+            <Tooltip title={t('serviceDashboard.canceled')} arrow>
+              <span className="service-type-icons">
+                <Brightness4RoundedIcon className="service-icon" />
               </span>
             </Tooltip>
           )}

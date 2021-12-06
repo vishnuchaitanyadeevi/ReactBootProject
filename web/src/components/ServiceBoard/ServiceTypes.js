@@ -4,6 +4,11 @@ import HandymanIcon from '@mui/icons-material/Handyman';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import SyncProblemIcon from '@mui/icons-material/SyncProblem';
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
+import QuizRoundedIcon from '@mui/icons-material/QuizRounded';
+import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded';
+import WbSunnyRoundedIcon from '@mui/icons-material/WbSunnyRounded';
+import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
+import Brightness4RoundedIcon from '@mui/icons-material/Brightness4Rounded';
 
 import { serviceTypes } from './data';
 import { SERVICE_TYPES } from '../../utils/constants';
@@ -11,7 +16,21 @@ import './ServiceBoard.css';
 
 const ServiceTypes = ({ showTitle = true, emptyGridLen = 6, iconsGridLen = 5, leftMrgn = '4rem' }) => {
   const { t } = useTranslation();
-  const { COMPLETE, SCHEDULE, NOT_COMPLETE, CANCELLED, REFILL, MAINTENANCE, CALL_OUT, AUDIT } = SERVICE_TYPES;
+  const {
+    COMPLETE,
+    SCHEDULE,
+    NOT_COMPLETE,
+    CANCELLED,
+    REFILL,
+    MAINTENANCE,
+    CALL_OUT,
+    AUDIT,
+    GET_PERMIT,
+    PERMIT_RECEIVED,
+    MORNING_JOB,
+    DAY_JOB,
+    NIGHT_JOB
+  } = SERVICE_TYPES;
 
   const getServiceIcon = (icon) => {
     switch (icon) {
@@ -31,6 +50,16 @@ const ServiceTypes = ({ showTitle = true, emptyGridLen = 6, iconsGridLen = 5, le
         return <span className="service-type-txt service-type-txt-clr">A</span>;
       case CANCELLED:
         return <HighlightOffOutlinedIcon style={{ margin: '-4px' }} />;
+      case GET_PERMIT:
+        return <QuizRoundedIcon style={{ margin: '-4px' }} />;
+      case PERMIT_RECEIVED:
+        return <EventNoteRoundedIcon style={{ margin: '-4px' }} />;
+      case MORNING_JOB:
+        return <WbSunnyRoundedIcon style={{ margin: '-4px' }} />;
+      case DAY_JOB:
+        return <LightModeRoundedIcon style={{ margin: '-4px' }} />;
+      case NIGHT_JOB:
+        return <Brightness4RoundedIcon style={{ margin: '-4px' }} />;
       default:
         return '';
     }
