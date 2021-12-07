@@ -89,9 +89,10 @@ const sidebarConfig = [
         title: 'Demo',
         path: '',
         children: [
-          { title: 'Add Project', path: '/ProjectCreation' },
-          { title: 'Add Contract', path: '/contract/add' },
-          { title: 'Contracts List', path: '/contractsList' },
+          { title: 'Add_Project', path: '/ProjectCreation' },
+          { title: 'Add_Contract', path: '/contract/add' },
+          { title: 'Contract_List', path: '/contractsList' },
+          { title: 'Project_Expiration', path: '/projectExpiration' },
           { title: 'Employee', path: '/employee' },
           { title: 'Data', path: '/data' },
           { title: 'Invoice', path: '/invoice' },

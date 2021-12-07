@@ -5,6 +5,10 @@
   "Invoice": "Invoice",
   "Pay": "Pay",
   "Components": "Components",
+  "Add_Project": "Add Project",
+  "Add_Contract": "Add Contract",
+  "Contract_List": "Contract List",
+  "Project_Expiration": "Project Expiration",
   "Navbar": {
     "Language": "Language"
   },
@@ -68,6 +72,11 @@
     "morningJob": "Morning Job",
     "dayJob": "Day Job",
     "nightJob": "Night Job"
+  },
+  "ProjectExpiration": {
+    "ProjectExpirationList": "Project Expiration List",
+    "ExpirationOverview": "Expiration Overview",
+    "ExpiredProjects":"Experied projects"
   }
 }
   

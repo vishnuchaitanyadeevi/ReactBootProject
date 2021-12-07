@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useCallback } from 'react';
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -15,7 +15,7 @@ import useSettings from '../../hooks/useSettings';
 import jsonData from '../../utils/project-table-data.json';
 import '../../Styles/app.scss';
 
-export default function SimpleTable({ rowData, headerData, editOption, ...other }) {
+export default function SimpleTable({ rowData, headerData, editOption, showActionColumn, type, title, ...other }) {
   const { themeMode, onChangeMode } = useSettings();
   const [tableData, setTableData] = useState(rowData);
   const [editingRows, setEditingRows] = useState({});
@@ -80,7 +80,24 @@ export default function SimpleTable({ rowData, headerData, editOption, ...other 
     console.log(filterSetData);
     setFilterState(filterSetData);
   }
+  const ActionBody = (options) => {
+    switch (type) {
+      case 'text':
+        return (
+          <>
+            <Typography onClick={() => handleClick(options)} style={{ cursor: 'pointer' }}>
+              {title}
+            </Typography>
+          </>
+        );
+      case 'button':
+        return <Button>{title}</Button>;
+      default:
+        return undefined;
+    }
+  };
 
+  const handleClick = (options) => console.log('selected row...', options);
   return (
     <Grid container spacing={1}>
       <Helmet>
@@ -102,6 +119,18 @@ export default function SimpleTable({ rowData, headerData, editOption, ...other 
           ))}
           {editOption ? (
             <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }} />
+          ) : null}
+          {showActionColumn ? (
+            <Column
+              columnKey="actionKey"
+              body={(options) => ActionBody(options)}
+              style={{
+                minWidth: '6rem',
+                width: '6rem',
+                paddingBottom: '0.1rem',
+                paddingTop: '0.1rem'
+              }}
+            />
           ) : null}
         </DataTable>
       </Grid>
