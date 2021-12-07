@@ -66,7 +66,12 @@
     "service": "Service",
     "companyName": "Company Name",
     "customerName": "Customer Name",
-    "lastServiceDate": "Last Service Date"
+    "lastServiceDate": "Last Service Date",
+    "getPermit": "Get Permit",
+    "permitReceived": "Permit Received",
+    "morningJob": "Morning Job",
+    "dayJob": "Day Job",
+    "nightJob": "Night Job"
   },
   "ProjectExpiration": {
     "ProjectExpirationList": "Project Expiration List",

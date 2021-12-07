@@ -158,7 +158,8 @@ export const serviceDataEn = [
         companyName: 'Panda Retail Company Panda 3',
         service: {
           scheduled: true,
-          maintenance: true
+          maintenance: true,
+          permitReceived: true
         }
       },
       {
@@ -174,7 +175,8 @@ export const serviceDataEn = [
         companyName: 'Panda Retail Company Panda 1',
         service: {
           scheduled: true,
-          highene: true
+          highene: true,
+          dayJob: true
         }
       }
     ],
@@ -313,7 +315,9 @@ export const serviceDataEn = [
         occurences: 0,
         companyName: 'Panda Retail Company Thahassusi makkah 225',
         service: {
-          scheduled: true
+          scheduled: true,
+          permitReceived: true,
+          morningJob: true
         }
       },
       {
@@ -382,7 +386,8 @@ export const serviceDataEn = [
         companyName: 'Panda Retail Company Hamdania 242',
         service: {
           audit: true,
-          highene: true
+          highene: true,
+          dayJob: true
         }
       }
     ],
@@ -414,7 +419,8 @@ export const serviceDataEn = [
         occurences: 2,
         companyName: 'Emirates National Poultry Farms L.L.C Al Ain',
         service: {
-          scheduled: true
+          scheduled: true,
+          nightJob: true
         }
       },
       {
@@ -431,7 +437,8 @@ export const serviceDataEn = [
         companyName: 'Panda Retail Company Panda 46, Jubail',
         service: {
           scheduled: true,
-          refill: true
+          refill: true,
+          morningJob: true
         }
       }
     ],
@@ -464,7 +471,8 @@ export const serviceDataEn = [
         occurences: 0,
         companyName: 'Panda Retail Comoany Al Awali makkah 20011',
         service: {
-          scheduled: true
+          scheduled: true,
+          getPermit: true
         }
       },
       {
@@ -570,7 +578,8 @@ export const serviceDataEn = [
         companyName: 'Reza Food Services Co Ltd Corniche road branch',
         service: {
           refill: true,
-          highene: true
+          highene: true,
+          getPermit: true
         }
       }
     ],
@@ -732,7 +741,8 @@ export const serviceDataAr = [
         companyName: 'شركة بنده للتجزئة 3',
         service: {
           scheduled: true,
-          maintenance: true
+          maintenance: true,
+          permitReceived: true
         }
       },
       {
@@ -748,7 +758,8 @@ export const serviceDataAr = [
         companyName: 'شركة بنده للتجزئة 1',
         service: {
           scheduled: true,
-          highene: true
+          highene: true,
+          dayJob: true
         }
       }
     ],
@@ -887,7 +898,9 @@ export const serviceDataAr = [
         occurences: 0,
         companyName: 'شركة بنده للتجزئة Thahassusi مكة 225',
         service: {
-          scheduled: true
+          scheduled: true,
+          permitReceived: true,
+          morningJob: true
         }
       },
       {
@@ -956,7 +969,8 @@ export const serviceDataAr = [
         companyName: 'شركة بنده للتجزئة الحمدانية 242',
         service: {
           audit: true,
-          highene: true
+          highene: true,
+          dayJob: true
         }
       }
     ],
@@ -988,7 +1002,8 @@ export const serviceDataAr = [
         occurences: 2,
         companyName: 'مزارع الإمارات الوطنية للدواجن ش.ذ.م.م العين',
         service: {
-          scheduled: true
+          scheduled: true,
+          nightJob: true
         }
       },
       {
@@ -1005,7 +1020,8 @@ export const serviceDataAr = [
         companyName: 'شركة بنده للتجزئة بنده 46 الجبيل',
         service: {
           scheduled: true,
-          refill: true
+          refill: true,
+          morningJob: true
         }
       }
     ],
@@ -1038,7 +1054,8 @@ export const serviceDataAr = [
         occurences: 0,
         companyName: 'بنده للتجزئة كوموني العوالي مكة 20011',
         service: {
-          scheduled: true
+          scheduled: true,
+          getPermit: true
         }
       },
       {
@@ -1144,7 +1161,8 @@ export const serviceDataAr = [
         companyName: 'شركة رضا للخدمات الغذائية المحدودة فرع طريق الكورنيش',
         service: {
           refill: true,
-          highene: true
+          highene: true,
+          getPermit: true
         }
       }
     ],
@@ -1229,14 +1247,19 @@ export const serviceMens = [
 ];
 
 export const serviceTypes = [
-  { name: 'Completed', colorCode: '#70a239', type: 'complete' },
-  { name: 'Scheduled', colorCode: '#88cfed', type: 'scheduled' },
-  { name: 'NotCompleted', colorCode: '#e3aa20', type: 'notCompleted' },
-  { name: 'Canceled', colorCode: '#ee3327', type: 'cancelled' },
-  { name: 'Refill', colorCode: '#d5dfe5', type: 'refill' },
-  { name: 'Maintenance', colorCode: '#d5dfe5', type: 'maintenance' },
-  { name: 'CallOut', colorCode: '#009fda', type: 'callOut' },
-  { name: 'Audit', colorCode: '#d5dfe5', type: 'audit' }
+  { colorCode: '#70a239', type: 'complete' },
+  { colorCode: '#88cfed', type: 'scheduled' },
+  { colorCode: '#e3aa20', type: 'notCompleted' },
+  { colorCode: '#ee3327', type: 'cancelled' },
+  { colorCode: '#d5dfe5', type: 'refill' },
+  { colorCode: '#d5dfe5', type: 'maintenance' },
+  { colorCode: '#009fda', type: 'callOut' },
+  { colorCode: '#d5dfe5', type: 'audit' },
+  { colorCode: '#d5dfe5', type: 'getPermit' },
+  { colorCode: '#d5dfe5', type: 'permitReceived' },
+  { colorCode: '#d5dfe5', type: 'morningJob' },
+  { colorCode: '#d5dfe5', type: 'dayJob' },
+  { colorCode: '#d5dfe5', type: 'nightJob' }
 ];
 
 export const COLOR_CODES = {
