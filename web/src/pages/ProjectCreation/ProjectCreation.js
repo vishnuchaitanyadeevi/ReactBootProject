@@ -94,7 +94,7 @@ function ProjectCreation() {
     <Grid className="project_creation_main_grid">
       <Grid container spacing={3}>
         <Grid className="main_title_cls" item xs={12}>
-          <Typography variant="h4">Create Project</Typography>
+          <Typography variant="h4">Project</Typography>
         </Grid>
 
         {/* Grid for project details section */}
