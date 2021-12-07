@@ -20,13 +20,14 @@ import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget'
 import './ContractsCreation.scss';
 import SimpleTable from '../../components/table/simpleTable';
 import jsonData from '../../utils/project-table-data.json';
+import CustomerData from '../../utils/customerslist.json';
 import CustomersList from '../../components/CustomersList';
 import { isEmail, isPhone } from '../../utils/utils';
 
 export default function ContractsCreation() {
   const [open, setOpen] = useState(false);
   const countryArr = ['SA'];
-  const customerArr = [11, 12, 414352, 5344, 2343];
+  const customerArr = ['HSD_ABH_00002', 'HSD_ABH_00004'];
   const statusArr = ['Active', 'On-Hold', 'Inactive'];
   const rolesArr = ['Primary', 'Role 1', 'Role 2 ', 'Role 3'];
   const transactionCurrencyArr = ['Riyal', 'Dollar'];
@@ -113,7 +114,11 @@ export default function ContractsCreation() {
   } = contractData;
 
   // HandleChange contract data fuction
-  const updateContractData = (key, val) => setContractData({ ...contractData, [key]: val });
+  const updateContractData = (key, val) => {
+    setContractData({ ...contractData, [key]: val });
+    console.log(key, val);
+  };
+  console.log('Customer Number', customerNo);
   const handleClickSaveContract = () => {
     if (!name || !position || !address || !phoneNo || !faxNo || !mobileNo || !emailId || isEmail(emailId) || !note) {
       setIsError(true);
@@ -150,6 +155,17 @@ export default function ContractsCreation() {
     console.log(isEditFlag);
   }, [isEditFlag]);
 
+  useEffect(() => {
+    if (customerNo) {
+      console.log('calling... only customerNo no', customerNo);
+      const newData = CustomerData.find((item) => item.custno === customerNo);
+      console.log('new_data....', newData.address);
+      setContractData({ ...contractData, customerName: newData.name, customerAddress: newData.address });
+    } else {
+      setContractData({ ...contractData, customerName: '', customerAddress: '' });
+    }
+  }, [customerNo]);
+
   // handle remove selcted file
   const handleRemove = (file) => {
     const filteredItems = multipleImages.images.filter((_file) => _file !== file);
@@ -168,6 +184,9 @@ export default function ContractsCreation() {
     { field: 'grpd', header: 'grpd', editorElement: null, style: { width: '5%' }, sortable: true, filter: true },
     { field: 'prm', header: 'prm', editorElement: 'checkbox', style: { width: '5%' }, sortable: true, filter: true }
   ];
+
+  // const idx = customerArr.indexOf(customerNo);
+  // console.log('customerNo', customerNo);
 
   if (!isEditFlag) {
     console.log('add contract', isEditFlag);
@@ -188,7 +207,15 @@ export default function ContractsCreation() {
             </Grid>
           </Grid>
           <Grid item xs={12} xl={6} md={6}>
-            <AutocompleteWidget options={customerArr} size="small" label="Customer No" disablePortal autoSelect />
+            <AutocompleteWidget
+              options={customerArr}
+              size="small"
+              label="Customer No"
+              disablePortal
+              autoSelect
+              onChange={(event, value) => setContractData({ ...contractData, customerNo: value })}
+              value={customerNo}
+            />
           </Grid>
           <Grid item xs={12} xl={6} md={6}>
             <IconButton aria-label="SearchIcon" size="small" color="primary" onClick={handleOpen}>
@@ -197,10 +224,10 @@ export default function ContractsCreation() {
             {open && <CustomersList openFlag={open} handleCloseDialog={(param) => setOpen(param)} />}
           </Grid>
           <Grid item xs={12} xl={12} md={12}>
-            <TextField fullWidth label="Customer Name" size="small" />
+            <TextField fullWidth label="Customer Name" size="small" value={customerName} />
           </Grid>
           <Grid item xs={12} xl={12} md={12}>
-            <TextField fullWidth label="Customer Address" size="small" />
+            <TextField fullWidth label="Customer Address" size="small" value={customerAddress} />
           </Grid>
           <Grid item xs={12} xl={6} md={6}>
             <TextField fullWidth label="CR No." size="small" />
