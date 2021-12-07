@@ -114,6 +114,10 @@ export default function Router() {
         {
           path: '/contractsList',
           element: <ContractListPage />
+        },
+        {
+          path: '/projectExpiration',
+          element: <ProjectExpirationPage />
         }
       ]
     },
@@ -175,4 +179,5 @@ const StripeContainer = Loadable(lazy(() => import('../pages/StripeContainer')))
 const ComponentsPage = Loadable(lazy(() => import('../pages/ComponentsPage')));
 const ProjectCreationPage = Loadable(lazy(() => import('../pages/ProjectCreation/ProjectCreation')));
 const ContractListPage = Loadable(lazy(() => import('../pages/contracts/ContractList')));
+const ProjectExpirationPage = Loadable(lazy(() => import('../pages/ProjectExpiration/ProjectExpiration')));
 const ServiceDashboardPage = Loadable(lazy(() => import('../pages/ServiceDashboardPage')));
