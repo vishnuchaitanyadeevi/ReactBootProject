@@ -80,6 +80,7 @@
   },
   "CreateProject":{
     "CreateProject": "Create Project",
+    "EditProject": "Edit Project",
     "ProjectDetails": "Project Details",
     "ServiceFrequencySettings": "Service Frequency Settings",
     "ExecutionType": "Execution Type",

@@ -1,5 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { matchPath, useLocation, useNavigate } from 'react-router-dom';
 import {
   Grid,
   Typography,
@@ -92,11 +93,26 @@ function ProjectCreation() {
     setUploadProject({ ...uploadProject, images: filteredItems });
   };
 
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  const navigateToContractlist = () => {
+    navigate('/contractsList', { replace: true });
+  };
+
+  const match = (path) => (path ? !!matchPath({ path, end: false }, pathname) : false);
+  const isEditFlag = match('project/edit/1');
+  useEffect(() => {
+    console.log(isEditFlag);
+  }, [isEditFlag]);
+
   return (
     <Grid className="project_creation_main_grid">
       <Grid container spacing={3}>
         <Grid className="main_title_cls" item xs={12}>
-          <Typography variant="h4">{t('CreateProject.CreateProject')}</Typography>
+          <Typography variant="h4">
+            {isEditFlag ? t('CreateProject.EditProject') : t('CreateProject.CreateProject')}
+          </Typography>
         </Grid>
 
         {/* Grid for project details section */}
@@ -461,7 +477,7 @@ function ProjectCreation() {
         {/* Grid for button section */}
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12} style={{ display: 'flex', justifyContent: 'center', margin: '1rem' }}>
-            <Button variant="contained" color="secondary">
+            <Button variant="contained" color="secondary" onClick={navigateToContractlist}>
               {t('CreateProject.Back')}
             </Button>
             <Button variant="contained" style={{ marginLeft: '1rem' }}>

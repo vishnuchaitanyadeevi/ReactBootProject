@@ -81,6 +81,7 @@
   },
   "CreateProject":{
     "CreateProject": "أنشئ مشروعًا",
+    "EditProject": "تحرير المشروع",
     "ProjectDetails": "تفاصيل المشروع",
     "ServiceFrequencySettings": "إعدادات تردد الخدمة",
     "ExecutionType": "نوع التنفيذ",

@@ -108,7 +108,11 @@ export default function Router() {
           element: <ContractsCreation />
         },
         {
-          path: '/ProjectCreation',
+          path: '/project/add',
+          element: <ProjectCreationPage />
+        },
+        {
+          path: '/project/edit/1',
           element: <ProjectCreationPage />
         },
         {
@@ -118,6 +122,10 @@ export default function Router() {
         {
           path: '/projectExpiration',
           element: <ProjectExpirationPage />
+        },
+        {
+          path: '/customers',
+          element: <Customers />
         }
       ]
     },
@@ -180,4 +188,5 @@ const ComponentsPage = Loadable(lazy(() => import('../pages/ComponentsPage')));
 const ProjectCreationPage = Loadable(lazy(() => import('../pages/ProjectCreation/ProjectCreation')));
 const ContractListPage = Loadable(lazy(() => import('../pages/contracts/ContractList')));
 const ProjectExpirationPage = Loadable(lazy(() => import('../pages/ProjectExpiration/ProjectExpiration')));
+const Customers = Loadable(lazy(() => import('../pages/Customers')));
 const ServiceDashboardPage = Loadable(lazy(() => import('../pages/ServiceDashboardPage')));
