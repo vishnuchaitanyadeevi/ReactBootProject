@@ -108,7 +108,11 @@ export default function Router() {
           element: <ContractsCreation />
         },
         {
-          path: '/ProjectCreation',
+          path: '/project/add',
+          element: <ProjectCreationPage />
+        },
+        {
+          path: '/project/edit/1',
           element: <ProjectCreationPage />
         },
         {
