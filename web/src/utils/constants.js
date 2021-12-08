@@ -33,7 +33,12 @@ export const SERVICE_TYPES = {
   REFILL: 'refill',
   MAINTENANCE: 'maintenance',
   CALL_OUT: 'callOut',
-  AUDIT: 'audit'
+  AUDIT: 'audit',
+  GET_PERMIT: 'getPermit',
+  PERMIT_RECEIVED: 'permitReceived',
+  MORNING_JOB: 'morningJob',
+  DAY_JOB: 'dayJob',
+  NIGHT_JOB: 'nightJob'
 };
 
 export const GROUP_BY = {

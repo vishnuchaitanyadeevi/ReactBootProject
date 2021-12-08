@@ -5,6 +5,10 @@
   "Invoice": "فاتورة",
   "Pay": "يدفع",
   "Components": "عناصر",
+  "Add_Project": "أضف مشروع",
+  "Add_Contract": "أضف العقد",
+  "Contract_List": "قائمة العقود",
+  "Project_Expiration": "انتهاء المشروع",
   "Navbar": {
     "Language": "لغة"
   },
@@ -63,6 +67,16 @@
     "service": "خدمة",
     "companyName": "اسم الشركة",
     "customerName": "اسم الزبون",
-    "lastServiceDate": "تاريخ آخر خدمة"
+    "lastServiceDate": "تاريخ آخر خدمة",
+    "getPermit": "الحصول على تصريح",
+    "permitReceived": "تم استلام التصريح",
+    "morningJob": "وظيفة الصباح",
+    "dayJob": "عمل نهاري",
+    "nightJob": "وظيفة ليلية"
+  },
+  "ProjectExpiration": {
+    "ProjectExpirationList": "قائمة انتهاء المشروع",
+    "ExpirationOverview": "نظرة عامة على انتهاء الصلاحية",
+    "ExpiredProjects":"مشاريع مجربة"
   }
 }

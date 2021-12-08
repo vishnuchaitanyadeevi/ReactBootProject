@@ -5,6 +5,10 @@
   "Invoice": "Invoice",
   "Pay": "Pay",
   "Components": "Components",
+  "Add_Project": "Add Project",
+  "Add_Contract": "Add Contract",
+  "Contract_List": "Contract List",
+  "Project_Expiration": "Project Expiration",
   "Navbar": {
     "Language": "Language"
   },
@@ -62,7 +66,17 @@
     "service": "Service",
     "companyName": "Company Name",
     "customerName": "Customer Name",
-    "lastServiceDate": "Last Service Date"
+    "lastServiceDate": "Last Service Date",
+    "getPermit": "Get Permit",
+    "permitReceived": "Permit Received",
+    "morningJob": "Morning Job",
+    "dayJob": "Day Job",
+    "nightJob": "Night Job"
+  },
+  "ProjectExpiration": {
+    "ProjectExpirationList": "Project Expiration List",
+    "ExpirationOverview": "Expiration Overview",
+    "ExpiredProjects":"Experied projects"
   }
 }
   

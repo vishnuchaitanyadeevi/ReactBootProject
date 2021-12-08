@@ -20,13 +20,14 @@ import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget'
 import './ContractsCreation.scss';
 import SimpleTable from '../../components/table/simpleTable';
 import jsonData from '../../utils/project-table-data.json';
+import CustomerData from '../../utils/customerslist.json';
 import CustomersList from '../../components/CustomersList';
 import { isEmail, isPhone } from '../../utils/utils';
 
 export default function ContractsCreation() {
   const [open, setOpen] = useState(false);
   const countryArr = ['SA'];
-  const customerArr = [11, 12, 414352, 5344, 2343];
+  const customerArr = ['HSD_ABH_00002', 'HSD_ABH_00004'];
   const statusArr = ['Active', 'On-Hold', 'Inactive'];
   const rolesArr = ['Primary', 'Role 1', 'Role 2 ', 'Role 3'];
   const transactionCurrencyArr = ['Riyal', 'Dollar'];
@@ -113,7 +114,11 @@ export default function ContractsCreation() {
   } = contractData;
 
   // HandleChange contract data fuction
-  const updateContractData = (key, val) => setContractData({ ...contractData, [key]: val });
+  const updateContractData = (key, val) => {
+    setContractData({ ...contractData, [key]: val });
+    console.log(key, val);
+  };
+  console.log('Customer Number', customerNo);
   const handleClickSaveContract = () => {
     if (!name || !position || !address || !phoneNo || !faxNo || !mobileNo || !emailId || isEmail(emailId) || !note) {
       setIsError(true);
@@ -149,6 +154,17 @@ export default function ContractsCreation() {
   useEffect(() => {
     console.log(isEditFlag);
   }, [isEditFlag]);
+
+  useEffect(() => {
+    if (customerNo) {
+      console.log('calling... only customerNo no', customerNo);
+      const newData = CustomerData.find((item) => item.custno === customerNo);
+      console.log('new_data....', newData.address);
+      setContractData({ ...contractData, customerName: newData.name, customerAddress: newData.address });
+    } else {
+      setContractData({ ...contractData, customerName: '', customerAddress: '' });
+    }
+  }, [customerNo]);
 
   // handle remove selcted file
   const handleRemove = (file) => {
