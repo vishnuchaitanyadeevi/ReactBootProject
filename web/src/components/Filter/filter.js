@@ -132,7 +132,7 @@ export default function Filters({ components, apiUrl, getFilterData }) {
               options={options}
               getOptionLabel={(option) => option.name}
               onChange={(e, val) => val && handleChange(key, val?.value)}
-              defaultValue={options.find((v) => payload[key] === v.value)}
+              value={payload[key] ? options.find((v) => payload[key] === v.value) : null}
               renderOption={(props, option) => (
                 <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
                   {option.name}
