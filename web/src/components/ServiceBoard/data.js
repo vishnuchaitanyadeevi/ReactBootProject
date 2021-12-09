@@ -1314,24 +1314,6 @@ export const FILTER_COMPONETS = [
     ]
   },
   {
-    control: CHECKBOX,
-    groupStyle: { marginRight: '1rem' },
-    key: 'lastProjectService',
-    label: 'lastProjectService',
-    placeholder: 'lastProjectService'
-  },
-  {
-    control: RADIO,
-    groupStyle: { marginRight: '1rem' },
-    key: 'gender',
-    label: 'gender',
-    placeholder: 'gender',
-    options: [
-      { name: 'Male', value: 'male', label: 'male' },
-      { name: 'Female', value: 'female', label: 'female' }
-    ]
-  },
-  {
     control: AUTOCOMPLETE,
     groupStyle: { marginRight: '1rem' },
     key: 'office',
@@ -1344,5 +1326,23 @@ export const FILTER_COMPONETS = [
       { name: 'Office 4', value: 'office4' },
       { name: 'Office 5', value: 'office5' }
     ]
+  },
+  {
+    control: CHECKBOX,
+    key: 'lastProjectService',
+    label: 'lastProjectService',
+    placeholder: 'lastProjectService',
+    columnWidth: 2
+  },
+  {
+    control: RADIO,
+    key: 'gender',
+    label: 'gender',
+    placeholder: 'gender',
+    options: [
+      { name: 'Male', value: 'male', label: 'male' },
+      { name: 'Female', value: 'female', label: 'female' }
+    ],
+    columnWidth: 1.5
   }
 ];

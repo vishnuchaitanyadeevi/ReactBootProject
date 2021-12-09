@@ -167,10 +167,16 @@
 }
 .filter-section {
   border: 10px solid;
-  padding: 2.5rem;
+  padding: 1rem;
   border-radius: 1rem;
-  margin-top: -2rem;
 }
 .pointer-cls {
   cursor: pointer;
+}
+.css-zjv1fi-MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-input {
+  padding: 0 0.4rem 0 0.6rem;
+}
+.css-in2arz-MuiFormLabel-root-MuiInputLabel-root {
+  margin-left: -0.6rem;
+  margin-left: 0.1rem;
 }

@@ -48,14 +48,15 @@ export default function Filters({ components, apiUrl, getFilterData }) {
       controlStyle,
       groupStyle,
       select = false,
-      fullWidth = true
+      fullWidth = true,
+      columnWidth = 2
     } = metaData;
 
     switch (control) {
       case TEXT_FIELD:
       case SELECT_BOX:
         return (
-          <Grid item xs={12} sm={2} style={{ ...groupStyle }} key={`${key}-${ind}`}>
+          <Grid item xs={12} sm={columnWidth} style={{ ...groupStyle }} key={`${key}-${ind}`}>
             {showLabel && <FormLabel style={labelStyle}>{t([label])}</FormLabel>}
             <TextField
               variant={variant || 'outlined'}
@@ -85,7 +86,7 @@ export default function Filters({ components, apiUrl, getFilterData }) {
         );
       case CHECKBOX:
         return (
-          <Grid item xs={12} sm={2} style={{ ...groupStyle }} key={`${key}-${ind}`}>
+          <Grid item xs={12} sm={columnWidth} style={{ ...groupStyle }} key={`${key}-${ind}`}>
             <FormControlLabel
               label={t([label])}
               control={
@@ -100,7 +101,7 @@ export default function Filters({ components, apiUrl, getFilterData }) {
         );
       case RADIO:
         return (
-          <Grid item xs={12} sm={2} key={`${key}-${ind}`}>
+          <Grid item xs={12} sm={columnWidth} style={{ ...groupStyle }} key={`${key}-${ind}`}>
             <FormControl component="fieldset">
               {showLabel && <FormLabel style={labelStyle}>{t([label])}</FormLabel>}
               <RadioGroup
@@ -125,7 +126,7 @@ export default function Filters({ components, apiUrl, getFilterData }) {
         );
       case AUTOCOMPLETE:
         return (
-          <Grid item xs={12} sm={2} key={`${key}-${ind}`} style={{ marginRight: '1rem' }}>
+          <Grid item xs={12} sm={columnWidth} key={`${key}-${ind}`} style={{ ...groupStyle }}>
             <Autocomplete
               id={key}
               options={options}
