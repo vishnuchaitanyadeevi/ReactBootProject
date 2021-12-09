@@ -26,6 +26,7 @@ import { isEmail, isPhone } from '../../utils/utils';
 
 export default function ContractsCreation() {
   const [open, setOpen] = useState(false);
+  const [editingRows, setEditingRows] = useState({});
   const countryArr = ['SA'];
   const customerArr = ['HSD_ABH_00002', 'HSD_ABH_00004'];
   const statusArr = ['Active', 'On-Hold', 'Inactive'];
@@ -186,7 +187,7 @@ export default function ContractsCreation() {
   ];
 
   console.log('add contract', isEditFlag);
-  tableData = isEditFlag ? jsonData : [];
+  tableData = isEditFlag ? jsonData : jsonData;
   return (
     <Grid container spacing={2} padding={3}>
       <Grid item xs={12} lg={12} display="flex" justifyContent="center">
@@ -436,20 +437,21 @@ export default function ContractsCreation() {
         </Stack>
       </Grid>
       <Grid rowSpacing={1} columnSpacing={1} item xs={12} lg={12} justifyContent="center">
-        <ProjectTable
-          tableDataInput={tableData}
-          columnDataForProjects={columnDataForProjects}
-          editMode="row"
+        <SimpleTable
+          rowData={tableData}
+          headerData={columnDataForProjects}
+          paginator
+          rowsPerPageOptions={[10, 20, 50, 100]}
+          rows={10}
           showGridlines
           responsiveLayout="scroll"
           resizableColumns
           columnResizeMode="expand"
           size="small"
-          rows={10}
+          // editingRows={editingRows}
           dataKey="id"
-          paginator
-          filterDisplay="row"
-          reorderableColumns
+          editMode="row"
+          editOption
         />
       </Grid>
     </Grid>

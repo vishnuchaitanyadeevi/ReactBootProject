@@ -17,7 +17,8 @@ import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget'
 import RadioGroupComponent from './RadioGroupComponent';
 import BasicDatePicker from '../../components/pickers/BasicDatePicker';
 import UploadFile from '../../components/UploadFile';
-import ProjectTable from './ProjectList';
+import SimpleTable from '../../components/table/simpleTable';
+import jsonData from '../../utils/create-project-table-data.json';
 import './ProjectCreation.scss';
 
 const projectLocation = [
@@ -65,6 +66,8 @@ const endDateTypes = [
 function ProjectCreation() {
   const { t } = useTranslation();
   const { themeMode, onChangeMode } = useSettings();
+  const [tableData, setTableData] = useState(jsonData);
+  const [editingRows, setEditingRows] = useState({});
   const [uploadProject, setUploadProject] = useState({ images: [] });
   const handleChangeExecutionType = (e) => console.log('execution type', e.target.value);
   const handleChangeServiceFrequencySetting = (e) => console.log('service frequency setting', e.target.value);
@@ -105,6 +108,73 @@ function ProjectCreation() {
   useEffect(() => {
     console.log(isEditFlag);
   }, [isEditFlag]);
+
+  const columnDataForProjects = [
+    {
+      field: 'itemCode',
+      header: 'Item Code',
+      editorElement: null,
+      style: { width: '10%' },
+      sortable: true,
+      filter: true
+    },
+    {
+      field: 'itemName',
+      header: 'Item Name',
+      editorElement: null,
+      style: { width: '10%' },
+      sortable: true,
+      filter: true
+    },
+    {
+      field: 'sla',
+      header: 'SLA',
+      editorElement: null,
+      style: { width: '10%' },
+      sortable: true,
+      filter: true
+    },
+    {
+      field: 'oStatus',
+      header: 'O/status',
+      editorElement: null,
+      style: { width: '10%' },
+      sortable: true,
+      filter: true
+    },
+    {
+      field: 'serialNumber',
+      header: 'Serial Number',
+      editorElement: null,
+      style: { width: '15%' },
+      sortable: true,
+      filter: true
+    },
+    {
+      field: 'specialNotes',
+      header: 'Special Notes',
+      editorElement: null,
+      style: { width: '15%' },
+      sortable: true,
+      filter: true
+    },
+    {
+      field: 'qty',
+      header: 'Qty',
+      editorElement: null,
+      style: { width: '15%' },
+      sortable: true,
+      filter: true
+    },
+    {
+      field: 'serviceSubjOwnerShip',
+      header: 'Service Subject OwnerShip',
+      editorElement: null,
+      style: { width: '15%' },
+      sortable: true,
+      filter: true
+    }
+  ];
 
   return (
     <Grid className="project_creation_main_grid">
@@ -492,8 +562,30 @@ function ProjectCreation() {
           </Grid>
         </Grid>
 
+        <Grid item xs={12} style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Button variant="contained" style={{ marginBottom: '1rem' }}>
+            Add New Service Subject
+          </Button>
+        </Grid>
         <Grid rowSpacing={1} columnSpacing={1} item xs={12} lg={12} justifyContent="center">
-          <ProjectTable />
+          <SimpleTable
+            rowData={tableData}
+            headerData={columnDataForProjects}
+            paginator
+            rowsPerPageOptions={[10, 20, 50, 100]}
+            rows={10}
+            showGridlines
+            responsiveLayout="scroll"
+            resizableColumns
+            columnResizeMode="expand"
+            size="small"
+            // editingRows={editingRows}
+            dataKey="id"
+            editMode="row"
+            type="text"
+            title="View project"
+            editOption
+          />
         </Grid>
       </Grid>
     </Grid>

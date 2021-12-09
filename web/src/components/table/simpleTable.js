@@ -24,6 +24,12 @@ export default function SimpleTable({ rowData, headerData, editOption, showActio
     setEditingRows(e.data);
   };
 
+  const onRowEditComplete = (e) => {
+    const _tableData = [...tableData];
+    const { newData, index } = e;
+    _tableData[index] = newData;
+    setTableData(_tableData);
+  };
   const setActiveRowIndex = (index) => {
     const editingRow = { ...editingRows, ...{ [`${tableData[index].id}`]: true } };
     setEditingRows(editingRow);
@@ -111,6 +117,7 @@ export default function SimpleTable({ rowData, headerData, editOption, showActio
           value={tableData}
           editingRows={editingRows}
           onRowEditChange={onRowEditChange}
+          onRowEditComplete={onRowEditComplete}
           filters={filterState}
           {...other}
         >

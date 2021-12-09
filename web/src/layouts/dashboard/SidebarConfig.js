@@ -98,7 +98,8 @@ const sidebarConfig = [
           { title: 'Invoice', path: '/invoice' },
           { title: 'Pay', path: '/pay' },
           { title: 'Components', path: '/components' },
-          { title: 'Customers', path: '/customers' }
+          { title: 'Customers', path: '/customers' },
+          { title: 'Add Call Out', path: '/addCallOut' }
         ]
       }
     ]
