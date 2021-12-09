@@ -78,5 +78,8 @@
     "ProjectExpirationList": "قائمة انتهاء المشروع",
     "ExpirationOverview": "نظرة عامة على انتهاء الصلاحية",
     "ExpiredProjects":"مشاريع مجربة"
+  },
+  "MaterialList": {
+    "MaterialPickingList": "قائمة اختيار المواد"
   }
 }

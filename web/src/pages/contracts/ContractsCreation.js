@@ -174,15 +174,43 @@ export default function ContractsCreation() {
 
   const columnDataForProjects = [
     { field: 'status', header: 'Status', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
-    { field: 'prjno', header: 'prjno', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
-    { field: 'prjnm', header: 'prjnm', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
-    { field: 'lcnm', header: 'lcnm', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
-    { field: 'bspct', header: 'bspct', editorElement: null, style: { width: '15%' }, sortable: true, filter: true },
-    { field: 'sdt', header: 'sdt', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
-    { field: 'edt', header: 'edt', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
-    { field: 'extp', header: 'extp', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
-    { field: 'grpd', header: 'grpd', editorElement: null, style: { width: '5%' }, sortable: true, filter: true },
-    { field: 'prm', header: 'prm', editorElement: 'checkbox', style: { width: '5%' }, sortable: true, filter: true }
+    {
+      field: 'prjno',
+      header: 'Project No.',
+      editorElement: null,
+      style: { width: '10%' },
+      sortable: true,
+      filter: true
+    },
+    {
+      field: 'prjnm',
+      header: 'Project Name',
+      editorElement: null,
+      style: { width: '10%' },
+      sortable: true,
+      filter: true
+    },
+    {
+      field: 'lcnm',
+      header: 'Location Name',
+      editorElement: null,
+      style: { width: '10%' },
+      sortable: true,
+      filter: true
+    },
+    {
+      field: 'bspct',
+      header: 'Business ProjCat',
+      editorElement: null,
+      style: { width: '15%' },
+      sortable: true,
+      filter: true
+    },
+    { field: 'sdt', header: 'Start Date', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+    { field: 'edt', header: 'End Date', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+    { field: 'extp', header: 'Ex Type', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+    { field: 'grpd', header: 'Grouped', editorElement: null, style: { width: '5%' }, sortable: true, filter: true },
+    { field: 'prm', header: 'Primary', editorElement: 'checkbox', style: { width: '5%' }, sortable: true, filter: true }
   ];
 
   // const idx = customerArr.indexOf(customerNo);
@@ -194,7 +222,7 @@ export default function ContractsCreation() {
     return (
       <Grid container spacing={2} padding={3}>
         <Grid item xs={12} lg={12} display="flex" justifyContent="center">
-          <Typography variant="h4">Add Contract</Typography>
+          <Typography variant="h4">Add New Contract</Typography>
         </Grid>
         <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
           <Typography variant="h4">Customer Details</Typography>
@@ -385,7 +413,7 @@ export default function ContractsCreation() {
               onDrop={handleDropMultiple}
               onRemove={handleRemove}
               backgroundColor="green"
-              buttonLabel="Upload Contract"
+              buttonLabel="Upload Contract PDF"
               startIcon={<UploadFileOutlined />}
             />
           </Grid>
@@ -420,7 +448,7 @@ export default function ContractsCreation() {
                     <AutocompleteWidget
                       options={fundingTypeArr}
                       size="small"
-                      label="Fund Type"
+                      label="Funding Type"
                       defaultValue="Customer"
                     />
                   </Grid>
@@ -698,7 +726,7 @@ export default function ContractsCreation() {
               onDrop={handleDropMultiple}
               onRemove={handleRemove}
               backgroundColor="green"
-              buttonLabel="Upload Contract"
+              buttonLabel="Upload Contract PDF"
               startIcon={<UploadFileOutlined />}
             />
           </Grid>
@@ -733,7 +761,7 @@ export default function ContractsCreation() {
                     <AutocompleteWidget
                       options={fundingTypeArr}
                       size="small"
-                      label="Fund Type"
+                      label="Funding Type"
                       defaultValue="Customer"
                     />
                   </Grid>
