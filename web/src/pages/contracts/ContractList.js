@@ -176,7 +176,7 @@ function ContractList() {
   const navigate = useNavigate();
 
   const navigateToProjectCreation = () => {
-    navigate('/ProjectCreation', { replace: true });
+    navigate('/project/edit/1', { replace: true });
   };
 
   const navigateToContractEdition = () => {

@@ -1,4 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { matchPath, useLocation, useNavigate } from 'react-router-dom';
 import {
   Grid,
   Typography,
@@ -104,6 +106,7 @@ const endDateTypes = [
 ];
 
 function ProjectCreation() {
+  const { t } = useTranslation();
   const { themeMode, onChangeMode } = useSettings();
   const [uploadProject, setUploadProject] = useState({ images: [] });
   const handleChangeExecutionType = (e) => console.log('execution type', e.target.value);
@@ -133,44 +136,59 @@ function ProjectCreation() {
     setUploadProject({ ...uploadProject, images: filteredItems });
   };
 
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  const navigateToContractlist = () => {
+    navigate('/contractsList', { replace: true });
+  };
+
+  const match = (path) => (path ? !!matchPath({ path, end: false }, pathname) : false);
+  const isEditFlag = match('project/edit/1');
+  useEffect(() => {
+    console.log(isEditFlag);
+  }, [isEditFlag]);
+
   return (
     <Grid className="project_creation_main_grid">
       <Grid container spacing={3}>
         <Grid className="main_title_cls" item xs={12}>
-          <Typography variant="h4">Project</Typography>
+          <Typography variant="h4">
+            {isEditFlag ? t('CreateProject.EditProject') : t('CreateProject.CreateProject')}
+          </Typography>
         </Grid>
 
         {/* Grid for project details section */}
         <Grid item xs={12} sm={6}>
           <Typography variant="h4" className="form_sub_title_cls">
-            Project Details
+            {t('CreateProject.ProjectDetails')}
           </Typography>
 
           <Grid container spacing={3}>
             <Grid item xs={12} sm={12}>
               <RadioGroupComponent
-                title="Execution Type"
+                title={t('CreateProject.ExecutionType')}
                 options={executionType}
                 onChange={handleChangeExecutionType}
               />
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label="Project No." size="small" />
+              <TextField fullWidth label={t('CreateProject.ProjectNo')} size="small" />
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label="Region" size="small" />
+              <TextField fullWidth label={t('CreateProject.Region')} size="small" />
             </Grid>
 
             <Grid item xs={12} sm={12}>
-              <TextField fullWidth label="Project Name" size="small" />
+              <TextField fullWidth label={t('CreateProject.ProjectName')} size="small" />
             </Grid>
 
             <Grid item xs={12} sm={6}>
               <AutocompleteWidget
                 options={projectLocation}
-                label="Project Location"
+                label={t('CreateProject.ProjectLocation')}
                 disablePortal
                 autoSelect
                 size="small"
@@ -178,19 +196,25 @@ function ProjectCreation() {
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <AutocompleteWidget options={projectLocation} label="Project SLA" disablePortal autoSelect size="small" />
+              <AutocompleteWidget
+                options={projectLocation}
+                label={t('CreateProject.ProjectSLA')}
+                disablePortal
+                autoSelect
+                size="small"
+              />
             </Grid>
 
             <Grid item xs={12} sm={12}>
               <Typography variant="h5" className="form_sub_title_cls">
-                Project Business Category
+                {t('CreateProject.ProjectBusinessCategory')}
               </Typography>
             </Grid>
 
             <Grid item xs={12} sm={6}>
               <AutocompleteWidget
                 options={projectLocation}
-                label="Business Type"
+                label={t('CreateProject.BusinessType')}
                 disablePortal
                 autoSelect
                 size="small"
@@ -198,28 +222,46 @@ function ProjectCreation() {
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <AutocompleteWidget options={projectLocation} label="Sub-type" disablePortal autoSelect size="small" />
+              <AutocompleteWidget
+                options={projectLocation}
+                label={t('CreateProject.SubType')}
+                disablePortal
+                autoSelect
+                size="small"
+              />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <BasicDatePicker label="Project Signed On" inputFormat="dd-MM-yyyy" views={['year', 'month', 'day']} />
+              <BasicDatePicker
+                label={t('CreateProject.ProjectSignedOn')}
+                inputFormat="dd-MM-yyyy"
+                views={['year', 'month', 'day']}
+              />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <BasicDatePicker label="Project Start Date" inputFormat="dd-MM-yyyy" views={['year', 'month', 'day']} />
+              <BasicDatePicker
+                label={t('CreateProject.ProjectStartDate')}
+                inputFormat="dd-MM-yyyy"
+                views={['year', 'month', 'day']}
+              />
             </Grid>
             <Grid item xs={12} sm={6}>
               <RadioGroupComponent
-                title="Project End Date"
+                title={t('CreateProject.ProjectEndDate')}
                 options={endDateTypes}
                 onChange={handleChangeProjectEndDate}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <BasicDatePicker label="Project End Date" inputFormat="dd-MM-yyyy" views={['year', 'month', 'day']} />
+              <BasicDatePicker
+                label={t('CreateProject.ProjectEndDate')}
+                inputFormat="dd-MM-yyyy"
+                views={['year', 'month', 'day']}
+              />
             </Grid>
             <Grid item xs={12} sm={6}>
               <AutocompleteWidget
                 options={projectLocation}
-                label="Project Status"
+                label={t('CreateProject.ProjectStatus')}
                 disablePortal
                 autoSelect
                 size="small"
@@ -228,7 +270,7 @@ function ProjectCreation() {
             <Grid item xs={12} sm={6}>
               <AutocompleteWidget
                 options={projectLocation}
-                label="Project Classification"
+                label={t('CreateProject.ProjectClassification')}
                 disablePortal
                 autoSelect
                 size="small"
@@ -237,7 +279,7 @@ function ProjectCreation() {
             <Grid style={{ marginTop: '0.3rem' }} item xs={12} sm={12}>
               <TextField
                 fullWidth
-                label="Project Discount"
+                label={t('CreateProject.ProjectDiscount')}
                 InputProps={{
                   endAdornment: <InputAdornment position="end">%</InputAdornment>
                 }}
@@ -245,22 +287,34 @@ function ProjectCreation() {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <AutocompleteWidget options={projectLocation} label="Salesman" disablePortal autoSelect size="small" />
+              <AutocompleteWidget
+                options={projectLocation}
+                label={t('CreateProject.Salesman')}
+                disablePortal
+                autoSelect
+                size="small"
+              />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <AutocompleteWidget options={projectLocation} label="Serviceman" disablePortal autoSelect size="small" />
+              <AutocompleteWidget
+                options={projectLocation}
+                label={t('CreateProject.Serviceman')}
+                disablePortal
+                autoSelect
+                size="small"
+              />
             </Grid>
 
             <Grid item xs={12} sm={12}>
               <Typography variant="h4" className="form_sub_title_cls">
-                Additional Information
+                {t('CreateProject.AdditionalInformation')}
               </Typography>
             </Grid>
             <Grid item xs={12} sm={12}>
-              <TextField fullWidth label="Special Attention / Notes" size="small" />
+              <TextField fullWidth label={t('CreateProject.SpecialAttentionNotes')} size="small" />
             </Grid>
             <Grid item xs={12} sm={12}>
-              <TextField fullWidth label="Scope of Project" size="small" />
+              <TextField fullWidth label={t('CreateProject.ScopeOfProject')} size="small" />
             </Grid>
             <Grid item xs={12} sm={12}>
               <UploadFile
@@ -271,7 +325,7 @@ function ProjectCreation() {
                 onDrop={handleUploadProject}
                 onRemove={handleRemove}
                 backgroundColor="#70cd71"
-                buttonLabel="Upload Project (pdf)"
+                buttonLabel={t('CreateProject.UploadProject')}
               />
             </Grid>
             <Grid item xs={12} xl={12} md={12} hidden={!(axDefaultexpanded === 'panel1' || axDefaultexpanded === true)}>
@@ -283,7 +337,7 @@ function ProjectCreation() {
                   id="panel1d-header"
                 >
                   <Typography variant="h4" className="form_sub_title_cls">
-                    Ax Default Fields
+                    {t('CreateProject.AxDefaultFields')}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -297,7 +351,7 @@ function ProjectCreation() {
         {/* Grid for service frequency settings details */}
         <Grid item xs={12} sm={6}>
           <Typography variant="h4" className="form_sub_title_cls">
-            Service Frequency Settings
+            {t('CreateProject.ServiceFrequencySettings')}
           </Typography>
 
           <Grid container spacing={3}>
@@ -306,9 +360,9 @@ function ProjectCreation() {
               <Grid style={{ marginTop: '0.3rem' }} item xs={12} sm={12}>
                 <TextField
                   fullWidth
-                  label="Recur every"
+                  label={t('CreateProject.RecurEvery')}
                   InputProps={{
-                    endAdornment: <InputAdornment position="end">Day(s)</InputAdornment>
+                    endAdornment: <InputAdornment position="end">{t('CreateProject.Days')}</InputAdornment>
                   }}
                   type="number"
                   size="small"
@@ -317,7 +371,7 @@ function ProjectCreation() {
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <Typography variant="h5">Service Recurrence</Typography>
+              <Typography variant="h5">{t('CreateProject.ServiceRecurrence')}</Typography>
               <Grid
                 item
                 xs={12}
@@ -338,17 +392,17 @@ function ProjectCreation() {
                   marginBottom: '1rem'
                 }}
               >
-                Invoice Recipient & frequency Settings
+                {t('CreateProject.InvoiceRecipientAndFrequencySettings')}
               </Typography>
               <RadioGroupComponent
-                title="Invoice Recipient"
+                title={t('CreateProject.InvoiceRecipient')}
                 options={invoiceRecipient}
                 onChange={handleChangeInvoiceRecipient}
               />
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <Typography variant="h5">Invoice Recurrence</Typography>
+              <Typography variant="h5">{t('CreateProject.InvoiceRecurrence')}</Typography>
               <Grid
                 item
                 xs={12}
@@ -363,7 +417,7 @@ function ProjectCreation() {
           <Grid style={{ marginTop: '0.2rem' }} container spacing={3}>
             <Grid item xs={12} sm={6}>
               <RadioGroupComponent
-                title="Invoice Frequency"
+                title={t('CreateProject.InvoiceFrequency')}
                 options={invoiceFrequency}
                 onChange={handleChangeInvoiceRecipient}
               />
@@ -374,7 +428,7 @@ function ProjectCreation() {
                 fullWidth
                 label="Recur every"
                 InputProps={{
-                  endAdornment: <InputAdornment position="end">Day(s)</InputAdornment>
+                  endAdornment: <InputAdornment position="end">{t('CreateProject.Days')}</InputAdornment>
                 }}
                 type="number"
                 size="small"
@@ -385,46 +439,46 @@ function ProjectCreation() {
                 fullWidth
                 label="Project Value"
                 InputProps={{
-                  endAdornment: <InputAdornment position="start">SAR</InputAdornment>
+                  endAdornment: <InputAdornment position="start">{t('CreateProject.SAR')}</InputAdornment>
                 }}
                 size="small"
               />
             </Grid>
             <Grid item xs={12} sm={12}>
-              <Typography variant="h4">Signatory Information</Typography>
+              <Typography variant="h4">{t('CreateProject.SignatoryInformation')}</Typography>
             </Grid>
             <Grid item xs={12} sm={12}>
               <AutocompleteWidget
                 options={projectLocation}
-                label="Select Various Roles"
+                label={t('CreateProject.SelectVariousRoles')}
                 disablePortal
                 autoSelect
                 size="small"
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label="Name" size="small" />
+              <TextField fullWidth label={t('CreateProject.Name')} size="small" />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label="Position" size="small" />
+              <TextField fullWidth label={t('CreateProject.Position')} size="small" />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label="Address" size="small" />
+              <TextField fullWidth label={t('CreateProject.Address')} size="small" />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label="Phone No." size="small" />
+              <TextField fullWidth label={t('CreateProject.PhoneNo')} size="small" />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label="Fax No." size="small" />
+              <TextField fullWidth label={t('CreateProject.FaxNo')} size="small" />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label="Mobile No." size="small" />
+              <TextField fullWidth label={t('CreateProject.MobileNo')} size="small" />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label="e-mail ID" size="small" />
+              <TextField fullWidth label={t('CreateProject.emailID')} size="small" />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label="Note" size="small" />
+              <TextField fullWidth label={t('CreateProject.Note')} size="small" />
             </Grid>
             <Grid item xs={12} sm={12}>
               <UploadFile
@@ -435,7 +489,7 @@ function ProjectCreation() {
                 onDrop={handleUploadProject}
                 onRemove={handleRemove}
                 backgroundColor="#70cd71"
-                buttonLabel="Agreement / LPO No."
+                buttonLabel={t('CreateProject.AgreementLPONo')}
               />
             </Grid>
             <Grid
@@ -453,7 +507,7 @@ function ProjectCreation() {
                   id="panel1d-header"
                 >
                   <Typography variant="h4" className="form_sub_title_cls">
-                    Financial Dimensions
+                    {t('CreateProject.FinancialDimensions')}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -466,14 +520,14 @@ function ProjectCreation() {
         {/* Grid for button section */}
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12} style={{ display: 'flex', justifyContent: 'center', margin: '1rem' }}>
-            <Button variant="contained" color="secondary">
-              Back
+            <Button variant="contained" color="secondary" onClick={navigateToContractlist}>
+              {t('CreateProject.Back')}
             </Button>
             <Button variant="contained" style={{ marginLeft: '1rem' }}>
-              Save
+              {t('CreateProject.Save')}
             </Button>
             <Button style={{ marginLeft: '1rem' }} variant="contained" color="secondary">
-              Renew
+              {t('CreateProject.Renew')}
             </Button>
           </Grid>
         </Grid>
