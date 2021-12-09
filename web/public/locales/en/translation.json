@@ -61,13 +61,23 @@
     "highene": "Highene",
     "service": "Service",
     "companyName": "Company Name",
-    "customerName": "Customer Name",
+    "customerName": "",
     "lastServiceDate": "Last Service Date",
     "getPermit": "Get Permit",
     "permitReceived": "Permit Received",
     "morningJob": "Morning Job",
     "dayJob": "Day Job",
     "nightJob": "Night Job"
+  },
+  "country": "Country",
+  "customerName": "Customer Name",
+  "lastProjectService": "Last Project Service",
+  "gender": "Gender",
+  "office": "Office",
+  "male": "Male",
+  "female": "Female",
+  "filter": {
+    "filter": "Filter",
+    "clear": "Clear"
   }
 }
-  

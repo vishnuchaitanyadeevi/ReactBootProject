@@ -69,5 +69,16 @@
     "morningJob": "وظيفة الصباح",
     "dayJob": "عمل نهاري",
     "nightJob": "وظيفة ليلية"
+  },
+  "country": "دولة",
+  "customerName": "اسم الزبون",
+  "lastProjectService": "خدمة المشروع الأخير",
+  "gender": "جنس تذكير أو تأنيث",
+  "office": "مكتب. مقر. مركز",
+  "male": "ذكر",
+  "female": "أنثى",
+  "filter": {
+    "filter": "منقي",
+    "clear": "صافي"
   }
 }

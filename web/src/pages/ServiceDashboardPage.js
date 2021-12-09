@@ -10,7 +10,8 @@ import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
 import ServiceBoard from '../components/ServiceBoard/ServiceBoard';
 import ServiceMens from '../components/ServiceBoard/ServiceMens';
 import ServiceTypes from '../components/ServiceBoard/ServiceTypes';
-import { serviceDataEn, serviceDataAr, COLOR_CODES } from '../components/ServiceBoard/data';
+import Filters from '../components/Filter/filter';
+import { serviceDataEn, serviceDataAr, COLOR_CODES, FILTER_COMPONETS } from '../components/ServiceBoard/data';
 
 import { MAX_LANES, GROUP_BY, THEME, LANGUAGE_CODES } from '../utils/constants';
 import { sortListOfObjects } from '../utils/utils';
@@ -104,6 +105,10 @@ export default function ServiceDashboard() {
     changeData();
   };
 
+  const getFilterData = (data) => {
+    console.log('Filtered data: ', data);
+  };
+
   useEffect(changeData, [start, serviceData]);
   useEffect(() => setColorCode(themeMode === THEME.LIGHT ? LGT : DRK), [themeMode]);
   useEffect(() => {
@@ -114,7 +119,9 @@ export default function ServiceDashboard() {
     <>
       <Grid container>
         <Grid item xs={12}>
-          <div className="filter-section" style={{ borderColor: BORDER }} />
+          <div className="filter-section" style={{ borderColor: BORDER }}>
+            <Filters components={FILTER_COMPONETS} apiUrl="dummyUrl" getFilterData={getFilterData} />
+          </div>
         </Grid>
         <Grid item xs={12} md={2}>
           <Stack>

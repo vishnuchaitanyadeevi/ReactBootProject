@@ -1,3 +1,7 @@
+import { COMPONENTS } from '../../utils/constants';
+
+const { TEXT_FIELD, SELECT_BOX, AUTOCOMPLETE, CHECKBOX, RADIO } = COMPONENTS;
+
 const card = {
   cardColor: '#66ff00',
   cardStyle: {
@@ -1282,3 +1286,63 @@ export const COLOR_CODES = {
     }
   }
 };
+
+export const FILTER_COMPONETS = [
+  {
+    control: TEXT_FIELD,
+    groupStyle: { marginRight: '1rem' },
+    key: 'customerName',
+    label: 'customerName',
+    placeholder: 'customerName'
+  },
+  {
+    control: SELECT_BOX,
+    groupStyle: { marginRight: '1rem' },
+    key: 'country',
+    label: 'country',
+    placeholder: 'country',
+    select: true,
+    options: [
+      { name: 'India', value: 'in' },
+      { name: 'Dubai', value: 'du' },
+      { name: 'Saudi Arabia', value: 'sb' },
+      { name: 'Qatar', value: 'qt' },
+      { name: 'Abu Dhabi ', value: 'ab' },
+      { name: 'Oman', value: 'om' },
+      { name: 'Kuwait', value: 'kt' },
+      { name: 'Bahrain', value: 'bh' }
+    ]
+  },
+  {
+    control: CHECKBOX,
+    groupStyle: { marginRight: '1rem' },
+    key: 'lastProjectService',
+    label: 'lastProjectService',
+    placeholder: 'lastProjectService'
+  },
+  {
+    control: RADIO,
+    groupStyle: { marginRight: '1rem' },
+    key: 'gender',
+    label: 'gender',
+    placeholder: 'gender',
+    options: [
+      { name: 'Male', value: 'male', label: 'male' },
+      { name: 'Female', value: 'female', label: 'female' }
+    ]
+  },
+  {
+    control: AUTOCOMPLETE,
+    groupStyle: { marginRight: '1rem' },
+    key: 'office',
+    label: 'office',
+    placeholder: 'office',
+    options: [
+      { name: 'Office 1', value: 'office1' },
+      { name: 'Office 2', value: 'office2' },
+      { name: 'Office 3', value: 'office3' },
+      { name: 'Office 4', value: 'office4' },
+      { name: 'Office 5', value: 'office5' }
+    ]
+  }
+];
