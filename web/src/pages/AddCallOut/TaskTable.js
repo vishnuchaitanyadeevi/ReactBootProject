@@ -8,10 +8,23 @@ import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { Toast } from 'primereact/toast';
 import useSettings from '../../hooks/useSettings';
-import jsonData from '../../utils/create-project-table-data.json';
 import '../../Styles/app.scss';
 
-export default function ProjectTable() {
+export default function TaskTable() {
+  const jsonData = [
+    {
+      id: 1,
+      serviceSubject: 'Service Subject 1',
+      taskName: 'Task Name 1',
+      note: 'Testing note... 1'
+    },
+    {
+      id: 2,
+      serviceSubject: 'Service Subject 2',
+      taskName: 'Task Name 2',
+      note: 'Testing note... 2'
+    }
+  ];
   const { themeMode, onChangeMode } = useSettings();
   const [tableData, setTableData] = useState(jsonData);
   const [editingRows, setEditingRows] = useState({});
@@ -20,16 +33,31 @@ export default function ProjectTable() {
     setEditingRows(e.data);
   };
 
+  const onRowEditComplete = (e) => {
+    const _tableData = [...tableData];
+    const { newData, index } = e;
+    _tableData[index] = newData;
+    setTableData(_tableData);
+  };
+
   const setActiveRowIndex = (index) => {
+    console.log('index', index);
     const editingRow = { ...editingRows, ...{ [`${tableData[index].id}`]: true } };
+    console.log('editing row...', editingRow);
     setEditingRows(editingRow);
+  };
+
+  const handleChange = (options, e) => {
+    debugger; // eslint-disable-line no-debugger
+    console.log('options,e', options, e.target.value);
+    options.editorCallback(e.target.value);
   };
 
   const textEditor = (options) => (
     <InputText
       type="text"
       value={options.value}
-      onChange={(e) => options.editorCallback(e.target.value)}
+      onChange={(e) => handleChange(options, e)}
       style={{ minWidth: '12rem' }}
     />
   );
@@ -64,34 +92,39 @@ export default function ProjectTable() {
         editMode="row"
         editingRows={editingRows}
         onRowEditChange={onRowEditChange}
+        onRowEditComplete={onRowEditComplete}
         dataKey="id"
+        paginator
       >
         <Column
-          field="itemCode"
-          header="Item Code"
+          columnKey="serviceSubject"
+          field="serviceSubject"
+          header="Service Subject"
+          sortable
           editor={(options) => textEditor(options)}
-          style={{ width: '20%' }}
+          reorderable={false}
+          filter
+          filterclear
         />
         <Column
-          field="itemName"
-          header="Item Name"
+          columnKey="taskName"
+          field="taskName"
+          header="Task Name"
+          sortable
           editor={(options) => textEditor(options)}
-          style={{ width: '20%' }}
+          reorderable={false}
+          filter
+          filterclear
         />
-        <Column field="sla" header="SLA" editor={(options) => textEditor(options)} style={{ width: '20%' }} />
-        <Column field="oStatus" header="O/status" editor={(options) => textEditor(options)} style={{ width: '20%' }} />
         <Column
-          field="serialNumber"
-          header="Serial Number"
+          columnKey="note"
+          field="note"
+          header="Note"
+          sortable
           editor={(options) => textEditor(options)}
-          style={{ width: '20%' }}
-        />
-        <Column field="specialNotes" header="Special Notes" editor={(options) => textEditor(options)} />
-        <Column field="qty" header="Qty" editor={(options) => textEditor(options)} />
-        <Column
-          field="serviceSubjOwnerShip"
-          header="Service Subject Ownership"
-          editor={(options) => textEditor(options)}
+          reorderable={false}
+          filter
+          filterclear
         />
         <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }} />
       </DataTable>

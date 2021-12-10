@@ -8,8 +8,8 @@
         "sdt": "01-11-2020",
         "edt": "01-01-2022",
         "extp": "Regular",
-        "grpd": true,
-        "prm": false,
+        "grpd": "true",
+        "prm": "false",
         "id":1
     },
     {
@@ -21,8 +21,8 @@
         "sdt": "01-11-2020",
         "edt": "01-01-2022",
         "extp": "Regular",
-        "grpd": true,
-        "prm": false,
+        "grpd": "true",
+        "prm": "false",
         "id":2
     }
 ]

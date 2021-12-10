@@ -44,7 +44,7 @@ const sidebarConfig = [
         path: '',
         children: [
           { title: 'Contract List', path: '/contractsList' },
-          { title: 'Project List', path: '' },
+          { title: 'Project List', path: '/project/add' },
           { title: 'Service Orders', path: '' },
           { title: 'Project Expiration List', path: '/projectExpiration' },
           { title: 'Terminate Projects', path: '' }
@@ -54,7 +54,7 @@ const sidebarConfig = [
         title: 'Manage Schedule',
         path: '',
         children: [
-          { title: 'Add Call Out', path: '' },
+          { title: 'Add Call Out', path: '/addCallOut' },
           { title: 'Schedule Services', path: '/dashboard/service' }
         ]
       },
@@ -99,16 +99,17 @@ const sidebarConfig = [
         title: 'Demo',
         path: '',
         children: [
-          { title: 'Add_Project', path: '/ProjectCreation' }
-          // { title: 'Add_Contract', path: '/contract/add' }
-          // { title: 'Contract_List', path: '/contractsList' },
-          // { title: 'Project_Expiration', path: '/projectExpiration' },
-          // { title: 'Employee', path: '/employee' },
-          // { title: 'Data', path: '/data' },
-          // { title: 'Invoice', path: '/invoice' }
-          // { title: 'Pay', path: '/pay' },
-          // { title: 'Components', path: '/components' }
-          // { title: 'Customers', path: '/customers' }
+          { title: 'Add_Project', path: '/project/add' },
+          { title: 'Add_Contract', path: '/contract/add' },
+          { title: 'Contract_List', path: '/contractsList' },
+          { title: 'Project_Expiration', path: '/projectExpiration' },
+          { title: 'Employee', path: '/employee' },
+          { title: 'Data', path: '/data' },
+          { title: 'Invoice', path: '/invoice' },
+          { title: 'Pay', path: '/pay' },
+          { title: 'Components', path: '/components' },
+          { title: 'Customers', path: '/customers' },
+          { title: 'Add Call Out', path: '/addCallOut' }
         ]
       }
       */
