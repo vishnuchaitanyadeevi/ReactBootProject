@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { isArray } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import {
@@ -26,10 +26,13 @@ export default function Filters({ components, apiUrl, getFilterData }) {
 
   const handleChange = (key, val) => setPayload({ ...payload, [key]: val });
 
-  const handleClearFilters = () => setPayload({});
+  const handleClearFilters = () => {
+    setPayload({});
+    getFilterData({});
+  };
 
   const handleGetData = () => {
-    console.log('filters: ', payload);
+    console.log(`Getting data from ${apiUrl} API with filters: `, payload);
     getFilterData(payload);
   };
 

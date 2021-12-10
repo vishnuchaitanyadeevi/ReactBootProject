@@ -120,7 +120,7 @@ export default function ServiceDashboard() {
       <Grid container>
         <Grid item xs={12}>
           <div className="filter-section" style={{ borderColor: BORDER }}>
-            <Filters components={FILTER_COMPONETS} apiUrl="dummyUrl" getFilterData={getFilterData} />
+            {/* <Filters components={FILTER_COMPONETS} apiUrl="dummyUrl" getFilterData={getFilterData} /> */}
           </div>
         </Grid>
         <Grid item xs={12} md={2}>
