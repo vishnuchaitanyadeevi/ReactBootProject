@@ -30,7 +30,7 @@
   "invoicing home": "invoicing home",
   "Invoicing -Overview": "Invoicing -Overview",
   "credit": "credit",
-  "Credit notes Proposal & Workflow": "Credit notes Proposal & Workflow",
+  "Credit Notes Proposal And Workflow": "Credit notes Proposal & Workflow",
   "credit note list": "credit note list",
   "credit control view": "credit control view",
   "credit control co-ordinator view": "credit control co-ordinator view",
@@ -77,6 +77,9 @@
     "ProjectExpirationList": "Project Expiration List",
     "ExpirationOverview": "Expiration Overview",
     "ExpiredProjects":"Experied projects"
+  },
+  "MaterialList": {
+    "MaterialPickingList": "Material Picking List"
   },
   "CreateProject":{
     "CreateProject": "Create Project",

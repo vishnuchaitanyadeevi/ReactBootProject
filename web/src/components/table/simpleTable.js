@@ -24,6 +24,25 @@ export default function SimpleTable({ rowData, headerData, editOption, showActio
     setEditingRows(e.data);
   };
 
+  const [globalFilter, setGlobalFilter] = useState(null);
+
+  const header = (
+    <div className="datatable-crud-demo">
+      <div className="table-header" style={{ justifyContent: 'right' }}>
+        <span className="p-input-icon-left">
+          <i className="pi pi-search" />
+          <InputText
+            type="search"
+            // value={globalFilterValue}
+            // onChange={onGlobalFilterChange}
+            placeholder="Global Search"
+            onInput={(e) => setGlobalFilter(e.target.value)}
+          />
+        </span>
+      </div>
+    </div>
+  );
+
   const setActiveRowIndex = (index) => {
     const editingRow = { ...editingRows, ...{ [`${tableData[index].id}`]: true } };
     setEditingRows(editingRow);
@@ -108,6 +127,8 @@ export default function SimpleTable({ rowData, headerData, editOption, showActio
       </Helmet>
       <Grid item xs={12} lg={12}>
         <DataTable
+          header={header}
+          globalFilter={globalFilter}
           value={tableData}
           editingRows={editingRows}
           onRowEditChange={onRowEditChange}

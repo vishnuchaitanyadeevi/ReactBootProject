@@ -17,8 +17,51 @@ import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget'
 import RadioGroupComponent from './RadioGroupComponent';
 import BasicDatePicker from '../../components/pickers/BasicDatePicker';
 import UploadFile from '../../components/UploadFile';
-import ProjectTable from './ProjectList';
+import ProjectTable from '../../components/contracts/projectTable';
 import './ProjectCreation.scss';
+
+const tableData = [];
+
+const columnDataForProjects = [
+  { field: 'status', header: 'Status', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+  {
+    field: 'prjno',
+    header: 'Project No.',
+    editorElement: null,
+    style: { width: '10%' },
+    sortable: true,
+    filter: true
+  },
+  {
+    field: 'prjnm',
+    header: 'Project Name',
+    editorElement: null,
+    style: { width: '10%' },
+    sortable: true,
+    filter: true
+  },
+  {
+    field: 'lcnm',
+    header: 'Location Name',
+    editorElement: null,
+    style: { width: '10%' },
+    sortable: true,
+    filter: true
+  },
+  {
+    field: 'bspct',
+    header: 'Business ProjCat',
+    editorElement: null,
+    style: { width: '15%' },
+    sortable: true,
+    filter: true
+  },
+  { field: 'sdt', header: 'Start Date', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+  { field: 'edt', header: 'End Date', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+  { field: 'extp', header: 'Ex Type', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+  { field: 'grpd', header: 'Grouped', editorElement: null, style: { width: '5%' }, sortable: true, filter: true },
+  { field: 'prm', header: 'Primary', editorElement: 'checkbox', style: { width: '5%' }, sortable: true, filter: true }
+];
 
 const projectLocation = [
   { label: 'Saudi Arabia', value: 'Saudi Arabia' },
@@ -483,17 +526,28 @@ function ProjectCreation() {
             <Button variant="contained" style={{ marginLeft: '1rem' }}>
               {t('CreateProject.Save')}
             </Button>
-            <Button style={{ marginLeft: '1rem' }} variant="contained" color="warning">
-              {t('CreateProject.TerminateProject')}
-            </Button>
             <Button style={{ marginLeft: '1rem' }} variant="contained" color="secondary">
               {t('CreateProject.Renew')}
             </Button>
           </Grid>
         </Grid>
-
         <Grid rowSpacing={1} columnSpacing={1} item xs={12} lg={12} justifyContent="center">
-          <ProjectTable />
+          <ProjectTable
+            showAddProject
+            tableDataInput={tableData}
+            columnDataForProjects={columnDataForProjects}
+            editMode="row"
+            showGridlines
+            responsiveLayout="scroll"
+            resizableColumns
+            columnResizeMode="expand"
+            size="small"
+            rows={10}
+            dataKey="id"
+            paginator
+            filterDisplay="row"
+            reorderableColumns
+          />
         </Grid>
       </Grid>
     </Grid>

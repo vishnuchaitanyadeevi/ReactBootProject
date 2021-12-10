@@ -161,6 +161,7 @@ function ContractList({
                   textAlign: `${numericFields.includes(col.field) ? 'center' : ''}`,
                   minWidth: '12rem'
                 }}
+                className={`${numericFields.includes(col.field) ? 'p-datatable' : null}`}
               />
             ))}
           <Column

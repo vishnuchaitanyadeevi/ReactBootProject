@@ -88,7 +88,7 @@ function ContractList() {
     },
     {
       id: 'contractSignOn',
-      header: 'Contract Sign On',
+      header: 'Contract Signed On',
       field: 'contractSignOn',
       editorElement: 'date'
     },
@@ -186,8 +186,8 @@ function ContractList() {
   const navigateToContractAddition = () => {
     navigate('/contract/add', { replace: true });
   };
-  const numericFields = ['id', 'contractNumber'];
-  const numericFieldsExpandedData = ['id', 'project_number'];
+  const numericFields = ['id', 'status', 'contractNumber', 'contractSignOn', 'salesman', 'contractStartDate'];
+  const numericFieldsExpandedData = ['id', 'status', 'project_number', 'project_start_date', 'end_date'];
 
   return (
     <Grid className="contract_list_main_cls">
@@ -225,7 +225,7 @@ function ContractList() {
           <AutocompleteWidget options={projectLocation} label="Country" disablePortal autoSelect size="small" />
         </Grid>
         <Grid item xs={6} sm={2}>
-          <AutocompleteWidget options={projectLocation} label="Office" disablePortal autoSelect size="small" />
+          <AutocompleteWidget options={projectLocation} label="Region" disablePortal autoSelect size="small" />
         </Grid>
         <Grid item xs={6} sm={2}>
           <AutocompleteWidget options={projectLocation} label="Business" disablePortal autoSelect size="small" />
@@ -233,7 +233,7 @@ function ContractList() {
         <Grid item xs={6} sm={2}>
           <AutocompleteWidget
             options={projectLocation}
-            label="Business sub type"
+            label="Business Sub Type"
             disablePortal
             autoSelect
             size="small"
@@ -253,7 +253,7 @@ function ContractList() {
         <Grid item xs={6} sm={2}>
           <TextField
             fullWidth
-            label="Customer name or ID"
+            label="Customer Name or ID"
             size="small"
             onChange={(e) => handleChangeFilter('customer', e.target.value)}
           />
@@ -262,7 +262,7 @@ function ContractList() {
           <TextField fullWidth label="Location" size="small" />
         </Grid>
         <Grid item xs={6} sm={2}>
-          <TextField fullWidth label="Contract or project" size="small" />
+          <TextField fullWidth label="Contract or Project Number" size="small" />
         </Grid>
         <Grid item xs={6} sm={2}>
           <TextField
