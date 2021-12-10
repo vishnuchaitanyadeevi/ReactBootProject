@@ -22,7 +22,8 @@ export default function App() {
 
   useEffect(() => {
     if (localStorage.getItem('username')) {
-      navigate('/home');
+      // navigate('/home');
+      navigate('/dashboard/service');
     } else {
       navigate('/login');
     }

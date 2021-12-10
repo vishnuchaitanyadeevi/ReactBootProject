@@ -74,15 +74,26 @@
     "dayJob": "عمل نهاري",
     "nightJob": "وظيفة ليلية"
   },
+  "country": "دولة",
+  "customerName": "اسم الزبون",
+  "lastProjectService": "خدمة المشروع الأخير",
+  "gender": "جنس تذكير أو تأنيث",
+  "office": "مكتب. مقر. مركز",
+  "male": "ذكر",
+  "female": "أنثى",
+  "filter": {
+    "filter": "منقي",
+    "clear": "صافي"
+  },
   "ProjectExpiration": {
     "ProjectExpirationList": "قائمة انتهاء المشروع",
     "ExpirationOverview": "نظرة عامة على انتهاء الصلاحية",
-    "ExpiredProjects":"مشاريع مجربة"
+    "ExpiredProjects": "مشاريع مجربة"
   },
   "MaterialList": {
     "MaterialPickingList": "قائمة اختيار المواد"
   },
-  "CreateProject":{
+  "CreateProject": {
     "CreateProject": "أنشئ مشروعًا",
     "EditProject": "تحرير المشروع",
     "ProjectDetails": "تفاصيل المشروع",

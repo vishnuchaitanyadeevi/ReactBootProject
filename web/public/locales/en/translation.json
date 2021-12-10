@@ -65,7 +65,7 @@
     "highene": "Highene",
     "service": "Service",
     "companyName": "Company Name",
-    "customerName": "Customer Name",
+    "customerName": "",
     "lastServiceDate": "Last Service Date",
     "getPermit": "Get Permit",
     "permitReceived": "Permit Received",
@@ -73,15 +73,26 @@
     "dayJob": "Day Job",
     "nightJob": "Night Job"
   },
+  "country": "Country",
+  "customerName": "Customer Name",
+  "lastProjectService": "Last Project Service",
+  "gender": "Gender",
+  "office": "Office",
+  "male": "Male",
+  "female": "Female",
+  "filter": {
+    "filter": "Filter",
+    "clear": "Clear"
+  },
   "ProjectExpiration": {
     "ProjectExpirationList": "Project Expiration List",
     "ExpirationOverview": "Expiration Overview",
-    "ExpiredProjects":"Experied projects"
+    "ExpiredProjects": "Experied projects"
   },
   "MaterialList": {
     "MaterialPickingList": "Material Picking List"
   },
-  "CreateProject":{
+  "CreateProject": {
     "CreateProject": "Create Project",
     "EditProject": "Edit Project",
     "ProjectDetails": "Project Details",
@@ -134,4 +145,3 @@
     "Renew": "Renew"
   }
 }
-  

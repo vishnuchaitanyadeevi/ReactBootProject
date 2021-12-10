@@ -115,42 +115,42 @@ export default function CustomCard({
             </Tooltip>
           )}
           {service.cancelled && (
-            <Tooltip title={t('serviceDashboard.canceled')} arrow>
+            <Tooltip title={t('serviceDashboard.cancelled')} arrow>
               <span className="service-type-icons">
                 <HighlightOffOutlinedIcon className="service-icon" />
               </span>
             </Tooltip>
           )}
           {service.getPermit && (
-            <Tooltip title={t('serviceDashboard.canceled')} arrow>
+            <Tooltip title={t('serviceDashboard.getPermit')} arrow>
               <span className="service-type-icons">
                 <QuizRoundedIcon className="service-icon" />
               </span>
             </Tooltip>
           )}
           {service.permitReceived && (
-            <Tooltip title={t('serviceDashboard.canceled')} arrow>
+            <Tooltip title={t('serviceDashboard.permitReceived')} arrow>
               <span className="service-type-icons">
                 <EventNoteRoundedIcon className="service-icon" />
               </span>
             </Tooltip>
           )}
           {service.morningJob && (
-            <Tooltip title={t('serviceDashboard.canceled')} arrow>
+            <Tooltip title={t('serviceDashboard.morningJob')} arrow>
               <span className="service-type-icons">
                 <WbSunnyRoundedIcon className="service-icon" />
               </span>
             </Tooltip>
           )}
           {service.dayJob && (
-            <Tooltip title={t('serviceDashboard.canceled')} arrow>
+            <Tooltip title={t('serviceDashboard.dayJob')} arrow>
               <span className="service-type-icons">
                 <LightModeRoundedIcon className="service-icon" />
               </span>
             </Tooltip>
           )}
           {service.nightJob && (
-            <Tooltip title={t('serviceDashboard.canceled')} arrow>
+            <Tooltip title={t('serviceDashboard.nightJob')} arrow>
               <span className="service-type-icons">
                 <Brightness4RoundedIcon className="service-icon" />
               </span>
