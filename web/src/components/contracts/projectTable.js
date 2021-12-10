@@ -12,7 +12,7 @@ import jsonData from '../../utils/project-table-data.json';
 import '../../Styles/app.scss';
 import SimpleTable from '../table/simpleTable';
 
-export default function ProjectTable({ tableDataInput, columnDataForProjects, ...other }) {
+export default function ProjectTable({ tableDataInput, columnDataForProjects, showAddProject, ...other }) {
   const [tableData, setTableData] = useState(tableDataInput);
   const [editingRows, setEditingRows] = useState({});
   const onRowEditChange = (e) => {
@@ -41,9 +41,11 @@ export default function ProjectTable({ tableDataInput, columnDataForProjects, ..
   };
   return (
     <Grid container spacing={1}>
-      <Grid item justifyContent="right" display="flex" xs={12} lg={12}>
-        <Button label="Add New Project" onClick={addNewProject} />
-      </Grid>
+      {!showAddProject && (
+        <Grid item justifyContent="right" display="flex" xs={12} lg={12}>
+          <Button label="Add New Project" onClick={addNewProject} />
+        </Grid>
+      )}
       <Grid item xs={12} lg={12}>
         <SimpleTable rowData={tableDataInput} headerData={columnDataForProjects} editingRows={editingRows} {...other} />
       </Grid>

@@ -43,7 +43,7 @@ export default function DashboardNavbar({ onOpenSidebar, header, toggleSidebar }
   const isHome = pathname === '/';
 
   return (
-    <AppBar color={isHome ? 'transparent' : 'default'} sx={{ boxShadow: 0 }}>
+    <AppBar color={isHome ? 'default' : 'default'} sx={{ boxShadow: 0 }}>
       <ToolbarStyle
         sx={{
           ...(isOffset && {

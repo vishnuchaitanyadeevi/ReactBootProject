@@ -17,8 +17,53 @@ import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget'
 import RadioGroupComponent from './RadioGroupComponent';
 import BasicDatePicker from '../../components/pickers/BasicDatePicker';
 import UploadFile from '../../components/UploadFile';
-import ProjectTable from './ProjectList';
+import SimpleTable from '../../components/table/simpleTable';
+import jsonData from '../../utils/create-project-table-data.json';
+import ProjectTable from '../../components/contracts/projectTable';
 import './ProjectCreation.scss';
+
+const tableData = [];
+
+const columnDataForProjects = [
+  { field: 'status', header: 'Status', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+  {
+    field: 'prjno',
+    header: 'Project No.',
+    editorElement: null,
+    style: { width: '10%' },
+    sortable: true,
+    filter: true
+  },
+  {
+    field: 'prjnm',
+    header: 'Project Name',
+    editorElement: null,
+    style: { width: '10%' },
+    sortable: true,
+    filter: true
+  },
+  {
+    field: 'lcnm',
+    header: 'Location Name',
+    editorElement: null,
+    style: { width: '10%' },
+    sortable: true,
+    filter: true
+  },
+  {
+    field: 'bspct',
+    header: 'Business ProjCat',
+    editorElement: null,
+    style: { width: '15%' },
+    sortable: true,
+    filter: true
+  },
+  { field: 'sdt', header: 'Start Date', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+  { field: 'edt', header: 'End Date', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+  { field: 'extp', header: 'Ex Type', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+  { field: 'grpd', header: 'Grouped', editorElement: null, style: { width: '5%' }, sortable: true, filter: true },
+  { field: 'prm', header: 'Primary', editorElement: 'checkbox', style: { width: '5%' }, sortable: true, filter: true }
+];
 
 const projectLocation = [
   { label: 'Saudi Arabia', value: 'Saudi Arabia' },
@@ -65,6 +110,8 @@ const endDateTypes = [
 function ProjectCreation() {
   const { t } = useTranslation();
   const { themeMode, onChangeMode } = useSettings();
+  const [tableData, setTableData] = useState(jsonData);
+  const [editingRows, setEditingRows] = useState({});
   const [uploadProject, setUploadProject] = useState({ images: [] });
   const handleChangeExecutionType = (e) => console.log('execution type', e.target.value);
   const handleChangeServiceFrequencySetting = (e) => console.log('service frequency setting', e.target.value);
@@ -105,6 +152,73 @@ function ProjectCreation() {
   useEffect(() => {
     console.log(isEditFlag);
   }, [isEditFlag]);
+
+  const columnDataForProjects = [
+    {
+      field: 'itemCode',
+      header: 'Item Code',
+      editorElement: null,
+      style: { width: '10%' },
+      sortable: true,
+      filter: true
+    },
+    {
+      field: 'itemName',
+      header: 'Item Name',
+      editorElement: null,
+      style: { width: '10%' },
+      sortable: true,
+      filter: true
+    },
+    {
+      field: 'sla',
+      header: 'SLA',
+      editorElement: null,
+      style: { width: '10%' },
+      sortable: true,
+      filter: true
+    },
+    {
+      field: 'oStatus',
+      header: 'O/status',
+      editorElement: null,
+      style: { width: '10%' },
+      sortable: true,
+      filter: true
+    },
+    {
+      field: 'serialNumber',
+      header: 'Serial Number',
+      editorElement: null,
+      style: { width: '15%' },
+      sortable: true,
+      filter: true
+    },
+    {
+      field: 'specialNotes',
+      header: 'Special Notes',
+      editorElement: null,
+      style: { width: '15%' },
+      sortable: true,
+      filter: true
+    },
+    {
+      field: 'qty',
+      header: 'Qty',
+      editorElement: null,
+      style: { width: '15%' },
+      sortable: true,
+      filter: true
+    },
+    {
+      field: 'serviceSubjOwnerShip',
+      header: 'Service Subject OwnerShip',
+      editorElement: null,
+      style: { width: '15%' },
+      sortable: true,
+      filter: true
+    }
+  ];
 
   return (
     <Grid className="project_creation_main_grid">
@@ -483,17 +597,31 @@ function ProjectCreation() {
             <Button variant="contained" style={{ marginLeft: '1rem' }}>
               {t('CreateProject.Save')}
             </Button>
-            <Button style={{ marginLeft: '1rem' }} variant="contained" color="warning">
-              {t('CreateProject.TerminateProject')}
-            </Button>
             <Button style={{ marginLeft: '1rem' }} variant="contained" color="secondary">
               {t('CreateProject.Renew')}
             </Button>
           </Grid>
         </Grid>
-
         <Grid rowSpacing={1} columnSpacing={1} item xs={12} lg={12} justifyContent="center">
-          <ProjectTable />
+          <SimpleTable
+            rowData={tableData}
+            headerData={columnDataForProjects}
+            paginator
+            rowsPerPageOptions={[10, 20, 50, 100]}
+            rows={10}
+            showGridlines
+            responsiveLayout="scroll"
+            resizableColumns
+            columnResizeMode="expand"
+            size="small"
+            // editingRows={editingRows}
+            dataKey="id"
+            editMode="row"
+            type="text"
+            title="View project"
+            editOption
+            btnLabel="Add new Service Subject"
+          />
         </Grid>
       </Grid>
     </Grid>

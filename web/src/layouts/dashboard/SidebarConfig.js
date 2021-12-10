@@ -30,62 +30,72 @@ const sidebarConfig = [
   {
     items: [
       { title: 'dashboard', path: PATH_DASHBOARD.general.home },
-      { title: 'serviceBoard', path: PATH_DASHBOARD.general.service },
       {
-        title: 'customer',
-        path: '',
+        title: 'Master Lists',
+        path: PATH_DASHBOARD.general.service,
         children: [
-          { title: 'customers', path: PATH_DASHBOARD.general.customers },
-          { title: 'contracts/projects', path: PATH_DASHBOARD.general.contracts },
-          { title: 'project expiration list', path: PATH_DASHBOARD.general.banking },
-          { title: 'scheduling', path: PATH_DASHBOARD.general.booking }
+          { title: 'Customers', path: '/customers' },
+          { title: 'Salesman', path: '' },
+          { title: 'Servicemen/Technicians', path: '' }
         ]
       },
       {
-        title: 'material management',
+        title: 'Contracts/Projects',
         path: '',
         children: [
-          { title: 'Material Picking List', path: PATH_DASHBOARD.general.booking },
-          { title: 'Materials and price list', path: PATH_DASHBOARD.general.booking },
-          { title: 'FOL Material Stats', path: PATH_DASHBOARD.general.booking },
-          { title: 'Equipments', path: PATH_DASHBOARD.general.booking }
+          { title: 'Contract List', path: '/contractsList' },
+          { title: 'Project List', path: '/project/add' },
+          { title: 'Service Orders', path: '' },
+          { title: 'Project Expiration List', path: '/projectExpiration' },
+          { title: 'Terminate Projects', path: '' }
         ]
       },
       {
-        title: 'invoicing',
+        title: 'Manage Schedule',
         path: '',
         children: [
-          { title: 'invoicing home', path: PATH_DASHBOARD.general.booking },
-          { title: 'Invoicing -Overview', path: PATH_DASHBOARD.general.booking }
+          { title: 'Add Call Out', path: '/addCallOut' },
+          { title: 'Schedule Services', path: '/dashboard/service' }
         ]
       },
       {
-        title: 'credit',
+        title: 'Inventory Management',
         path: '',
         children: [
-          { title: 'Credit notes Proposal & Workflow', path: PATH_DASHBOARD.general.booking },
-          { title: 'credit note list', path: PATH_DASHBOARD.general.booking },
-          { title: 'credit control view', path: PATH_DASHBOARD.general.booking },
-          { title: 'credit control co-ordinator view', path: PATH_DASHBOARD.general.booking }
+          { title: 'Material Picking List', path: '/data' },
+          { title: 'Material and Price List', path: '' },
+          { title: 'FOL Installation List', path: '' },
+          { title: 'Equipments/Devices', path: '' }
         ]
       },
       {
-        title: 'misc',
+        title: 'Invoicing',
         path: '',
         children: [
-          { title: 'Reports', path: PATH_DASHBOARD.general.booking },
-          { title: 'iPad Synchronization Log', path: PATH_DASHBOARD.general.booking },
-          { title: 'Route Analysis', path: PATH_DASHBOARD.general.booking },
-          { title: 'Manage Questions', path: PATH_DASHBOARD.general.booking },
-          { title: 'Discount Workflow', path: PATH_DASHBOARD.general.booking },
-          { title: 'Equipment Builder', path: PATH_DASHBOARD.general.booking },
-          { title: 'Ax Synchronization', path: PATH_DASHBOARD.general.booking },
-          { title: 'Mobile Warehouse', path: PATH_DASHBOARD.general.booking },
-          { title: 'Salesmen View', path: PATH_DASHBOARD.general.booking },
-          { title: 'Export', path: PATH_DASHBOARD.general.booking }
+          { title: 'Invoice List', path: '' },
+          { title: 'Invoice Overview', path: '' }
         ]
       },
       {
+        title: 'Credit Notes',
+        path: '',
+        children: [
+          { title: 'Credit Notes Proposal and Workflow', path: '' },
+          { title: 'Credit Control View', path: '' },
+          { title: 'Credit Control Coordinator View', path: '' }
+        ]
+      },
+      { title: 'Reports', path: '' },
+      { title: 'iPad Synchronization Log', path: '' },
+      { title: 'Route Analysis', path: '' },
+      { title: 'Manage Questions', path: '' },
+      { title: 'Discount Workflow', path: '' },
+      { title: 'Equipment Builder', path: '' },
+      { title: 'Ax Synchronization', path: '' },
+      { title: 'Mobile Warehouse', path: '' },
+      { title: 'Salesmen View', path: '' },
+      { title: 'Export', path: '' }
+      /* {
         title: 'Demo',
         path: '',
         children: [
@@ -98,9 +108,11 @@ const sidebarConfig = [
           { title: 'Invoice', path: '/invoice' },
           { title: 'Pay', path: '/pay' },
           { title: 'Components', path: '/components' },
-          { title: 'Customers', path: '/customers' }
+          { title: 'Customers', path: '/customers' },
+          { title: 'Add Call Out', path: '/addCallOut' }
         ]
       }
+      */
     ]
   }
 ];

@@ -90,6 +90,9 @@
     "ExpirationOverview": "نظرة عامة على انتهاء الصلاحية",
     "ExpiredProjects": "مشاريع مجربة"
   },
+  "MaterialList": {
+    "MaterialPickingList": "قائمة اختيار المواد"
+  },
   "CreateProject": {
     "CreateProject": "أنشئ مشروعًا",
     "EditProject": "تحرير المشروع",
