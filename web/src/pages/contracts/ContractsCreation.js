@@ -36,7 +36,7 @@ export default function ContractsCreation() {
   const salesmanArr = ['Abdul Razak', 'Abdul Miyan', 'Shehnaz Kureshi'];
   const regionArr = ['Region 1', 'Region 2'];
   const [multipleImages, setMultipleImages] = useState({ images: [] });
-  const [axDefaultexpanded, setAxDefaultexpanded] = useState(true);
+  const [axDefaultexpanded, setAxDefaultexpanded] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -148,7 +148,9 @@ export default function ContractsCreation() {
   const navigateToContractlist = () => {
     navigate('/contractsList', { replace: true });
   };
-
+  const addNewProject = () => {
+    navigate('/project/add', { replace: true });
+  };
   const { pathname } = useLocation();
   const match = (path) => (path ? !!matchPath({ path, end: false }, pathname) : false);
   const isEditFlag = match('contract/edit/1');
@@ -470,6 +472,11 @@ export default function ContractsCreation() {
           </Button>
         </Stack>
       </Grid>
+      <Grid item xs={12} style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Button variant="contained" size="small" onClick={addNewProject}>
+          Add new project
+        </Button>
+      </Grid>
       <Grid rowSpacing={1} columnSpacing={1} item xs={12} lg={12} justifyContent="center">
         <SimpleTable
           rowData={tableData}
@@ -486,7 +493,6 @@ export default function ContractsCreation() {
           dataKey="id"
           editMode="row"
           editOption
-          btnLabel="Add new Project"
           numericFields={numericFields}
         />
       </Grid>

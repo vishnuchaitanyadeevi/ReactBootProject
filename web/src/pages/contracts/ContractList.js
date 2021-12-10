@@ -31,6 +31,7 @@ function ContractList() {
   const [contract, setContract] = useState(null);
   const [salesman, setSalesman] = useState(null);
   const [showFilter, setShowFilter] = useState(true);
+  const [activeProjects, setActiveProjects] = useState(null);
 
   const onStockFilterChange = () => {
     const _filters1 = { ...filters1 };
@@ -42,12 +43,12 @@ function ContractList() {
     _filters1.customerName.value = customerName;
     _filters1.location.value = location;
     _filters1.contract.value = contract;
-    _filters1.salesman.value = salesman;
+    _filters1.activeProjects.value = activeProjects;
     setFilters1(_filters1);
   };
 
   const clearFilter1 = () => {
-    setSalesman('');
+    setActiveProjects('');
     const _filters1 = { ...filters1 };
     _filters1.country.value = null;
     _filters1.office.value = null;
@@ -57,7 +58,7 @@ function ContractList() {
     _filters1.customerName.value = null;
     _filters1.location.value = null;
     _filters1.contract.value = null;
-    _filters1.salesman.value = null;
+    _filters1.activeProjects.value = null;
     setFilters1(_filters1);
   };
 
@@ -68,7 +69,7 @@ function ContractList() {
     contractSignOn: { value: null, matchMode: FilterMatchMode.CONTAINS },
     contractStartDate: { value: null, matchMode: FilterMatchMode.CONTAINS },
     customer: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    salesman: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    activeProjects: { value: null, matchMode: FilterMatchMode.CONTAINS },
     country: { value: null, matchMode: FilterMatchMode.CONTAINS },
     office: { value: null, matchMode: FilterMatchMode.CONTAINS },
     business: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -116,9 +117,9 @@ function ContractList() {
       editorElement: 'textField'
     },
     {
-      id: 'salesman',
-      header: 'Salesman',
-      field: 'salesman',
+      id: 'activeProjects',
+      header: 'Active Projects',
+      field: 'activeProjects',
       editorElement: 'textField'
     }
   ]);
@@ -176,7 +177,7 @@ function ContractList() {
     'contractSignOn',
     'contractStartDate',
     'customer',
-    'salesman'
+    'activeProjects'
   ];
   const statusData = [
     { label: 'Success', value: 'Success' },
@@ -198,7 +199,7 @@ function ContractList() {
   const navigateToContractAddition = () => {
     navigate('/contract/add', { replace: true });
   };
-  const numericFields = ['id', 'contractNumber', 'contractSignOn', 'contractStartDate', 'status'];
+  const numericFields = ['id', 'contractNumber', 'contractSignOn', 'contractStartDate', 'status', 'activeProjects'];
   const numericFieldsExpandedData = ['id', 'project_number', 'project_start_date', 'end_date'];
 
   return (

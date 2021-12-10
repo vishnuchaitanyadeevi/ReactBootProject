@@ -82,6 +82,7 @@ function ContractList({
   );
 
   const editIcon = (rowData) => <ModeEditOutlinedIcon onClick={() => onRowClick(rowData)} />;
+  const editIconExpanded = (rowData) => <ModeEditOutlinedIcon onClick={() => onChildRowClick(rowData)} />;
   const rowExpansionTemplate = (data) => (
     <div className="orders-subtable">
       <DataTable
@@ -95,7 +96,6 @@ function ContractList({
         rows={10}
         scrollable
         scrollHeight="400px"
-        onRowClick={onChildRowClick}
         filterDisplay="row"
       >
         {expandedColumns &&
@@ -108,6 +108,17 @@ function ContractList({
               style={{ justifyContent: `${numericFieldsExpandedData.includes(col.field) ? 'center' : ''}` }}
             />
           ))}
+        <Column
+          columnKey="edit"
+          body={editIconExpanded}
+          style={{
+            minWidth: '6rem',
+            width: '6rem',
+            paddingBottom: '0.1rem',
+            paddingTop: '0.1rem',
+            justifyContent: 'center'
+          }}
+        />
       </DataTable>
     </div>
   );
@@ -160,7 +171,6 @@ function ContractList({
                 filterType="text"
                 style={{ textAlign: `${numericFields && numericFields.includes(col.field) ? 'center' : ''}` }}
                 className={`${numericFields.includes(col.field) ? 'p-datatable' : null}`}
-                // body={handleBody(col)}
               />
             ))}
           <Column
@@ -170,7 +180,8 @@ function ContractList({
               minWidth: '6rem',
               width: '6rem',
               paddingBottom: '0.1rem',
-              paddingTop: '0.1rem'
+              paddingTop: '0.1rem',
+              textAlign: 'center'
             }}
           />
         </DataTable>

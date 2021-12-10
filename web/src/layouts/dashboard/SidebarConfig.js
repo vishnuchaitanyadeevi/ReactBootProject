@@ -43,8 +43,8 @@ const sidebarConfig = [
         title: 'Contracts/Projects',
         path: '',
         children: [
-          { title: 'Contract List', path: '/contractsList' },
-          { title: 'Project List', path: '/project/add' },
+          { title: 'Contracts', path: '/contractsList' },
+          // { title: 'Projects', path: '/project/add' },
           { title: 'Service Orders', path: '' },
           { title: 'Project Expiration List', path: '/projectExpiration' },
           { title: 'Terminate Projects', path: '' }
