@@ -6,7 +6,7 @@
     "contractSignOn": "01-01-2012",
     "contractStartDate": "01-01-2012",
     "customer": "Impact BBDO [HSD_JED_00289]",
-    "salesman": "Ubaid",
+    "activeProjects": "4/23",
     "projects": [
       {
         "id": "1000",
@@ -44,7 +44,7 @@
     "contractSignOn": "01-05-2012",
     "contractStartDate": "01-05-2012",
     "customer": "Impact BBDO [HSD_JED_00290]",
-    "salesman": "Shami",
+    "activeProjects": "2/10",
     "projects": [
       {
         "id": "1001",
@@ -82,7 +82,7 @@
     "contractSignOn": "01-05-2013",
     "contractStartDate": "01-05-2013",
     "customer": "Impact BBDO [HSD_JED_00291]",
-    "salesman": "Naveed",
+    "activeProjects": "15/36",
     "projects": [
       {
         "id": "1004",
@@ -129,7 +129,7 @@
     "contractSignOn": "01-05-2015",
     "contractStartDate": "01-05-2015",
     "customer": "Impact BBDO [HSD_JED_00292]",
-    "salesman": "Ramzi",
+    "activeProjects": "20/26",
     "projects": [
       {
         "id": "1008",
@@ -176,7 +176,7 @@
     "contractSignOn": "01-01-2012",
     "contractStartDate": "01-01-2012",
     "customer": "Impact BBDO [HSD_JED_00289]",
-    "salesman": "Ubaid",
+    "activeProjects": "3/7",
     "projects": [
       {
         "id": "1000",
@@ -214,7 +214,7 @@
     "contractSignOn": "01-05-2015",
     "contractStartDate": "01-05-2015",
     "customer": "Impact BBDO [HSD_JED_00292]",
-    "salesman": "Ramzi",
+    "activeProjects": "2/5",
     "projects": [
       {
         "id": "1008",
@@ -261,7 +261,7 @@
     "contractSignOn": "01-05-2015",
     "contractStartDate": "01-05-2015",
     "customer": "Impact BBDO [HSD_JED_00292]",
-    "salesman": "Ramzi",
+    "activeProjects": "12/15",
     "projects": [
       {
         "id": "1008",
