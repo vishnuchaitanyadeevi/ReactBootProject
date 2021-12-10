@@ -6,8 +6,19 @@ import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
-import { TextField, Grid, Paper, Button, Autocomplete, Typography } from '@mui/material';
+import {
+  TextField,
+  Grid,
+  Paper,
+  Button,
+  Autocomplete,
+  Typography,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails
+} from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { ArrowRight } from '@mui/icons-material/';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 import { useTranslation } from 'react-i18next';
@@ -30,6 +41,7 @@ function PrimeGrid(theme) {
   });
   const [tableData, setTableData] = useState(jsonData);
   const [selected, setSelected] = useState(null);
+  const [showFilter, setShowFilter] = useState(true);
   const onRowEditComplete = (e) => {
     const _tableData = [...tableData];
     const { newData, index } = e;
@@ -134,109 +146,122 @@ function PrimeGrid(theme) {
           href={`https://unpkg.com/primereact/resources/themes/lara-${themeMode}-indigo/theme.css`}
         />
       </Helmet>
-      <Grid>
-        <ProminentAppBar height="15px" />
-        <Paper style={paperStyle} elevation={1}>
-          <Grid container spacing={1}>
-            <Grid item xs={12} sm={6} md={4} lg={2}>
-              <TextField
-                value={stockFilter}
-                onChange={(e) => {
-                  setStockFilter(e.target.value);
-                  // filterdata.code = e.target.value;
-                }}
-                fullWidth
-                size="small"
-                label="Stock Code"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={2}>
-              <TextField
-                value={descFilter}
-                onChange={(e) => setdescFilter(e.target.value)}
-                fullWidth
-                size="small"
-                label="Description"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={2}>
-              <TextField
-                value={qtyFilter}
-                onChange={(e) => setqtyFilter(e.target.value)}
-                fullWidth
-                size="small"
-                label="Qty"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={2}>
-              <Autocomplete
-                size="small"
-                options={['Each', 'Kg']}
-                value={uomFilter}
-                renderInput={(params) => <TextField size="small" {...params} label="Inv UOM" />}
-                fullWidth
-                onChange={(event, newValue) => {
-                  setuomFilter(newValue);
-                }}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={2}>
-              <TextField
-                value={hqtyFilter}
-                onChange={(e) => sethqtyFilter(e.target.value)}
-                fullWidth
-                size="small"
-                label="Hold Qty"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={2}>
-              <TextField
-                value={handFilter}
-                onChange={(e) => sethandFilter(e.target.value)}
-                fullWidth
-                size="small"
-                label="On-hand"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={2}>
-              <TextField
-                value={owanFilter}
-                onChange={(e) => setowanFilter(e.target.value)}
-                fullWidth
-                size="small"
-                label="On-wan"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={2}>
-              <TextField
-                value={fwanFilter}
-                onChange={(e) => setfwanFilter(e.target.value)}
-                fullWidth
-                size="small"
-                label="From-wan"
-              />
-            </Grid>
-            <Grid item xs={6} sm={3} md={2} lg={1}>
-              <Button onClick={onStockFilterChange} startIcon={<SearchIcon />} variant="contained">
-                Filter
-              </Button>
-            </Grid>
-            <Grid item xs={6} sm={3} md={2} lg={1}>
-              <Button onClick={clearFilter1} startIcon={<CloseIcon />} variant="contained">
-                Clear
-              </Button>
-            </Grid>
-            <Grid item xs={6} sm={3} md={2} lg={2}>
-              <Button variant="contained" startIcon={<CheckCircleOutlineOutlinedIcon />}>
-                Accept Materials
-              </Button>
-            </Grid>
-            <Grid item xs={6} sm={3} md={2} lg={2}>
-              <Typography variant="body2">MPL - Print</Typography>
-              <Typography variant="body2">MPL - Print By Customer</Typography>
-            </Grid>
-          </Grid>
-        </Paper>
+      <Grid hidden={!(showFilter === 'panel1' || showFilter === true)}>
+        <Accordion style={{ boxShadow: 'none' }} fullWidth>
+          <AccordionSummary
+            style={{ display: 'flex', alignItems: 'center', flexDirection: 'row-reverse' }}
+            expandIcon={<ArrowRight />}
+            aria-controls="panel1d-content"
+            id="panel1d-header"
+          >
+            <Typography variant="h6" className="form_sub_title_cls">
+              Filter
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Paper style={paperStyle} elevation={1}>
+              <Grid container spacing={1}>
+                <Grid item xs={12} sm={6} md={4} lg={2}>
+                  <TextField
+                    value={stockFilter}
+                    onChange={(e) => {
+                      setStockFilter(e.target.value);
+                      // filterdata.code = e.target.value;
+                    }}
+                    fullWidth
+                    size="small"
+                    label="Stock Code"
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={2}>
+                  <TextField
+                    value={descFilter}
+                    onChange={(e) => setdescFilter(e.target.value)}
+                    fullWidth
+                    size="small"
+                    label="Description"
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={2}>
+                  <TextField
+                    value={qtyFilter}
+                    onChange={(e) => setqtyFilter(e.target.value)}
+                    fullWidth
+                    size="small"
+                    label="Qty"
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={2}>
+                  <Autocomplete
+                    size="small"
+                    options={['Each', 'Kg']}
+                    value={uomFilter}
+                    renderInput={(params) => <TextField size="small" {...params} label="Inv UOM" />}
+                    fullWidth
+                    onChange={(event, newValue) => {
+                      setuomFilter(newValue);
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={2}>
+                  <TextField
+                    value={hqtyFilter}
+                    onChange={(e) => sethqtyFilter(e.target.value)}
+                    fullWidth
+                    size="small"
+                    label="Hold Qty"
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={2}>
+                  <TextField
+                    value={handFilter}
+                    onChange={(e) => sethandFilter(e.target.value)}
+                    fullWidth
+                    size="small"
+                    label="On-hand"
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={2}>
+                  <TextField
+                    value={owanFilter}
+                    onChange={(e) => setowanFilter(e.target.value)}
+                    fullWidth
+                    size="small"
+                    label="On-wan"
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={2}>
+                  <TextField
+                    value={fwanFilter}
+                    onChange={(e) => setfwanFilter(e.target.value)}
+                    fullWidth
+                    size="small"
+                    label="From-wan"
+                  />
+                </Grid>
+                <Grid item xs={6} sm={3} md={2} lg={1}>
+                  <Button onClick={onStockFilterChange} startIcon={<SearchIcon />} variant="contained">
+                    Filter
+                  </Button>
+                </Grid>
+                <Grid item xs={6} sm={3} md={2} lg={1}>
+                  <Button onClick={clearFilter1} startIcon={<CloseIcon />} variant="contained">
+                    Clear
+                  </Button>
+                </Grid>
+                <Grid item xs={6} sm={3} md={2} lg={2}>
+                  <Button variant="contained" startIcon={<CheckCircleOutlineOutlinedIcon />}>
+                    Accept Materials
+                  </Button>
+                </Grid>
+                <Grid item xs={6} sm={3} md={2} lg={2}>
+                  <Typography variant="body2">MPL - Print</Typography>
+                  <Typography variant="body2">MPL - Print By Customer</Typography>
+                </Grid>
+              </Grid>
+            </Paper>
+          </AccordionDetails>
+        </Accordion>
       </Grid>
       <DataTable
         value={tableData}

@@ -22,6 +22,7 @@ export default function SimpleTable({
   type,
   title,
   btnLabel,
+  numericFields,
   ...other
 }) {
   const { themeMode, onChangeMode } = useSettings();
@@ -139,11 +140,13 @@ export default function SimpleTable({
           href={`https://unpkg.com/primereact/resources/themes/lara-${themeMode}-indigo/theme.css`}
         />
       </Helmet>
-      <Grid item display="flex" justifyContent="flex-end" xs={12} lg={12}>
-        <Button variant="contained" size="small" onClick={addNewProject}>
-          {btnLabel}
-        </Button>
-      </Grid>
+      {btnLabel && (
+        <Grid item display="flex" justifyContent="flex-end" xs={12} lg={12}>
+          <Button variant="contained" size="small" onClick={addNewProject}>
+            {btnLabel}
+          </Button>
+        </Grid>
+      )}
       <Grid item xs={12} lg={12}>
         <DataTable
           header={header}
@@ -153,10 +156,17 @@ export default function SimpleTable({
           onRowEditChange={onRowEditChange}
           onRowEditComplete={onRowEditComplete}
           filters={filterState}
+          filterDisplay="row"
           {...other}
         >
           {headerData.map((headerElement) => (
-            <Column editor={(options) => switchEditor(headerElement.editorElement, options)} {...headerElement} />
+            <Column
+              editor={(options) => switchEditor(headerElement.editorElement, options)}
+              {...headerElement}
+              bodyStyle={{
+                textAlign: `${numericFields && numericFields.includes(headerElement.field) ? 'center' : ''}`
+              }}
+            />
           ))}
           {editOption ? (
             <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }} />

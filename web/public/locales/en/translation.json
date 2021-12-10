@@ -76,7 +76,7 @@
   "ProjectExpiration": {
     "ProjectExpirationList": "Project Expiration List",
     "ExpirationOverview": "Expiration Overview",
-    "ExpiredProjects":"Experied projects"
+    "ExpiredProjects":"Expired projects"
   },
   "MaterialList": {
     "MaterialPickingList": "Material Picking List"

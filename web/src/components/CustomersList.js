@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
-import { Grid, TextField, Autocomplete } from '@mui/material';
+import {
+  Grid,
+  TextField,
+  Autocomplete,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography
+} from '@mui/material';
+import { ArrowRight } from '@mui/icons-material/';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -13,6 +22,7 @@ import jsonData from '../utils/customerslist.json';
 
 function CustomersList({ openFlag, handleCloseDialog, showDialog }) {
   const [open, setOpen] = useState(openFlag);
+  const [showFilter, setShowFilter] = useState(true);
   console.log('openFlag', openFlag);
   console.log('open', open);
   const handleClose = () => {
@@ -42,67 +52,83 @@ function CustomersList({ openFlag, handleCloseDialog, showDialog }) {
   );
 
   const CustomerFilter = () => (
-    <Grid container spacing={1}>
-      <Grid item xs={12} sm={6} md={4} lg={2}>
-        <Autocomplete
-          size="small"
-          options={['Saudi Arabia', 'Jordan', 'Iraq', 'Kuwait', 'Oman', 'UAE']}
-          // value={}
-          renderInput={(params) => <TextField size="small" {...params} label="Country" />}
-          fullWidth
-          /* onChange={(event, newValue) => {
-        set(newValue);
-    }} */
-        />
-      </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={2}>
-        <TextField
-          // value={}
-          /* onChange={(e) => {
-            set(e.target.value);
-            // filterdata.code = e.target.value;
-          }} */
-          fullWidth
-          size="small"
-          label="Customer Number"
-        />
-      </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={2}>
-        <TextField
-          // value={}
-          // onChange={(e) => set(e.target.value)}
-          fullWidth
-          size="small"
-          label="Customer Name"
-        />
-      </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={2}>
-        <TextField
-          // value={}
-          // onChange={(e) => set(e.target.value)}
-          fullWidth
-          size="small"
-          label="Customer Address"
-        />
-      </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={2}>
-        <TextField
-          // value={}
-          // onChange={(e) => set(e.target.value)}
-          fullWidth
-          size="small"
-          label="Customer Contacts"
-        />
-      </Grid>
-      <Grid item xs={6} sm={3} md={2} lg={1}>
-        <Button size="small" startIcon={<SearchIcon />} variant="contained">
-          Filter
-        </Button>
-      </Grid>
-      <Grid item xs={6} sm={3} md={2} lg={1}>
-        <Button size="small" startIcon={<CloseIcon />} variant="contained">
-          Clear
-        </Button>
+    <Grid hidden={!(showFilter === 'panel1' || showFilter === true)} container spacing={3}>
+      <Grid item xs={12}>
+        <Accordion style={{ boxShadow: 'none' }} fullWidth>
+          <AccordionSummary
+            style={{ display: 'flex', alignItems: 'center', flexDirection: 'row-reverse' }}
+            expandIcon={<ArrowRight />}
+            aria-controls="panel1d-content"
+            id="panel1d-header"
+          >
+            <Typography variant="h6">Filter</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={6} md={4} lg={2}>
+                <Autocomplete
+                  size="small"
+                  options={['Saudi Arabia', 'Jordan', 'Iraq', 'Kuwait', 'Oman', 'UAE']}
+                  // value={}
+                  renderInput={(params) => <TextField size="small" {...params} label="Country" />}
+                  fullWidth
+                  /* onChange={(event, newValue) => {
+                set(newValue);
+            }} */
+                />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4} lg={2}>
+                <TextField
+                  // value={}
+                  /* onChange={(e) => {
+                    set(e.target.value);
+                    // filterdata.code = e.target.value;
+                  }} */
+                  fullWidth
+                  size="small"
+                  label="Customer Number"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4} lg={2}>
+                <TextField
+                  // value={}
+                  // onChange={(e) => set(e.target.value)}
+                  fullWidth
+                  size="small"
+                  label="Customer Name"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4} lg={2}>
+                <TextField
+                  // value={}
+                  // onChange={(e) => set(e.target.value)}
+                  fullWidth
+                  size="small"
+                  label="Customer Address"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4} lg={2}>
+                <TextField
+                  // value={}
+                  // onChange={(e) => set(e.target.value)}
+                  fullWidth
+                  size="small"
+                  label="Customer Contacts"
+                />
+              </Grid>
+              <Grid item xs={6} sm={3} md={2} lg={1}>
+                <Button size="small" startIcon={<SearchIcon />} variant="contained">
+                  Filter
+                </Button>
+              </Grid>
+              <Grid item xs={6} sm={3} md={2} lg={1}>
+                <Button size="small" startIcon={<CloseIcon />} variant="contained">
+                  Clear
+                </Button>
+              </Grid>
+            </Grid>
+          </AccordionDetails>
+        </Accordion>
       </Grid>
     </Grid>
   );
