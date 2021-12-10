@@ -6,9 +6,11 @@ import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
-import { TextField, Grid, Paper, Button, Autocomplete } from '@mui/material';
+import { TextField, Grid, Paper, Button, Autocomplete, Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
+import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
+import { useTranslation } from 'react-i18next';
 import { FilterMatchMode } from 'primereact/api';
 import { useDispatch, connect } from 'react-redux';
 import { ThemeSettingChange } from '../../redux/actions/themeSettingsActions';
@@ -20,6 +22,7 @@ import ProminentAppBar from '../header/header';
 import '../../Styles/app.scss';
 
 function PrimeGrid(theme) {
+  const { t } = useTranslation();
   const { themeMode, onChangeMode } = useSettings();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -38,7 +41,7 @@ function PrimeGrid(theme) {
       type="text"
       value={options.value}
       onChange={(e) => options.editorCallback(e.target.value)}
-      style={{ minWidth: '12rem' }}
+      style={{ minWidth: '11rem' }}
     />
   );
   /* const onRowReorder = (e) => {
@@ -104,7 +107,7 @@ function PrimeGrid(theme) {
   const header = (
     <div className="datatable-crud-demo">
       <div className="table-header">
-        <h4>PRODUCT DETAILS</h4>
+        <h4>{t('MaterialList.MaterialPickingList')}</h4>
         <span className="p-input-icon-left">
           <i className="pi pi-search" />
           <InputText
@@ -223,6 +226,15 @@ function PrimeGrid(theme) {
                 Clear
               </Button>
             </Grid>
+            <Grid item xs={6} sm={3} md={2} lg={2}>
+              <Button variant="contained" startIcon={<CheckCircleOutlineOutlinedIcon />}>
+                Accept Materials
+              </Button>
+            </Grid>
+            <Grid item xs={6} sm={3} md={2} lg={2}>
+              <Typography variant="body2">MPL - Print</Typography>
+              <Typography variant="body2">MPL - Print By Customer</Typography>
+            </Grid>
           </Grid>
         </Paper>
       </Grid>
@@ -278,7 +290,8 @@ function PrimeGrid(theme) {
             minWidth: '12rem',
             width: '12rem',
             paddingBottom: '0.1rem',
-            paddingTop: '0.1rem'
+            paddingTop: '0.1rem',
+            justifyContent: 'center'
           }}
         />
         <Column
@@ -292,10 +305,11 @@ function PrimeGrid(theme) {
             minWidth: '12rem',
             width: '12rem',
             // Making Ellipsis for lengthy descriptions
+            // If I set display to inline-block it moves text up (though negligible difference when viewed)
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
-            // display: 'block',
+            display: 'inline-block',
             paddingBottom: '0.1rem',
             paddingTop: '0.1rem'
           }}
@@ -311,7 +325,8 @@ function PrimeGrid(theme) {
             minWidth: '12rem',
             width: '12rem',
             paddingBottom: '0.1rem',
-            paddingTop: '0.1rem'
+            paddingTop: '0.1rem',
+            justifyContent: 'center'
           }}
         />
         <Column
@@ -339,7 +354,8 @@ function PrimeGrid(theme) {
             minWidth: '12rem',
             width: '12rem',
             paddingBottom: '0.1rem',
-            paddingTop: '0.1rem'
+            paddingTop: '0.1rem',
+            justifyContent: 'center'
           }}
         />
         <Column
@@ -353,7 +369,8 @@ function PrimeGrid(theme) {
             minWidth: '12rem',
             width: '12rem',
             paddingBottom: '0.1rem',
-            paddingTop: '0.1rem'
+            paddingTop: '0.1rem',
+            justifyContent: 'center'
           }}
         />
         <Column
@@ -367,7 +384,8 @@ function PrimeGrid(theme) {
             minWidth: '12rem',
             width: '12rem',
             paddingBottom: '0.1rem',
-            paddingTop: '0.1rem'
+            paddingTop: '0.1rem',
+            justifyContent: 'center'
           }}
         />
         <Column
@@ -381,7 +399,8 @@ function PrimeGrid(theme) {
             minWidth: '12rem',
             width: '12rem',
             paddingBottom: '0.1rem',
-            paddingTop: '0.1rem'
+            paddingTop: '0.1rem',
+            justifyContent: 'center'
           }}
         />
         <Column
@@ -393,7 +412,8 @@ function PrimeGrid(theme) {
             minWidth: '5rem',
             maxWidth: '5rem',
             paddingBottom: '0.1rem',
-            paddingTop: '0.1rem'
+            paddingTop: '0.1rem',
+            justifyContent: 'center'
           }}
           reorderable={false}
         />

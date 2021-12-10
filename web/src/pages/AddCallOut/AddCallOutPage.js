@@ -19,7 +19,21 @@ import TaskTable from './TaskTable';
 import './AddCallOutPage.scss';
 
 function AddCallOutPage() {
-  const [taskData, setTaskData] = useState([]);
+  const jsonData = [
+    {
+      id: 1,
+      serviceSubject: 'Service Subject 1',
+      taskName: 'Task Name 1',
+      note: 'Testing note... 1'
+    },
+    {
+      id: 2,
+      serviceSubject: 'Service Subject 2',
+      taskName: 'Task Name 2',
+      note: 'Testing note... 2'
+    }
+  ];
+  const [taskData, setTaskData] = useState(jsonData);
   const [sparePartData, setSparePartData] = useState([]);
   const [editingRows, setEditingRows] = useState({});
 
@@ -225,7 +239,25 @@ function AddCallOutPage() {
           </Typography>
         </Grid> */}
         <Grid item xs={12}>
-          <TaskTable />
+          <SimpleTable
+            rowData={taskData}
+            headerData={columnDataForTask}
+            paginator
+            rowsPerPageOptions={[10, 20, 50, 100]}
+            rows={10}
+            showGridlines
+            responsiveLayout="scroll"
+            resizableColumns
+            columnResizeMode="expand"
+            size="small"
+            // editingRows={editingRows}
+            dataKey="id"
+            editMode="row"
+            type="text"
+            title="View project"
+            editOption
+            btnLabel="Add new task"
+          />
         </Grid>
       </Grid>
       <Divider style={{ backgroundColor: '#c7d2fe', marginTop: '0.8rem' }} />
@@ -236,9 +268,9 @@ function AddCallOutPage() {
             Spare parts
           </Typography>
         </Grid>
-        <Grid item xs={12} style={{ display: 'flex', justifyContent: 'flex-start' }}>
+        {/* <Grid item xs={12} style={{ display: 'flex', justifyContent: 'flex-start' }}>
           <Typography style={{ textDecoration: 'underline', fontSize: '1rem', cursor: 'pointer' }}>Add part</Typography>
-        </Grid>
+        </Grid> */}
         <Grid item xs={12}>
           <SimpleTable
             rowData={sparePartData}
@@ -258,6 +290,7 @@ function AddCallOutPage() {
             type="text"
             title="View project"
             editOption
+            btnLabel="Spare parts"
           />
         </Grid>
       </Grid>

@@ -87,7 +87,7 @@ export default function MainNavbar() {
   }, [language]);
 
   return (
-    <AppBar color={isHome ? 'transparent' : 'default'} sx={{ boxShadow: 0 }}>
+    <AppBar color='default' sx={{ boxShadow: 0 }}>
       <ToolbarStyle
         disableGutters
         sx={{

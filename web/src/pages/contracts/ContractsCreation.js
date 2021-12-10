@@ -175,15 +175,43 @@ export default function ContractsCreation() {
 
   const columnDataForProjects = [
     { field: 'status', header: 'Status', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
-    { field: 'prjno', header: 'prjno', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
-    { field: 'prjnm', header: 'prjnm', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
-    { field: 'lcnm', header: 'lcnm', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
-    { field: 'bspct', header: 'bspct', editorElement: null, style: { width: '15%' }, sortable: true, filter: true },
-    { field: 'sdt', header: 'sdt', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
-    { field: 'edt', header: 'edt', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
-    { field: 'extp', header: 'extp', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
-    { field: 'grpd', header: 'grpd', editorElement: null, style: { width: '5%' }, sortable: true, filter: true },
-    { field: 'prm', header: 'prm', editorElement: 'checkbox', style: { width: '5%' }, sortable: true, filter: true }
+    {
+      field: 'prjno',
+      header: 'Project No.',
+      editorElement: null,
+      style: { width: '10%' },
+      sortable: true,
+      filter: true
+    },
+    {
+      field: 'prjnm',
+      header: 'Project Name',
+      editorElement: null,
+      style: { width: '10%' },
+      sortable: true,
+      filter: true
+    },
+    {
+      field: 'lcnm',
+      header: 'Location Name',
+      editorElement: null,
+      style: { width: '10%' },
+      sortable: true,
+      filter: true
+    },
+    {
+      field: 'bspct',
+      header: 'Business ProjCat',
+      editorElement: null,
+      style: { width: '15%' },
+      sortable: true,
+      filter: true
+    },
+    { field: 'sdt', header: 'Start Date', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+    { field: 'edt', header: 'End Date', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+    { field: 'extp', header: 'Ex Type', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
+    { field: 'grpd', header: 'Grouped', editorElement: null, style: { width: '5%' }, sortable: true, filter: true },
+    { field: 'prm', header: 'Primary', editorElement: 'checkbox', style: { width: '5%' }, sortable: true, filter: true }
   ];
 
   console.log('add contract', isEditFlag);
@@ -406,7 +434,12 @@ export default function ContractsCreation() {
                   <AutocompleteWidget options={transactionCurrencyArr} size="small" label="Transaction Currency" />
                 </Grid>
                 <Grid item xs={12} xl={12} md={12}>
-                  <AutocompleteWidget options={fundingTypeArr} size="small" label="Fund Type" defaultValue="Customer" />
+                  <AutocompleteWidget
+                    options={fundingTypeArr}
+                    size="small"
+                    label="Funding Type"
+                    defaultValue="Customer"
+                  />
                 </Grid>
               </Grid>
             </Grid>
@@ -452,6 +485,7 @@ export default function ContractsCreation() {
           dataKey="id"
           editMode="row"
           editOption
+          btnLabel="Add new Project"
         />
       </Grid>
     </Grid>

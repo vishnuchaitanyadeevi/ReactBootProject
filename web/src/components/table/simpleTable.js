@@ -1,10 +1,9 @@
 import React, { Fragment, useState, useCallback } from 'react';
-import { Grid, Typography } from '@mui/material';
+import { Grid, Typography, Button } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
-import { Button } from 'primereact/button';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { Toast } from 'primereact/toast';
@@ -15,7 +14,16 @@ import useSettings from '../../hooks/useSettings';
 import jsonData from '../../utils/project-table-data.json';
 import '../../Styles/app.scss';
 
-export default function SimpleTable({ rowData, headerData, editOption, showActionColumn, type, title, ...other }) {
+export default function SimpleTable({
+  rowData,
+  headerData,
+  editOption,
+  showActionColumn,
+  type,
+  title,
+  btnLabel,
+  ...other
+}) {
   const { themeMode, onChangeMode } = useSettings();
   const [tableData, setTableData] = useState(rowData);
   const [editingRows, setEditingRows] = useState({});
@@ -30,6 +38,25 @@ export default function SimpleTable({ rowData, headerData, editOption, showActio
     _tableData[index] = newData;
     setTableData(_tableData);
   };
+  const [globalFilter, setGlobalFilter] = useState(null);
+
+  const header = (
+    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <div className="table-header" style={{ justifyContent: 'left' }}>
+        <span className="p-input-icon-left">
+          <i className="pi pi-search" />
+          <InputText
+            type="search"
+            // value={globalFilterValue}
+            // onChange={onGlobalFilterChange}
+            placeholder="Global Search"
+            onInput={(e) => setGlobalFilter(e.target.value)}
+          />
+        </span>
+      </div>
+    </div>
+  );
+
   const setActiveRowIndex = (index) => {
     const editingRow = { ...editingRows, ...{ [`${tableData[index].id}`]: true } };
     setEditingRows(editingRow);
@@ -112,8 +139,15 @@ export default function SimpleTable({ rowData, headerData, editOption, showActio
           href={`https://unpkg.com/primereact/resources/themes/lara-${themeMode}-indigo/theme.css`}
         />
       </Helmet>
+      <Grid item display="flex" justifyContent="flex-end" xs={12} lg={12}>
+        <Button variant="contained" size="small" onClick={addNewProject}>
+          {btnLabel}
+        </Button>
+      </Grid>
       <Grid item xs={12} lg={12}>
         <DataTable
+          header={header}
+          globalFilter={globalFilter}
           value={tableData}
           editingRows={editingRows}
           onRowEditChange={onRowEditChange}
