@@ -107,6 +107,7 @@ const endDateTypes = [
   { name: 'Number Of Services', val: 'Number Of Services' }
 ];
 
+const numericFields = ['itemCode', 'serialNumber', 'qty'];
 function ProjectCreation() {
   const { t } = useTranslation();
   const { themeMode, onChangeMode } = useSettings();
@@ -407,9 +408,7 @@ function ProjectCreation() {
                   aria-controls="panel1d-content"
                   id="panel1d-header"
                 >
-                  <Typography variant="h4" className="form_sub_title_cls">
-                    {t('CreateProject.AxDefaultFields')}
-                  </Typography>
+                  <Typography variant="h4">{t('CreateProject.AxDefaultFields')}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography> Lorem ipsum. </Typography>
@@ -577,9 +576,7 @@ function ProjectCreation() {
                   aria-controls="panel1d-content"
                   id="panel1d-header"
                 >
-                  <Typography variant="h4" className="form_sub_title_cls">
-                    {t('CreateProject.FinancialDimensions')}
-                  </Typography>
+                  <Typography variant="h4">{t('CreateProject.FinancialDimensions')}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography> Lorem ipsum. </Typography>
@@ -621,6 +618,7 @@ function ProjectCreation() {
             title="View project"
             editOption
             btnLabel="Add new Service Subject"
+            numericFields={numericFields}
           />
         </Grid>
       </Grid>

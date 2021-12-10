@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { Grid, Typography, TextField, Button, Divider } from '@mui/material';
+import {
+  Grid,
+  Typography,
+  TextField,
+  Button,
+  Divider,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails
+} from '@mui/material';
+import { ArrowRight } from '@mui/icons-material/';
 import { FilterMatchMode } from 'primereact/api';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
@@ -19,6 +29,8 @@ function ContractList() {
   const [customerName, setCustomerName] = useState(null);
   const [location, setLocation] = useState(null);
   const [contract, setContract] = useState(null);
+  const [salesman, setSalesman] = useState(null);
+  const [showFilter, setShowFilter] = useState(true);
   const [activeProjects, setActiveProjects] = useState(null);
 
   const onStockFilterChange = () => {
@@ -135,7 +147,7 @@ function ContractList() {
     },
     {
       id: 'end_date',
-      header: 'End Date',
+      header: 'Project End Date',
       field: 'end_date'
     },
     {
@@ -179,14 +191,15 @@ function ContractList() {
     navigate('/project/edit/1', { replace: true });
   };
 
-  const navigateToContractEdition = () => {
+  const navigateToContractEdition = (options) => {
+    console.log('calling', options);
     navigate('/contract/edit/1', { replace: true });
   };
 
   const navigateToContractAddition = () => {
     navigate('/contract/add', { replace: true });
   };
-  const numericFields = ['id', 'contractNumber', 'contractSignOn', 'contractStartDate'];
+  const numericFields = ['id', 'contractNumber', 'contractSignOn', 'contractStartDate', 'status', 'activeProjects'];
   const numericFieldsExpandedData = ['id', 'project_number', 'project_start_date', 'end_date'];
 
   return (
@@ -221,71 +234,112 @@ function ContractList() {
           <Divider style={{ backgroundColor: '#c7d2fe' }} />
         </Grid>
         {/* Grid for filter section */}
-        <Grid item xs={6} sm={2}>
-          <AutocompleteWidget options={projectLocation} label="Country" disablePortal autoSelect size="small" />
-        </Grid>
-        <Grid item xs={6} sm={2}>
-          <AutocompleteWidget options={projectLocation} label="Region" disablePortal autoSelect size="small" />
-        </Grid>
-        <Grid item xs={6} sm={2}>
-          <AutocompleteWidget options={projectLocation} label="Business" disablePortal autoSelect size="small" />
-        </Grid>
-        <Grid item xs={6} sm={2}>
-          <AutocompleteWidget
-            options={projectLocation}
-            label="Business Sub Type"
-            disablePortal
-            autoSelect
-            size="small"
-          />
-        </Grid>
-        <Grid item xs={6} sm={2}>
-          <AutocompleteWidget
-            options={statusData}
-            label="Status"
-            disablePortal
-            autoSelect
-            size="small"
-            onChange={(event, newValue) => setStatus(newValue?.value)}
-            defaultValue={status}
-          />
-        </Grid>
-        <Grid item xs={6} sm={2}>
-          <TextField
-            fullWidth
-            label="Customer Name or ID"
-            size="small"
-            onChange={(e) => handleChangeFilter('customer', e.target.value)}
-          />
-        </Grid>
-        <Grid item xs={6} sm={2}>
-          <TextField fullWidth label="Location" size="small" />
-        </Grid>
-        <Grid item xs={6} sm={2}>
-          <TextField fullWidth label="Contract or Project Number" size="small" />
-        </Grid>
-        <Grid item xs={6} sm={2}>
-          <TextField
-            onChange={(e) => setActiveProjects(e.target.value)}
-            fullWidth
-            label="Active Projects"
-            size="small"
-            value={activeProjects}
-          />
-        </Grid>
-        <Grid item xs={6} sm={4}>
-          <Button onClick={onStockFilterChange} variant="contained" size="small" startIcon={<SearchIcon />}>
-            Filter
-          </Button>
-          <Button
-            onClick={clearFilter1}
-            style={{ marginLeft: '0.5rem' }}
-            variant="contained"
-            size="small"
-            startIcon={<CloseIcon />}
-          >
-            Clear
-          </Button>
+        <Grid
+          container
+          spacing={3}
+          hidden={!(showFilter === 'panel1' || showFilter === true)}
+          style={{ marginTop: '0px' }}
+        >
+          <Grid item xs={12}>
+            <Accordion style={{ boxShadow: 'none' }} fullWidth>
+              <AccordionSummary
+                style={{ display: 'flex', alignItems: 'center', flexDirection: 'row-reverse' }}
+                expandIcon={<ArrowRight />}
+                aria-controls="panel1d-content"
+                id="panel1d-header"
+              >
+                <Typography variant="h6">Filter</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Grid container spacing={3}>
+                  <Grid item xs={6} sm={2}>
+                    <AutocompleteWidget
+                      options={projectLocation}
+                      label="Country"
+                      disablePortal
+                      autoSelect
+                      size="small"
+                    />
+                  </Grid>
+                  <Grid item xs={6} sm={2}>
+                    <AutocompleteWidget
+                      options={projectLocation}
+                      label="Region"
+                      disablePortal
+                      autoSelect
+                      size="small"
+                    />
+                  </Grid>
+                  <Grid item xs={6} sm={2}>
+                    <AutocompleteWidget
+                      options={projectLocation}
+                      label="Business"
+                      disablePortal
+                      autoSelect
+                      size="small"
+                    />
+                  </Grid>
+                  <Grid item xs={6} sm={2}>
+                    <AutocompleteWidget
+                      options={projectLocation}
+                      label="Business Sub Type"
+                      disablePortal
+                      autoSelect
+                      size="small"
+                    />
+                  </Grid>
+                  <Grid item xs={6} sm={2}>
+                    <AutocompleteWidget
+                      options={statusData}
+                      label="Status"
+                      disablePortal
+                      autoSelect
+                      size="small"
+                      onChange={(event, newValue) => setStatus(newValue?.value)}
+                      defaultValue={status}
+                    />
+                  </Grid>
+                  <Grid item xs={6} sm={2}>
+                    <TextField
+                      fullWidth
+                      label="Customer Name or ID"
+                      size="small"
+                      onChange={(e) => handleChangeFilter('customer', e.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={6} sm={2}>
+                    <TextField fullWidth label="Location" size="small" />
+                  </Grid>
+                  <Grid item xs={6} sm={2}>
+                    <TextField fullWidth label="Contract or Project Number" size="small" />
+                  </Grid>
+                  <Grid item xs={6} sm={2}>
+                    <TextField
+                      onChange={(e) => setSalesman(e.target.value)}
+                      fullWidth
+                      label="Salesman"
+                      size="small"
+                      value={salesman}
+                    />
+                  </Grid>
+                  <Grid item xs={6} sm={4}>
+                    <Button onClick={onStockFilterChange} variant="contained" size="small" startIcon={<SearchIcon />}>
+                      Filter
+                    </Button>
+                    <Button
+                      onClick={clearFilter1}
+                      style={{ marginLeft: '0.5rem' }}
+                      variant="contained"
+                      size="small"
+                      startIcon={<CloseIcon />}
+                    >
+                      Clear
+                    </Button>
+                  </Grid>
+                </Grid>
+              </AccordionDetails>
+            </Accordion>
+          </Grid>
         </Grid>
         {/* Grid for all contract list */}
         <Grid item xs={12}>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Grid, Typography, TextField, Button } from '@mui/material';
+import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
 import { Helmet } from 'react-helmet';
 import { InputText } from 'primereact/inputtext';
 import { DataTable } from 'primereact/datatable';
@@ -66,7 +67,6 @@ function ContractList({
   const header = (
     <div className="datatable-crud-demo">
       <div className="table-header">
-        <h4>CONTRACTS</h4>
         <span className="p-input-icon-left">
           <i className="pi pi-search" />
           <InputText
@@ -81,6 +81,8 @@ function ContractList({
     </div>
   );
 
+  const editIcon = (rowData) => <ModeEditOutlinedIcon onClick={() => onRowClick(rowData)} />;
+  const editIconExpanded = (rowData) => <ModeEditOutlinedIcon onClick={() => onChildRowClick(rowData)} />;
   const rowExpansionTemplate = (data) => (
     <div className="orders-subtable">
       <DataTable
@@ -94,7 +96,6 @@ function ContractList({
         rows={10}
         scrollable
         scrollHeight="400px"
-        onRowClick={onChildRowClick}
         filterDisplay="row"
       >
         {expandedColumns &&
@@ -107,6 +108,17 @@ function ContractList({
               style={{ justifyContent: `${numericFieldsExpandedData.includes(col.field) ? 'center' : ''}` }}
             />
           ))}
+        <Column
+          columnKey="edit"
+          body={editIconExpanded}
+          style={{
+            minWidth: '6rem',
+            width: '6rem',
+            paddingBottom: '0.1rem',
+            paddingTop: '0.1rem',
+            justifyContent: 'center'
+          }}
+        />
       </DataTable>
     </div>
   );
@@ -132,7 +144,7 @@ function ContractList({
           filterDisplay="row"
           onRowToggle={(e) => setExpandedRows(e.data)}
           rowExpansionTemplate={rowExpansionTemplate}
-          onRowClick={onRowClick}
+          // onRowClick={onRowClick}
           dataKey="id"
           scrollHeight="400px"
           header={header}
@@ -157,25 +169,20 @@ function ContractList({
                 columnKey={col.id}
                 filter
                 filterType="text"
-                style={{
-                  textAlign: `${numericFields.includes(col.field) ? 'center' : ''}`,
-                  minWidth: '12rem'
-                }}
+                style={{ textAlign: `${numericFields && numericFields.includes(col.field) ? 'center' : ''}` }}
                 className={`${numericFields.includes(col.field) ? 'p-datatable' : null}`}
               />
             ))}
           <Column
             columnKey="edit"
-            rowEditor
-            headerstyle={{ width: '10%', minWidth: '8rem', paddingBottom: '0.1rem', paddingTop: '0.1rem' }}
-            bodyStyle={{ textAlign: 'center' }}
+            body={editIcon}
             style={{
-              minWidth: '10rem',
-              maxWidth: '10rem',
+              minWidth: '6rem',
+              width: '6rem',
               paddingBottom: '0.1rem',
-              paddingTop: '0.8rem'
+              paddingTop: '0.1rem',
+              textAlign: 'center'
             }}
-            reorderable={false}
           />
         </DataTable>
       </div>

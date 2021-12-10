@@ -68,8 +68,8 @@ export default function LoginForm() {
     },
     validationSchema: LoginSchema,
     onSubmit: async (e) => {
-      // navigate('/home');
-      navigate('/dashboard/service');
+      navigate('/home');
+      // navigate('/dashboard/service');
       /* e.preventDefault();
       const user = { email, password };
       // send the email and password to the server
