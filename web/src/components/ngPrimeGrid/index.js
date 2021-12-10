@@ -119,7 +119,6 @@ function PrimeGrid(theme) {
   const header = (
     <div className="datatable-crud-demo">
       <div className="table-header">
-        <h4>{t('MaterialList.MaterialPickingList')}</h4>
         <span className="p-input-icon-left">
           <i className="pi pi-search" />
           <InputText
@@ -154,9 +153,7 @@ function PrimeGrid(theme) {
             aria-controls="panel1d-content"
             id="panel1d-header"
           >
-            <Typography variant="h6" className="form_sub_title_cls">
-              Filter
-            </Typography>
+            <Typography variant="h6">Filter</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Paper style={paperStyle} elevation={1}>
