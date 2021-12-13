@@ -166,6 +166,7 @@ export default function SimpleTable({
               bodyStyle={{
                 textAlign: `${numericFields && numericFields.includes(headerElement.field) ? 'center' : ''}`
               }}
+              className={numericFields && numericFields.includes(headerElement.field) ? 'd-data-cls' : ''}
             />
           ))}
           {editOption ? (

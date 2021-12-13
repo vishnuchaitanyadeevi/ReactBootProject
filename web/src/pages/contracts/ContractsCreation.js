@@ -218,7 +218,7 @@ export default function ContractsCreation() {
 
   console.log('add contract', isEditFlag);
   tableData = isEditFlag ? jsonData : jsonData;
-  const numericFields = ['status', 'prjno', 'sdt', 'edt'];
+  const numericFields = ['status', 'prjno', 'sdt', 'edt', 'extp', 'grpd', 'prm'];
   return (
     <Grid container spacing={2} padding={3}>
       <Grid item xs={12} lg={12} display="flex" justifyContent="center">

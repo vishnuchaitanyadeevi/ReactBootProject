@@ -23,6 +23,7 @@ import jsonData from '../utils/customerslist.json';
 function CustomersList({ openFlag, handleCloseDialog, showDialog }) {
   const [open, setOpen] = useState(openFlag);
   const [showFilter, setShowFilter] = useState(true);
+  const numericFields = ['custno'];
   console.log('openFlag', openFlag);
   console.log('open', open);
   const handleClose = () => {
@@ -33,9 +34,9 @@ function CustomersList({ openFlag, handleCloseDialog, showDialog }) {
 
   const columnData = [
     { field: 'custno', header: 'Customer No', sortable: true },
-    { field: 'name', header: 'Name', sortable: true },
+    { field: 'name', header: 'Customer Name', sortable: true },
     { field: 'address', header: 'Address', sortable: true },
-    { field: 'sname', header: 'Short Name', sortable: true }
+    { field: 'sname', header: 'Customer Short Name', sortable: true }
   ];
 
   const CustomerTable = () => (
@@ -48,6 +49,7 @@ function CustomersList({ openFlag, handleCloseDialog, showDialog }) {
       showGridlines
       size="small"
       editOption={false}
+      numericFields={numericFields}
     />
   );
 

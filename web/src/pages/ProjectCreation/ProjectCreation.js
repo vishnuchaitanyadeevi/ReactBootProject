@@ -107,7 +107,7 @@ const endDateTypes = [
   { name: 'Number Of Services', val: 'Number Of Services' }
 ];
 
-const numericFields = ['itemCode', 'serialNumber', 'qty'];
+const numericFields = ['itemCode', 'serialNumber', 'qty', 'sla', 'oStatus', 'serviceSubjOwnerShip'];
 function ProjectCreation() {
   const { t } = useTranslation();
   const { themeMode, onChangeMode } = useSettings();
