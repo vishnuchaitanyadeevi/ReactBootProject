@@ -1329,6 +1329,7 @@ export const FILTER_COMPONETS = [
   },
   {
     control: CHECKBOX,
+    groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
     key: 'lastProjectService',
     label: 'lastProjectService',
     placeholder: 'lastProjectService',
