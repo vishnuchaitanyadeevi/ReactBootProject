@@ -1290,41 +1290,41 @@ export const COLOR_CODES = {
 export const FILTER_COMPONETS = [
   {
     control: TEXT_FIELD,
-    groupStyle: { marginRight: '1rem' },
+    groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
     key: 'customerName',
     label: 'customerName',
     placeholder: 'customerName'
   },
   {
     control: SELECT_BOX,
-    groupStyle: { marginRight: '1rem' },
+    groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
     key: 'country',
     label: 'country',
     placeholder: 'country',
     select: true,
     options: [
-      { name: 'India', value: 'in' },
-      { name: 'Dubai', value: 'du' },
-      { name: 'Saudi Arabia', value: 'sb' },
-      { name: 'Qatar', value: 'qt' },
-      { name: 'Abu Dhabi ', value: 'ab' },
-      { name: 'Oman', value: 'om' },
-      { name: 'Kuwait', value: 'kt' },
-      { name: 'Bahrain', value: 'bh' }
+      { name: { en: 'India', ar: 'الهند' }, value: 'in' },
+      { name: { en: 'Dubai', ar: 'دبي' }, value: 'du' },
+      { name: { en: 'Saudi Arabia', ar: 'المملكة العربية السعودية' }, value: 'sb' },
+      { name: { en: 'Qatar', ar: 'دولة قطر' }, value: 'qt' },
+      { name: { en: 'Abu Dhabi ', ar: 'أبو ظبي' }, value: 'ab' },
+      { name: { en: 'Oman', ar: 'سلطنة عمان' }, value: 'om' },
+      { name: { en: 'Kuwait', ar: 'سلطنة عمان' }, value: 'kt' },
+      { name: { en: 'Bahrain', ar: 'البحرين' }, value: 'bh' }
     ]
   },
   {
     control: AUTOCOMPLETE,
-    groupStyle: { marginRight: '1rem' },
+    groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
     key: 'office',
     label: 'office',
     placeholder: 'office',
     options: [
-      { name: 'Office 1', value: 'office1' },
-      { name: 'Office 2', value: 'office2' },
-      { name: 'Office 3', value: 'office3' },
-      { name: 'Office 4', value: 'office4' },
-      { name: 'Office 5', value: 'office5' }
+      { name: { en: 'Office 1', ar: 'مكتب 1' }, value: 'office1' },
+      { name: { en: 'Office 2', ar: 'مكتب 2' }, value: 'office2' },
+      { name: { en: 'Office 3', ar: 'مكتب 3' }, value: 'office3' },
+      { name: { en: 'Office 4', ar: 'مكتب 4' }, value: 'office4' },
+      { name: { en: 'Office 5', ar: 'مكتب 5' }, value: 'office5' }
     ]
   },
   {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { isArray } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import {
@@ -17,10 +17,12 @@ import FormLabel from '@mui/material/FormLabel';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 
+import useSettings from '../../hooks/useSettings';
 import { COMPONENTS } from '../../utils/constants';
 
 export default function Filters({ components, apiUrl, getFilterData }) {
   const { t } = useTranslation();
+  const { lang } = useSettings();
   const { TEXT_FIELD, SELECT_BOX, CHECKBOX, RADIO, AUTOCOMPLETE } = COMPONENTS;
   const [payload, setPayload] = useState({});
 
@@ -79,7 +81,7 @@ export default function Filters({ components, apiUrl, getFilterData }) {
                   <option key={key} value="" />
                   {options.map((item) => (
                     <option key={item.value} disabled={item.isDisabled} value={item.value}>
-                      {item.name}
+                      {item.name[lang]}
                     </option>
                   ))}
                 </>
@@ -133,12 +135,12 @@ export default function Filters({ components, apiUrl, getFilterData }) {
             <Autocomplete
               id={key}
               options={options}
-              getOptionLabel={(option) => option.name}
+              getOptionLabel={(option) => option.name[lang]}
               onChange={(e, val) => val && handleChange(key, val?.value)}
               value={payload[key] ? options.find((v) => payload[key] === v.value) : null}
               renderOption={(props, option) => (
                 <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-                  {option.name}
+                  {option.name[lang]}
                 </Box>
               )}
               renderInput={(params) => (
