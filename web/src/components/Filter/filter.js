@@ -167,13 +167,17 @@ export default function Filters({ components, apiUrl, getFilterData }) {
   return (
     <>
       {isArray(components) && (
-        <Grid container style={{ marginLeft: '0.5rem', marginRight: '0.5rem' }}>
+        <Grid container>
           {components.map((comp, ind) => renderComponent(comp, ind))}
-          <Button variant="contained" onClick={handleGetData}>
+          <Button variant="contained" onClick={handleGetData} style={{ marginLeft: '0.5rem', marginRight: '0.5rem' }}>
             <SearchIcon />
             {t('filter.filter')}
           </Button>
-          <Button variant="contained" onClick={handleClearFilters}>
+          <Button
+            variant="contained"
+            onClick={handleClearFilters}
+            style={{ marginLeft: '0.5rem', marginRight: '0.5rem' }}
+          >
             <ClearIcon />
             {t('filter.clear')}
           </Button>
