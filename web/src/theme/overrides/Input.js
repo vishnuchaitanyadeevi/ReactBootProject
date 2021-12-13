@@ -13,7 +13,7 @@ export default function Input(theme) {
           '&::placeholder': {
             opacity: 1,
             color: theme.palette.text.disabled,
-            fontSize: '0.7rem'
+            fontSize: '0.9rem'
           }
         }
       }
