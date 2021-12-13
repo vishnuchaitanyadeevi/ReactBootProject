@@ -214,3 +214,9 @@ px
 .MuiGrid-root>.MuiGrid-item {
   padding-top: 8px;
 }
+
+// global css for centering header for primeReact dataGrid
+.d-data-cls .p-column-header-content{
+  display: flex;
+  justify-content: center;
+}
