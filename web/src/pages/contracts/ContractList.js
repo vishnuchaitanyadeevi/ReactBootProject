@@ -200,7 +200,7 @@ function ContractList() {
     navigate('/contract/add', { replace: true });
   };
   const numericFields = ['id', 'contractNumber', 'contractSignOn', 'contractStartDate', 'status', 'activeProjects'];
-  const numericFieldsExpandedData = ['id', 'project_number', 'project_start_date', 'end_date'];
+  const numericFieldsExpandedData = ['id', 'status', 'project_number', 'project_start_date', 'end_date'];
 
   return (
     <Grid className="contract_list_main_cls">

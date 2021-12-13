@@ -24,6 +24,7 @@ function ProjectExpiration() {
   const [tableData, setTableData] = useState(ProjectExpirationData);
   const [editingRows, setEditingRows] = useState({});
   const [showFilter, setShowFilter] = useState(true);
+  const numericFields = ['projectNo', 'expiry', 'status'];
   const onRowEditChange = (e) => {
     setEditingRows(e.data);
   };
@@ -205,6 +206,7 @@ function ProjectExpiration() {
             showActionColumn
             type="text"
             title="View project"
+            numericFields={numericFields}
           />
         </Grid>
       </Grid>

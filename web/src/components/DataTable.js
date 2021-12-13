@@ -170,7 +170,7 @@ function ContractList({
                 filter
                 filterType="text"
                 style={{ textAlign: `${numericFields && numericFields.includes(col.field) ? 'center' : ''}` }}
-                className={`${numericFields.includes(col.field) ? 'p-datatable' : null}`}
+                className={numericFields && numericFields.includes(col.field) ? 'd-data-cls' : ''}
               />
             ))}
           <Column
