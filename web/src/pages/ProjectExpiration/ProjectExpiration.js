@@ -1,7 +1,19 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Grid, Typography, TextField, Button, Divider, Checkbox, FormControlLabel, Chip } from '@mui/material';
+import {
+  Grid,
+  Typography,
+  Button,
+  Divider,
+  Checkbox,
+  FormControlLabel,
+  Chip,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails
+} from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { ArrowRight } from '@mui/icons-material/';
 import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget';
 import SimpleTable from '../../components/table/simpleTable';
 import ProjectExpirationData from './ProjectExpirationData.json';
@@ -11,6 +23,7 @@ function ProjectExpiration() {
   const { t } = useTranslation();
   const [tableData, setTableData] = useState(ProjectExpirationData);
   const [editingRows, setEditingRows] = useState({});
+  const [showFilter, setShowFilter] = useState(true);
   const onRowEditChange = (e) => {
     setEditingRows(e.data);
   };
@@ -71,88 +84,105 @@ function ProjectExpiration() {
   ];
   return (
     <div className="project_expiration_main_cls">
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={8}>
-          <Typography variant="h4">{t('ProjectExpiration.ProjectExpirationList')}</Typography>
-          <Divider style={{ backgroundColor: '#c7d2fe' }} />
-          <Grid container spacing={3} style={{ marginTop: '1rem' }}>
-            <Grid item xs={12} sm={3}>
-              <AutocompleteWidget options={country} label="Country" disablePortal autoSelect size="small" />
-            </Grid>
-            <Grid item xs={12} sm={3}>
-              <AutocompleteWidget options={country} label="Region" disablePortal autoSelect size="small" />
-            </Grid>
-            <Grid item xs={12} sm={3}>
-              <AutocompleteWidget options={country} label="Business" disablePortal autoSelect size="small" />
-            </Grid>
-            <Grid item xs={12} sm={3}>
-              <AutocompleteWidget options={country} label="Status" disablePortal autoSelect size="small" />
-            </Grid>
-            <Grid item xs={12} sm={3}>
-              <AutocompleteWidget
-                options={country}
-                label="Expiration date offset"
-                disablePortal
-                autoSelect
-                size="small"
-              />
-              <FormControlLabel control={<Checkbox />} label="Show expired projects" />
-            </Grid>
-            <Grid item xs={12} sm={3}>
-              <Button variant="contained" size="small" startIcon={<SearchIcon />}>
-                Filter
-              </Button>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <Typography variant="h4">{t('ProjectExpiration.ExpirationOverview')}</Typography>
-          <Divider style={{ backgroundColor: '#c7d2fe' }} />
-          {/* Expire project grid */}
-          <Grid container spacing={3} style={{ marginTop: '1rem' }}>
-            <Grid item xs={12} sm={12}>
-              <Grid
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  border: '1px solid #c7d2fe',
-                  borderRadius: '5px',
-                  padding: '5px'
-                }}
-              >
-                <Typography variant="body2" style={{ fontWeight: 'bold' }}>
-                  {t('ProjectExpiration.ExpiredProjects')}
-                </Typography>
-                <Chip label="81450" style={{ backgroundColor: '#637381', color: '#FFF' }} />
-              </Grid>
-            </Grid>
+      <Grid hidden={!(showFilter === 'panel1' || showFilter === true)} container spacing={3}>
+        <Grid item xs={12}>
+          <Accordion style={{ boxShadow: 'none' }} fullWidth>
+            <AccordionSummary
+              style={{ display: 'flex', alignItems: 'center', flexDirection: 'row-reverse' }}
+              expandIcon={<ArrowRight />}
+              aria-controls="panel1d-content"
+              id="panel1d-header"
+            >
+              <Typography variant="h6">Filter</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Grid container spacing={3}>
+                <Grid item xs={12} sm={8}>
+                  <Typography variant="h4">{t('ProjectExpiration.ProjectExpirationList')}</Typography>
+                  <Divider style={{ backgroundColor: '#c7d2fe' }} />
 
-            <Grid item xs={12} sm={12}>
-              <Grid
-                style={{
-                  border: '1px solid #c7d2fe',
-                  overflow: 'scroll',
-                  height: '200px',
-                  borderRadius: '5px',
-                  padding: '0px 5px 5px 5px',
-                  alignItems: 'center'
-                }}
-                item
-                xs={12}
-                sm={12}
-              >
-                {[...Array(15)].map((g) => (
-                  <Grid item xs={12} style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Typography variant="body2">
-                      17-12-2015 <span style={{ fontWeight: 'bold' }}>(15)</span>
-                    </Typography>
-                    <Chip label="103" style={{ backgroundColor: '#637381', color: '#FFF' }} />
+                  <Grid container spacing={3} style={{ marginTop: '1rem' }}>
+                    <Grid item xs={12} sm={3}>
+                      <AutocompleteWidget options={country} label="Country" disablePortal autoSelect size="small" />
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                      <AutocompleteWidget options={country} label="Region" disablePortal autoSelect size="small" />
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                      <AutocompleteWidget options={country} label="Business" disablePortal autoSelect size="small" />
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                      <AutocompleteWidget options={country} label="Status" disablePortal autoSelect size="small" />
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                      <AutocompleteWidget
+                        options={country}
+                        label="Expiration date offset"
+                        disablePortal
+                        autoSelect
+                        size="small"
+                      />
+                      <FormControlLabel control={<Checkbox />} label="Show expired projects" />
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                      <Button variant="contained" size="small" startIcon={<SearchIcon />}>
+                        Filter
+                      </Button>
+                    </Grid>
                   </Grid>
-                ))}
+                </Grid>
+
+                <Grid item xs={12} sm={4}>
+                  <Typography variant="h4">{t('ProjectExpiration.ExpirationOverview')}</Typography>
+                  <Divider style={{ backgroundColor: '#c7d2fe' }} />
+                  {/* Expire project grid */}
+                  <Grid container spacing={3} style={{ marginTop: '1rem' }}>
+                    <Grid item xs={12} sm={12}>
+                      <Grid
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          border: '1px solid #c7d2fe',
+                          borderRadius: '5px',
+                          padding: '5px'
+                        }}
+                      >
+                        <Typography variant="body2" style={{ fontWeight: 'bold' }}>
+                          {t('ProjectExpiration.ExpiredProjects')}
+                        </Typography>
+                        <Chip label="81450" style={{ backgroundColor: '#637381', color: '#FFF' }} />
+                      </Grid>
+                      <Grid item xs={12} sm={12}>
+                        <Grid
+                          style={{
+                            border: '1px solid #c7d2fe',
+                            overflow: 'scroll',
+                            height: '200px',
+                            borderRadius: '5px',
+                            padding: '0px 5px 5px 5px',
+                            alignItems: 'center'
+                          }}
+                          item
+                          xs={12}
+                          sm={12}
+                        >
+                          {[...Array(15)].map((g) => (
+                            <Grid item xs={12} style={{ display: 'flex', justifyContent: 'space-between' }}>
+                              <Typography variant="body2">
+                                17-12-2015 <span style={{ fontWeight: 'bold' }}>(15)</span>
+                              </Typography>
+                              <Chip label="103" style={{ backgroundColor: '#637381', color: '#FFF' }} />
+                            </Grid>
+                          ))}
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
               </Grid>
-            </Grid>
-          </Grid>
+            </AccordionDetails>
+          </Accordion>
         </Grid>
       </Grid>
       {/* Project expiration tabular layout */}
