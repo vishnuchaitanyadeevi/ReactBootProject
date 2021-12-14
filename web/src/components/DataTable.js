@@ -96,7 +96,7 @@ function ContractList({
         rows={10}
         scrollable
         scrollHeight="400px"
-        filterDisplay="row"
+        filterDisplay="menu"
       >
         {expandedColumns &&
           expandedColumns.map((col) => (
