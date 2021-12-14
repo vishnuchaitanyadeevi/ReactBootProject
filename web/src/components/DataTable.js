@@ -67,6 +67,7 @@ function ContractList({
   const header = (
     <div className="datatable-crud-demo">
       <div className="table-header">
+        <div />
         <span className="p-input-icon-left">
           <i className="pi pi-search" />
           <InputText

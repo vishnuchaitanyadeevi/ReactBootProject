@@ -42,8 +42,9 @@ export default function SimpleTable({
   const [globalFilter, setGlobalFilter] = useState(null);
 
   const header = (
-    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-      <div className="table-header" style={{ justifyContent: 'left' }}>
+    <div className="datatable-crud-demo">
+      <div className="table-header">
+        <div />
         <span className="p-input-icon-left">
           <i className="pi pi-search" />
           <InputText
