@@ -54,7 +54,7 @@ export default function Filters({ components, apiUrl, getFilterData }) {
       groupStyle,
       select = false,
       fullWidth = true,
-      columnWidth = 2
+      columnWidth = 1.5
     } = metaData;
 
     switch (control) {
