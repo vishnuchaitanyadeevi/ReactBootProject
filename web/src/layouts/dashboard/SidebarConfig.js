@@ -47,7 +47,7 @@ const sidebarConfig = [
           // { title: 'Projects', path: '/project/add' },
           { title: 'Service Orders', path: '' },
           { title: 'Project Expiration List', path: '/projectExpiration' },
-          { title: 'Terminate Projects', path: '' }
+          { title: 'Terminate Projects', path: '/terminateProject' }
         ]
       },
       {
