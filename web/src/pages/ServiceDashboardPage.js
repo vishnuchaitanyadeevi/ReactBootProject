@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { isArray } from 'lodash';
 import { Grid, Stack, Button, MenuItem, TextField, Popover, Tooltip } from '@mui/material';
@@ -11,17 +12,26 @@ import ServiceBoard from '../components/ServiceBoard/ServiceBoard';
 import ServiceMens from '../components/ServiceBoard/ServiceMens';
 import ServiceTypes from '../components/ServiceBoard/ServiceTypes';
 import Filters from '../components/Filter/filter';
-import { serviceDataEn, serviceDataAr, COLOR_CODES, FILTER_COMPONETS } from '../components/ServiceBoard/data';
+import {
+  serviceDataEn,
+  serviceDataAr,
+  COLOR_CODES,
+  SEVICE_DASHBOARD_FILTER_MASTER_DATA
+} from '../components/ServiceBoard/data';
 
-import { MAX_LANES, GROUP_BY, THEME, LANGUAGE_CODES } from '../utils/constants';
+import { MAX_LANES, GROUP_BY, THEME, LANGUAGE_CODES, COMPONENTS } from '../utils/constants';
 import { sortListOfObjects } from '../utils/utils';
 import useSettings from '../hooks/useSettings';
+import { POST_OFFICE } from '../redux/constants';
 
 import '../components/ServiceBoard/ServiceBoard.css';
 
 export default function ServiceDashboard() {
   const { t } = useTranslation();
   const { lang } = useSettings();
+
+  const masterData = useSelector((state) => state.MasterDataReducer);
+  const dispatch = useDispatch();
 
   const { SERVICE_MEN, CUSTOMER } = GROUP_BY;
   const [serviceData, setServiceData] = useState(serviceDataEn);
@@ -39,6 +49,90 @@ export default function ServiceDashboard() {
   const {
     FILTER_BOX: { BORDER }
   } = colorCode;
+
+  const { TEXT_FIELD, SELECT_BOX, AUTOCOMPLETE, CHECKBOX, RADIO } = COMPONENTS;
+
+  const FILTER_COMPONETS = [
+    {
+      control: AUTOCOMPLETE,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'country',
+      label: 'serviceDashboard.country',
+      placeholder: 'serviceDashboard.country',
+      options: masterData?.country
+    },
+    {
+      control: AUTOCOMPLETE,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'office',
+      label: 'serviceDashboard.office',
+      placeholder: 'serviceDashboard.office',
+      options: masterData?.office
+    },
+    {
+      control: AUTOCOMPLETE,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'business',
+      label: 'serviceDashboard.business',
+      placeholder: 'serviceDashboard.business',
+      options: masterData?.business
+    },
+    {
+      control: AUTOCOMPLETE,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'office',
+      label: 'serviceDashboard.contract',
+      placeholder: 'serviceDashboard.contract',
+      options: masterData?.contract
+    },
+    {
+      control: AUTOCOMPLETE,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'office',
+      label: 'CreateProject.ProjectStatus',
+      placeholder: 'CreateProject.ProjectStatus',
+      options: masterData?.projectStatus
+    },
+    {
+      control: AUTOCOMPLETE,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'office',
+      label: 'serviceDashboard.status',
+      placeholder: 'serviceDashboard.status',
+      options: masterData?.status
+    },
+    {
+      control: CHECKBOX,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'lastProjectService',
+      label: 'serviceDashboard.lastProjectService',
+      placeholder: 'serviceDashboard.lastProjectService',
+      columnWidth: 2
+    },
+    {
+      control: TEXT_FIELD,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'customerName',
+      label: 'serviceDashboard.customerName',
+      placeholder: 'serviceDashboard.customerName'
+    },
+    {
+      control: AUTOCOMPLETE,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'office',
+      label: 'serviceDashboard.location',
+      placeholder: 'serviceDashboard.location',
+      options: masterData?.location
+    },
+    {
+      control: AUTOCOMPLETE,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'office',
+      label: 'serviceDashboard.serviceman',
+      placeholder: 'serviceDashboard.serviceman',
+      options: masterData?.serviceman
+    }
+  ];
 
   const checkValidUpdateForStart = (value) => {
     switch (true) {
@@ -109,6 +203,16 @@ export default function ServiceDashboard() {
     console.log('Filtered data: ', data);
   };
 
+  const getFilterDataPayloadChange = (key, val) => {
+    console.log(key, val);
+    if (key === 'country') {
+      const country = SEVICE_DASHBOARD_FILTER_MASTER_DATA.OFFICE.find((office) => office.country === val);
+      if (country) {
+        dispatch({ type: POST_OFFICE, data: country.offices });
+      }
+    }
+  };
+
   useEffect(changeData, [start, serviceData]);
   useEffect(() => setColorCode(themeMode === THEME.LIGHT ? LGT : DRK), [themeMode]);
   useEffect(() => {
@@ -120,7 +224,12 @@ export default function ServiceDashboard() {
       <Grid container>
         <Grid item xs={12}>
           <div className="filter-section" style={{ borderColor: BORDER }}>
-            <Filters components={FILTER_COMPONETS} apiUrl="dummyUrl" getFilterData={getFilterData} />
+            <Filters
+              components={FILTER_COMPONETS}
+              apiUrl="dummyUrl"
+              getFilterData={getFilterData}
+              getFilterDataPayloadChange={getFilterDataPayloadChange}
+            />
           </div>
         </Grid>
         <Grid item xs={12} md={2}>
