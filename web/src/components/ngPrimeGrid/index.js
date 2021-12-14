@@ -119,6 +119,7 @@ function PrimeGrid(theme) {
   const header = (
     <div className="datatable-crud-demo">
       <div className="table-header">
+        <h4>Material Picking List</h4>
         <span className="p-input-icon-left">
           <i className="pi pi-search" />
           <InputText
