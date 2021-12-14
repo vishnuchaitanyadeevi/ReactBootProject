@@ -31,12 +31,8 @@ export default function Filters({ components, apiUrl, getFilterData, getFilterDa
   const { TEXT_FIELD, SELECT_BOX, CHECKBOX, RADIO, AUTOCOMPLETE } = COMPONENTS;
   const [payload, setPayload] = useState({});
   const [open, setOpen] = useState(true);
-  const [rightDir, setRightDir] = useState(LANGUAGES_CODES_RTL_ORIENTATION.includes[lang]);
 
-  useEffect(() => {
-    console.log(LANGUAGES_CODES_RTL_ORIENTATION, lang);
-    setRightDir(LANGUAGES_CODES_RTL_ORIENTATION.includes[lang]);
-  }, [lang]);
+  const rightDir = LANGUAGES_CODES_RTL_ORIENTATION.includes(lang);
 
   const handleChange = (key, val) => {
     setPayload({ ...payload, [key]: val });
@@ -184,7 +180,7 @@ export default function Filters({ components, apiUrl, getFilterData, getFilterDa
   return (
     <>
       <Typography variant="h5">
-        Filter {LANGUAGES_CODES_RTL_ORIENTATION.includes[lang] ? 'rtl' : 'ltr'}
+        {t('filter.filter')}
         {open ? (
           <KeyboardArrowUpIcon
             onClick={handleClick}
@@ -201,15 +197,11 @@ export default function Filters({ components, apiUrl, getFilterData, getFilterDa
         {isArray(components) && (
           <Grid container>
             {components.map((comp, ind) => renderComponent(comp, ind))}
-            <Button variant="contained" onClick={handleGetData} style={{ marginLeft: '0.5rem', marginRight: '0.5rem' }}>
+            <Button variant="contained" onClick={handleGetData} style={{ margin: '0.5rem' }}>
               <SearchIcon />
               {t('filter.filter')}
             </Button>
-            <Button
-              variant="contained"
-              onClick={handleClearFilters}
-              style={{ marginLeft: '0.5rem', marginRight: '0.5rem' }}
-            >
+            <Button variant="contained" onClick={handleClearFilters} style={{ margin: '0.5rem' }}>
               <ClearIcon />
               {t('filter.clear')}
             </Button>
