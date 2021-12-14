@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { isArray } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import {
@@ -11,22 +11,51 @@ import {
   RadioGroup,
   Radio,
   Autocomplete,
-  Box
+  Box,
+  FormLabel,
+  Collapse,
+  Typography
 } from '@mui/material';
-import FormLabel from '@mui/material/FormLabel';
+
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import useSettings from '../../hooks/useSettings';
-import { COMPONENTS } from '../../utils/constants';
+import { COMPONENTS, LANGUAGES_CODES_RTL_ORIENTATION, THEME } from '../../utils/constants';
+import { COLOR_CODES } from '../ServiceBoard/data';
 
-export default function Filters({ components, apiUrl, getFilterData }) {
+import '../ServiceBoard/ServiceBoard.css';
+
+export default function Filters({
+  components,
+  apiUrl,
+  getFilterData,
+  getFilterDataPayloadChange,
+  displayBorder = true
+}) {
   const { t } = useTranslation();
-  const { lang } = useSettings();
+  const { lang, themeMode } = useSettings();
   const { TEXT_FIELD, SELECT_BOX, CHECKBOX, RADIO, AUTOCOMPLETE } = COMPONENTS;
   const [payload, setPayload] = useState({});
+  const [open, setOpen] = useState(true);
 
-  const handleChange = (key, val) => setPayload({ ...payload, [key]: val });
+  const { DRK, LGT } = COLOR_CODES;
+  const [colorCode, setColorCode] = useState(themeMode === THEME.LIGHT ? LGT : DRK);
+  const {
+    FILTER_BOX: { BORDER, BTN_TEXT },
+    CARD: { TXT }
+  } = colorCode;
+
+  const rightDir = LANGUAGES_CODES_RTL_ORIENTATION.includes(lang);
+
+  const handleChange = (key, val) => {
+    setPayload({ ...payload, [key]: val });
+    getFilterDataPayloadChange(key, val);
+  };
+
+  const handleClick = () => setOpen(!open);
 
   const handleClearFilters = () => {
     setPayload({});
@@ -54,7 +83,7 @@ export default function Filters({ components, apiUrl, getFilterData }) {
       groupStyle,
       select = false,
       fullWidth = true,
-      columnWidth = 2
+      columnWidth = 1.5
     } = metaData;
 
     switch (control) {
@@ -164,25 +193,40 @@ export default function Filters({ components, apiUrl, getFilterData }) {
         return '';
     }
   };
+
+  useEffect(() => setColorCode(themeMode === THEME.LIGHT ? LGT : DRK), [themeMode]);
+
   return (
-    <>
-      {isArray(components) && (
-        <Grid container>
-          {components.map((comp, ind) => renderComponent(comp, ind))}
-          <Button variant="contained" onClick={handleGetData} style={{ marginLeft: '0.5rem', marginRight: '0.5rem' }}>
-            <SearchIcon />
-            {t('filter.filter')}
-          </Button>
-          <Button
-            variant="contained"
-            onClick={handleClearFilters}
-            style={{ marginLeft: '0.5rem', marginRight: '0.5rem' }}
-          >
-            <ClearIcon />
-            {t('filter.clear')}
-          </Button>
-        </Grid>
-      )}
-    </>
+    <div className={displayBorder ? 'filter-section' : ''} style={{ borderColor: BORDER }}>
+      <Typography variant="h5" style={{ color: TXT }}>
+        {t('filter.filter')}
+        {open ? (
+          <KeyboardArrowUpIcon
+            onClick={handleClick}
+            style={{ cursor: 'pointer', float: rightDir ? 'left' : 'right' }}
+          />
+        ) : (
+          <KeyboardArrowDownIcon
+            onClick={handleClick}
+            style={{ cursor: 'pointer', float: rightDir ? 'left' : 'right' }}
+          />
+        )}
+      </Typography>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        {isArray(components) && (
+          <Grid container>
+            {components.map((comp, ind) => renderComponent(comp, ind))}
+            <Button variant="contained" onClick={handleGetData} style={{ margin: '0.5rem', color: BTN_TEXT }}>
+              <SearchIcon />
+              {t('filter.filter')}
+            </Button>
+            <Button variant="contained" onClick={handleClearFilters} style={{ margin: '0.5rem', color: BTN_TEXT }}>
+              <ClearIcon />
+              {t('filter.clear')}
+            </Button>
+          </Grid>
+        )}
+      </Collapse>
+    </div>
   );
 }

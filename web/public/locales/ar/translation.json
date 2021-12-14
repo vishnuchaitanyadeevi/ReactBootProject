@@ -68,6 +68,7 @@
   "serviceDashboard": {
     "addCallOut": "إضافة مكالمة",
     "sortBy": "صنف حسب",
+    "serviceman": "جندي",
     "serviceMen": "العسكريين",
     "Customers": "عميل",
     "complete": "مكتمل",
@@ -87,15 +88,19 @@
     "permitReceived": "تم استلام التصريح",
     "morningJob": "وظيفة الصباح",
     "dayJob": "عمل نهاري",
-    "nightJob": "وظيفة ليلية"
+    "nightJob": "وظيفة ليلية",
+    "country": "دولة",
+    "lastProjectService": "خدمة المشروع الأخير",
+    "gender": "جنس تذكير أو تأنيث",
+    "office": "مكتب. مقر. مركز",
+    "male": "ذكر",
+    "female": "أنثى",
+    "business": "اعمال",
+    "contract": "اتفافية",
+    "status": "حالة",
+    "location": "موقع",
+    "servicemen": "العسكريين"
   },
-  "country": "دولة",
-  "customerName": "اسم الزبون",
-  "lastProjectService": "خدمة المشروع الأخير",
-  "gender": "جنس تذكير أو تأنيث",
-  "office": "مكتب. مقر. مركز",
-  "male": "ذكر",
-  "female": "أنثى",
   "filter": {
     "filter": "منقي",
     "clear": "صافي"

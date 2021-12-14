@@ -1,7 +1,3 @@
-import { COMPONENTS } from '../../utils/constants';
-
-const { TEXT_FIELD, SELECT_BOX, AUTOCOMPLETE, CHECKBOX, RADIO } = COMPONENTS;
-
 const card = {
   cardColor: '#66ff00',
   cardStyle: {
@@ -719,7 +715,7 @@ export const serviceDataAr = [
     ],
     currentPage: 1,
     id: 'lane1',
-    day: 'Sun',
+    day: 'شمس',
     date: '14-11-2021',
     style: laneStyle,
     serviceMensOnLeave: [
@@ -769,7 +765,7 @@ export const serviceDataAr = [
     ],
     currentPage: 2,
     id: 'lane2',
-    day: 'Mon',
+    day: 'الاثنين',
     date: '15-11-2021',
     style: laneStyle,
     serviceMensOnLeave: [
@@ -819,7 +815,7 @@ export const serviceDataAr = [
     ],
     currentPage: 3,
     id: 'lane3',
-    day: 'Tue',
+    day: 'الثلاثاء',
     date: '16-11-2021',
     style: laneStyle,
     serviceMensOnLeave: [
@@ -870,7 +866,7 @@ export const serviceDataAr = [
     ],
     currentPage: 4,
     id: 'lane4',
-    day: 'Wed',
+    day: 'الاربعاء',
     date: '17-11-2021',
     style: laneStyle,
     serviceMensOnLeave: [
@@ -926,7 +922,7 @@ export const serviceDataAr = [
     ],
     currentPage: 5,
     id: 'lane5',
-    day: 'Thu',
+    day: 'الخميس',
     date: '18-11-2021',
     style: laneStyle,
     serviceMensOnLeave: [
@@ -980,7 +976,7 @@ export const serviceDataAr = [
     ],
     currentPage: 6,
     id: 'lane6',
-    day: 'Fri',
+    day: 'الجمعه',
     date: '19-11-2021',
     style: laneStyle,
     serviceMensOnLeave: [
@@ -1031,7 +1027,7 @@ export const serviceDataAr = [
     ],
     currentPage: 7,
     id: 'lane7',
-    day: 'Sat',
+    day: 'جلس',
     date: '20-11-2021',
     style: laneStyle,
     serviceMensOnLeave: [
@@ -1081,7 +1077,7 @@ export const serviceDataAr = [
     ],
     currentPage: 8,
     id: 'lane8',
-    day: 'Sun',
+    day: 'شمس',
     date: '21-11-2021',
     style: laneStyle
   },
@@ -1123,7 +1119,7 @@ export const serviceDataAr = [
     ],
     currentPage: 9,
     id: 'lane9',
-    day: 'Mon',
+    day: 'الاثنين',
     date: '22-11-2021',
     style: laneStyle,
     serviceMensOnLeave: [
@@ -1172,7 +1168,7 @@ export const serviceDataAr = [
     ],
     currentPage: 10,
     id: 'lane10',
-    day: 'Tue',
+    day: 'الثلاثاء',
     date: '23-11-2021',
     style: laneStyle,
     serviceMensOnLeave: [
@@ -1273,7 +1269,8 @@ export const COLOR_CODES = {
       TXT: '#f1f1f1'
     },
     FILTER_BOX: {
-      BORDER: '#323232'
+      BORDER: '#323232',
+      BTN_TEXT: '#424242'
     }
   },
   LGT: {
@@ -1282,68 +1279,89 @@ export const COLOR_CODES = {
       TXT: '#767575'
     },
     FILTER_BOX: {
-      BORDER: '#e2e2e7'
+      BORDER: '#e2e2e7',
+      BTN_TEXT: '#f1f1f1'
     }
   }
 };
 
-export const FILTER_COMPONETS = [
-  {
-    control: TEXT_FIELD,
-    groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
-    key: 'customerName',
-    label: 'customerName',
-    placeholder: 'customerName'
-  },
-  {
-    control: SELECT_BOX,
-    groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
-    key: 'country',
-    label: 'country',
-    placeholder: 'country',
-    select: true,
-    options: [
-      { name: { en: 'India', ar: 'الهند' }, value: 'in' },
-      { name: { en: 'Dubai', ar: 'دبي' }, value: 'du' },
-      { name: { en: 'Saudi Arabia', ar: 'المملكة العربية السعودية' }, value: 'sb' },
-      { name: { en: 'Qatar', ar: 'دولة قطر' }, value: 'qt' },
-      { name: { en: 'Abu Dhabi ', ar: 'أبو ظبي' }, value: 'ab' },
-      { name: { en: 'Oman', ar: 'سلطنة عمان' }, value: 'om' },
-      { name: { en: 'Kuwait', ar: 'سلطنة عمان' }, value: 'kt' },
-      { name: { en: 'Bahrain', ar: 'البحرين' }, value: 'bh' }
-    ]
-  },
-  {
-    control: AUTOCOMPLETE,
-    groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
-    key: 'office',
-    label: 'office',
-    placeholder: 'office',
-    options: [
-      { name: { en: 'Office 1', ar: 'مكتب 1' }, value: 'office1' },
-      { name: { en: 'Office 2', ar: 'مكتب 2' }, value: 'office2' },
-      { name: { en: 'Office 3', ar: 'مكتب 3' }, value: 'office3' },
-      { name: { en: 'Office 4', ar: 'مكتب 4' }, value: 'office4' },
-      { name: { en: 'Office 5', ar: 'مكتب 5' }, value: 'office5' }
-    ]
-  },
-  {
-    control: CHECKBOX,
-    groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
-    key: 'lastProjectService',
-    label: 'lastProjectService',
-    placeholder: 'lastProjectService',
-    columnWidth: 2
-  },
-  {
-    control: RADIO,
-    key: 'gender',
-    label: 'gender',
-    placeholder: 'gender',
-    options: [
-      { name: 'Male', value: 'male', label: 'male' },
-      { name: 'Female', value: 'female', label: 'female' }
-    ],
-    columnWidth: 1.5
-  }
-];
+export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
+  COUNTRY: [
+    { name: { en: 'Bahrain', ar: 'البحرين' }, value: 'bh' },
+    { name: { en: 'Qatar', ar: 'دولة قطر' }, value: 'qt' },
+    { name: { en: 'Saudi Arabia', ar: 'المملكة العربية السعودية' }, value: 'sa' },
+    { name: { en: 'United Arab Emirates', ar: 'الإمارات العربية المتحدة' }, value: 'uae' }
+  ],
+  OFFICE: [
+    { country: 'bh', offices: [{ name: { en: 'Bahrain Region', ar: 'منطقة البحرين' }, value: 'bahrain-region' }] },
+    {
+      country: 'sa',
+      offices: [
+        { name: { en: 'Abha', ar: 'أبها' }, value: 'abha' },
+        { name: { en: 'Jeddah ', ar: 'جدة' }, value: 'jeddah' },
+        { name: { en: 'Khobar ', ar: 'مدينه الخبر ' }, value: 'khobar' },
+        { name: { en: 'Riyadh ', ar: 'الرياض' }, value: 'riyadh' }
+      ]
+    },
+    { country: 'qt', offices: [{ name: { en: 'Qatar Region', ar: 'منطقة قطر' }, value: 'qatar-region' }] },
+    {
+      country: 'uae',
+      offices: [
+        { name: { en: 'Abu Dhabi ', ar: 'أبو ظبي' }, value: 'abu-dhabi' },
+        { name: { en: 'Dubai', ar: 'دبي' }, value: 'dubai' },
+        { name: { en: 'Sharjah', ar: 'الشارقة' }, value: 'sharjah' }
+      ]
+    }
+  ],
+  BUSINESS: [
+    { name: { en: 'Audit', ar: 'مراجعة' }, value: 'audit' },
+    { name: { en: 'Maintenance', ar: 'اعمال صيانة' }, value: 'maintenance' },
+    { name: { en: 'Refill', ar: 'اعادة تعبئه' }, value: 'refill' },
+    { name: { en: 'Services', ar: 'خدمات' }, value: 'services' },
+    { name: { en: 'Specialized Cleaning', ar: 'التنظيف المتخصص' }, value: 'specialized-claning' }
+  ],
+  PROJECT_STATUS: [
+    { name: { en: 'Active', ar: 'نشيط' }, value: 'active' },
+    { name: { en: 'Hold - Customer Request', ar: 'عقد - طلب العميل' }, value: 'hold-cust-req' },
+    { name: { en: 'Hold – Stock availability', ar: 'عقد - توافر المخزون' }, value: 'hold-sock-availability' },
+    { name: { en: 'Hold - Credit Hold', ar: 'عقد - عقد الائتمان' }, value: 'hold-credit-hold' },
+    { name: { en: 'Inactive', ar: 'غير نشط' }, value: 'inactive' },
+    {
+      name: { en: 'Pending – Financial Closing', ar: 'معلق – إغلاق مالي' },
+      value: 'pending-financial-closing'
+    },
+    { name: { en: 'Pending - Renewal', ar: 'معلق - التجديد' }, value: 'pending-renewal' },
+    { name: { en: 'Pending – Uninstallation', ar: 'معلق – إلغاء التثبيت' }, value: 'pending-uninstallation' }
+  ],
+  STATUS: [
+    { name: { en: 'CallOut', ar: 'شرح' }, value: 'callOut' },
+    { name: { en: 'CallOut Cancelled', ar: 'تم إلغاء الشرح' }, value: 'callOut-cancelled' },
+    { name: { en: 'CallOut Complete', ar: 'اكتملت عملية الشرح' }, value: 'callOut-complete' },
+    { name: { en: 'Cancelled', ar: 'الغاء' }, value: 'cancelled' },
+    { name: { en: 'Credit Hold', ar: 'عقد الائتمان' }, value: 'credit-hold' },
+    { name: { en: 'Complete', ar: 'اكمل' }, value: 'complete' },
+    { name: { en: 'On Hold', ar: 'في الانتظار' }, value: 'on-hold' },
+    { name: { en: 'Scheduled', ar: 'موضوع على سلم الاوليات' }, value: 'scheduled' }
+  ],
+  CONTRACT: [
+    {
+      name: { en: 'Holiday Villa Madina | General Contract', ar: 'هوليداي فيلا المدينة | العقد العام' },
+      value: 'holiday-villa-madina_general-contract'
+    },
+    {
+      name: { en: 'Sahareej Aden Restaurent | General Contract', ar: 'سهريج عدن ريستورنت | العقد العام' },
+      value: 'sahareej-aden-restaurent_general-contract'
+    }
+  ],
+  LOCATION: [
+    { name: { en: 'Business Office', ar: 'مكتب الأعمال' }, value: 'business-office' },
+    { name: { en: 'Service Company', ar: 'شركة الخدمات' }, value: 'service-company' },
+    { name: { en: 'Support Company', ar: 'شركة الدعم' }, value: 'support-company' }
+  ],
+  SERVICEMAN: [
+    { name: { en: 'Abid Muhammadali', ar: 'عابد محمدلي' }, value: 'abid-muhammadali' },
+    { name: { en: 'Arnold J Maben', ar: 'أرنولد جي مابن' }, value: 'arnold-j-maben' },
+    { name: { en: 'Shareef Mohammed', ar: 'شريف محمد' }, value: 'shareef -mohammed' },
+    { name: { en: 'Venkateshwarlu Shri', ar: 'فينكاتيشوارلو شري' }, value: 'venkateshwarlu-shri' }
+  ]
+};
