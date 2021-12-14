@@ -44,7 +44,8 @@ export default function Filters({
   const { DRK, LGT } = COLOR_CODES;
   const [colorCode, setColorCode] = useState(themeMode === THEME.LIGHT ? LGT : DRK);
   const {
-    FILTER_BOX: { BORDER }
+    FILTER_BOX: { BORDER, BTN_TEXT },
+    CARD: { TXT }
   } = colorCode;
 
   const rightDir = LANGUAGES_CODES_RTL_ORIENTATION.includes(lang);
@@ -197,7 +198,7 @@ export default function Filters({
 
   return (
     <div className={displayBorder ? 'filter-section' : ''} style={{ borderColor: BORDER }}>
-      <Typography variant="h5">
+      <Typography variant="h5" style={{ color: TXT }}>
         {t('filter.filter')}
         {open ? (
           <KeyboardArrowUpIcon
@@ -215,11 +216,11 @@ export default function Filters({
         {isArray(components) && (
           <Grid container>
             {components.map((comp, ind) => renderComponent(comp, ind))}
-            <Button variant="contained" onClick={handleGetData} style={{ margin: '0.5rem' }}>
+            <Button variant="contained" onClick={handleGetData} style={{ margin: '0.5rem', color: BTN_TEXT }}>
               <SearchIcon />
               {t('filter.filter')}
             </Button>
-            <Button variant="contained" onClick={handleClearFilters} style={{ margin: '0.5rem' }}>
+            <Button variant="contained" onClick={handleClearFilters} style={{ margin: '0.5rem', color: BTN_TEXT }}>
               <ClearIcon />
               {t('filter.clear')}
             </Button>
