@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { isArray } from 'lodash';
 import { Grid, Stack, Button, MenuItem, TextField, Popover, Tooltip } from '@mui/material';
@@ -12,11 +12,17 @@ import ServiceBoard from '../components/ServiceBoard/ServiceBoard';
 import ServiceMens from '../components/ServiceBoard/ServiceMens';
 import ServiceTypes from '../components/ServiceBoard/ServiceTypes';
 import Filters from '../components/Filter/filter';
-import { serviceDataEn, serviceDataAr, COLOR_CODES } from '../components/ServiceBoard/data';
+import {
+  serviceDataEn,
+  serviceDataAr,
+  COLOR_CODES,
+  SEVICE_DASHBOARD_FILTER_MASTER_DATA
+} from '../components/ServiceBoard/data';
 
 import { MAX_LANES, GROUP_BY, THEME, LANGUAGE_CODES, COMPONENTS } from '../utils/constants';
 import { sortListOfObjects } from '../utils/utils';
 import useSettings from '../hooks/useSettings';
+import { POST_OFFICE } from '../redux/constants';
 
 import '../components/ServiceBoard/ServiceBoard.css';
 
@@ -25,6 +31,7 @@ export default function ServiceDashboard() {
   const { lang } = useSettings();
 
   const masterData = useSelector((state) => state.MasterDataReducer);
+  const dispatch = useDispatch();
 
   const { SERVICE_MEN, CUSTOMER } = GROUP_BY;
   const [serviceData, setServiceData] = useState(serviceDataEn);
@@ -121,9 +128,9 @@ export default function ServiceDashboard() {
       control: AUTOCOMPLETE,
       groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
       key: 'office',
-      label: 'serviceDashboard.servicemen',
-      placeholder: 'serviceDashboard.servicemen',
-      options: masterData?.servicemen
+      label: 'serviceDashboard.serviceman',
+      placeholder: 'serviceDashboard.serviceman',
+      options: masterData?.serviceman
     }
   ];
 
@@ -196,6 +203,16 @@ export default function ServiceDashboard() {
     console.log('Filtered data: ', data);
   };
 
+  const getFilterDataPayloadChange = (key, val) => {
+    console.log(key, val);
+    if (key === 'country') {
+      const country = SEVICE_DASHBOARD_FILTER_MASTER_DATA.OFFICE.find((office) => office.country === val);
+      if (country) {
+        dispatch({ type: POST_OFFICE, data: country.offices });
+      }
+    }
+  };
+
   useEffect(changeData, [start, serviceData]);
   useEffect(() => setColorCode(themeMode === THEME.LIGHT ? LGT : DRK), [themeMode]);
   useEffect(() => {
@@ -207,7 +224,12 @@ export default function ServiceDashboard() {
       <Grid container>
         <Grid item xs={12}>
           <div className="filter-section" style={{ borderColor: BORDER }}>
-            <Filters components={FILTER_COMPONETS} apiUrl="dummyUrl" getFilterData={getFilterData} />
+            <Filters
+              components={FILTER_COMPONETS}
+              apiUrl="dummyUrl"
+              getFilterData={getFilterData}
+              getFilterDataPayloadChange={getFilterDataPayloadChange}
+            />
           </div>
         </Grid>
         <Grid item xs={12} md={2}>

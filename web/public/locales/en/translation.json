@@ -52,6 +52,7 @@
   "serviceDashboard": {
     "addCallOut": "Add CallOut",
     "sortBy": "Sort By",
+    "serviceman": "Serviceman",
     "serviceMen": "Servicemen",
     "customers": "Customers",
     "complete": "Completed",

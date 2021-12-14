@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { isArray } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import {
@@ -11,22 +11,39 @@ import {
   RadioGroup,
   Radio,
   Autocomplete,
-  Box
+  Box,
+  FormLabel,
+  Collapse,
+  Typography
 } from '@mui/material';
-import FormLabel from '@mui/material/FormLabel';
+
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import useSettings from '../../hooks/useSettings';
-import { COMPONENTS } from '../../utils/constants';
+import { COMPONENTS, LANGUAGES_CODES_RTL_ORIENTATION } from '../../utils/constants';
 
-export default function Filters({ components, apiUrl, getFilterData }) {
+export default function Filters({ components, apiUrl, getFilterData, getFilterDataPayloadChange }) {
   const { t } = useTranslation();
   const { lang } = useSettings();
   const { TEXT_FIELD, SELECT_BOX, CHECKBOX, RADIO, AUTOCOMPLETE } = COMPONENTS;
   const [payload, setPayload] = useState({});
+  const [open, setOpen] = useState(true);
+  const [rightDir, setRightDir] = useState(LANGUAGES_CODES_RTL_ORIENTATION.includes[lang]);
 
-  const handleChange = (key, val) => setPayload({ ...payload, [key]: val });
+  useEffect(() => {
+    console.log(LANGUAGES_CODES_RTL_ORIENTATION, lang);
+    setRightDir(LANGUAGES_CODES_RTL_ORIENTATION.includes[lang]);
+  }, [lang]);
+
+  const handleChange = (key, val) => {
+    setPayload({ ...payload, [key]: val });
+    getFilterDataPayloadChange(key, val);
+  };
+
+  const handleClick = () => setOpen(!open);
 
   const handleClearFilters = () => {
     setPayload({});
@@ -166,23 +183,39 @@ export default function Filters({ components, apiUrl, getFilterData }) {
   };
   return (
     <>
-      {isArray(components) && (
-        <Grid container>
-          {components.map((comp, ind) => renderComponent(comp, ind))}
-          <Button variant="contained" onClick={handleGetData} style={{ marginLeft: '0.5rem', marginRight: '0.5rem' }}>
-            <SearchIcon />
-            {t('filter.filter')}
-          </Button>
-          <Button
-            variant="contained"
-            onClick={handleClearFilters}
-            style={{ marginLeft: '0.5rem', marginRight: '0.5rem' }}
-          >
-            <ClearIcon />
-            {t('filter.clear')}
-          </Button>
-        </Grid>
-      )}
+      <Typography variant="h5">
+        Filter {LANGUAGES_CODES_RTL_ORIENTATION.includes[lang] ? 'rtl' : 'ltr'}
+        {open ? (
+          <KeyboardArrowUpIcon
+            onClick={handleClick}
+            style={{ cursor: 'pointer', float: rightDir ? 'left' : 'right' }}
+          />
+        ) : (
+          <KeyboardArrowDownIcon
+            onClick={handleClick}
+            style={{ cursor: 'pointer', float: rightDir ? 'left' : 'right' }}
+          />
+        )}
+      </Typography>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        {isArray(components) && (
+          <Grid container>
+            {components.map((comp, ind) => renderComponent(comp, ind))}
+            <Button variant="contained" onClick={handleGetData} style={{ marginLeft: '0.5rem', marginRight: '0.5rem' }}>
+              <SearchIcon />
+              {t('filter.filter')}
+            </Button>
+            <Button
+              variant="contained"
+              onClick={handleClearFilters}
+              style={{ marginLeft: '0.5rem', marginRight: '0.5rem' }}
+            >
+              <ClearIcon />
+              {t('filter.clear')}
+            </Button>
+          </Grid>
+        )}
+      </Collapse>
     </>
   );
 }

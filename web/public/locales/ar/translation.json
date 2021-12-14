@@ -53,6 +53,7 @@
   "serviceDashboard": {
     "addCallOut": "إضافة مكالمة",
     "sortBy": "صنف حسب",
+    "serviceman": "جندي",
     "serviceMen": "العسكريين",
     "customers": "عميل",
     "complete": "مكتمل",

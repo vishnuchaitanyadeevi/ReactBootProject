@@ -18,12 +18,14 @@ export const VALID_FILE_FORMAT = {
 
 export const LANGUAGE_CODES = { EN: 'en', AR: 'ar' };
 
+const { EN, AR } = LANGUAGE_CODES;
+
 export const LANGUAGES = [
-  { name: 'English', val: LANGUAGE_CODES.EN },
-  { name: 'عربي', val: LANGUAGE_CODES.AR } // Arabic
+  { name: 'English', val: EN },
+  { name: 'عربي', val: AR } // Arabic
 ];
 
-export const LANGUAGES_CODES_RTL_ORIENTATION = [LANGUAGE_CODES.AR];
+export const LANGUAGES_CODES_RTL_ORIENTATION = [AR];
 
 export const SERVICE_TYPES = {
   COMPLETE: 'complete',
