@@ -197,6 +197,6 @@ const ProjectCreationPage = Loadable(lazy(() => import('../pages/ProjectCreation
 const ContractListPage = Loadable(lazy(() => import('../pages/contracts/ContractList')));
 const ProjectExpirationPage = Loadable(lazy(() => import('../pages/ProjectExpiration/ProjectExpiration')));
 const Customers = Loadable(lazy(() => import('../pages/Customers')));
-const AddCallOutPage = Loadable(lazy(() => import('../pages/AddCallout/AddCallOutPage')));
+const AddCallOutPage = Loadable(lazy(() => import('../pages/AddCallOut/AddCallOutPage')));
 const ServiceDashboardPage = Loadable(lazy(() => import('../pages/ServiceDashboardPage')));
 const TerminateProjectPage = Loadable(lazy(() => import('../pages/TerminateAllProject/TerminateProject')));
