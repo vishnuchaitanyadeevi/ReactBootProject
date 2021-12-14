@@ -104,7 +104,7 @@ export default function Router() {
           element: <ContractsCreation />
         },
         {
-          path: '/contract/edit/1',
+          path: '/contract/edit/:id',
           element: <ContractsCreation />
         },
         {
