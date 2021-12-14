@@ -1269,7 +1269,8 @@ export const COLOR_CODES = {
       TXT: '#f1f1f1'
     },
     FILTER_BOX: {
-      BORDER: '#323232'
+      BORDER: '#323232',
+      BTN_TEXT: '#424242'
     }
   },
   LGT: {
@@ -1278,7 +1279,8 @@ export const COLOR_CODES = {
       TXT: '#767575'
     },
     FILTER_BOX: {
-      BORDER: '#e2e2e7'
+      BORDER: '#e2e2e7',
+      BTN_TEXT: '#f1f1f1'
     }
   }
 };
