@@ -12,14 +12,9 @@ import ServiceBoard from '../components/ServiceBoard/ServiceBoard';
 import ServiceMens from '../components/ServiceBoard/ServiceMens';
 import ServiceTypes from '../components/ServiceBoard/ServiceTypes';
 import Filters from '../components/Filter/filter';
-import {
-  serviceDataEn,
-  serviceDataAr,
-  COLOR_CODES,
-  SEVICE_DASHBOARD_FILTER_MASTER_DATA
-} from '../components/ServiceBoard/data';
+import { serviceDataEn, serviceDataAr, SEVICE_DASHBOARD_FILTER_MASTER_DATA } from '../components/ServiceBoard/data';
 
-import { MAX_LANES, GROUP_BY, THEME, LANGUAGE_CODES, COMPONENTS } from '../utils/constants';
+import { MAX_LANES, GROUP_BY, LANGUAGE_CODES, COMPONENTS } from '../utils/constants';
 import { sortListOfObjects } from '../utils/utils';
 import useSettings from '../hooks/useSettings';
 import { POST_OFFICE } from '../redux/constants';
@@ -42,15 +37,7 @@ export default function ServiceDashboard() {
   const [servicemenAnchorEl, setServicemenAnchorEl] = useState(null);
   const [serviceTypeAnchorEl, setServiceTypeAnchorEl] = useState(null);
 
-  const { themeMode } = useSettings();
-  const { DRK, LGT } = COLOR_CODES;
-
-  const [colorCode, setColorCode] = useState(themeMode === THEME.LIGHT ? LGT : DRK);
-  const {
-    FILTER_BOX: { BORDER }
-  } = colorCode;
-
-  const { TEXT_FIELD, SELECT_BOX, AUTOCOMPLETE, CHECKBOX, RADIO } = COMPONENTS;
+  const { TEXT_FIELD, AUTOCOMPLETE, CHECKBOX } = COMPONENTS;
 
   const FILTER_COMPONETS = [
     {
@@ -214,7 +201,7 @@ export default function ServiceDashboard() {
   };
 
   useEffect(changeData, [start, serviceData]);
-  useEffect(() => setColorCode(themeMode === THEME.LIGHT ? LGT : DRK), [themeMode]);
+
   useEffect(() => {
     setServiceData(lang === LANGUAGE_CODES.AR ? serviceDataAr : serviceDataEn);
   }, [lang]);
@@ -223,14 +210,12 @@ export default function ServiceDashboard() {
     <>
       <Grid container>
         <Grid item xs={12}>
-          <div className="filter-section" style={{ borderColor: BORDER }}>
-            <Filters
-              components={FILTER_COMPONETS}
-              apiUrl="dummyUrl"
-              getFilterData={getFilterData}
-              getFilterDataPayloadChange={getFilterDataPayloadChange}
-            />
-          </div>
+          <Filters
+            components={FILTER_COMPONETS}
+            apiUrl="dummyUrl"
+            getFilterData={getFilterData}
+            getFilterDataPayloadChange={getFilterDataPayloadChange}
+          />
         </Grid>
         <Grid item xs={12} md={2}>
           <Stack>
