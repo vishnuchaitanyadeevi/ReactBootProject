@@ -33,10 +33,34 @@ function CustomersList({ openFlag, handleCloseDialog, showDialog }) {
   };
 
   const columnData = [
-    { field: 'custno', header: 'Customer No', sortable: true },
-    { field: 'name', header: 'Customer Name', sortable: true },
-    { field: 'address', header: 'Address', sortable: true },
-    { field: 'sname', header: 'Customer Short Name', sortable: true }
+    {
+      field: 'custno',
+      header: 'Customer No',
+      sortable: true,
+      editorElement: 'text',
+      filter: true
+    },
+    {
+      field: 'name',
+      header: 'Customer Name',
+      sortable: true,
+      editorElement: 'text',
+      filter: true
+    },
+    {
+      field: 'address',
+      header: 'Address',
+      sortable: true,
+      editorElement: 'text',
+      filter: true
+    },
+    {
+      field: 'sname',
+      header: 'Customer Short Name',
+      sortable: true,
+      editorElement: 'text',
+      filter: true
+    }
   ];
 
   const CustomerTable = () => (
@@ -47,8 +71,12 @@ function CustomersList({ openFlag, handleCloseDialog, showDialog }) {
       rowsPerPageOptions={[10, 20, 50, 100]}
       rows={10}
       showGridlines
+      responsiveLayout="scroll"
+      resizableColumns
+      columnResizeMode="expand"
       size="small"
-      editOption={false}
+      dataKey="id"
+      editMode="row"
       numericFields={numericFields}
     />
   );
@@ -136,7 +164,7 @@ function CustomersList({ openFlag, handleCloseDialog, showDialog }) {
   );
 
   return (
-    <Grid>
+    <Grid style={{ padding: '30px 20px', width: '100%', margin: '-35px auto' }}>
       {!showDialog ? (
         <Dialog open={openFlag} onClose={handleClose} fullWidth maxWidth="lg">
           {!showDialog && (

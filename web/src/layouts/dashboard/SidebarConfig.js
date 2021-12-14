@@ -47,7 +47,7 @@ const sidebarConfig = [
           // { title: 'Projects', path: '/project/add' },
           { title: 'Service Orders', path: '' },
           { title: 'Project Expiration List', path: '/projectExpiration' },
-          { title: 'Terminate Projects', path: '' }
+          { title: 'Terminate Projects', path: '/terminateProject' }
         ]
       },
       {
@@ -63,7 +63,7 @@ const sidebarConfig = [
         path: '',
         children: [
           { title: 'Material Picking List', path: '/data' },
-          { title: 'Material and Price List', path: '' },
+          { title: 'Material And Price List', path: '' },
           { title: 'FOL Installation List', path: '' },
           { title: 'Equipments/Devices', path: '' }
         ]
@@ -80,7 +80,7 @@ const sidebarConfig = [
         title: 'Credit Notes',
         path: '',
         children: [
-          { title: 'Credit Notes Proposal and Workflow', path: '' },
+          { title: 'Credit Notes Proposal And Workflow', path: '' },
           { title: 'Credit Control View', path: '' },
           { title: 'Credit Control Coordinator View', path: '' }
         ]
