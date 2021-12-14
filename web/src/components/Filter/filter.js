@@ -23,14 +23,29 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import useSettings from '../../hooks/useSettings';
-import { COMPONENTS, LANGUAGES_CODES_RTL_ORIENTATION } from '../../utils/constants';
+import { COMPONENTS, LANGUAGES_CODES_RTL_ORIENTATION, THEME } from '../../utils/constants';
+import { COLOR_CODES } from '../ServiceBoard/data';
 
-export default function Filters({ components, apiUrl, getFilterData, getFilterDataPayloadChange }) {
+import '../ServiceBoard/ServiceBoard.css';
+
+export default function Filters({
+  components,
+  apiUrl,
+  getFilterData,
+  getFilterDataPayloadChange,
+  displayBorder = true
+}) {
   const { t } = useTranslation();
-  const { lang } = useSettings();
+  const { lang, themeMode } = useSettings();
   const { TEXT_FIELD, SELECT_BOX, CHECKBOX, RADIO, AUTOCOMPLETE } = COMPONENTS;
   const [payload, setPayload] = useState({});
   const [open, setOpen] = useState(true);
+
+  const { DRK, LGT } = COLOR_CODES;
+  const [colorCode, setColorCode] = useState(themeMode === THEME.LIGHT ? LGT : DRK);
+  const {
+    FILTER_BOX: { BORDER }
+  } = colorCode;
 
   const rightDir = LANGUAGES_CODES_RTL_ORIENTATION.includes(lang);
 
@@ -177,8 +192,11 @@ export default function Filters({ components, apiUrl, getFilterData, getFilterDa
         return '';
     }
   };
+
+  useEffect(() => setColorCode(themeMode === THEME.LIGHT ? LGT : DRK), [themeMode]);
+
   return (
-    <>
+    <div className={displayBorder ? 'filter-section' : ''} style={{ borderColor: BORDER }}>
       <Typography variant="h5">
         {t('filter.filter')}
         {open ? (
@@ -208,6 +226,6 @@ export default function Filters({ components, apiUrl, getFilterData, getFilterDa
           </Grid>
         )}
       </Collapse>
-    </>
+    </div>
   );
 }
