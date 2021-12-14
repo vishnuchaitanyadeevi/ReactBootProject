@@ -130,6 +130,10 @@ export default function Router() {
         {
           path: '/addCallOut',
           element: <AddCallOutPage />
+        },
+        {
+          path: '/terminateProject',
+          element: <TerminateProjectPage />
         }
       ]
     },
@@ -195,3 +199,4 @@ const ProjectExpirationPage = Loadable(lazy(() => import('../pages/ProjectExpira
 const Customers = Loadable(lazy(() => import('../pages/Customers')));
 const AddCallOutPage = Loadable(lazy(() => import('../pages/AddCallOut/AddCallOutPage')));
 const ServiceDashboardPage = Loadable(lazy(() => import('../pages/ServiceDashboardPage')));
+const TerminateProjectPage = Loadable(lazy(() => import('../pages/TerminateAllProject/TerminateProject')));
