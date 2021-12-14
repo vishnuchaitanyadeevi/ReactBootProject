@@ -104,7 +104,7 @@ export default function Router() {
           element: <ContractsCreation />
         },
         {
-          path: '/contract/edit/1',
+          path: '/contract/edit/:id',
           element: <ContractsCreation />
         },
         {
@@ -130,6 +130,10 @@ export default function Router() {
         {
           path: '/addCallOut',
           element: <AddCallOutPage />
+        },
+        {
+          path: '/terminateProject',
+          element: <TerminateProjectPage />
         }
       ]
     },
@@ -195,3 +199,4 @@ const ProjectExpirationPage = Loadable(lazy(() => import('../pages/ProjectExpira
 const Customers = Loadable(lazy(() => import('../pages/Customers')));
 const AddCallOutPage = Loadable(lazy(() => import('../pages/AddCallout/AddCallOutPage')));
 const ServiceDashboardPage = Loadable(lazy(() => import('../pages/ServiceDashboardPage')));
+const TerminateProjectPage = Loadable(lazy(() => import('../pages/TerminateAllProject/TerminateProject')));

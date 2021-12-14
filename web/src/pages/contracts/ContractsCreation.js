@@ -152,8 +152,10 @@ export default function ContractsCreation() {
     navigate('/project/add', { replace: true });
   };
   const { pathname } = useLocation();
+  const { state } = useLocation();
+  const paramId = state;
   const match = (path) => (path ? !!matchPath({ path, end: false }, pathname) : false);
-  const isEditFlag = match('contract/edit/1');
+  const isEditFlag = match('contract/edit/:id');
   useEffect(() => {
     console.log(isEditFlag);
   }, [isEditFlag]);
@@ -222,7 +224,7 @@ export default function ContractsCreation() {
   return (
     <Grid container spacing={2} padding={3}>
       <Grid item xs={12} lg={12} display="flex" justifyContent="center">
-        <Typography variant="h4">{isEditFlag ? 'Edit Contract' : 'Add Contract'}</Typography>
+        <Typography variant="h4">{isEditFlag ? `Edit Contract - ${paramId}` : 'Add Contract'}</Typography>
       </Grid>
       <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
         <Typography variant="h4">Customer Details</Typography>
@@ -261,7 +263,7 @@ export default function ContractsCreation() {
         <Typography variant="h4">Contract Details</Typography>
         <Grid container spacing={1} item xs={12} xl={6}>
           <Grid item xs={12} xl={6} md={6}>
-            <TextField fullWidth label="Contract No." size="small" />
+            <TextField fullWidth label="Contract No." size="small" value={contractNo} />
           </Grid>
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
