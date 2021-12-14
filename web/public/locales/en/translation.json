@@ -23,7 +23,7 @@
   "scheduling": "scheduling",
   "material management": "material management",
   "Material Picking List": "Material Picking List",
-  "Materials and price list": "Materials and price list",
+  "Materials and Price List": "Materials And Price List",
   "FOL Material Stats": "FOL Material Stats",
   "Equipments": "Equipments",
   "invoicing": "invoicing",
@@ -87,7 +87,7 @@
   "ProjectExpiration": {
     "ProjectExpirationList": "Project Expiration List",
     "ExpirationOverview": "Expiration Overview",
-    "ExpiredProjects":"Expired projects"
+    "ExpiredProjects": "Expired projects"
   },
   "MaterialList": {
     "MaterialPickingList": "Material Picking List"
