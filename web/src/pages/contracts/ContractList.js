@@ -21,6 +21,7 @@ import './ContractList.scss';
 
 function ContractList() {
   // filter component state
+  let paramId;
   const [country, setCountry] = useState(null);
   const [office, setOffice] = useState(null);
   const [business, setBusiness] = useState(null);
@@ -192,8 +193,10 @@ function ContractList() {
   };
 
   const navigateToContractEdition = (options) => {
-    console.log('calling', options);
-    navigate('/contract/edit/1', { replace: true });
+    // console.log('calling', options);
+    paramId = options.contractNumber;
+    navigate(`/contract/edit/${options.id}`, { state: paramId }, { replace: true });
+    console.log('paramId', paramId);
   };
 
   const navigateToContractAddition = () => {
