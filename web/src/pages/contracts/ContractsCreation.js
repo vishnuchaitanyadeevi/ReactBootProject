@@ -189,7 +189,6 @@ export default function ContractsCreation() {
     if (customerNo) {
       console.log('calling... only customerNo no', customerNo);
       const newData = CustomerData.find((item) => item.custno === customerNo);
-      console.log('new_data....', newData.address);
       setContractData({ ...contractData, customerName: newData.name, customerAddress: newData.address });
     } /* else {
       setContractData({ ...contractData, customerName: '', customerAddress: '' });
@@ -249,7 +248,7 @@ export default function ContractsCreation() {
   return (
     <Grid container spacing={2} padding={3}>
       <Grid item xs={12} lg={12} display="flex" justifyContent="center">
-        <Typography variant="h4">{isEditFlag ? `Edit Contract - ${paramId}` : 'Add Contract'}</Typography>
+        <Typography variant="h4">{isEditFlag ? `Contract - ${paramId}` : 'Add Contract'}</Typography>
       </Grid>
       <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
         <Typography variant="h6">Customer Details</Typography>
