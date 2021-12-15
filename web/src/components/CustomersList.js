@@ -83,9 +83,6 @@ function CustomersList({ openFlag, handleCloseDialog, showDialog }) {
 
   const CustomerFilter = () => (
     <Grid hidden={!(showFilter === 'panel1' || showFilter === true)} container spacing={3}>
-      <div style={{ width: '100%', textAlign: 'center' }}>
-        <Typography variant="h4">Customers</Typography>
-      </div>
       <Grid item xs={12}>
         <Accordion style={{ boxShadow: 'none' }} fullWidth>
           <AccordionSummary
