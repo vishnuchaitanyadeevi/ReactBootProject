@@ -4,13 +4,13 @@ import { MobileDateTimePicker } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
-export default function BasicDatePicker({ label, minDate, maxDate, inputFormat, views, size = 'small' }) {
-  const [value, setValue] = React.useState(new Date());
+export default function BasicDatePicker({ label, minDate, maxDate, inputFormat, views, size = 'small', passVal }) {
+  const [value, setValue] = React.useState(passVal);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <MobileDateTimePicker
-        value={value}
+        value={passVal}
         onChange={(newValue) => {
           setValue(newValue);
         }}

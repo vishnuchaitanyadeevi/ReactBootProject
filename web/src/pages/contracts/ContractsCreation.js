@@ -23,6 +23,7 @@ import jsonData from '../../utils/project-table-data.json';
 import CustomerData from '../../utils/customerslist.json';
 import CustomersList from '../../components/CustomersList';
 import { isEmail, isPhone } from '../../utils/utils';
+import ContractJson from '../../utils/Contract-List-Data.json';
 
 export default function ContractsCreation() {
   const [open, setOpen] = useState(false);
@@ -156,19 +157,43 @@ export default function ContractsCreation() {
   const paramId = state;
   const match = (path) => (path ? !!matchPath({ path, end: false }, pathname) : false);
   const isEditFlag = match('contract/edit/:id');
+
   useEffect(() => {
-    console.log(isEditFlag);
+    if (isEditFlag) {
+      console.log('paramId', paramId);
+      const popData = ContractJson.find((item) => item.contractNumber === paramId);
+      console.log('log', popData.contractNumber);
+      updateFormFields(popData);
+    } else {
+      setContractData({
+        ...contractData,
+        contractNo: '',
+        contractSignOn: '',
+        contractStartDate: ''
+      });
+    }
   }, [isEditFlag]);
 
+  const updateFormFields = (popData) => {
+    console.log('PopData', popData);
+    setContractData({
+      ...contractData,
+      contractNo: popData?.contractNumber,
+      contractSignOn: popData?.contractSignOn,
+      contractStartDate: popData?.contractStartDate
+    });
+  };
+
+  console.log('contractData', contractData);
   useEffect(() => {
     if (customerNo) {
       console.log('calling... only customerNo no', customerNo);
       const newData = CustomerData.find((item) => item.custno === customerNo);
       console.log('new_data....', newData.address);
       setContractData({ ...contractData, customerName: newData.name, customerAddress: newData.address });
-    } else {
+    } /* else {
       setContractData({ ...contractData, customerName: '', customerAddress: '' });
-    }
+    } */
   }, [customerNo]);
 
   // handle remove selcted file
@@ -237,7 +262,15 @@ export default function ContractsCreation() {
           </Grid>
         </Grid>
         <Grid item xs={12} xl={6} md={6}>
-          <AutocompleteWidget options={customerArr} size="small" label="Customer No" disablePortal autoSelect />
+          <AutocompleteWidget
+            options={customerArr}
+            size="small"
+            label="Customer No"
+            disablePortal
+            autoSelect
+            onChange={(event, value) => setContractData({ ...contractData, customerNo: value })}
+            value={customerNo}
+          />
         </Grid>
         <Grid item xs={12} xl={6} md={6}>
           <IconButton aria-label="SearchIcon" size="small" color="primary" onClick={handleOpen}>
@@ -246,10 +279,10 @@ export default function ContractsCreation() {
           {open && <CustomersList openFlag={open} handleCloseDialog={(param) => setOpen(param)} />}
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
-          <TextField fullWidth label="Customer Name" size="small" />
+          <TextField fullWidth label="Customer Name" size="small" value={customerNo ? customerName : ''} />
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
-          <TextField fullWidth label="Customer Address" size="small" />
+          <TextField fullWidth label="Customer Address" size="small" value={customerNo ? customerAddress : ''} />
         </Grid>
         <Grid item xs={12} xl={6} md={6}>
           <TextField fullWidth label="CR No." size="small" />
@@ -270,10 +303,20 @@ export default function ContractsCreation() {
           <TextField fullWidth label="Contract Name" size="small" />
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
-          <BasicDatePicker label="Contract Signed On" inputFormat="dd-MM-yyyy" views={['year', 'month', 'day']} />
+          <BasicDatePicker
+            label="Contract Signed On"
+            inputFormat="dd-MM-yyyy"
+            views={['year', 'month', 'day']}
+            passVal={isEditFlag ? contractSignOn : new Date()}
+          />
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
-          <BasicDatePicker label="Contract Start Date" inputFormat="dd-MM-yyyy" views={['year', 'month', 'day']} />
+          <BasicDatePicker
+            label="Contract Start Date"
+            inputFormat="dd-MM-yyyy"
+            views={['year', 'month', 'day']}
+            passVal={isEditFlag ? contractStartDate : new Date()}
+          />
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
           <TextField label="General Discount" type="number" size="small" /> %

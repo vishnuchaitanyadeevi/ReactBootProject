@@ -97,7 +97,7 @@ function ContractList({
         rows={10}
         scrollable
         scrollHeight="400px"
-        filterDisplay="row"
+        filterDisplay="menu"
       >
         {expandedColumns &&
           expandedColumns.map((col) => (
@@ -142,7 +142,7 @@ function ContractList({
           size="small"
           paginator
           rows={10}
-          filterDisplay="row"
+          filterDisplay="menu"
           onRowToggle={(e) => setExpandedRows(e.data)}
           rowExpansionTemplate={rowExpansionTemplate}
           // onRowClick={onRowClick}
@@ -151,7 +151,7 @@ function ContractList({
           header={header}
           globalFilter={globalFilter}
           globalFilterFields={globalFilters}
-          filters={filters1}
+          // filters={filters1}
           onRowEditComplete={onRowEditComplete}
           reorderableColumns
           stripedRows

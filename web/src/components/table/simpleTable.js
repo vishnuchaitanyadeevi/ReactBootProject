@@ -156,8 +156,8 @@ export default function SimpleTable({
           editingRows={editingRows}
           onRowEditChange={onRowEditChange}
           onRowEditComplete={onRowEditComplete}
-          filters={filterState}
-          filterDisplay="row"
+          // filters={filterState}
+          filterDisplay="menu"
           {...other}
         >
           {headerData.map((headerElement) => (
