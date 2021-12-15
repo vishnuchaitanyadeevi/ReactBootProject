@@ -280,12 +280,12 @@ function PrimeGrid(theme) {
         scrollable
         scrollHeight="400px"
         header={header}
-        filterDisplay="row"
+        filterDisplay="menu"
         globalFilterFields={['code', 'desc', 'qty', 'uom', 'hqty', 'hand', 'owan', 'fwan']}
         rowsPerPageOptions={[10, 20, 50, 100]}
         globalFilter={globalFilter}
         style={{ marginTop: '10px' }}
-        filters={filters1}
+        // filters={filters1}
       >
         {/* <Column columnKey="rowreorder" field="rowreorder" rowReorder style={{ width: '3em' }} /> */}
         <Column

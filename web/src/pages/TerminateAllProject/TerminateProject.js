@@ -220,6 +220,7 @@ function TerminateProject() {
             headerData={columnDataForProject}
             rowsPerPageOptions={[10, 20, 50, 100]}
             rows={10}
+            paginator
             showGridlines
             responsiveLayout="scroll"
             columnResizeMode="expand"

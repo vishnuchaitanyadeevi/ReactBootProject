@@ -112,7 +112,7 @@ export default function Router() {
           element: <ProjectCreationPage />
         },
         {
-          path: '/project/edit/1',
+          path: '/project/edit/:id',
           element: <ProjectCreationPage />
         },
         {
