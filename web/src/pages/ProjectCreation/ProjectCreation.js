@@ -142,6 +142,8 @@ function ProjectCreation() {
   };
 
   const { pathname } = useLocation();
+  const { state } = useLocation();
+  const editId = state;
   const navigate = useNavigate();
 
   const navigateToContractlist = () => {
@@ -149,7 +151,7 @@ function ProjectCreation() {
   };
 
   const match = (path) => (path ? !!matchPath({ path, end: false }, pathname) : false);
-  const isEditFlag = match('project/edit/1');
+  const isEditFlag = match('project/edit/:id');
   useEffect(() => {
     console.log(isEditFlag);
   }, [isEditFlag]);
@@ -226,7 +228,7 @@ function ProjectCreation() {
       <Grid container spacing={3}>
         <Grid className="main_title_cls" item xs={12}>
           <Typography variant="h4">
-            {isEditFlag ? t('CreateProject.EditProject') : t('CreateProject.CreateProject')}
+            {isEditFlag ? `${t('CreateProject.EditProject')} - ${editId}` : t('CreateProject.CreateProject')}
           </Typography>
         </Grid>
 
