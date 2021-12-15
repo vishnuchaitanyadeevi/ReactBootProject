@@ -167,7 +167,7 @@ export default function ContractsCreation() {
     } else {
       setContractData({
         ...contractData,
-        contractNo: '123',
+        contractNo: '',
         contractSignOn: '',
         contractStartDate: ''
       });
@@ -176,7 +176,12 @@ export default function ContractsCreation() {
 
   const updateFormFields = (popData) => {
     console.log('PopData', popData);
-    setContractData({ ...contractData, contractNo: popData?.contractNumber });
+    setContractData({
+      ...contractData,
+      contractNo: popData?.contractNumber,
+      contractSignOn: popData?.contractSignOn,
+      contractStartDate: popData?.contractStartDate
+    });
   };
 
   console.log('contractData', contractData);
@@ -186,9 +191,9 @@ export default function ContractsCreation() {
       const newData = CustomerData.find((item) => item.custno === customerNo);
       console.log('new_data....', newData.address);
       setContractData({ ...contractData, customerName: newData.name, customerAddress: newData.address });
-    } else {
+    } /* else {
       setContractData({ ...contractData, customerName: '', customerAddress: '' });
-    }
+    } */
   }, [customerNo]);
 
   // handle remove selcted file
@@ -274,10 +279,10 @@ export default function ContractsCreation() {
           {open && <CustomersList openFlag={open} handleCloseDialog={(param) => setOpen(param)} />}
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
-          <TextField fullWidth label="Customer Name" size="small" value={customerName} />
+          <TextField fullWidth label="Customer Name" size="small" value={customerNo ? customerName : ''} />
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
-          <TextField fullWidth label="Customer Address" size="small" value={customerAddress} />
+          <TextField fullWidth label="Customer Address" size="small" value={customerNo ? customerAddress : ''} />
         </Grid>
         <Grid item xs={12} xl={6} md={6}>
           <TextField fullWidth label="CR No." size="small" />
@@ -302,7 +307,7 @@ export default function ContractsCreation() {
             label="Contract Signed On"
             inputFormat="dd-MM-yyyy"
             views={['year', 'month', 'day']}
-            value={contractSignOn}
+            passVal={isEditFlag ? contractSignOn : new Date()}
           />
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
@@ -310,7 +315,7 @@ export default function ContractsCreation() {
             label="Contract Start Date"
             inputFormat="dd-MM-yyyy"
             views={['year', 'month', 'day']}
-            value={contractStartDate}
+            passVal={isEditFlag ? contractStartDate : new Date()}
           />
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
