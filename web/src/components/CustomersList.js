@@ -82,9 +82,14 @@ function CustomersList({ openFlag, handleCloseDialog, showDialog }) {
   );
 
   const CustomerFilter = () => (
-    <Grid hidden={!(showFilter === 'panel1' || showFilter === true)} container spacing={3}>
+    <Grid container spacing={3}>
       <Grid item xs={12}>
-        <Accordion style={{ boxShadow: 'none' }} fullWidth>
+        <Accordion
+          expanded={showFilter}
+          style={{ boxShadow: 'none' }}
+          fullWidth
+          onClick={() => setShowFilter(!showFilter)}
+        >
           <AccordionSummary
             style={{ display: 'flex', alignItems: 'center', flexDirection: 'row-reverse' }}
             expandIcon={<ArrowRight />}

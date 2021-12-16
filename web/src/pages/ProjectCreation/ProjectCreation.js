@@ -28,7 +28,7 @@ const columnDataForProjects = [
   { field: 'status', header: 'Status', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
   {
     field: 'prjno',
-    header: 'Project No.',
+    header: 'Project Number',
     editorElement: null,
     style: { width: '10%' },
     sortable: true,

@@ -206,7 +206,7 @@ export default function ContractsCreation() {
     { field: 'status', header: 'Status', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
     {
       field: 'prjno',
-      header: 'Project No.',
+      header: 'Project Number',
       editorElement: null,
       style: { width: '10%' },
       sortable: true,
@@ -285,7 +285,7 @@ export default function ContractsCreation() {
           <TextField fullWidth label="Customer Address" size="small" value={customerNo ? customerAddress : ''} />
         </Grid>
         <Grid item xs={12} xl={6} md={6}>
-          <TextField fullWidth label="CR No." size="small" />
+          <TextField fullWidth label="CR Number" size="small" />
         </Grid>
         <Grid item xs={12} xl={6} md={6} />
         <Grid item xs={12} xl={6} md={6}>
@@ -296,7 +296,7 @@ export default function ContractsCreation() {
         <Typography variant="h4">Contract Details</Typography>
         <Grid container spacing={1} item xs={12} xl={6}>
           <Grid item xs={12} xl={6} md={6}>
-            <TextField fullWidth label="Contract No." size="small" value={contractNo} />
+            <TextField fullWidth label="Contract Number" size="small" value={contractNo} />
           </Grid>
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
@@ -370,7 +370,7 @@ export default function ContractsCreation() {
         <Grid item xs={12} xl={12} md={12}>
           <TextField
             fullWidth
-            label="Phone No."
+            label="Phone Number"
             size="small"
             onChange={(e) => updateContractData('phoneNo', e.target.value)}
             value={phoneNo}
@@ -382,7 +382,7 @@ export default function ContractsCreation() {
         <Grid item xs={12} xl={12} md={12}>
           <TextField
             fullWidth
-            label="Fax No."
+            label="Fax Number"
             size="small"
             onChange={(e) => updateContractData('faxNo', e.target.value)}
             value={faxNo}
@@ -394,7 +394,7 @@ export default function ContractsCreation() {
         <Grid item xs={12} xl={12} md={12}>
           <TextField
             fullWidth
-            label="Mobile No."
+            label="Mobile Number"
             size="small"
             onChange={(e) => updateContractData('mobileNo', e.target.value)}
             value={mobileNo}

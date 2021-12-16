@@ -237,14 +237,14 @@ function ContractList() {
           <Divider style={{ backgroundColor: '#c7d2fe' }} />
         </Grid>
         {/* Grid for filter section */}
-        <Grid
-          container
-          spacing={3}
-          hidden={!(showFilter === 'panel1' || showFilter === true)}
-          style={{ marginTop: '0px' }}
-        >
+        <Grid container spacing={3} style={{ marginTop: '0px' }}>
           <Grid item xs={12}>
-            <Accordion style={{ boxShadow: 'none' }} fullWidth>
+            <Accordion
+              expanded={showFilter}
+              style={{ boxShadow: 'none' }}
+              fullWidth
+              onClick={() => setShowFilter(!showFilter)}
+            >
               <AccordionSummary
                 style={{ display: 'flex', alignItems: 'center', flexDirection: 'row-reverse' }}
                 expandIcon={<ArrowRight />}
