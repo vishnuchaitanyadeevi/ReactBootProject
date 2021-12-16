@@ -150,7 +150,7 @@ function InvoiceList() {
   ];
 
   return (
-    <div className="contract_list_main_cls">
+    <div className="invoice_list_main_cls">
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Typography variant="h4" align="center">
@@ -227,7 +227,9 @@ function InvoiceList() {
             resizableColumns
             columnResizeMode="expand"
             size="small"
-            datakey="id"
+            editingRows={editingRows}
+            dataKey="id"
+            editMode="row"
           />
         </Grid>
       </Grid>
