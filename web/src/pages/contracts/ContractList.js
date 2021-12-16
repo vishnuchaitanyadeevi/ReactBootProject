@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   Grid,
   Typography,
@@ -17,9 +18,15 @@ import { useNavigate } from 'react-router-dom';
 import DataTable from '../../components/DataTable';
 import contractData from '../../utils/Contract-List-Data.json';
 import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget';
+import Filters from '../../components/Filter/filter';
+import { COMPONENTS } from '../../utils/constants';
+import { SEVICE_DASHBOARD_FILTER_MASTER_DATA } from '../../components/ServiceBoard/data';
+import { POST_OFFICE } from '../../redux/constants';
 import './ContractList.scss';
 
 function ContractList() {
+  const masterData = useSelector((state) => state.MasterDataReducer);
+  const dispatch = useDispatch();
   // filter component state
   let paramId;
   let editId;
@@ -80,6 +87,90 @@ function ContractList() {
     location: { value: null, matchMode: FilterMatchMode.CONTAINS },
     contract: { value: null, matchMode: FilterMatchMode.CONTAINS }
   });
+
+  const { TEXT_FIELD, AUTOCOMPLETE } = COMPONENTS;
+  const FILTER_COMPONETS = [
+    {
+      control: AUTOCOMPLETE,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'country',
+      label: 'serviceDashboard.country',
+      placeholder: 'serviceDashboard.country',
+      options: masterData?.country
+    },
+    {
+      control: AUTOCOMPLETE,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'region',
+      label: 'Region',
+      placeholder: 'Region',
+      options: masterData?.office
+    },
+    {
+      control: AUTOCOMPLETE,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'business',
+      label: 'serviceDashboard.business',
+      placeholder: 'serviceDashboard.business',
+      options: masterData?.business
+    },
+    {
+      control: AUTOCOMPLETE,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'businessSubType',
+      label: 'Business Sub Type',
+      placeholder: 'Business Sub Type',
+      options: masterData?.contract
+    },
+    {
+      control: AUTOCOMPLETE,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'Status',
+      label: 'Status',
+      placeholder: 'Status',
+      options: masterData?.projectStatus
+    },
+    {
+      control: TEXT_FIELD,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'customerName',
+      label: 'Customer Name or ID',
+      placeholder: 'Customer Name or ID'
+    },
+    {
+      control: TEXT_FIELD,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'location',
+      label: 'Location',
+      placeholder: 'Location'
+    },
+    {
+      control: TEXT_FIELD,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'contractOrProjectNumber',
+      label: 'Contract or Project Number',
+      placeholder: 'Contract or Project Number'
+    },
+    {
+      control: TEXT_FIELD,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'Salesman',
+      label: 'Salesman',
+      placeholder: 'Salesman'
+    }
+  ];
+  const getFilterData = (data) => {
+    console.log('Filtered data: ', data);
+  };
+  const getFilterDataPayloadChange = (key, val) => {
+    console.log(key, val);
+    if (key === 'country') {
+      const country = SEVICE_DASHBOARD_FILTER_MASTER_DATA.OFFICE.find((office) => office.country === val);
+      if (country) {
+        dispatch({ type: POST_OFFICE, data: country.offices });
+      }
+    }
+  };
   const handleChangeFilter = (key, val) => setFilters1({ ...filters1, [key]: val });
   const [colName, setColName] = useState([
     {
@@ -239,112 +330,13 @@ function ContractList() {
           <Divider style={{ backgroundColor: '#c7d2fe' }} />
         </Grid>
         {/* Grid for filter section */}
-        <Grid container spacing={3} style={{ marginTop: '0px' }}>
-          <Grid item xs={12}>
-            <Accordion
-              expanded={showFilter}
-              style={{ boxShadow: 'none' }}
-              fullWidth
-              onClick={() => setShowFilter(!showFilter)}
-            >
-              <AccordionSummary
-                style={{ display: 'flex', alignItems: 'center', flexDirection: 'row-reverse' }}
-                expandIcon={<ArrowRight />}
-                aria-controls="panel1d-content"
-                id="panel1d-header"
-              >
-                <Typography variant="h6">Filter</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Grid container spacing={3}>
-                  <Grid item xs={6} sm={2}>
-                    <AutocompleteWidget
-                      options={projectLocation}
-                      label="Country"
-                      disablePortal
-                      autoSelect
-                      size="small"
-                    />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <AutocompleteWidget
-                      options={projectLocation}
-                      label="Region"
-                      disablePortal
-                      autoSelect
-                      size="small"
-                    />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <AutocompleteWidget
-                      options={projectLocation}
-                      label="Business"
-                      disablePortal
-                      autoSelect
-                      size="small"
-                    />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <AutocompleteWidget
-                      options={projectLocation}
-                      label="Business Sub Type"
-                      disablePortal
-                      autoSelect
-                      size="small"
-                    />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <AutocompleteWidget
-                      options={statusData}
-                      label="Status"
-                      disablePortal
-                      autoSelect
-                      size="small"
-                      onChange={(event, newValue) => setStatus(newValue?.value)}
-                      defaultValue={status}
-                    />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <TextField
-                      fullWidth
-                      label="Customer Name or ID"
-                      size="small"
-                      onChange={(e) => handleChangeFilter('customer', e.target.value)}
-                    />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <TextField fullWidth label="Location" size="small" />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <TextField fullWidth label="Contract or Project Number" size="small" />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <TextField
-                      onChange={(e) => setSalesman(e.target.value)}
-                      fullWidth
-                      label="Salesman"
-                      size="small"
-                      value={salesman}
-                    />
-                  </Grid>
-                  <Grid item xs={6} sm={4}>
-                    <Button onClick={onStockFilterChange} variant="contained" size="small" startIcon={<SearchIcon />}>
-                      Filter
-                    </Button>
-                    <Button
-                      onClick={clearFilter1}
-                      style={{ marginLeft: '0.5rem' }}
-                      variant="contained"
-                      size="small"
-                      startIcon={<CloseIcon />}
-                    >
-                      Clear
-                    </Button>
-                  </Grid>
-                </Grid>
-              </AccordionDetails>
-            </Accordion>
-          </Grid>
+        <Grid item xs={12}>
+          <Filters
+            components={FILTER_COMPONETS}
+            apiUrl="dummyUrl"
+            getFilterData={getFilterData}
+            getFilterDataPayloadChange={getFilterDataPayloadChange}
+          />
         </Grid>
         {/* Grid for all contract list */}
         <Grid item xs={12}>
