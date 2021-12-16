@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 import {
   Grid,
@@ -18,9 +19,15 @@ import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton';
 import SimpleTable from './table/simpleTable';
+import Filters from './Filter/filter';
+import { COMPONENTS } from '../utils/constants';
+import { SEVICE_DASHBOARD_FILTER_MASTER_DATA } from './ServiceBoard/data';
+import { POST_OFFICE } from '../redux/constants';
 import jsonData from '../utils/customerslist.json';
 
 function CustomersList({ openFlag, handleCloseDialog, showDialog }) {
+  const masterData = useSelector((state) => state.MasterDataReducer);
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(openFlag);
   const [showFilter, setShowFilter] = useState(true);
   const numericFields = ['custno'];
@@ -63,6 +70,51 @@ function CustomersList({ openFlag, handleCloseDialog, showDialog }) {
     }
   ];
 
+  const { TEXT_FIELD, AUTOCOMPLETE } = COMPONENTS;
+  const FILTER_COMPONETS = [
+    {
+      control: AUTOCOMPLETE,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'country',
+      label: 'serviceDashboard.country',
+      placeholder: 'serviceDashboard.country',
+      options: masterData?.country
+    },
+    {
+      control: TEXT_FIELD,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'CustomerNo',
+      label: 'Customer Number',
+      placeholder: 'Customer Name or ID'
+    },
+    {
+      control: TEXT_FIELD,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'customerName',
+      label: 'Customer Name',
+      placeholder: 'Customer Name'
+    },
+    {
+      control: TEXT_FIELD,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'customerAddress',
+      label: 'Customer Address',
+      placeholder: 'Customer Address'
+    }
+  ];
+  const getFilterData = (data) => {
+    console.log('Filtered data: ', data);
+  };
+  const getFilterDataPayloadChange = (key, val) => {
+    console.log(key, val);
+    if (key === 'country') {
+      const country = SEVICE_DASHBOARD_FILTER_MASTER_DATA.OFFICE.find((office) => office.country === val);
+      if (country) {
+        dispatch({ type: POST_OFFICE, data: country.offices });
+      }
+    }
+  };
+
   const CustomerTable = () => (
     <SimpleTable
       rowData={jsonData}
@@ -84,86 +136,12 @@ function CustomersList({ openFlag, handleCloseDialog, showDialog }) {
   const CustomerFilter = () => (
     <Grid container spacing={3}>
       <Grid item xs={12}>
-        <Accordion
-          expanded={showFilter}
-          style={{ boxShadow: 'none' }}
-          fullWidth
-          onClick={() => setShowFilter(!showFilter)}
-        >
-          <AccordionSummary
-            style={{ display: 'flex', alignItems: 'center', flexDirection: 'row-reverse' }}
-            expandIcon={<ArrowRight />}
-            aria-controls="panel1d-content"
-            id="panel1d-header"
-          >
-            <Typography variant="h6">Filter</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Grid container spacing={3}>
-              <Grid item xs={12} sm={6} md={4} lg={2}>
-                <Autocomplete
-                  size="small"
-                  options={['Saudi Arabia', 'Jordan', 'Iraq', 'Kuwait', 'Oman', 'UAE']}
-                  // value={}
-                  renderInput={(params) => <TextField size="small" {...params} label="Country" />}
-                  fullWidth
-                  /* onChange={(event, newValue) => {
-                set(newValue);
-            }} */
-                />
-              </Grid>
-              <Grid item xs={12} sm={6} md={4} lg={2}>
-                <TextField
-                  // value={}
-                  /* onChange={(e) => {
-                    set(e.target.value);
-                    // filterdata.code = e.target.value;
-                  }} */
-                  fullWidth
-                  size="small"
-                  label="Customer Number"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6} md={4} lg={2}>
-                <TextField
-                  // value={}
-                  // onChange={(e) => set(e.target.value)}
-                  fullWidth
-                  size="small"
-                  label="Customer Name"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6} md={4} lg={2}>
-                <TextField
-                  // value={}
-                  // onChange={(e) => set(e.target.value)}
-                  fullWidth
-                  size="small"
-                  label="Customer Address"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6} md={4} lg={2}>
-                <TextField
-                  // value={}
-                  // onChange={(e) => set(e.target.value)}
-                  fullWidth
-                  size="small"
-                  label="Customer Contacts"
-                />
-              </Grid>
-              <Grid item xs={6} sm={3} md={2} lg={1}>
-                <Button size="small" startIcon={<SearchIcon />} variant="contained">
-                  Filter
-                </Button>
-              </Grid>
-              <Grid item xs={6} sm={3} md={2} lg={1}>
-                <Button size="small" startIcon={<CloseIcon />} variant="contained">
-                  Clear
-                </Button>
-              </Grid>
-            </Grid>
-          </AccordionDetails>
-        </Accordion>
+        <Filters
+          components={FILTER_COMPONETS}
+          apiUrl="dummyUrl"
+          getFilterData={getFilterData}
+          getFilterDataPayloadChange={getFilterDataPayloadChange}
+        />
       </Grid>
     </Grid>
   );
