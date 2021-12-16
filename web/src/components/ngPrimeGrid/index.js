@@ -146,8 +146,13 @@ function PrimeGrid(theme) {
           href={`https://unpkg.com/primereact/resources/themes/lara-${themeMode}-indigo/theme.css`}
         />
       </Helmet>
-      <Grid hidden={!(showFilter === 'panel1' || showFilter === true)}>
-        <Accordion style={{ boxShadow: 'none' }} fullWidth>
+      <Grid>
+        <Accordion
+          expanded={showFilter}
+          style={{ boxShadow: 'none' }}
+          fullWidth
+          onClick={() => setShowFilter(!showFilter)}
+        >
           <AccordionSummary
             style={{ display: 'flex', alignItems: 'center', flexDirection: 'row-reverse' }}
             expandIcon={<ArrowRight />}

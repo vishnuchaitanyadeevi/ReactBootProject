@@ -36,7 +36,7 @@ function ProjectExpiration() {
   const columnDataForProjects = [
     {
       field: 'projectNo',
-      header: 'Project number',
+      header: 'Project Number',
       editorElement: null,
       style: { width: '10%' },
       sortable: true,
@@ -85,9 +85,14 @@ function ProjectExpiration() {
   ];
   return (
     <div className="project_expiration_main_cls">
-      <Grid hidden={!(showFilter === 'panel1' || showFilter === true)} container spacing={3}>
+      <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Accordion style={{ boxShadow: 'none' }} fullWidth>
+          <Accordion
+            expanded={showFilter}
+            style={{ boxShadow: 'none' }}
+            fullWidth
+            onClick={() => setShowFilter(!showFilter)}
+          >
             <AccordionSummary
               style={{ display: 'flex', alignItems: 'center', flexDirection: 'row-reverse' }}
               expandIcon={<ArrowRight />}
