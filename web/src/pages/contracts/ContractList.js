@@ -22,6 +22,7 @@ import './ContractList.scss';
 function ContractList() {
   // filter component state
   let paramId;
+  let editId;
   const [country, setCountry] = useState(null);
   const [office, setOffice] = useState(null);
   const [business, setBusiness] = useState(null);
@@ -188,8 +189,9 @@ function ContractList() {
 
   const navigate = useNavigate();
 
-  const navigateToProjectCreation = () => {
-    navigate('/project/edit/1', { replace: true });
+  const navigateToProjectCreation = (options) => {
+    editId = options.project_number;
+    navigate(`/project/edit/${options.id}`, { state: editId }, { replace: true });
   };
 
   const navigateToContractEdition = (options) => {

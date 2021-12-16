@@ -142,6 +142,8 @@ function ProjectCreation() {
   };
 
   const { pathname } = useLocation();
+  const { state } = useLocation();
+  const editId = state;
   const navigate = useNavigate();
 
   const navigateToContractlist = () => {
@@ -149,7 +151,7 @@ function ProjectCreation() {
   };
 
   const match = (path) => (path ? !!matchPath({ path, end: false }, pathname) : false);
-  const isEditFlag = match('project/edit/1');
+  const isEditFlag = match('project/edit/:id');
   useEffect(() => {
     console.log(isEditFlag);
   }, [isEditFlag]);
@@ -226,13 +228,13 @@ function ProjectCreation() {
       <Grid container spacing={3}>
         <Grid className="main_title_cls" item xs={12}>
           <Typography variant="h4">
-            {isEditFlag ? t('CreateProject.EditProject') : t('CreateProject.CreateProject')}
+            {isEditFlag ? `${t('CreateProject.EditProject')} - ${editId}` : t('CreateProject.CreateProject')}
           </Typography>
         </Grid>
 
         {/* Grid for project details section */}
         <Grid item xs={12} sm={6}>
-          <Typography variant="h4" className="form_sub_title_cls">
+          <Typography variant="h6" className="form_sub_title_cls">
             {t('CreateProject.ProjectDetails')}
           </Typography>
 
@@ -378,7 +380,7 @@ function ProjectCreation() {
             </Grid>
 
             <Grid item xs={12} sm={12}>
-              <Typography variant="h4" className="form_sub_title_cls">
+              <Typography variant="h6" className="form_sub_title_cls">
                 {t('CreateProject.AdditionalInformation')}
               </Typography>
             </Grid>
@@ -408,7 +410,7 @@ function ProjectCreation() {
                   aria-controls="panel1d-content"
                   id="panel1d-header"
                 >
-                  <Typography variant="h4">{t('CreateProject.AxDefaultFields')}</Typography>
+                  <Typography variant="h6">{t('CreateProject.AxDefaultFields')}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography> Lorem ipsum. </Typography>
@@ -420,7 +422,7 @@ function ProjectCreation() {
 
         {/* Grid for service frequency settings details */}
         <Grid item xs={12} sm={6}>
-          <Typography variant="h4" className="form_sub_title_cls">
+          <Typography variant="h6" className="form_sub_title_cls">
             {t('CreateProject.ServiceFrequencySettings')}
           </Typography>
 
@@ -441,7 +443,7 @@ function ProjectCreation() {
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <Typography variant="h5">{t('CreateProject.ServiceRecurrence')}</Typography>
+              <Typography variant="h6">{t('CreateProject.ServiceRecurrence')}</Typography>
               <Grid
                 item
                 xs={12}
@@ -456,7 +458,7 @@ function ProjectCreation() {
           <Grid style={{ marginTop: '0.1rem' }} container spacing={3}>
             <Grid item xs={12} sm={6}>
               <Typography
-                variant="h5"
+                variant="h6"
                 style={{
                   fontWeight: 'bold',
                   marginBottom: '1rem'
@@ -472,7 +474,7 @@ function ProjectCreation() {
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <Typography variant="h5">{t('CreateProject.InvoiceRecurrence')}</Typography>
+              <Typography variant="h6">{t('CreateProject.InvoiceRecurrence')}</Typography>
               <Grid
                 item
                 xs={12}
@@ -515,7 +517,7 @@ function ProjectCreation() {
               />
             </Grid>
             <Grid item xs={12} sm={12}>
-              <Typography variant="h4">{t('CreateProject.SignatoryInformation')}</Typography>
+              <Typography variant="h6">{t('CreateProject.SignatoryInformation')}</Typography>
             </Grid>
             <Grid item xs={12} sm={12}>
               <AutocompleteWidget
@@ -576,7 +578,7 @@ function ProjectCreation() {
                   aria-controls="panel1d-content"
                   id="panel1d-header"
                 >
-                  <Typography variant="h4">{t('CreateProject.FinancialDimensions')}</Typography>
+                  <Typography variant="h6">{t('CreateProject.FinancialDimensions')}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography> Lorem ipsum. </Typography>

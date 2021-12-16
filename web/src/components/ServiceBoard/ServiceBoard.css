@@ -173,14 +173,3 @@
 .pointer-cls {
   cursor: pointer;
 }
-.css-zjv1fi-MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-input,
-.MuiAutocomplete-hasPopupIcon.rtl-zjv1fi-MuiAutocomplete-root .MuiOutlinedInput-root,
-.MuiAutocomplete-hasClearIcon.rtl-zjv1fi-MuiAutocomplete-root .MuiOutlinedInput-root {
-  padding: 0 0.4rem 0 0.6rem;
-}
-
-.rtl-in2arz-MuiFormLabel-root-MuiInputLabel-root,
-.css-159a81b-MuiFormLabel-root-MuiInputLabel-root,
-.css-in2arz-MuiFormLabel-root-MuiInputLabel-root {
-  margin-top: -0.4rem;
-}
