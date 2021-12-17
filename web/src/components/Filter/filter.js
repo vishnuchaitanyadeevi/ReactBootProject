@@ -19,8 +19,8 @@ import {
 
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import useSettings from '../../hooks/useSettings';
 import { COMPONENTS, LANGUAGES_CODES_RTL_ORIENTATION, THEME } from '../../utils/constants';
@@ -172,13 +172,13 @@ export default function Filters({
                   {option.name[lang]}
                 </Box>
               )}
-              size={size || 'small'}
               renderInput={(params) => (
                 <TextField
                   fullWidth={fullWidth}
                   placeholder={t([placeholder])}
                   SelectProps={{ native: true }}
                   variant={variant || 'outlined'}
+                  size={size || 'small'}
                   {...params}
                   label={t([label])}
                   inputProps={{
@@ -198,9 +198,19 @@ export default function Filters({
 
   return (
     <div className={displayBorder ? 'filter-section' : ''} style={{ borderColor: BORDER }}>
-      <Typography variant="h5" style={{ color: TXT, marginBottom: '0.5rem' }}>
-        {open ? <ArrowDropUpIcon onClick={handleClick} /> : <ArrowDropDownIcon onClick={handleClick} />}
+      <Typography variant="h5" style={{ color: TXT }}>
         {t('filter.filter')}
+        {open ? (
+          <KeyboardArrowUpIcon
+            onClick={handleClick}
+            style={{ cursor: 'pointer', float: rightDir ? 'left' : 'right' }}
+          />
+        ) : (
+          <KeyboardArrowDownIcon
+            onClick={handleClick}
+            style={{ cursor: 'pointer', float: rightDir ? 'left' : 'right' }}
+          />
+        )}
       </Typography>
       <Collapse in={open} timeout="auto" unmountOnExit>
         {isArray(components) && (

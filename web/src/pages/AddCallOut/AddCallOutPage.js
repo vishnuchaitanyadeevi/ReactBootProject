@@ -145,7 +145,7 @@ function AddCallOutPage() {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Typography variant="h4" align="center">
-            Add Call Out
+            New callout
           </Typography>
         </Grid>
         <Grid item xs={12}>

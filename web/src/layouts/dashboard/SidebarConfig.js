@@ -55,7 +55,7 @@ const sidebarConfig = [
         path: '',
         children: [
           { title: 'Add Call Out', path: '/addCallOut' },
-          { title: 'Schedule Services', path: '/schedule/service' }
+          { title: 'Schedule Services', path: '/dashboard/service' }
         ]
       },
       {
