@@ -28,6 +28,7 @@ export default function AutocompleteWidget({
   fullWidth,
   getOptionLabel,
   groupBy,
+  inputValue,
   limitTags,
   loading,
   loadingText,
@@ -39,7 +40,8 @@ export default function AutocompleteWidget({
   openText,
   popupIcon,
   renderGroup,
-  size
+  size,
+  value
 }) {
   return (
     <Autocomplete
@@ -72,6 +74,7 @@ export default function AutocompleteWidget({
       fullWidth={fullWidth === undefined || fullWidth === null ? false : fullWidth}
       getOptionLabel={getOptionLabel === undefined || getOptionLabel === null ? undefined : getOptionLabel}
       groupBy={groupBy === undefined || groupBy === null ? undefined : groupBy}
+      inputValue={inputValue}
       limitTags={limitTags === undefined || limitTags === null ? -1 : limitTags}
       loading={loading === undefined || loading === null ? false : loading}
       loadingText={loadingText === undefined || loadingText === null ? false : loadingText}
@@ -84,6 +87,7 @@ export default function AutocompleteWidget({
       options={options}
       renderInput={(params) => <TextField {...params} label={label} />}
       size={size === undefined || size === null ? 'medium' : size}
+      value={value}
     />
   );
 }

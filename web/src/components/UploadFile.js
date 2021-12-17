@@ -51,7 +51,7 @@ export default function UploadMultiFile({
             </Typography>
             {errors.map((e) => (
               <Typography key={e.code} variant="caption" component="p">
-                - {e.message}
+                File can't be uploaded. Kindly upload PDF (.pdf extension) file only.
               </Typography>
             ))}
           </Box>

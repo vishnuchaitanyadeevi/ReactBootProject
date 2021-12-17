@@ -34,6 +34,7 @@ function ContractList() {
   const [salesman, setSalesman] = useState(null);
   const [showFilter, setShowFilter] = useState(true);
   const [activeProjects, setActiveProjects] = useState(null);
+  const [projNumber, setprojNumber] = useState(null);
 
   const onStockFilterChange = () => {
     const _filters1 = { ...filters1 };
@@ -194,6 +195,11 @@ function ContractList() {
     navigate(`/project/edit/${options.id}`, { state: editId }, { replace: true });
   };
 
+  const navigateOnButtonClick = (projNumber) => {
+    console.log(projNumber);
+    navigate(`/project/edit/${projNumber}`, { state: projNumber }, { replace: true });
+  };
+
   const navigateToContractEdition = (options) => {
     // console.log('calling', options);
     paramId = options.contractNumber;
@@ -220,18 +226,26 @@ function ContractList() {
         {/* Grid for open project and add contract section */}
         <Grid item xs={12} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Grid style={{ display: 'flex', alignItems: 'center' }}>
-            <TextField label="Project Number" size="small" />
+            <TextField
+              label="Project Number"
+              size="small"
+              value={projNumber}
+              onChange={(e) => {
+                setprojNumber(e.target.value);
+                console.log('log', projNumber);
+              }}
+            />
             <Button
               variant="contained"
               color="primary"
               style={{ marginLeft: '1rem' }}
               size="small"
-              onClick={navigateToProjectCreation}
+              onClick={() => navigateOnButtonClick(projNumber)}
             >
               Open Project
             </Button>
           </Grid>
-          <Button variant="contained" color="primary" size="small" onClick={navigateToContractAddition}>
+          <Button variant="contained" color="primary" size="small" onClick={() => navigateToContractAddition()}>
             Add New Contract
           </Button>
         </Grid>
@@ -328,11 +342,16 @@ function ContractList() {
                     />
                   </Grid>
                   <Grid item xs={6} sm={4}>
-                    <Button onClick={onStockFilterChange} variant="contained" size="small" startIcon={<SearchIcon />}>
+                    <Button
+                      onClick={() => onStockFilterChange()}
+                      variant="contained"
+                      size="small"
+                      startIcon={<SearchIcon />}
+                    >
                       Filter
                     </Button>
                     <Button
-                      onClick={clearFilter1}
+                      onClick={() => clearFilter1()}
                       style={{ marginLeft: '0.5rem' }}
                       variant="contained"
                       size="small"

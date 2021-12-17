@@ -20,6 +20,7 @@ import UploadFile from '../../components/UploadFile';
 import SimpleTable from '../../components/table/simpleTable';
 import jsonData from '../../utils/create-project-table-data.json';
 import ProjectTable from '../../components/contracts/projectTable';
+import ContractJson from '../../utils/Contract-List-Data.json';
 import './ProjectCreation.scss';
 
 const tableData = [];
@@ -152,9 +153,59 @@ function ProjectCreation() {
 
   const match = (path) => (path ? !!matchPath({ path, end: false }, pathname) : false);
   const isEditFlag = match('project/edit/:id');
+
   useEffect(() => {
-    console.log(isEditFlag);
+    if (isEditFlag) {
+      let popData;
+      // currently this for loop part has some logical issues (Will have to fix that)
+      for (let idx = 0; idx !== 6; idx += 1) {
+        if (ContractJson.find((item) => item.projects[idx].project_number === editId)) {
+          popData = ContractJson.find((item) => item.projects[idx].project_number === editId);
+          console.log('log', popData.projects[idx].project_number);
+          updateFormFields(popData, idx);
+          break;
+        }
+      }
+    }
   }, [isEditFlag]);
+
+  const updateFormFields = (popData, idx) => {
+    setProjectData({
+      ...projectData,
+      projectNo: popData.projects[idx]?.project_number,
+      execution: popData.projects[idx]?.execution,
+      region: popData.projects[idx]?.region,
+      projectName: popData.projects[idx]?.projectName,
+      endDate: popData.projects[idx]?.end_date,
+      discount: popData.projects[idx]?.discount,
+      specialAttention: popData.projects[idx]?.specialAttention,
+      scopeOfProject: popData.projects[idx]?.scopeOfProject,
+      serviceFrequency: popData.projects[idx]?.serviceFrequency,
+      recur: popData.projects[idx]?.recur,
+      invoice: popData.projects[idx]?.invoice,
+      invoiceRec: popData.projects[idx]?.invoiceRec,
+      recurDays: popData.projects[idx]?.recurDays,
+      projectVal: popData.projects[idx]?.projectVal,
+      projName: popData.projects[idx]?.projName,
+      projPos: popData.projects[idx]?.projPos,
+      projAdd: popData.projects[idx]?.projAdd,
+      projPhone: popData.projects[idx]?.projPhone,
+      projFax: popData.projects[idx]?.projFax,
+      projMob: popData.projects[idx]?.projMob,
+      projMail: popData.projects[idx]?.projMail,
+      projNote: popData.projects[idx]?.projNote,
+      projLoc: popData.projects[idx]?.projLoc,
+      projSla: popData.projects[idx]?.projSla,
+      projbus: popData.projects[idx]?.projbus,
+      projSub: popData.projects[idx]?.projSub,
+      projStat: popData.projects[idx]?.projStat,
+      projClass: popData.projects[idx]?.projClass,
+      projSale: popData.projects[idx]?.projSale,
+      projServ: popData.projects[idx]?.projServ,
+      projRole: popData.projects[idx]?.projRole,
+      projEndDate: popData.projects[idx]?.projEndDate
+    });
+  };
 
   const columnDataForProjects = [
     {
@@ -223,6 +274,78 @@ function ProjectCreation() {
     }
   ];
 
+  const [projectData, setProjectData] = useState({
+    execution: '',
+    projectNo: '',
+    region: '',
+    projectName: '',
+    startDate: '',
+    endDate: '',
+    discount: '',
+    specialAttention: '',
+    scopeOfProject: '',
+    serviceFrequency: '',
+    recur: '',
+    invoice: '',
+    invoiceRec: '',
+    recurDays: '',
+    projectVal: '',
+    projName: '',
+    projPos: '',
+    projAdd: '',
+    projPhone: '',
+    projFax: '',
+    projMob: '',
+    projMail: '',
+    projNote: '',
+    projLoc: '',
+    projSla: '',
+    projbus: '',
+    projSub: '',
+    projStat: '',
+    projClass: '',
+    projSale: '',
+    projServ: '',
+    projRole: '',
+    projEndDate: ''
+  });
+
+  const {
+    execution,
+    projectNo,
+    region,
+    projectName,
+    startDate,
+    endDate,
+    discount,
+    specialAttention,
+    scopeOfProject,
+    serviceFrequency,
+    recur,
+    invoice,
+    invoiceRec,
+    recurDays,
+    projectVal,
+    projName,
+    projPos,
+    projAdd,
+    projPhone,
+    projFax,
+    projMob,
+    projMail,
+    projNote,
+    projLoc,
+    projSla,
+    projbus,
+    projSub,
+    projStat,
+    projClass,
+    projSale,
+    projServ,
+    projRole,
+    projEndDate
+  } = projectData;
+
   return (
     <Grid className="project_creation_main_grid">
       <Grid container spacing={3}>
@@ -244,19 +367,20 @@ function ProjectCreation() {
                 title={t('CreateProject.ExecutionType')}
                 options={executionType}
                 onChange={handleChangeExecutionType}
+                value={execution}
               />
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label={t('CreateProject.ProjectNo')} size="small" />
+              <TextField fullWidth label={t('CreateProject.ProjectNo')} size="small" value={projectNo} />
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label={t('CreateProject.Region')} size="small" />
+              <TextField fullWidth label={t('CreateProject.Region')} size="small" value={region} />
             </Grid>
 
             <Grid item xs={12} sm={12}>
-              <TextField fullWidth label={t('CreateProject.ProjectName')} size="small" />
+              <TextField fullWidth label={t('CreateProject.ProjectName')} size="small" value={projectName} />
             </Grid>
 
             <Grid item xs={12} sm={6}>
@@ -266,6 +390,7 @@ function ProjectCreation() {
                 disablePortal
                 autoSelect
                 size="small"
+                value={projLoc}
               />
             </Grid>
 
@@ -276,6 +401,7 @@ function ProjectCreation() {
                 disablePortal
                 autoSelect
                 size="small"
+                value={projSla}
               />
             </Grid>
 
@@ -292,6 +418,7 @@ function ProjectCreation() {
                 disablePortal
                 autoSelect
                 size="small"
+                value={projbus}
               />
             </Grid>
 
@@ -302,6 +429,7 @@ function ProjectCreation() {
                 disablePortal
                 autoSelect
                 size="small"
+                value={projSub}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -316,6 +444,7 @@ function ProjectCreation() {
                 label={t('CreateProject.ProjectStartDate')}
                 inputFormat="dd-MM-yyyy"
                 views={['year', 'month', 'day']}
+                value={startDate}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -323,6 +452,7 @@ function ProjectCreation() {
                 title={t('CreateProject.ProjectEndDate')}
                 options={endDateTypes}
                 onChange={handleChangeProjectEndDate}
+                value={projEndDate}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -339,6 +469,7 @@ function ProjectCreation() {
                 disablePortal
                 autoSelect
                 size="small"
+                value={projStat}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -348,6 +479,7 @@ function ProjectCreation() {
                 disablePortal
                 autoSelect
                 size="small"
+                value={projClass}
               />
             </Grid>
             <Grid style={{ marginTop: '0.3rem' }} item xs={12} sm={12}>
@@ -358,6 +490,7 @@ function ProjectCreation() {
                   endAdornment: <InputAdornment position="end">%</InputAdornment>
                 }}
                 size="small"
+                value={discount}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -367,6 +500,7 @@ function ProjectCreation() {
                 disablePortal
                 autoSelect
                 size="small"
+                value={projSale}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -376,6 +510,7 @@ function ProjectCreation() {
                 disablePortal
                 autoSelect
                 size="small"
+                value={projServ}
               />
             </Grid>
 
@@ -385,16 +520,21 @@ function ProjectCreation() {
               </Typography>
             </Grid>
             <Grid item xs={12} sm={12}>
-              <TextField fullWidth label={t('CreateProject.SpecialAttentionNotes')} size="small" />
+              <TextField
+                fullWidth
+                label={t('CreateProject.SpecialAttentionNotes')}
+                size="small"
+                value={specialAttention}
+              />
             </Grid>
             <Grid item xs={12} sm={12}>
-              <TextField fullWidth label={t('CreateProject.ScopeOfProject')} size="small" />
+              <TextField fullWidth label={t('CreateProject.ScopeOfProject')} size="small" value={scopeOfProject} />
             </Grid>
             <Grid item xs={12} sm={12}>
               <UploadFile
                 showPreview
                 maxSize={3145728}
-                accept="application/pdf,image/*"
+                accept="application/pdf "
                 files={uploadProject.images}
                 onDrop={handleUploadProject}
                 onRemove={handleRemove}
@@ -428,7 +568,11 @@ function ProjectCreation() {
 
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
-              <RadioGroupComponent options={serviceFrequencySettings} onChange={handleChangeServiceFrequencySetting} />
+              <RadioGroupComponent
+                options={serviceFrequencySettings}
+                onChange={handleChangeServiceFrequencySetting}
+                value={serviceFrequency}
+              />
               <Grid style={{ marginTop: '0.3rem' }} item xs={12} sm={12}>
                 <TextField
                   fullWidth
@@ -438,6 +582,7 @@ function ProjectCreation() {
                   }}
                   type="number"
                   size="small"
+                  value={recur}
                 />
               </Grid>
             </Grid>
@@ -470,6 +615,7 @@ function ProjectCreation() {
                 title={t('CreateProject.InvoiceRecipient')}
                 options={invoiceRecipient}
                 onChange={handleChangeInvoiceRecipient}
+                value={invoiceRec}
               />
             </Grid>
 
@@ -492,6 +638,7 @@ function ProjectCreation() {
                 title={t('CreateProject.InvoiceFrequency')}
                 options={invoiceFrequency}
                 onChange={handleChangeInvoiceRecipient}
+                value={invoice}
               />
             </Grid>
 
@@ -504,6 +651,7 @@ function ProjectCreation() {
                 }}
                 type="number"
                 size="small"
+                value={recurDays}
               />
             </Grid>
             <Grid item xs={12} sm={12}>
@@ -514,6 +662,7 @@ function ProjectCreation() {
                   endAdornment: <InputAdornment position="start">{t('CreateProject.SAR')}</InputAdornment>
                 }}
                 size="small"
+                value={projectVal}
               />
             </Grid>
             <Grid item xs={12} sm={12}>
@@ -526,37 +675,38 @@ function ProjectCreation() {
                 disablePortal
                 autoSelect
                 size="small"
+                value={projRole}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label={t('CreateProject.Name')} size="small" />
+              <TextField fullWidth label={t('CreateProject.Name')} size="small" value={projName} />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label={t('CreateProject.Position')} size="small" />
+              <TextField fullWidth label={t('CreateProject.Position')} size="small" value={projPos} />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label={t('CreateProject.Address')} size="small" />
+              <TextField fullWidth label={t('CreateProject.Address')} size="small" value={projAdd} />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label={t('CreateProject.PhoneNo')} size="small" />
+              <TextField fullWidth label={t('CreateProject.PhoneNo')} size="small" value={projPhone} />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label={t('CreateProject.FaxNo')} size="small" />
+              <TextField fullWidth label={t('CreateProject.FaxNo')} size="small" value={projFax} />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label={t('CreateProject.MobileNo')} size="small" />
+              <TextField fullWidth label={t('CreateProject.MobileNo')} size="small" value={projMob} />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label={t('CreateProject.emailID')} size="small" />
+              <TextField fullWidth label={t('CreateProject.emailID')} size="small" value={projMail} />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label={t('CreateProject.Note')} size="small" />
+              <TextField fullWidth label={t('CreateProject.Note')} size="small" value={projNote} />
             </Grid>
             <Grid item xs={12} sm={12}>
               <UploadFile
                 showPreview
                 maxSize={3145728}
-                accept="application/pdf,image/*"
+                accept="application/pdf"
                 files={uploadProject.images}
                 onDrop={handleUploadProject}
                 onRemove={handleRemove}
