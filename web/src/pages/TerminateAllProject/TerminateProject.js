@@ -147,7 +147,7 @@ function TerminateProject() {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Typography variant="h4" align="center">
-            Terminate Project
+            Terminate All Projects
           </Typography>
         </Grid>
         <Grid item xs={12}>

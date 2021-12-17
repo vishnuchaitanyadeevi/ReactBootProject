@@ -220,7 +220,6 @@ export default function ContractsCreation() {
     if (customerNo) {
       console.log('calling... only customerNo no', customerNo);
       const newData = CustomerData.find((item) => item.custno === customerNo);
-      console.log('new_data....', newData.address);
       setContractData({ ...contractData, customerName: newData.name, customerAddress: newData.address });
     } /* else {
       setContractData({ ...contractData, customerName: '', customerAddress: '' });
@@ -237,7 +236,7 @@ export default function ContractsCreation() {
     { field: 'status', header: 'Status', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
     {
       field: 'prjno',
-      header: 'Project No.',
+      header: 'Project Number',
       editorElement: null,
       style: { width: '10%' },
       sortable: true,
