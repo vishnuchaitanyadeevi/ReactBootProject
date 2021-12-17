@@ -10,6 +10,19 @@ import SimpleTable from '../../components/table/simpleTable';
 function InvoiceList() {
   const [tableData, setTableData] = useState(InvoiceListingData);
   const [editingRows, setEditingRows] = useState({});
+  const numericFields = [
+    'id',
+    'invoice_number',
+    'invoice_date',
+    'project_number',
+    'customer_no',
+    'gross_amt',
+    'discount_%',
+    'discount_amt',
+    'net_amt',
+    'vat_amt',
+    'net_w_vat_amt'
+  ];
   const countries = [
     { label: 'Saudi Arabia', value: 'Saudi Arabia' },
     { label: 'Qatar', value: 'Qatar' },
@@ -52,7 +65,7 @@ function InvoiceList() {
       filter: true
     },
     {
-      field: 'customer_no.',
+      field: 'customer_no',
       header: 'Customer No.',
       editorElement: null,
       style: { width: '10%' },
@@ -230,6 +243,7 @@ function InvoiceList() {
             editingRows={editingRows}
             dataKey="id"
             editMode="row"
+            numericFields={numericFields}
           />
         </Grid>
       </Grid>
