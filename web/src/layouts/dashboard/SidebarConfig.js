@@ -72,7 +72,7 @@ const sidebarConfig = [
         title: 'Invoicing',
         path: '',
         children: [
-          { title: 'Invoice List', path: '' },
+          { title: 'Invoice List', path: '/invoiceList' },
           { title: 'Invoice Overview', path: '' }
         ]
       },
