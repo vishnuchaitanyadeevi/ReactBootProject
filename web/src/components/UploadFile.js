@@ -23,6 +23,8 @@ export default function UploadMultiFile({
   startIcon,
   endIcon,
   buttonLabel,
+  checkEmpty,
+  eventCalled,
   ...other
 }) {
   const hasFile = files.length > 0;
@@ -30,6 +32,28 @@ export default function UploadMultiFile({
   const { getRootProps, getInputProps, fileRejections } = useDropzone({
     ...other
   });
+
+  const showFileEmpty = () => (
+    <Paper
+      variant="outlined"
+      sx={{
+        py: 1,
+        px: 2,
+        mt: 3,
+        borderColor: 'error.light',
+        bgcolor: (theme) => alpha(theme.palette.error.main, 0.08)
+      }}
+    >
+      <Box sx={{ my: 1 }}>
+        <Typography variant="subtitle2" noWrap>
+          No File Uploaded
+        </Typography>
+        <Typography variant="caption" component="p">
+          Kindly upload a PDF file.
+        </Typography>
+      </Box>
+    </Paper>
+  );
 
   const ShowRejectionItems = () => (
     <Paper
@@ -51,7 +75,7 @@ export default function UploadMultiFile({
             </Typography>
             {errors.map((e) => (
               <Typography key={e.code} variant="caption" component="p">
-                - {e.message}
+                File can't be uploaded. Kindly upload PDF (.pdf extension) file only.
               </Typography>
             ))}
           </Box>
@@ -68,9 +92,8 @@ export default function UploadMultiFile({
           {buttonLabel === undefined || buttonLabel == null ? 'Upload' : buttonLabel}
         </Button>
       </div>
-
+      {checkEmpty === false && fileRejections.length === 0 && eventCalled === true ? showFileEmpty() : null}
       {fileRejections.length > 0 && <ShowRejectionItems />}
-
       <List disablePadding sx={{ ...(hasFile && { my: 3 }) }}>
         {files.map((file) => {
           const { name, size, preview } = file;

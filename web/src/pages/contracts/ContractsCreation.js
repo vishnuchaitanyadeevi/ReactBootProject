@@ -22,7 +22,7 @@ import SimpleTable from '../../components/table/simpleTable';
 import jsonData from '../../utils/project-table-data.json';
 import CustomerData from '../../utils/customerslist.json';
 import CustomersList from '../../components/CustomersList';
-import { isEmail, isPhone } from '../../utils/utils';
+import { isEmail, isPhone, isName } from '../../utils/utils';
 import ContractJson from '../../utils/Contract-List-Data.json';
 
 export default function ContractsCreation() {
@@ -37,7 +37,7 @@ export default function ContractsCreation() {
   const salesmanArr = ['Abdul Razak', 'Abdul Miyan', 'Shehnaz Kureshi'];
   const regionArr = ['Region 1', 'Region 2'];
   const [multipleImages, setMultipleImages] = useState({ images: [] });
-  const [axDefaultexpanded, setAxDefaultexpanded] = useState(false);
+  const [axDefaultexpanded, setAxDefaultexpanded] = useState(true);
 
   const handleOpen = () => {
     setOpen(true);
@@ -115,15 +115,50 @@ export default function ContractsCreation() {
     fundingType
   } = contractData;
 
+  const [defaultSalesman, setdefaultSalesman] = useState('Abdul Miyan');
   // HandleChange contract data fuction
   const updateContractData = (key, val) => {
     setContractData({ ...contractData, [key]: val });
     console.log(key, val);
   };
   console.log('Customer Number', customerNo);
+  const [checkEvent, setCheckEvent] = useState(false);
   const handleClickSaveContract = () => {
-    if (!name || !position || !address || !phoneNo || !faxNo || !mobileNo || !emailId || isEmail(emailId) || !note) {
+    const checkFile = multipleImages.images.length;
+    setCheckEvent(true);
+    console.log('logs', checkEvent);
+    if (
+      !name ||
+      !position ||
+      !address ||
+      !phoneNo ||
+      !faxNo ||
+      !mobileNo ||
+      !emailId ||
+      isEmail(emailId) ||
+      !note ||
+      !customerName ||
+      !customerAddress ||
+      !contractNo ||
+      !contractName ||
+      !crNo ||
+      !country ||
+      !region ||
+      !customerNo ||
+      !salesman ||
+      !contractSignOn ||
+      !contractStartDate ||
+      !generalDiscount ||
+      !status ||
+      !scopeOfContract ||
+      !legalEntity ||
+      !transactionCurrency ||
+      !accountCurrency ||
+      !fundingType ||
+      !checkFile
+    ) {
       setIsError(true);
+      console.log('length', checkFile);
     } else {
       setIsError(false);
       console.log('Contract data is...', contractData);
@@ -162,15 +197,8 @@ export default function ContractsCreation() {
     if (isEditFlag) {
       console.log('paramId', paramId);
       const popData = ContractJson.find((item) => item.contractNumber === paramId);
-      console.log('log', popData.contractNumber);
+      console.log('log', popData);
       updateFormFields(popData);
-    } else {
-      setContractData({
-        ...contractData,
-        contractNo: '',
-        contractSignOn: '',
-        contractStartDate: ''
-      });
     }
   }, [isEditFlag]);
 
@@ -178,9 +206,32 @@ export default function ContractsCreation() {
     console.log('PopData', popData);
     setContractData({
       ...contractData,
+      region: popData?.region,
+      contractName: popData?.contractName,
+      country: popData?.country,
       contractNo: popData?.contractNumber,
       contractSignOn: popData?.contractSignOn,
-      contractStartDate: popData?.contractStartDate
+      contractStartDate: popData?.contractStartDate,
+      customerNo: popData?.customerNumber,
+      // customerName: popData?.customerName,
+      // customerAddress: popData?.customerAddress,
+      salesman: popData?.salesman,
+      name: popData?.signName,
+      position: popData?.signPos,
+      address: popData?.signAdd,
+      phoneNo: popData?.phoneNo,
+      faxNo: popData?.faxNo,
+      mobileNo: popData?.mobileNo,
+      emailId: popData?.emailId,
+      note: popData?.note,
+      specialAttention: popData?.specialAttention,
+      scopeOfContract: popData?.scopeOfContract,
+      legalEntity: popData?.legalEntity,
+      transactionCurrency: popData?.transactionCurrency,
+      accountCurrency: popData?.accountCurrency,
+      fundingType: popData?.fundingType,
+      generalDiscount: popData?.generalDiscount,
+      crNo: popData?.crNo
     });
   };
 
@@ -199,6 +250,7 @@ export default function ContractsCreation() {
   const handleRemove = (file) => {
     const filteredItems = multipleImages.images.filter((_file) => _file !== file);
     setMultipleImages({ ...multipleImages, images: filteredItems });
+    // console.log('length', checkFile);
   };
 
   const columnDataForProjects = [
@@ -254,10 +306,34 @@ export default function ContractsCreation() {
         <Typography variant="h6">Customer Details</Typography>
         <Grid container spacing={1} item xs={12} xl={6}>
           <Grid item xs={12} xl={6} md={6}>
-            <AutocompleteWidget options={countryArr} size="small" label="Country" disablePortal autoSelect />
+            <AutocompleteWidget
+              options={countryArr}
+              size="small"
+              label="Country"
+              disablePortal
+              value={country}
+              error={isError && !country}
+              helperText={isError && !country && 'Select Country'}
+              FormHelperTextProps={{ className: 'helper_text_cls' }}
+              onChange={(event, newValue) => {
+                updateContractData('country', newValue);
+              }}
+            />
           </Grid>
           <Grid item xs={12} xl={6} md={6}>
-            <AutocompleteWidget options={regionArr} size="small" label="Region" disablePortal autoSelect />
+            <AutocompleteWidget
+              options={regionArr}
+              size="small"
+              label="Region"
+              disablePortal
+              value={region}
+              error={isError && !region}
+              helperText={isError && !region && 'Select Region'}
+              FormHelperTextProps={{ className: 'helper_text_cls' }}
+              onChange={(event, newValue) => {
+                updateContractData('region', newValue);
+              }}
+            />
           </Grid>
         </Grid>
         <Grid item xs={12} xl={6} md={6}>
@@ -266,47 +342,115 @@ export default function ContractsCreation() {
             size="small"
             label="Customer No"
             disablePortal
-            autoSelect
-            onChange={(event, value) => setContractData({ ...contractData, customerNo: value })}
+            // onChange={(event, value) => setContractData({ ...contractData, customerNo: value })}
             value={customerNo}
+            error={isError && !customerNo}
+            helperText={isError && !customerNo && 'Enter Customer Number'}
+            FormHelperTextProps={{ className: 'helper_text_cls' }}
+            onChange={(event, newValue) => {
+              updateContractData('customerNo', newValue);
+            }}
           />
         </Grid>
         <Grid item xs={12} xl={6} md={6}>
-          <IconButton aria-label="SearchIcon" size="small" color="primary" onClick={handleOpen}>
+          <IconButton aria-label="SearchIcon" size="small" color="primary" onClick={() => handleOpen()}>
             <SearchIcon />
           </IconButton>
           {open && <CustomersList openFlag={open} handleCloseDialog={(param) => setOpen(param)} />}
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
-          <TextField fullWidth label="Customer Name" size="small" value={customerNo ? customerName : ''} />
+          <TextField
+            fullWidth
+            label="Customer Name"
+            size="small"
+            value={customerName}
+            error={isError && !customerName}
+            helperText={isError && !customerName && 'Enter Customer Name'}
+            FormHelperTextProps={{ className: 'helper_text_cls' }}
+            onChange={(e) => updateContractData('customerName', e.target.value)}
+          />
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
-          <TextField fullWidth label="Customer Address" size="small" value={customerNo ? customerAddress : ''} />
+          <TextField
+            fullWidth
+            label="Customer Address"
+            size="small"
+            value={customerAddress}
+            error={isError && !customerAddress}
+            helperText={isError && !customerAddress && 'Enter Customer Address'}
+            FormHelperTextProps={{ className: 'helper_text_cls' }}
+            onChange={(e) => updateContractData('customerAddress', e.target.value)}
+          />
         </Grid>
         <Grid item xs={12} xl={6} md={6}>
-          <TextField fullWidth label="CR Number" size="small" />
+          <TextField
+            fullWidth
+            label="CR Number"
+            size="small"
+            value={crNo}
+            error={isError && !crNo}
+            helperText={isError && !crNo && 'Enter CR Number'}
+            FormHelperTextProps={{ className: 'helper_text_cls' }}
+            onChange={(e) => updateContractData('crNo', e.target.value)}
+          />
         </Grid>
         <Grid item xs={12} xl={6} md={6} />
         <Grid item xs={12} xl={6} md={6}>
-          <AutocompleteWidget options={salesmanArr} size="small" label="Salesman" disablePortal autoSelect />
+          <AutocompleteWidget
+            options={salesmanArr}
+            value={salesman}
+            defaultValue={defaultSalesman}
+            size="small"
+            label="Salesman"
+            disablePortal
+            onChange={(event, newValue) => {
+              updateContractData('salesman', newValue);
+            }}
+            error={isError && !salesman}
+            helperText={isError && !salesman && 'Select Salesman'}
+            FormHelperTextProps={{ className: 'helper_text_cls' }}
+          />
         </Grid>
       </Grid>
       <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
         <Typography variant="h6">Contract Details</Typography>
         <Grid container spacing={1} item xs={12} xl={6}>
           <Grid item xs={12} xl={6} md={6}>
-            <TextField fullWidth label="Contract Number" size="small" value={contractNo} />
+            <TextField
+              fullWidth
+              label="Contract Number"
+              size="small"
+              value={contractNo}
+              error={isError && !contractNo}
+              helperText={isError && !contractNo && 'Enter Contract Number'}
+              FormHelperTextProps={{ className: 'helper_text_cls' }}
+              onChange={(e) => updateContractData('contractNo', e.target.value)}
+            />
           </Grid>
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
-          <TextField fullWidth label="Contract Name" size="small" />
+          <TextField
+            fullWidth
+            label="Contract Name"
+            size="small"
+            value={contractName}
+            error={isError && !contractName}
+            helperText={isError && !contractName && 'Enter Contract Name'}
+            FormHelperTextProps={{ className: 'helper_text_cls' }}
+            onChange={(e) => updateContractData('contractName', e.target.value)}
+          />
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
           <BasicDatePicker
             label="Contract Signed On"
             inputFormat="dd-MM-yyyy"
             views={['year', 'month', 'day']}
-            passVal={isEditFlag ? contractSignOn : new Date()}
+            // value={isEditFlag ? contractSignOn : new Date()}
+            value={contractSignOn}
+            error={isError && !contractSignOn}
+            helperText={isError && !contractSignOn && 'Enter Sign-On Date'}
+            FormHelperTextProps={{ className: 'helper_text_cls' }}
+            onChange={(newValue) => updateContractData('contractSignOn', newValue)}
           />
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
@@ -314,21 +458,65 @@ export default function ContractsCreation() {
             label="Contract Start Date"
             inputFormat="dd-MM-yyyy"
             views={['year', 'month', 'day']}
-            passVal={isEditFlag ? contractStartDate : new Date()}
+            // value={isEditFlag ? contractStartDate : new Date()}
+            value={contractStartDate}
+            error={isError && (!contractStartDate || contractStartDate < contractSignOn)}
+            helperText={
+              (isError && !contractStartDate && 'Enter Start Date') ||
+              (isError && contractStartDate < contractSignOn && 'Start Date can not be before Sign-On Date')
+            }
+            FormHelperTextProps={{ className: 'helper_text_cls' }}
+            minDate={contractSignOn}
+            onChange={(newValue) => updateContractData('contractStartDate', newValue)}
+            disabled={!contractSignOn}
           />
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
-          <TextField label="General Discount" type="number" size="small" /> %
+          <TextField
+            label="General Discount"
+            type="number"
+            size="small"
+            value={generalDiscount}
+            error={isError && !generalDiscount}
+            helperText={isError && !generalDiscount && 'Enter General Discount'}
+            FormHelperTextProps={{ className: 'helper_text_cls' }}
+            onChange={(e) => updateContractData('generalDiscount', e.target.value)}
+          />
+          %
         </Grid>
         <Grid item xs={12} xl={6} md={6}>
-          <AutocompleteWidget options={statusArr} size="small" label="Status" defaultValue="Active" />
+          <AutocompleteWidget
+            options={statusArr}
+            size="small"
+            label="Status"
+            defaultValue="Active"
+            value={status}
+            error={isError && !status}
+            helperText={isError && !status && 'Select Status'}
+            FormHelperTextProps={{ className: 'helper_text_cls' }}
+            onChange={(event, newValue) => {
+              updateContractData('status', newValue);
+            }}
+          />
         </Grid>
       </Grid>
       <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
         <Typography variant="h6">Signatory Information</Typography>
         <Grid item xs={12} xl={6} md={6} />
         <Grid item xs={12} xl={6} md={6}>
-          <AutocompleteWidget options={rolesArr} size="small" label="Role" defaultValue="Primary" />
+          <AutocompleteWidget
+            options={rolesArr}
+            size="small"
+            label="Role"
+            defaultValue="Primary"
+            error={isError && !role}
+            value={role}
+            helperText={isError && !role && 'Select Role'}
+            FormHelperTextProps={{ className: 'helper_text_cls' }}
+            onChange={(event, newValue) => {
+              updateContractData('role', newValue);
+            }}
+          />
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
           <TextField
@@ -337,8 +525,8 @@ export default function ContractsCreation() {
             size="small"
             onChange={(e) => updateContractData('name', e.target.value)}
             value={name}
-            error={isError && !name}
-            helperText={isError && !name && 'Enter Name'}
+            error={isError && (!name || isName(name))}
+            helperText={(isError && !name && 'Enter Name') || (isError && isName(name) && 'Not Valid Name')}
             FormHelperTextProps={{ className: 'helper_text_cls' }}
           />
         </Grid>
@@ -373,8 +561,10 @@ export default function ContractsCreation() {
             size="small"
             onChange={(e) => updateContractData('phoneNo', e.target.value)}
             value={phoneNo}
-            error={isError && !phoneNo}
-            helperText={isError && !phoneNo && 'Enter Phone Number'}
+            error={isError && (!phoneNo || isPhone(phoneNo))}
+            helperText={
+              (isError && !phoneNo && 'Enter Phone Number') || (isError && isPhone(phoneNo) && 'Not Valid Phone Number')
+            }
             FormHelperTextProps={{ className: 'helper_text_cls' }}
           />
         </Grid>
@@ -435,10 +625,29 @@ export default function ContractsCreation() {
       <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
         <Typography variant="h6">Additional Information</Typography>
         <Grid item xs={12} xl={12} md={12}>
-          <TextField multiline minRows={3} fullWidth label="Special Attention / Notes" size="small" />
+          <TextField
+            multiline
+            minRows={3}
+            fullWidth
+            label="Special Attention / Notes"
+            size="small"
+            value={specialAttention}
+            onChange={(e) => updateContractData('specialAttention', e.target.value)}
+          />
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
-          <TextField multiline minRows={3} fullWidth label="Scope of Contract" size="small" />
+          <TextField
+            multiline
+            minRows={3}
+            fullWidth
+            label="Scope of Contract"
+            size="small"
+            value={scopeOfContract}
+            error={isError && !scopeOfContract}
+            helperText={isError && !scopeOfContract && 'Enter Scope of Contract'}
+            FormHelperTextProps={{ className: 'helper_text_cls' }}
+            onChange={(e) => updateContractData('scopeOfContract', e.target.value)}
+          />
         </Grid>
         <Grid item xs={12} xl={6} md={6}>
           <UploadFile
@@ -449,8 +658,10 @@ export default function ContractsCreation() {
             onDrop={handleDropMultiple}
             onRemove={handleRemove}
             backgroundColor="green"
-            buttonLabel="Upload Contract"
+            buttonLabel="Upload Contract (PDF)"
             startIcon={<UploadFileOutlined />}
+            checkEmpty={Boolean(multipleImages.images.length)}
+            eventCalled={Boolean(checkEvent)}
           />
         </Grid>
       </Grid>
@@ -470,22 +681,58 @@ export default function ContractsCreation() {
             <Grid container spacing={1}>
               <Grid container rowSpacing={1} columnSpacing={2} item xs={12} xl={6} md={6}>
                 <Grid item xs={12} xl={12} md={12}>
-                  <TextField fullWidth label="Legal Entity" size="small" />
+                  <TextField
+                    fullWidth
+                    label="Legal Entity"
+                    size="small"
+                    value={legalEntity}
+                    error={isError && !legalEntity}
+                    helperText={isError && !legalEntity && 'Enter Legal Entity'}
+                    FormHelperTextProps={{ className: 'helper_text_cls' }}
+                    onChange={(e) => updateContractData('legalEntity', e.target.value)}
+                  />
                 </Grid>
                 <Grid item xs={12} xl={12} md={12}>
-                  <TextField fullWidth label="Account currency" size="small" />
+                  <TextField
+                    fullWidth
+                    label="Account currency"
+                    size="small"
+                    value={accountCurrency}
+                    error={isError && !accountCurrency}
+                    helperText={isError && !accountCurrency && 'Enter Account Currency'}
+                    FormHelperTextProps={{ className: 'helper_text_cls' }}
+                    onChange={(e) => updateContractData('accountCurrency', e.target.value)}
+                  />
                 </Grid>
               </Grid>
               <Grid container rowSpacing={1} columnSpacing={2} item xs={12} xl={6} md={6}>
                 <Grid item xs={12} xl={12} md={12}>
-                  <AutocompleteWidget options={transactionCurrencyArr} size="small" label="Transaction Currency" />
+                  <AutocompleteWidget
+                    options={transactionCurrencyArr}
+                    size="small"
+                    label="Transaction Currency"
+                    value={transactionCurrency}
+                    error={isError && !transactionCurrency}
+                    helperText={isError && !transactionCurrency && 'Select Transaction Currency'}
+                    FormHelperTextProps={{ className: 'helper_text_cls' }}
+                    onChange={(event, newValue) => {
+                      updateContractData('transactionCurrency', newValue);
+                    }}
+                  />
                 </Grid>
                 <Grid item xs={12} xl={12} md={12}>
                   <AutocompleteWidget
                     options={fundingTypeArr}
                     size="small"
                     label="Funding Type"
+                    value={fundingType}
                     defaultValue="Customer"
+                    error={isError && !fundingType}
+                    helperText={isError && !fundingType && 'Select Transaction Currency'}
+                    FormHelperTextProps={{ className: 'helper_text_cls' }}
+                    onChange={(event, newValue) => {
+                      updateContractData('fundingType', newValue);
+                    }}
                   />
                 </Grid>
               </Grid>
@@ -493,7 +740,11 @@ export default function ContractsCreation() {
           </AccordionDetails>
         </Accordion>
         <Grid item xs={12} xl={4} md={4} hidden={!(axDefaultexpanded === 'panel1' || axDefaultexpanded === true)}>
-          <Accordion fullWidth>
+          <Accordion
+            fullWidth
+            expanded={axDefaultexpanded === 'panel1' || axDefaultexpanded === true}
+            hidden={!(axDefaultexpanded === 'panel1' || axDefaultexpanded === true)}
+          >
             <AccordionSummary expandIcon={<ArrowRight />} aria-controls="panel2a-content" id="panel2a-header">
               <Typography variant="h6">Financial Dimensions</Typography>
             </AccordionSummary>
@@ -505,19 +756,24 @@ export default function ContractsCreation() {
       </Grid>
       <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={12} justifyContent="center">
         <Stack direction="row" spacing={2}>
-          <Button color="secondary" variant="contained" onClick={navigateToContractlist}>
+          <Button color="secondary" variant="contained" onClick={() => navigateToContractlist()}>
             Back
           </Button>
-          <Button variant="contained" onClick={handleClickSaveContract}>
+          <Button variant="contained" onClick={() => handleClickSaveContract()}>
             Save
           </Button>
           <Button color="warning" variant="contained">
             Complete Contract
           </Button>
+          {isEditFlag && (
+            <Button color="primary" variant="contained">
+              AX Integration
+            </Button>
+          )}
         </Stack>
       </Grid>
       <Grid item xs={12} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button variant="contained" size="small" onClick={addNewProject}>
+        <Button variant="contained" size="small" onClick={() => addNewProject()}>
           Add new project
         </Button>
       </Grid>

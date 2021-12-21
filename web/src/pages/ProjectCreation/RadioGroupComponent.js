@@ -8,17 +8,19 @@ import {
   FormControl,
   FormLabel,
   TextField,
-  InputAdornment
+  InputAdornment,
+  Chip
 } from '@mui/material';
 
-function RadioGroupComponent({ title, options, onChange }) {
+function RadioGroupComponent({ title, options, onChange, value, error, helperText }) {
   return (
     <div>
-      <FormControl component="fieldset">
+      <FormControl component="fieldset" error={error}>
         <FormLabel component="legend" style={{ color: '#919EAB' }}>
           {title}
         </FormLabel>
-        <RadioGroup onChange={onChange} row aria-label="ExecutionType" name="row-radio-buttons-group">
+        {error && <Chip variant="outlined" color="error" label={helperText} sx={{ borderColor: 'error.main' }} />}
+        <RadioGroup onChange={onChange} row aria-label="ExecutionType" name="row-radio-buttons-group" value={value}>
           {options.map((option) => (
             <FormControlLabel value={option.val} control={<Radio />} label={option.name} />
           ))}
