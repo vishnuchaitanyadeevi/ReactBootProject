@@ -1363,5 +1363,535 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
     { name: { en: 'Arnold J Maben', ar: 'أرنولد جي مابن' }, value: 'arnold-j-maben' },
     { name: { en: 'Shareef Mohammed', ar: 'شريف محمد' }, value: 'shareef -mohammed' },
     { name: { en: 'Venkateshwarlu Shri', ar: 'فينكاتيشوارلو شري' }, value: 'venkateshwarlu-shri' }
+  ],
+  CALL_OUT_REASONS: [
+    { name: { en: 'Abuse', ar: 'تعاطي' } },
+    { name: { en: 'Warranty', ar: 'ضمان' } },
+    { name: { en: 'Not been completed', ar: 'لم تكتمل' } },
+    {
+      name: {
+        en: 'Break down of acidental damage FOL Scheduled Return',
+        ar: 'انهيار التلف العرضي للإرجاع المجدول'
+      }
+    },
+    { name: { en: 'FOL Unscheduled Return', ar: 'FOL عودة غير مجدولة' } }
+  ],
+  CUSTOMERS: [
+    {
+      name: { en: 'Makan Restaurant', ar: 'مطعم مكان' },
+      address: {
+        en: 'Fares Ibn Al Nudur St. Opp. Rashid Male Gat# 6 Al-Khobar-34428',
+        ar: 'شارع فارس بن النضر مقابل. راشد مالي جات # 6 الخبر - 34428'
+      }
+    },
+    {
+      name: { en: 'Walid Ben Mafih Bin Mohammed Al Qsaini', ar: 'وليد بن مافح بن محمد القصيني' },
+      address: {
+        en: 'PO Box.# 620 10Th Cross St. Alameen Al-Aqrabhiah-Al-Knobar-31952',
+        ar: 'ص.ب 620 تقاطع 10 شارع الامين العقربية -النوبر 31952'
+      }
+    },
+    {
+      name: { en: 'Asia Trading Company', ar: 'شركة آسيا التجارية' },
+      address: { en: 'PO Box.# 156 Al-Jafr Road Al-Hafof-31982', ar: 'ص.ب رقم 156 طريق الجفر الهفوف 31982' }
+    },
+    {
+      name: {
+        en: 'Quality First Catering Service Corporation....',
+        ar: 'شركة الجودة الأولى لخدمات التموين ....'
+      },
+      address: { en: 'P.O Box: 12281.Al Aarid Diriyah.Riyadh.', ar: 'ص.ب: 12281 العارض الدرعية الرياض.' }
+    },
+    {
+      name: { en: 'Magenta Investments L.L.C', ar: 'ماجنتا للاستثمارات ذ' },
+      address: {
+        en: 'PO Box: 32449 4903 Aspin Commercial Tower, SZR.Dubai UAE',
+        ar: 'ص.ب: 32449 4903 برج آسبن التجاري ، SZR ، دبي ، الإمارات العربية المتحدة'
+      }
+    },
+    {
+      name: { en: 'Al Jabalain Plastic Products Est.', ar: 'مؤسسة الجبلين للمنتجات البلاستيكية.' },
+      address: { en: 'P.O Box:55411.Hail.', ar: 'P.O Box:55411.Hail.' }
+    },
+    {
+      name: { en: 'Basmat Alaeela Est. Trading', ar: 'مؤسسة بسمة العيلة تجارة' },
+      address: { en: 'Qatif-32632', ar: 'القطيف 32632' }
+    },
+    {
+      name: { en: '66 Cups', ar: '66 كوب' },
+      address: {
+        en: 'P.O.Box 23514, King Abdulaziz Road, Alshatia,Jeddah',
+        ar: 'ص.ب 23514 ، طريق الملك عبد العزيز ، الشاطئ ، جدة'
+      }
+    },
+    {
+      name: { en: 'Al Alameen Intemational School', ar: 'مدرسة العلمين الدولية' },
+      address: {
+        en: 'P.O.Box:6687 Salah Ad Din Ayyubi Road,Al Zahra, Riyadh 12332.',
+        ar: 'ص.ب .: 6687 طريق صلاح الدين الأيوبي ، الزهراء ، الرياض 12332.'
+      }
+    },
+    {
+      name: { en: 'Perfect Body Sports Company (Calistheni...', ar: 'شركة بيرفكت بودي الرياضية (كاليسثين ...' },
+      address: {
+        en: 'Perfect Body Sports Company(Calisthenics). Prince Muhammed Ibn Saad Ibn,. Riyadh. Mr. Imad-',
+        ar: 'شركة بيرفكت بودي سبورتس (تمارين رياضية). الأمير محمد بن سعد بن. الرياض. السيد عماد-'
+      }
+    },
+    {
+      name: { en: 'Altima Contracting and Industrial Service...', ar: 'التيما للمقاولات والخدمات الصناعية ...' },
+      address: { en: 'Al-Jubail-31901', ar: 'الجبيل 31901' }
+    },
+    {
+      name: { en: 'The Modem Dish Company (NAYA DUR)', ar: 'شركة صحن المودم (نيا دور)' },
+      address: {
+        en: 'Al-Rakah Prince Turkev St. Al-Khobar-31952',
+        ar: 'الراكة شارع الامير تركيف الخبر 31952'
+      }
+    },
+    {
+      name: { en: 'Mays & Reem Coffee Shop', ar: 'مقهى ميس وريم' },
+      address: {
+        en: 'Al•Agrabiyah Al-Mashoora St. Al-Knobar-31952',
+        ar: '• Agrabiyah Al-Mashoora - الخبر - 31952'
+      }
+    },
+    {
+      name: { en: 'Hessa Abdullah Al Besher for Proving M...', ar: 'حصة عبدالله البشر لإثبات ...' },
+      address: {
+        en: 'P.O.Box:11512. Khalid Bin Al Waleed Riyadh.',
+        ar: 'صندوق بريد: 11512. خالد بن الوليد الرياض.'
+      }
+    },
+    {
+      name: { en: 'Caesars Bluewaters Dubai LLC', ar: 'سيزرز بلوواترز دبي ذ' },
+      address: {
+        en: 'PO Box: 36555 Caesars Bluewaters Dubai, Bluewaters Island Duba',
+        ar: 'صندوق بريد: 36555 Caesars Bluewaters Dubai، Bluewaters Island، Duba'
+      }
+    }
+  ],
+  SERVICE_SUBJECTS: [
+    {
+      code: '638171',
+      name: { en: 'Prolitec Wall Mount Appliance RZAQ570 Black', ar: 'جهاز بروليتيك للتثبيت على الحائط RZAQ570 أسود' }
+    },
+    { code: '611113', name: { en: 'Ads 4', ar: 'الإعلانات 4' } },
+    { code: 'D02023', name: { en: 'W5000 Diffuser', ar: 'الناشر W5000' } },
+    { code: '611113', name: { en: 'Ads 4', ar: 'الإعلانات 4' } },
+    {
+      code: '621065',
+      name: {
+        en: 'Auto Janitor System Toilet Odor Treatment 1818138',
+        ar: 'نظام التنظيف التلقائي لرائحة المرحاض 1818138'
+      }
+    },
+    {
+      code: '621065',
+      name: {
+        en: 'Auto Janitor System Toilet Odor Treatment 1818138',
+        ar: 'نظام التنظيف التلقائي لرائحة المرحاض 1818138'
+      }
+    },
+    { code: '611007', name: { en: 'RM T-Cell Dispenser Chrome', ar: 'موزع RM T-Cell كروم' } },
+    {
+      code: '611239',
+      name: {
+        en: 'EC030 Catcher - Genus Insect Light Trap 220V',
+        ar: 'EC030 الماسك - مصيدة الحشرات من الجنس بجهد 220 فولت'
+      }
+    },
+    { code: '611089', name: { en: 'Insect Inn Ultra II', ar: 'إنسيكت إن ألترا 2' } },
+    {
+      code: '610340',
+      name: { en: 'Aifforce Hand Dryer Chrome 220 - 240V', ar: 'آيف فورس مجفف يد كروم 220-240 فولت' }
+    },
+    {
+      code: '610024',
+      name: { en: 'MX Type Mixing Center SS 4 Prod Fleci Gap', ar: 'MX نوع خلط مركز SS 4 برود Fleci الفجوة' }
+    },
+    {
+      code: '610340',
+      name: { en: 'Airforce Hand Dryer Chrome 220 - 240V', ar: 'مجفف اليد ايرفورس كروم 220 - 240 فولت' }
+    },
+    {
+      code: 'D01047',
+      name: { en: 'Automatic Liquid Soap Dispenser refillable', ar: 'موزع صابون سائل أوتوماتيكي قابل لإعادة التعبئة' }
+    }
+  ],
+  CURRENCYS: [
+    { name: { en: 'Euro', ar: 'اليورو' }, code: { en: 'EUR', ar: 'يورو' } },
+    { name: { en: 'US Dollar', ar: 'الدولار الأمريكي' }, code: { en: 'USD', ar: 'دولار أمريكي' } },
+    { name: { en: 'Bahraini Dinar', ar: 'دينار بحريني' }, code: { en: 'BHD', ar: 'دينار بحريني' } },
+    { name: { en: 'Qatari Rial', ar: 'ريال قطري' }, code: { en: 'QAR', ar: 'ريال قطري' } },
+    { name: { en: 'UAE Dirham', ar: 'درهم إماراتي' }, code: { en: 'AED', ar: 'درهم إماراتي' } },
+    { name: { en: 'Fu Dollar', ar: 'فو دولار' }, code: { en: 'FJD', ar: 'FJD' } },
+    {
+      name: { en: 'Falkland Islands (lslas Malvinas) Pound', ar: 'جزر فوكلاند ( lslas مالفيناس ) جنيه' },
+      code: { en: 'EKP', ar: 'EKP' }
+    },
+    { name: { en: 'Pound Sterling', ar: 'الجنيه الاسترليني' }, code: { en: 'GBP', ar: 'GBP' } },
+    { name: { en: 'Lari', ar: 'لاري' }, code: { en: 'GEL', ar: 'جل' } },
+    { name: { en: 'Ghana Cedi', ar: 'غانا سيدي' }, code: { en: 'GHS', ar: 'GHS' } },
+    { name: { en: 'Gibraltar Pound', ar: 'جبل طارق الجنيه' }, code: { en: 'GIP', ar: 'GIP' } }
+  ],
+  CONTRACTS: [
+    {
+      code: 'HSDCJD_0001',
+      name: { en: 'Retal Dental Clinic | General Contract', ar: 'عيادة ريتال لطب الاسنان | عقد عام' }
+    },
+    {
+      code: 'HSDCJD_0002',
+      name: { en: 'Marhaba Restaurant | General Contract', ar: 'مطعم مرحبا | عقد عام' }
+    },
+    {
+      code: 'HSDCJD_0003',
+      name: { en: 'Bouthaina Beauty I General Contract', ar: 'عقد عام بثينة للتجميل 1' }
+    },
+    {
+      code: 'HSDCJD_0004',
+      name: { en: 'Nestle Saudi Arabia LLC | General Contract', ar: 'نستله المملكة العربية السعودية ذ م م | عقد عام' }
+    },
+    { code: 'HSDCJD_0005', name: { en: 'Jotun Paints | General Contract', ar: 'دهانات جوتن | عقد عام' } },
+    {
+      code: 'HSDCJD_0006',
+      name: { en: 'Al Waiba Restaurant | General Contract', ar: 'مطعم الويبة | عقد عام' }
+    },
+    { code: 'HSDCJD_0007', name: { en: 'Cafe Aroma | General Contract', ar: 'كافيه أروما | عقد عام' } },
+    {
+      code: 'HSDCJD_0009',
+      name: { en: 'Pepsico Services LLC | General Contract', ar: 'بيبسيكو للخدمات ذ م م | عقد عام' }
+    },
+    { code: 'HSDCJD_0015', name: { en: 'Keen Rite I General Contract', ar: 'Keen Rite I العقد العام' } },
+    {
+      code: 'HSDCJD_0016',
+      name: { en: 'Kinan Intemational | General Contract', ar: 'كنان الدولية | عقد عام' }
+    },
+    {
+      code: 'HSDCJD_0020',
+      name: {
+        en: 'Islamic Development Bank Group | General Contract',
+        ar: 'مجموعة البنك الاسلامي للتنمية | عقد عام'
+      }
+    },
+    {
+      code: 'HSDCJD_0021',
+      name: {
+        en: 'Movenpick Hotel & Resort Yanbu | General Contract',
+        ar: 'فندق ومنتجع موفنبيك ينبع | عقد عام'
+      }
+    },
+    {
+      code: 'HSDCJD_0022',
+      name: { en: 'Premium Food Company Ltd I General Contract', ar: 'شركة بريميوم فود المحدودة أنا العقد العام' }
+    },
+    {
+      code: 'HSDCJD_0023',
+      name: {
+        en: 'Dar Al Hijra Intercontinental Hotel | General Contract',
+        ar: 'فندق دار الهجرة انتركونتيننتال | عقد عام'
+      }
+    },
+    {
+      code: 'HSDCJD_0027',
+      name: {
+        en: 'Restaurant Of Oriental Cusine Co Ltd - Chop Stick',
+        ar: 'شركة مطعم المأكولات الشرقية المحدودة - عيدان الطعام'
+      }
+    },
+    {
+      code: 'HSDCJD_0030',
+      name: { en: 'Alireza Travels | General Contract', ar: 'علي رضا للسفريات | عقد عام' }
+    }
+  ],
+  PROJECTS: [
+    {
+      code: 'HSDPJD_0001_001_001',
+      name: {
+        en: 'Retal Dental Clinic | Gazzaz center | Refill Washroom',
+        ar: 'عيادة ريتال لطب الاسنان | مركز القزاز | إعادة تعبئة الحمام'
+      }
+    },
+    {
+      code: 'HSDPJD_0002_001_001',
+      name: {
+        en: 'Marhaba Restaurant | Andalus branch | Refill Washroom',
+        ar: 'مطعم مرحبا | فرع الأندلس | إعادة تعبئة الحمام'
+      }
+    },
+    {
+      code: 'HSDPJD_0003_001_001',
+      name: {
+        en: 'Bouthaina Beauty | Prince Sultan street branch | Refill Washroom',
+        ar: 'بثينة للتجميل | فرع شارع الأمير سلطان | إعادة تعبئة الحمام'
+      }
+    },
+    {
+      code: 'HSDPJD_0004_001_001',
+      name: {
+        en: 'Nestle Saudi Arabia LLC | 4th floor bin sulaiman center | Refill Washroom',
+        ar: 'نستله المملكة العربية السعودية ذ م م | الدور الرابع سنتر بن سليمان | إعادة تعبئة الحمام'
+      }
+    },
+    {
+      code: 'HSDPJD_0005_001_001',
+      name: {
+        en: 'Jotun Paints | Warehouse industrial city I Refill Washroom',
+        ar: 'دهانات جوتن | المستودع الصناعي بالمدينة الأول إعادة تعبئة الحمام'
+      }
+    },
+    {
+      code: 'HSDPJD_0005_002_001',
+      name: {
+        en: 'Jotun Paints | Office beside Red sea paint factory | Refill Washroom',
+        ar: 'دهانات جوتن | مكتب بجوار مصنع دهانات البحر الاحمر | إعادة تعبئة الحمام'
+      }
+    },
+    {
+      code: 'HSDPJD_0006_001_001',
+      name: {
+        en: 'Al Waba Restaurant I Hindawiya district I Refill Washroom',
+        ar: 'مطعم الوابا 1 حي الهنداوية 1 إعادة ملء دورة المياه'
+      }
+    },
+    {
+      code: 'HSDPJD_0007_001_001',
+      name: {
+        en: 'Cafe Aroma | Al hamra branch | Refill Washroom',
+        ar: 'كافيه أروما | فرع الحمرا | إعادة تعبئة الحمام'
+      }
+    },
+    {
+      code: 'HSDPJD_0009_001_001',
+      name: {
+        en: 'Pepsico Services LLC I Talia street I Refill Washroom',
+        ar: 'Pepsico Services LLC I شارع Talia I إعادة ملء الحمام'
+      }
+    },
+    {
+      code: 'HSDPJD_0015_001_001',
+      name: {
+        en: 'Keen Rite | Ana Gheir Center | Refill Washroom',
+        ar: 'كين رايت | مركز أنا غير | إعادة تعبئة الحمام'
+      }
+    },
+    {
+      code: 'HSDPJD_0015_002_001',
+      name: {
+        en: 'Keen Rite I Auto mall king road I Refill Washroom',
+        ar: 'كين رايت أنا السيارات مول الملك الطريق أنا إعادة ملء الحمام'
+      }
+    },
+    {
+      code: 'HSDPJD_0015_003_001',
+      name: {
+        en: 'Keen Rite | Al khalidiya bin salman center | Refill Washroom',
+        ar: 'كين رايت | مركز الخالدية بن سلمان | إعادة تعبئة الحمام'
+      }
+    },
+    {
+      code: 'HSDPJD_0016_001_001',
+      name: {
+        en: 'Knan Intemational | Saudi Business Center | Refill Washroom',
+        ar: 'كنان | غير المعتدل مركز الأعمال السعودي | إعادة تعبئة الحمام'
+      }
+    },
+    {
+      code: 'HSDPJD_0016_002_001',
+      name: {
+        en: 'Kinan Intemational | Saudi Business Center | Refill Rezaroma',
+        ar: 'كينان | غير المعتدل مركز الأعمال السعودي | إعادة تعبئة ريزاروما'
+      }
+    },
+    {
+      code: 'HSDPJD_0016_003_001',
+      name: {
+        en: 'Kinan Intemational | Asfan Medina Road I Refill Rezaroma',
+        ar: 'كينان | غير المعتدل شارع أسفان مدينا أعيد ملء ريزاروما'
+      }
+    },
+    {
+      code: 'HSDPJD_0020_001_001',
+      name: {
+        en: 'Islamic Development Bank Group I ITFC Building Refill Washroom/',
+        ar: 'مجموعة البنك الإسلامي للتنمية I ITFC إعادة تعبئة المبنى مرحاض /'
+      }
+    }
+  ],
+  STOCK_CODES: [
+    {
+      serviceId: 16,
+      uniteRatio: 16,
+      stockCode: 611074,
+      name: { en: 'RM Microburst 3000 Anticipations 75ml 1981053', ar: 'آر إم ميكروبيرست 3000 توقعات 75 مل 1981053' }
+    },
+    {
+      serviceId: 17,
+      uniteRatio: 16,
+      stockCode: 611074,
+      name: { en: 'RM Microburst 3000 Anticipations 75ml 1981053', ar: 'آر إم ميكروبيرست 3000 توقعات 75 مل 1981053' }
+    },
+    {
+      serviceId: 18,
+      uniteRatio: 16,
+      stockCode: 611074,
+      name: { en: 'RM Microburst 3000 Anticipations 75ml 1981053', ar: 'آر إم ميكروبيرست 3000 توقعات 75 مل 1981053' }
+    },
+    {
+      serviceId: 19,
+      uniteRatio: 16,
+      stockCode: 611074,
+      name: { en: 'RM Microburst 3000 Anticipations 75ml 1981053', ar: 'آر إم ميكروبيرست 3000 توقعات 75 مل 1981053' }
+    },
+    {
+      serviceId: 20,
+      uniteRatio: 16,
+      stockCode: 611074,
+      name: { en: 'RM Microburst 3000 Anticipations 75ml 1981053', ar: 'آر إم ميكروبيرست 3000 توقعات 75 مل 1981053' }
+    },
+    {
+      serviceId: 21,
+      uniteRatio: 8,
+      stockCode: 611067,
+      name: { en: 'Auto Janitor Refill Expression 600ml', ar: 'عبوة تعبئة السيارات 600 مل' }
+    },
+    {
+      serviceId: 21,
+      uniteRatio: 8,
+      stockCode: 611061,
+      name: { en: 'RM Microburst 3000 Inspiration 75ml 1980900', ar: 'RM Microburst 3000 Inspiration 75ml 1980900' }
+    },
+    {
+      serviceId: 33,
+      uniteRatio: 8,
+      stockCode: 611067,
+      name: { en: 'Auto Janitor Refill Expression 600ml', ar: 'عبوة تعبئة السيارات 600 مل' }
+    },
+    {
+      serviceId: 33,
+      uniteRatio: 8,
+      stockCode: 611048,
+      name: {
+        en: 'RM Microburst 3000 Radiant Sense 75ml 1980898',
+        ar: 'آر إم ميكروبرست 3000 راديانت سينس 75 مل 1980898'
+      }
+    },
+    {
+      serviceId: 34,
+      uniteRatio: 8,
+      stockCode: 611067,
+      name: { en: 'Auto Janitor Refill Expression 600ml', ar: 'عبوة تعبئة السيارات 600 مل' }
+    },
+    {
+      serviceId: 34,
+      uniteRatio: 8,
+      stockCode: 611048,
+      name: {
+        en: 'RM Microburst 3000 Radiant Sense 75ml 1980898',
+        ar: 'آر إم ميكروبرست 3000 راديانت سينس 75 مل 1980898'
+      }
+    },
+    {
+      serviceId: 35,
+      uniteRatio: 8,
+      stockCode: 611067,
+      name: { en: 'Auto Janitor Refill Expression 600ml', ar: 'عبوة تعبئة السيارات 600 مل' }
+    },
+    {
+      serviceId: 35,
+      uniteRatio: 8,
+      stockCode: 611048,
+      name: {
+        en: 'RM Microburst 3000 Radiant Sense 75ml 1980898',
+        ar: 'آر إم ميكروبرست 3000 راديانت سينس 75 مل 1980898'
+      }
+    },
+    {
+      serviceId: 36,
+      uniteRatio: 8,
+      stockCode: 611067,
+      name: { en: 'Auto Janitor Refill Expression 600ml', ar: 'عبوة تعبئة السيارات 600 مل' }
+    },
+    {
+      serviceId: 36,
+      uniteRatio: 8,
+      stockCode: 611048,
+      name: {
+        en: 'RM Microburst 3000 Radiant Sense 75ml 1980898',
+        ar: 'آر إم ميكروبرست 3000 راديانت سينس 75 مل 1980898'
+      }
+    },
+    {
+      serviceId: 37,
+      uniteRatio: 8,
+      stockCode: 611067,
+      name: { en: 'Auto Janitor Refill Expression 600ml', ar: 'عبوة تعبئة السيارات 600 مل' }
+    },
+    {
+      serviceId: 37,
+      uniteRatio: 8,
+      stockCode: 611048,
+      name: {
+        en: 'RM Microburst 3000 Radiant Sense 75ml 1980898',
+        ar: 'آر إم ميكروبرست 3000 راديانت سينس 75 مل 1980898'
+      }
+    },
+    {
+      serviceId: 38,
+      uniteRatio: 8,
+      stockCode: 611067,
+      name: { en: 'Auto Janitor Refill Expression 600ml', ar: 'عبوة تعبئة السيارات 600 مل' }
+    },
+    {
+      serviceId: 38,
+      uniteRatio: 8,
+      stockCode: 611048,
+      name: {
+        en: 'RM Microburst 3000 Radiant Sense 75ml 1980898',
+        ar: 'آر إم ميكروبرست 3000 راديانت سينس 75 مل 1980898'
+      }
+    },
+    {
+      serviceId: 39,
+      uniteRatio: 8,
+      stockCode: 611067,
+      name: { en: 'Auto Janitor Refill Expression 600ml', ar: 'عبوة تعبئة السيارات 600 مل' }
+    },
+    {
+      serviceId: 39,
+      uniteRatio: 8,
+      stockCode: 611048,
+      name: {
+        en: 'RM Microburst 3000 Radiant Sense 75ml 1980898',
+        ar: 'آر إم ميكروبرست 3000 راديانت سينس 75 مل 1980898'
+      }
+    }
+  ],
+  RATIOS: [
+    { id: 1, title: { en: '100 ml', ar: '100 مل ' }, roatio: '0.10000000' },
+    { id: 2, title: { en: '150 ml', ar: '150 مل' }, roatio: '0.1500000C' },
+    { id: 3, title: { en: '200 ml', ar: '200 مل' }, roatio: '0.20000000' },
+    { id: 4, title: { en: '250 ml', ar: '250 مل' }, roatio: '0.2500000C' },
+    { id: 5, title: { en: '300 ml', ar: '300 مل' }, roatio: '0.3000000C' },
+    { id: 6, title: { en: '400 ml', ar: '400 مل' }, roatio: '0.4000000C' },
+    { id: 7, title: { en: '500 ml', ar: '500 مل' }, roatio: '0.5000000C' },
+    { id: 8, title: { en: '1.000 Ltr', ar: '1.000 ' }, roatio: '1.0000000C' },
+    { id: 9, title: { en: '1.200 Ltr', ar: '1.200 لتر' }, roatio: '1.2000000C' },
+    { id: 10, title: { en: '1.500 Ltr', ar: '1.500 لتر' }, roatio: '1.50000006' },
+    { id: 11, title: { en: '2.000 Ltr', ar: '2.000 لتر' }, roatio: '2.0000000C' },
+    { id: 12, title: { en: '2.200 Ltr', ar: '2.200 لتر' }, roatio: '2.20000000' },
+    { id: 13, title: { en: '2.500 Ltr', ar: '2.500 لتر' }, roatio: '2.5000000C' },
+    { id: 14, title: { en: '3.000 Ltr', ar: '3.000 لتر' }, roatio: '3.00000000' },
+    { id: 15, title: { en: '5.000 Ltr', ar: '5.000 لتر' }, roatio: '5.0000000C' },
+    { id: 16, title: { en: 'Each', ar: 'كل' }, roatio: '1.0000000C' },
+    { id: 17, title: { en: '600 ml', ar: '600 مل' }, roatio: '0.6000000C' },
+    { id: 18, title: { en: '700 ml', ar: '700 مل' }, roatio: '0.70000000' },
+    { id: 19, title: { en: '800 ml', ar: '800 مل' }, roatio: '0.80000000' },
+    { id: 20, title: { en: '850 ml', ar: '850 مل' }, roatio: '0.85000000' }
   ]
 };
+
+export const PAYMENT_TYPE = [
+  { name: { en: 'Billable', ar: 'قابل للفوترة' }, value: 'billable' },
+  { name: { en: 'Non Billable', ar: 'غير قابل للفوترة' }, value: 'nonBillable' }
+];

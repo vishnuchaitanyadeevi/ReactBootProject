@@ -148,5 +148,23 @@
     "Save": "Save",
     "TerminateProject": "Terminate Project",
     "Renew": "Renew"
+  },
+  "addCallout": {
+    "addCallOut": "Add CallOut",
+    "customer": "Customer",
+    "contracts": "Contracts",
+    "calloutReason": "CallOut Reason",
+    "project-ServiceSubject": "Project - Service Subject",
+    "isFOLReplacement": "Is FOL Replacement",
+    "paymentType": "Payment Type",
+    "date": "Date",
+    "customerAddress": "Customer Address",
+    "serviceFee": "Service Fee",
+    "currency": "Currency",
+    "notes": "Notes",
+    "task": "Task",
+    "addNewTasks": "Add New Tasks",
+    "spareParts": "Spare parts",
+    "new": "New"
   }
 }

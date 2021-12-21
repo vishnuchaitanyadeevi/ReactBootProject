@@ -164,5 +164,23 @@
     "Save": "يحفظ",
     "Terminate Projects": "إنهاء المشروع",
     "Renew": "تجديد"
+  },
+  "addCallout": {
+    "addCallOut": "إضافة مكالمة",
+    "Customer": "عميل",
+    "contracts": "انكماش",
+    "calloutReason": "سبب الاستدعاء",
+    "project-ServiceSubject": "مشروع - موضوع الخدمة",
+    "isFOLReplacement": "هل استبدال FOL",
+    "paymentType": "نوع الدفع",
+    "date": "تاريخ",
+    "customerAddress": "عنوان العميل",
+    "serviceFee": "رسوم الخدمة",
+    "currency": "عملة",
+    "notes": "ملحوظات",
+    "task": "مهمة",
+    "addNewTasks": "أضف مهام جديدة",
+    "spareParts": "قطعة منفصلة",
+    "new": "جديد"
   }
 }

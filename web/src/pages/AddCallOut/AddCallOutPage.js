@@ -1,24 +1,39 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import {
-  Grid,
-  Typography,
   TextField,
-  Button,
+  Grid,
   Divider,
-  Radio,
-  RadioGroup,
   FormControlLabel,
   FormControl,
+  Button,
+  Checkbox,
+  RadioGroup,
+  Radio,
+  Autocomplete,
+  Box,
   FormLabel,
-  Checkbox
+  Typography
 } from '@mui/material';
+import TextareaAutosize from '@mui/base/TextareaAutosize';
+import { isArray } from 'lodash';
 import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget';
 import BasicDatePicker from '../../components/pickers/BasicDatePicker';
 import SimpleTable from '../../components/table/simpleTable';
+import { PAYMENT_TYPE } from '../../components/ServiceBoard/data';
 import TaskTable from './TaskTable';
+import useSettings from '../../hooks/useSettings';
+import { COMPONENTS } from '../../utils/constants';
 import './AddCallOutPage.scss';
 
 function AddCallOutPage() {
+  const { lang, themeMode } = useSettings();
+  const { t } = useTranslation();
+  const masterData = useSelector((state) => state.MasterDataReducer);
+  const { TEXT_FIELD, SELECT_BOX, CHECKBOX, RADIO, AUTOCOMPLETE, DATEPICKER, TEXT_AREA } = COMPONENTS;
+  const [payload, setPayload] = useState({});
+
   const jsonData = [
     {
       id: 1,
@@ -140,104 +155,288 @@ function AddCallOutPage() {
     { label: 'C', value: 'C' }
   ];
 
+  const handleChange = (key, val) => {
+    setPayload({ ...payload, [key]: val });
+  };
+
+  const renderComponent = (metaData, ind) => {
+    const {
+      control,
+      isPasswordField = false,
+      variant,
+      key,
+      showLabel = false,
+      label,
+      placeholder,
+      size,
+      options,
+      labelStyle,
+      controlStyle,
+      groupStyle,
+      select = false,
+      fullWidth = true,
+      columnWidth = 1.5,
+      inputFormat = 'dd-MM-yyyy',
+      views = ['year', 'month', 'day'],
+      defaultValue = '',
+      maxRows = 10,
+      minRows = 4
+    } = metaData;
+
+    switch (control) {
+      case TEXT_FIELD:
+      case SELECT_BOX:
+        return (
+          <Grid item xs={12} sm={columnWidth} style={{ ...groupStyle }} key={`${key}-${ind}`}>
+            {showLabel && <FormLabel style={labelStyle}>{t([label])}</FormLabel>}
+            <TextField
+              variant={variant || 'outlined'}
+              size={size || 'small'}
+              type={isPasswordField ? 'password' : 'text'}
+              select={select}
+              fullWidth={fullWidth}
+              label={t([label])}
+              placeholder={t([placeholder])}
+              SelectProps={{ native: true }}
+              onChange={(e) => handleChange(key, e.target.value)}
+              value={payload[key] || ''}
+              style={{ ...controlStyle }}
+            >
+              {select && isArray(options) && (
+                <>
+                  <option key={key} value="" />
+                  {options.map((item) => (
+                    <option key={item.value} disabled={item.isDisabled} value={item.value}>
+                      {item.name[lang]}
+                    </option>
+                  ))}
+                </>
+              )}
+            </TextField>
+          </Grid>
+        );
+      case CHECKBOX:
+        return (
+          <Grid item xs={12} sm={columnWidth} style={{ ...groupStyle }} key={`${key}-${ind}`}>
+            <FormControlLabel
+              label={t([label])}
+              control={
+                <Checkbox
+                  style={{ ...controlStyle }}
+                  checked={payload[key] || false}
+                  onChange={(e) => handleChange(key, e.target.checked)}
+                />
+              }
+            />
+          </Grid>
+        );
+      case RADIO:
+        return (
+          <Grid item xs={12} sm={columnWidth} style={{ ...groupStyle }} key={`${key}-${ind}`}>
+            <FormControl component="fieldset">
+              {showLabel && <FormLabel style={labelStyle}>{t([label])}</FormLabel>}
+              <RadioGroup
+                row
+                aria-label={label}
+                value={payload[key] || ''}
+                name={label}
+                onChange={(e) => handleChange(key, e.target.value)}
+              >
+                {options.map((item) => (
+                  <FormControlLabel
+                    key={item.value}
+                    value={item.value}
+                    disabled={item.isDisabled}
+                    control={<Radio />}
+                    label={t([item.label])}
+                  />
+                ))}
+              </RadioGroup>
+            </FormControl>
+          </Grid>
+        );
+      case AUTOCOMPLETE:
+        return (
+          <Grid item xs={12} sm={columnWidth} key={`${key}-${ind}`} style={{ ...groupStyle }}>
+            <Autocomplete
+              id={key}
+              options={options}
+              getOptionLabel={(option) => option.name[lang]}
+              onChange={(e, val) => val && handleChange(key, val?.value)}
+              value={payload[key] ? options.find((v) => payload[key] === v.value) : null}
+              renderOption={(props, option) => (
+                <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+                  {option.name[lang]}
+                </Box>
+              )}
+              size={size || 'small'}
+              renderInput={(params) => (
+                <TextField
+                  fullWidth={fullWidth}
+                  placeholder={t([placeholder])}
+                  SelectProps={{ native: true }}
+                  variant={variant || 'outlined'}
+                  {...params}
+                  label={t([label])}
+                  inputProps={{
+                    ...params.inputProps
+                  }}
+                />
+              )}
+            />
+          </Grid>
+        );
+      case DATEPICKER:
+        return (
+          <Grid item xs={12} sm={columnWidth} key={`${key}-${ind}`} style={{ ...groupStyle }}>
+            <BasicDatePicker
+              label={t([label])}
+              onChange={(e) => handleChange(key, e.target.value)}
+              inputFormat={inputFormat}
+              views={views}
+            />
+          </Grid>
+        );
+      case TEXT_AREA:
+        return (
+          <TextareaAutosize
+            maxRows={maxRows}
+            minRows={minRows}
+            aria-label={t([label])}
+            placeholder={t([placeholder])}
+            defaultValue={defaultValue}
+            style={controlStyle}
+          />
+        );
+      default:
+        return '';
+    }
+  };
+
   return (
     <Grid className="Add_Call_out_main_cls">
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Typography variant="h4" align="center">
-            Add Call Out
+            {t('addCallout.addCallOut')}
           </Typography>
         </Grid>
         <Grid item xs={12}>
           <Divider style={{ backgroundColor: '#c7d2fe' }} />
         </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h6">General Data</Typography>
+        {renderComponent({
+          control: AUTOCOMPLETE,
+          key: 'customer',
+          label: 'addCallout.customer',
+          placeholder: 'addCallout.customer',
+          columnWidth: '5',
+          options: masterData?.customers
+        })}
+        {renderComponent({
+          control: AUTOCOMPLETE,
+          key: 'contract',
+          label: 'addCallout.contracts',
+          placeholder: 'addCallout.contracts',
+          columnWidth: '3.5',
+          options: masterData?.contracts
+        })}
+        {renderComponent({
+          control: AUTOCOMPLETE,
+          key: 'calloutReason',
+          label: 'addCallout.calloutReason',
+          placeholder: 'addCallout.calloutReason',
+          columnWidth: '3.5',
+          options: masterData?.callOutReasons
+        })}
+        {renderComponent({
+          control: AUTOCOMPLETE,
+          key: 'projectServiceSubject',
+          label: 'addCallout.project-ServiceSubject',
+          placeholder: 'addCallout.project-ServiceSubject',
+          columnWidth: '12',
+          options: masterData?.serviceSubject
+        })}
+        {renderComponent({
+          control: CHECKBOX,
+          key: 'isFOLReplacement',
+          label: 'addCallout.isFOLReplacement',
+          placeholder: 'addCallout.isFOLReplacement',
+          columnWidth: '3'
+        })}
+        {renderComponent({
+          control: DATEPICKER,
+          label: 'addCallout.date',
+          inputFormat: 'dd-MM-yyyy',
+          views: ['year', 'month', 'day'],
+          columnWidth: '2'
+        })}
+        {renderComponent({
+          control: AUTOCOMPLETE,
+          key: 'serviceman',
+          label: 'serviceDashboard.serviceman',
+          placeholder: 'serviceDashboard.serviceman',
+          columnWidth: '3.5',
+          options: masterData?.serviceman
+        })}
+        {renderComponent({
+          control: AUTOCOMPLETE,
+          key: 'serviceman',
+          label: 'addCallout.paymentType',
+          placeholder: 'addCallout.paymentType',
+          columnWidth: '3.5',
+          options: PAYMENT_TYPE
+        })}
+        <Grid item xs={12} sm={8.5}>
+          <div>
+            <span style={{ fontSize: '0.7rem' }}>
+              {t('addCallout.customerAddress')}:
+              <span
+                style={{ color: 'rgb(136 137 140)', fontSize: '0.7rem', marginLeft: '0.2rem', marginBottom: '1rem' }}
+              >
+                Testing Service Subject
+              </span>
+            </span>
+          </div>
+          <div>
+            <span style={{ fontSize: '0.7rem' }}>
+              {t('serviceDashboard.location')}:
+              <span
+                style={{ color: 'rgb(136 137 140)', fontSize: '0.7rem', marginLeft: '0.2rem', marginBottom: '1rem' }}
+              >
+                Testing Service Subject
+              </span>
+            </span>
+          </div>
         </Grid>
-        {/* Form Data Grid section */}
-        <Grid item xs={6} sm={4}>
-          <AutocompleteWidget options={customerData} label="Customer" disablePortal autoSelect size="small" />
-        </Grid>
-        <Grid item xs={6} sm={4}>
-          <AutocompleteWidget options={customerData} label="Contract" disablePortal autoSelect size="small" />
-        </Grid>
-        <Grid item xs={6} sm={4}>
-          <AutocompleteWidget options={customerData} label="Project" disablePortal autoSelect size="small" />
-        </Grid>
-        <Grid item xs={6} sm={4}>
-          <span style={{ fontSize: '0.7rem' }}>Service Subject:</span>
-          <Typography style={{ color: 'rgb(136 137 140)', fontSize: '0.7rem', marginBottom: '1rem' }}>
-            Testing Service Subject
-          </Typography>
-        </Grid>
-        <Grid item xs={6} sm={4}>
-          <span style={{ fontSize: '0.7rem' }}>Customer:</span>
-          <Typography style={{ color: 'rgb(136 137 140)', fontSize: '0.7rem', marginBottom: '1rem' }}>
-            Testing Customer
-          </Typography>
-        </Grid>
-        <Grid item xs={6} sm={4}>
-          <span style={{ fontSize: '0.7rem' }}>Location:</span>
-          <Typography style={{ color: 'rgb(136 137 140)', fontSize: '0.7rem', marginBottom: '1rem' }}>
-            Testing Location
-          </Typography>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <BasicDatePicker label="Date" inputFormat="dd-MM-yyyy" views={['year', 'month', 'day']} />
-        </Grid>
-        <Grid
-          style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}
-          item
-          xs={6}
-          sm={2}
-        >
-          <span style={{ fontSize: '0.7rem', marginTop: '-5px' }}>Status:</span>
-          <Typography style={{ color: 'rgb(136 137 140)', fontSize: '0.7rem' }}>Call out</Typography>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <AutocompleteWidget options={customerData} label="Serviceman" disablePortal autoSelect size="small" />
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <FormControl component="fieldset">
-            <FormLabel component="legend" style={{ fontSize: '0.7rem' }}>
-              Payment Type
-            </FormLabel>
-            <RadioGroup row aria-label="Payment Type" name="radio-buttons-group">
-              <FormControlLabel value="Billable" control={<Radio size="small" />} label="Billable" />
-              <FormControlLabel value="Non billable" control={<Radio size="small" />} label="Non billable" />
-            </RadioGroup>
-          </FormControl>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <TextField fullWidth label="Service Fee" size="small" />
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <AutocompleteWidget options={customerData} label="Call Out Reason" disablePortal autoSelect size="small" />
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <TextField fullWidth label="Notes" size="small" />
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <FormControlLabel control={<Checkbox size="small" />} label="FOL Replacement" />
-        </Grid>
-        <Grid item xs={12}>
-          <Divider style={{ backgroundColor: '#c7d2fe', marginTop: '0.5rem' }} />
-        </Grid>
+        {renderComponent({
+          control: TEXT_FIELD,
+          key: 'serviceFee',
+          label: 'addCallout.serviceFee',
+          placeholder: 'addCallout.serviceFee',
+          columnWidth: '2.5'
+        })}
+        {renderComponent({
+          control: AUTOCOMPLETE,
+          key: 'currency',
+          label: 'addCallout.currency',
+          placeholder: 'addCallout.currency',
+          columnWidth: '1',
+          options: masterData.currency
+        })}
+        {renderComponent({
+          control: TEXT_AREA,
+          key: 'notes',
+          label: 'addCallout.notes',
+          placeholder: 'addCallout.notes',
+          columnWidth: '12',
+          controlStyle: { width: '100%', padding: '0.5rem', marginLeft: '1.5rem' }
+        })}
+        <Divider style={{ backgroundColor: '#c7d2fe', marginTop: '0.5rem' }} />
       </Grid>
 
       {/* Task Grid Container */}
       <Grid container spacing={3} style={{ marginTop: '0.1rem' }}>
-        <Grid item xs={12} sm={12}>
-          <Typography variant="h4" align="center">
-            Tasks
-          </Typography>
-        </Grid>
         {/* Tabular layout */}
-        {/* <Grid item xs={12} style={{ display: 'flex', justifyContent: 'flex-start' }}>
-          <Typography style={{ textDecoration: 'underline', fontSize: '1rem', cursor: 'pointer' }}>
-            Add new task
-          </Typography>
-        </Grid> */}
         <Grid item xs={12}>
           <SimpleTable
             rowData={taskData}
@@ -256,8 +455,13 @@ function AddCallOutPage() {
             type="text"
             title="View project"
             editOption
-            btnLabel="Add new task"
+            btnLabel="Add New Task"
           />
+        </Grid>
+        <Grid item xs={12} sm={12}>
+          <Typography variant="h4" align="center">
+            {t('addCallout.task')}
+          </Typography>
         </Grid>
       </Grid>
       <Divider style={{ backgroundColor: '#c7d2fe', marginTop: '0.8rem' }} />
@@ -265,12 +469,9 @@ function AddCallOutPage() {
       <Grid container spacing={3} style={{ marginTop: '0.1rem' }}>
         <Grid item xs={12} sm={12}>
           <Typography variant="h4" align="center">
-            Spare parts
+            {t('addCallout.spareParts')}
           </Typography>
         </Grid>
-        {/* <Grid item xs={12} style={{ display: 'flex', justifyContent: 'flex-start' }}>
-          <Typography style={{ textDecoration: 'underline', fontSize: '1rem', cursor: 'pointer' }}>Add part</Typography>
-        </Grid> */}
         <Grid item xs={12}>
           <SimpleTable
             rowData={sparePartData}
@@ -290,7 +491,7 @@ function AddCallOutPage() {
             type="text"
             title="View project"
             editOption
-            btnLabel="Spare parts"
+            btnLabel={t('addCallout.spareParts')}
           />
         </Grid>
       </Grid>
@@ -298,13 +499,13 @@ function AddCallOutPage() {
       <Grid container spacing={3} style={{ marginTop: '0.1rem' }}>
         <Grid style={{ display: 'flex', justifyContent: 'center' }} item xs={12} sm={12}>
           <Button style={{ marginLeft: '0.5rem' }} variant="contained" size="small">
-            Save
+            {t('CreateProject.Save')}
           </Button>
           <Button color="warning" style={{ marginLeft: '0.5rem' }} variant="contained" size="small">
-            Back
+            {t('CreateProject.Back')}
           </Button>
           <Button color="secondary" style={{ marginLeft: '0.5rem' }} variant="contained" size="small">
-            New
+            {t('addCallout.new')}
           </Button>
         </Grid>
       </Grid>
