@@ -158,6 +158,11 @@ function ProjectExpiration() {
   return (
     <div className="project_expiration_main_cls">
       <Grid style={{ marginTop: '0rem' }} container spacing={3}>
+        <Grid item xs={12}>
+          <Typography variant="h4" align="center">
+            Project Expiration
+          </Typography>
+        </Grid>
         <Grid item xs={12} sm={8}>
           <Filters
             components={FILTER_COMPONETS}
