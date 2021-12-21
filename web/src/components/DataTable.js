@@ -138,7 +138,6 @@ function ContractList({
           expandedRows={expandedRows}
           showGridlines
           responsiveLayout="scroll"
-          columnResizeMode="expand"
           size="small"
           paginator
           rows={10}
@@ -158,8 +157,9 @@ function ContractList({
           rowsPerPageOptions={[10, 20, 50, 100]}
           selection={selected}
           onSelectionChange={(e) => setSelected(e.value)}
+          resizableColumns
         >
-          <Column expander style={{ width: '3em' }} />
+          <Column expander style={{ minWidth: '1rem', textAlign: 'center' }} />
           {columns &&
             columns.map((col) => (
               <Column

@@ -272,11 +272,11 @@ export default function SimpleTable({
           ) : null}
           {showActionColumn ? (
             <Column
+              field="Action"
+              header="Action"
               columnKey="actionKey"
               body={(options) => ActionBody(options)}
               style={{
-                minWidth: '6rem',
-                width: '6rem',
                 paddingBottom: '0.1rem',
                 paddingTop: '0.1rem'
               }}
