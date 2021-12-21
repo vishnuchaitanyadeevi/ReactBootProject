@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import {
@@ -18,17 +18,15 @@ import {
 } from '@mui/material';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { isArray } from 'lodash';
-import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget';
 import BasicDatePicker from '../../components/pickers/BasicDatePicker';
 import SimpleTable from '../../components/table/simpleTable';
 import { PAYMENT_TYPE } from '../../components/ServiceBoard/data';
-import TaskTable from './TaskTable';
 import useSettings from '../../hooks/useSettings';
 import { COMPONENTS } from '../../utils/constants';
 import './AddCallOutPage.scss';
 
 function AddCallOutPage() {
-  const { lang, themeMode } = useSettings();
+  const { lang } = useSettings();
   const { t } = useTranslation();
   const masterData = useSelector((state) => state.MasterDataReducer);
   const { TEXT_FIELD, SELECT_BOX, CHECKBOX, RADIO, AUTOCOMPLETE, DATEPICKER, TEXT_AREA } = COMPONENTS;
@@ -51,6 +49,8 @@ function AddCallOutPage() {
   const [taskData, setTaskData] = useState(jsonData);
   const [sparePartData, setSparePartData] = useState([]);
   const [editingRows, setEditingRows] = useState({});
+  const [customerAddress, setCustomerAddress] = useState('');
+  const [projectLocation, setProjectLocation] = useState('');
 
   const columnDataForTask = [
     {
@@ -149,15 +149,7 @@ function AddCallOutPage() {
     }
   ];
 
-  const customerData = [
-    { label: 'A', value: 'A' },
-    { label: 'B', value: 'B' },
-    { label: 'C', value: 'C' }
-  ];
-
-  const handleChange = (key, val) => {
-    setPayload({ ...payload, [key]: val });
-  };
+  const handleChange = (key, val) => setPayload({ ...payload, [key]: val });
 
   const renderComponent = (metaData, ind) => {
     const {
@@ -313,6 +305,20 @@ function AddCallOutPage() {
     }
   };
 
+  useEffect(() => {
+    const customer = masterData?.customers?.find((cust) => cust?.value === payload?.customer);
+    if (customer) {
+      setCustomerAddress(customer?.address);
+    }
+  }, [payload.customer]);
+
+  useEffect(() => {
+    const project = masterData?.projects?.find((cust) => cust?.value === payload?.project);
+    if (project) {
+      setProjectLocation(project?.location);
+    }
+  }, [payload.project]);
+
   return (
     <Grid className="Add_Call_out_main_cls">
       <Grid container spacing={3}>
@@ -350,11 +356,11 @@ function AddCallOutPage() {
         })}
         {renderComponent({
           control: AUTOCOMPLETE,
-          key: 'projectServiceSubject',
+          key: 'project',
           label: 'addCallout.project-ServiceSubject',
           placeholder: 'addCallout.project-ServiceSubject',
           columnWidth: '12',
-          options: masterData?.serviceSubject
+          options: masterData?.projects
         })}
         {renderComponent({
           control: CHECKBOX,
@@ -389,11 +395,11 @@ function AddCallOutPage() {
         <Grid item xs={12} sm={8.5}>
           <div>
             <span style={{ fontSize: '0.7rem' }}>
-              {t('addCallout.customerAddress')}:
+              {t('addCallout.customerAddress')} {lang}:
               <span
                 style={{ color: 'rgb(136 137 140)', fontSize: '0.7rem', marginLeft: '0.2rem', marginBottom: '1rem' }}
               >
-                Testing Service Subject
+                {(customerAddress && customerAddress[lang]) || ''}
               </span>
             </span>
           </div>
@@ -403,7 +409,7 @@ function AddCallOutPage() {
               <span
                 style={{ color: 'rgb(136 137 140)', fontSize: '0.7rem', marginLeft: '0.2rem', marginBottom: '1rem' }}
               >
-                Testing Service Subject
+                {(projectLocation && projectLocation[lang]) || ''}
               </span>
             </span>
           </div>
