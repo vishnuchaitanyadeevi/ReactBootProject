@@ -71,3 +71,4 @@ export const isValidStr = (str, type) => {
 // Validation patterns
 export const isEmail = (str) => !PATTERN.EMAIL.test(str);
 export const isPhone = (str) => !PATTERN.PHONE.test(str);
+export const isName = (str) => !PATTERN.NAME.test(str);
