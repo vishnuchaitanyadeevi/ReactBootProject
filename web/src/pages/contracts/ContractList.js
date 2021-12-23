@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import {
   Grid,
   Typography,
@@ -27,6 +28,7 @@ import './ContractList.scss';
 function ContractList() {
   const masterData = useSelector((state) => state.MasterDataReducer);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   // filter component state
   let paramId;
   let editId;
@@ -310,7 +312,7 @@ function ContractList() {
         {/* Grid for heading section */}
         <Grid item xs={12}>
           <Typography align="center" variant="h4">
-            Contract List
+            {t('Contract List')}
           </Typography>
         </Grid>
 
@@ -318,7 +320,7 @@ function ContractList() {
         <Grid item xs={12} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Grid style={{ display: 'flex', alignItems: 'center' }}>
             <TextField
-              label="Project Number"
+              label={t('Project Number')}
               size="small"
               value={projNumber}
               onChange={(e) => {
@@ -333,11 +335,11 @@ function ContractList() {
               size="small"
               onClick={() => navigateOnButtonClick(projNumber)}
             >
-              Open Project
+              {t('Open Project')}
             </Button>
           </Grid>
           <Button variant="contained" color="primary" size="small" onClick={() => navigateToContractAddition()}>
-            Add New Contract
+            {t('Add New Contract')}
           </Button>
         </Grid>
         <Grid item xs={12}>
