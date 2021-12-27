@@ -64,53 +64,10 @@ const columnDataForProjects = [
   { field: 'grpd', header: 'Grouped', editorElement: null, style: { width: '5%' }, sortable: true, filter: true },
   { field: 'prm', header: 'Primary', editorElement: 'checkbox', style: { width: '5%' }, sortable: true, filter: true }
 ];
-
-const projectLocation = [
-  { label: 'Saudi Arabia', value: 'Saudi Arabia' },
-  { label: 'Qatar', value: 'Qatar' },
-  { label: 'Oman', value: 'Oman' },
-  { label: 'Kuwait', value: 'Kuwait' },
-  { label: 'Iraq', value: 'Iraq' },
-  { label: 'Bahrain', value: 'Bahrain' }
-];
-
-const executionType = [
-  { name: 'Regular', val: 'Regular' },
-  { name: 'Discrete', val: 'Discrete' },
-  { name: 'Trial', val: 'Trial' }
-];
-
-const serviceFrequencySettings = [
-  { name: 'Daily', val: 'Daily' },
-  { name: 'Weekly', val: 'Weekly' },
-  { name: 'Monthly', val: 'Monthly' },
-  { name: 'Yearly', val: 'Yearly' }
-];
-
-const invoiceRecipient = [
-  { name: 'Send invoice to customer address', val: 'Send invoice to customer address' },
-  { name: 'Send invoice to project location address', val: 'Send invoice to project location address' },
-  { name: 'Do not schedule invoices', val: 'Do not schedule invoices' },
-  { name: 'Schedule invoice with service', val: 'Schedule invoice with service' },
-  { name: 'Discrete invoice scheduling pattern', val: 'Discrete invoice scheduling pattern' }
-];
-
-const invoiceFrequency = [
-  { name: 'Daily', val: 'Daily' },
-  { name: 'Weekly', val: 'Weekly' },
-  { name: 'Monthly', val: 'Monthly' },
-  { name: 'Yearly', val: 'Yearly' }
-];
-
-const endDateTypes = [
-  { name: 'Fix Date', val: 'Fix Date' },
-  { name: 'Number Of Services', val: 'Number Of Services' }
-];
-
 const numericFields = ['itemCode', 'serialNumber', 'qty', 'sla', 'oStatus', 'serviceSubjOwnerShip'];
 function ProjectCreation() {
-  const { t } = useTranslation();
   const { themeMode, onChangeMode } = useSettings();
+  const { t } = useTranslation();
   const [tableData, setTableData] = useState(jsonData);
   const [editingRows, setEditingRows] = useState({});
   const [uploadProject, setUploadProject] = useState({ images: [] });
@@ -134,7 +91,45 @@ function ProjectCreation() {
       )
     });
   });
-
+  const projectLocation = [
+    { label: `${t('CreateProject.Saudi Arabia')}`, value: 'Saudi Arabia' },
+    { label: `${t('CreateProject.Qatar')}`, value: 'Qatar' },
+    { label: `${t('CreateProject.Oman')}`, value: 'Oman' },
+    { label: `${t('CreateProject.Kuwait')}`, value: 'Kuwait' },
+    { label: `${t('CreateProject.Iraq')}`, value: 'Iraq' },
+    { label: `${t('CreateProject.Bahrain')}`, value: 'Bahrain' }
+  ];
+  const executionType = [
+    { name: `${t('CreateProject.Regular')}`, val: 'Regular' },
+    { name: `${t('CreateProject.Discrete')}`, val: 'Discrete' },
+    { name: `${t('CreateProject.Trial')}`, val: 'Trial' }
+  ];
+  const serviceFrequencySettings = [
+    { name: `${t('CreateProject.Daily')}`, val: 'Daily' },
+    { name: `${t('CreateProject.Weekly')}`, val: 'Weekly' },
+    { name: `${t('CreateProject.Monthly')}`, val: 'Monthly' },
+    { name: `${t('CreateProject.Yearly')}`, val: 'Yearly' }
+  ];
+  const invoiceRecipient = [
+    { name: `${t('CreateProject.Send invoice to customer address')}`, val: 'Send invoice to customer address' },
+    {
+      name: `${t('CreateProject.Send invoice to project location address')}`,
+      val: 'Send invoice to project location address'
+    },
+    { name: `${t('CreateProject.Do not schedule invoices')}`, val: 'Do not schedule invoices' },
+    { name: `${t('CreateProject.Schedule invoice with service')}`, val: 'Schedule invoice with service' },
+    { name: `${t('CreateProject.Discrete invoice scheduling pattern')}`, val: 'Discrete invoice scheduling pattern' }
+  ];
+  const invoiceFrequency = [
+    { name: `${t('CreateProject.Daily')}`, val: 'Daily' },
+    { name: `${t('CreateProject.Weekly')}`, val: 'Weekly' },
+    { name: `${t('CreateProject.Monthly')}`, val: 'Monthly' },
+    { name: `${t('CreateProject.Yearly')}`, val: 'Yearly' }
+  ];
+  const endDateTypes = [
+    { name: `${t('CreateProject.Fix Date')}`, val: 'Fix Date' },
+    { name: `${t('CreateProject.Number Of Services')}`, val: 'Number Of Services' }
+  ];
   // handle remove selcted file
   const handleRemove = (file) => {
     const filteredItems = uploadProject.images.filter((_file) => _file !== file);
@@ -822,7 +817,7 @@ function ProjectCreation() {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Recur every"
+                label={t('CreateProject.Recur every')}
                 InputProps={{
                   endAdornment: <InputAdornment position="end">{t('CreateProject.Days')}</InputAdornment>
                 }}
@@ -838,7 +833,7 @@ function ProjectCreation() {
             <Grid item xs={12} sm={12}>
               <TextField
                 fullWidth
-                label="Project Value"
+                label={t('CreateProject.Project Value')}
                 InputProps={{
                   endAdornment: <InputAdornment position="start">{t('CreateProject.SAR')}</InputAdornment>
                 }}
@@ -1034,7 +1029,7 @@ function ProjectCreation() {
             type="text"
             title="View project"
             editOption
-            btnLabel="Add new Service Subject"
+            btnLabel={t('CreateProject.Add New Service Subject')}
             numericFields={numericFields}
           />
         </Grid>
