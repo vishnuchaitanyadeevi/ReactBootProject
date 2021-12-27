@@ -16,6 +16,7 @@ import { FilterMatchMode } from 'primereact/api';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from 'react-router-dom';
+import { useErrorHandler } from 'react-error-boundary';
 import DataTable from '../../components/DataTable';
 import contractData from '../../utils/Contract-List-Data.json';
 import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget';
@@ -287,10 +288,14 @@ function ContractList() {
     editId = options.project_number;
     navigate(`/project/edit/${options.id}`, { state: editId }, { replace: true });
   };
-
+  const handleError = useErrorHandler();
   const navigateOnButtonClick = (projNumber) => {
-    console.log(projNumber);
-    navigate(`/project/edit/${projNumber}`, { state: projNumber }, { replace: true });
+    try {
+      console.log(projNumber);
+      navigate(`/project/edit/${projNumber}`, { state: projNumber }, { replace: true });
+    } catch (e) {
+      handleError(e);
+    }
   };
 
   const navigateToContractEdition = (options) => {

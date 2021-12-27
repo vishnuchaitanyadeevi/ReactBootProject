@@ -14,7 +14,9 @@ const AlertDialog = ({
   onClick,
   negativeText,
   positiveText,
-  handleSubmit
+  handleSubmit,
+  dialogContent,
+  handleNegative
 }) => {
   console.log('calling Component...');
   return (
@@ -27,9 +29,10 @@ const AlertDialog = ({
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">{description}</DialogContentText>
+        {dialogContent}
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>{negativeText}</Button>
+        <Button onClick={handleNegative}>{negativeText}</Button>
         <Button onClick={handleSubmit} autoFocus>
           {positiveText}
         </Button>
