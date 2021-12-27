@@ -2,6 +2,8 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import moment from 'moment-timezone';
+import { ErrorBoundary } from 'react-error-boundary';
+import FallBack from './components/errorHandling/FallBack';
 import Router from './routes';
 // theme
 import ThemeConfig from './theme';
@@ -34,15 +36,21 @@ export default function App() {
     return () => {};
   }, []);
 
+  const errorHandler = (error, errorInfo) => {
+    console.log('Logging', error, errorInfo);
+  };
+
   return (
-    <ThemeConfig>
-      <ThemePrimaryColor>
-        <RtlLayout>
-          {/* <Settings /> */}
-          <ScrollToTop />
-          <Router />
-        </RtlLayout>
-      </ThemePrimaryColor>
-    </ThemeConfig>
+    <ErrorBoundary FallbackComponent={FallBack} onError={errorHandler} key={location.pathname}>
+      <ThemeConfig>
+        <ThemePrimaryColor>
+          <RtlLayout>
+            {/* <Settings /> */}
+            <ScrollToTop />
+            <Router />
+          </RtlLayout>
+        </ThemePrimaryColor>
+      </ThemeConfig>
+    </ErrorBoundary>
   );
 }
