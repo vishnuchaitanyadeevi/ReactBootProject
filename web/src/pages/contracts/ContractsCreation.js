@@ -8,8 +8,6 @@ import {
   Stack,
   Button
 } from '@mui/material';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
 import React, { useState, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArrowRight, UploadFileOutlined } from '@mui/icons-material/';
@@ -27,8 +25,7 @@ import CustomerData from '../../utils/customerslist.json';
 import CustomersList from '../../components/CustomersList';
 import { isEmail, isPhone, isName } from '../../utils/utils';
 import { ContractData as ConData } from './Data';
-
-const Alert = React.forwardRef((props, ref) => <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />);
+import OpenNotification from '../../components/Notification/Notification';
 
 export default function ContractsCreation() {
   const [open, setOpen] = useState(false);
@@ -63,8 +60,8 @@ export default function ContractsCreation() {
     // contract details
     contractNo: '',
     contractName: '',
-    contractSignOn: '',
-    contractStartDate: '',
+    contractSignOn: null,
+    contractStartDate: null,
     generalDiscount: '',
     status: '',
     // Signatory information
@@ -172,8 +169,8 @@ export default function ContractsCreation() {
         id: Math.floor(Math.random() * 10),
         status: 'Active',
         contractNumber: contractNo,
-        // contractSignOn,
-        // contractStartDate,
+        contractSignOn,
+        contractStartDate,
         customer: customerName,
         activeProjects: '10/12',
         projects: []
@@ -315,18 +312,17 @@ export default function ContractsCreation() {
   console.log('add contract', isEditFlag);
   tableData = isEditFlag ? jsonData : [];
   const numericFields = ['status', 'prjno', 'sdt', 'edt', 'extp', 'grpd', 'prm'];
+  const handleCloseNotification = () => setNotification(false);
   return (
     <Grid container spacing={2} padding={3}>
-      <Snackbar
-        open={openNotification}
-        autoHideDuration={2000}
-        onClose={() => setNotification(false)}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      >
-        <Alert style={{ color: '#FFF' }} severity="success" onClose={() => setNotification(false)}>
-          <span style={{ color: '#FFF' }}>Data Saved Successfully!</span>
-        </Alert>
-      </Snackbar>
+      {openNotification && (
+        <OpenNotification
+          open={openNotification}
+          onClose={handleCloseNotification}
+          severityType="success"
+          message="Successfully Saved Contract"
+        />
+      )}
       <Grid item xs={12} lg={12} display="flex" justifyContent="center">
         <Typography variant="h4">{isEditFlag ? `${t('Contract')} - ${paramId}` : t('Add Contract')}</Typography>
       </Grid>
@@ -473,12 +469,12 @@ export default function ContractsCreation() {
             label={t('Contract Signed On')}
             inputFormat="dd-MM-yyyy"
             views={['year', 'month', 'day']}
-            // value={isEditFlag ? contractSignOn : new Date()}
             value={contractSignOn}
             error={isError && !contractSignOn}
             helperText={isError && !contractSignOn && 'Enter Sign-On Date'}
             FormHelperTextProps={{ className: 'helper_text_cls' }}
-            onChange={(newValue) => updateContractData('contractSignOn', newValue)}
+            getSelectedDate={(dt) => console.log('contractSignOn', dt)}
+            getIsoDate={(dt) => updateContractData('contractSignOn', dt)}
           />
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
@@ -486,7 +482,6 @@ export default function ContractsCreation() {
             label={t('Contract Start Date')}
             inputFormat="dd-MM-yyyy"
             views={['year', 'month', 'day']}
-            // value={isEditFlag ? contractStartDate : new Date()}
             value={contractStartDate}
             error={isError && (!contractStartDate || contractStartDate < contractSignOn)}
             helperText={
@@ -495,7 +490,8 @@ export default function ContractsCreation() {
             }
             FormHelperTextProps={{ className: 'helper_text_cls' }}
             minDate={contractSignOn}
-            onChange={(newValue) => updateContractData('contractStartDate', newValue)}
+            getSelectedDate={(dt) => console.log('contractStartDate', dt)}
+            getIsoDate={(dt) => updateContractData('contractStartDate', dt)}
             disabled={!contractSignOn}
           />
         </Grid>
