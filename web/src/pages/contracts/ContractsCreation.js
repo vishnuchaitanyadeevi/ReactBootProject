@@ -8,6 +8,8 @@ import {
   Stack,
   Button
 } from '@mui/material';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 import React, { useState, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArrowRight, UploadFileOutlined } from '@mui/icons-material/';
@@ -24,7 +26,9 @@ import jsonData from '../../utils/project-table-data.json';
 import CustomerData from '../../utils/customerslist.json';
 import CustomersList from '../../components/CustomersList';
 import { isEmail, isPhone, isName } from '../../utils/utils';
-import ContractJson from '../../utils/Contract-List-Data.json';
+import { ContractData as ConData } from './Data';
+
+const Alert = React.forwardRef((props, ref) => <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />);
 
 export default function ContractsCreation() {
   const [open, setOpen] = useState(false);
@@ -40,7 +44,7 @@ export default function ContractsCreation() {
   const regionArr = ['Region 1', 'Region 2'];
   const [multipleImages, setMultipleImages] = useState({ images: [] });
   const [axDefaultexpanded, setAxDefaultexpanded] = useState(true);
-
+  const [openNotification, setNotification] = useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -164,6 +168,18 @@ export default function ContractsCreation() {
     } else {
       setIsError(false);
       console.log('Contract data is...', contractData);
+      ConData.push({
+        id: Math.floor(Math.random() * 10),
+        status: 'Active',
+        contractNumber: contractNo,
+        // contractSignOn,
+        // contractStartDate,
+        customer: customerName,
+        activeProjects: '10/12',
+        projects: []
+      });
+      setNotification(true);
+      console.log('contract list....', ConData);
     }
   };
   const [isError, setIsError] = useState(false);
@@ -198,7 +214,7 @@ export default function ContractsCreation() {
   useEffect(() => {
     if (isEditFlag) {
       console.log('paramId', paramId);
-      const popData = ContractJson.find((item) => item.contractNumber === paramId);
+      const popData = ConData.find((item) => item.contractNumber === paramId);
       console.log('log', popData);
       updateFormFields(popData);
     }
@@ -301,8 +317,18 @@ export default function ContractsCreation() {
   const numericFields = ['status', 'prjno', 'sdt', 'edt', 'extp', 'grpd', 'prm'];
   return (
     <Grid container spacing={2} padding={3}>
+      <Snackbar
+        open={openNotification}
+        autoHideDuration={2000}
+        onClose={() => setNotification(false)}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      >
+        <Alert style={{ color: '#FFF' }} severity="success" onClose={() => setNotification(false)}>
+          <span style={{ color: '#FFF' }}>Data Saved Successfully!</span>
+        </Alert>
+      </Snackbar>
       <Grid item xs={12} lg={12} display="flex" justifyContent="center">
-        <Typography variant="h4">{isEditFlag ? `{t('Contract')} - ${paramId}` : t('Add Contract')}</Typography>
+        <Typography variant="h4">{isEditFlag ? `${t('Contract')} - ${paramId}` : t('Add Contract')}</Typography>
       </Grid>
       <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
         <Typography variant="h6">{t('Customer Details')}</Typography>
