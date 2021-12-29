@@ -139,6 +139,22 @@ function InvoiceList() {
       filter: true
     }
   ];
+  const headCellsType = [
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE'
+  ];
+
   return (
     <div className="invoice_list_main_cls">
       <Grid container spacing={3}>
@@ -233,6 +249,7 @@ function InvoiceList() {
             showPrintColumn
             printtype="button"
             printtitle="Print"
+            headCellsType={headCellsType}
           />
         </Grid>
       </Grid>

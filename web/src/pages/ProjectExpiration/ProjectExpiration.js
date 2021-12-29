@@ -82,6 +82,7 @@ function ProjectExpiration() {
       filter: true
     }
   ];
+  const headCellsType = ['NONE', 'NONE', 'NONE', 'NONE', 'NONE'];
   const country = [
     { label: 'Saudi Arabia', value: 'Saudi Arabia' },
     { label: 'Qatar', value: 'Qatar' },
@@ -259,6 +260,7 @@ function ProjectExpiration() {
             type="text"
             title="View project"
             numericFields={numericFields}
+            headCellsType={headCellsType}
           />
         </Grid>
       </Grid>

@@ -133,7 +133,8 @@ function AddCallOutPage() {
       filter: true
     }
   ];
-
+  const headCellsTypeTask = ['NONE', 'NONE', 'NONE'];
+  const headCellsTypeSparePart = ['NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE'];
   const customerData = [
     { label: 'A', value: 'A' },
     { label: 'B', value: 'B' },
@@ -257,6 +258,7 @@ function AddCallOutPage() {
             title="View project"
             editOption
             btnLabel="Add new task"
+            headCellsType={headCellsTypeTask}
           />
         </Grid>
       </Grid>
@@ -291,6 +293,7 @@ function AddCallOutPage() {
             title="View project"
             editOption
             btnLabel="Spare parts"
+            headCellsType={headCellsTypeSparePart}
           />
         </Grid>
       </Grid>

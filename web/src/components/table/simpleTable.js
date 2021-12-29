@@ -36,6 +36,7 @@ export default function SimpleTable({
   title,
   btnLabel,
   numericFields,
+  headCellsType,
   ...other
 }) {
   const { themeMode, onChangeMode } = useSettings();
@@ -229,6 +230,30 @@ export default function SimpleTable({
     }
   };
 
+  const handleClickLink = (rowData) => console.log('rowData...', rowData);
+
+  const handleChangeBody = (options, idx) => {
+    const key = Object.keys(options)[idx];
+    const newVal = { key, value: options[key] };
+    switch (headCellsType[idx]) {
+      case 'BUTTON':
+        return <Button variant="contained">{newVal.value}</Button>;
+      case 'NONE':
+        return <Typography style={{ fontSize: '13px' }}>{newVal.value}</Typography>;
+      case 'LINK':
+        return (
+          <Typography
+            style={{ cursor: 'pointer', textDecoration: 'underline', fontSize: '13px', color: 'blue' }}
+            onClick={() => handleClickLink(options)}
+          >
+            {newVal.value}
+          </Typography>
+        );
+      default:
+        return undefined;
+    }
+  };
+
   const handleClick = (options) => console.log('selected row...', options);
   return (
     <Grid container spacing={1}>
@@ -249,7 +274,7 @@ export default function SimpleTable({
         <DataTable
           header={header}
           globalFilter={globalFilter}
-          value={tableData}
+          value={rowData}
           editingRows={editingRows}
           onRowEditChange={onRowEditChange}
           onRowEditComplete={onRowEditComplete}
@@ -257,7 +282,7 @@ export default function SimpleTable({
           filterDisplay="menu"
           {...other}
         >
-          {headerData.map((headerElement) => (
+          {headerData.map((headerElement, idx) => (
             <Column
               editor={(options) => switchEditor(headerElement.editorElement, options)}
               {...headerElement}
@@ -265,6 +290,7 @@ export default function SimpleTable({
                 textAlign: `${numericFields && numericFields.includes(headerElement.field) ? 'center' : ''}`
               }}
               className={numericFields && numericFields.includes(headerElement.field) ? 'd-data-cls' : ''}
+              body={(options) => handleChangeBody(options, idx)}
             />
           ))}
           {editOption ? (
