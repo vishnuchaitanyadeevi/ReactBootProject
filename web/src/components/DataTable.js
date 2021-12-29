@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Grid, Typography, TextField, Button } from '@mui/material';
 import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Helmet } from 'react-helmet';
 import { InputText } from 'primereact/inputtext';
 import { DataTable } from 'primereact/datatable';
@@ -19,10 +20,11 @@ function ContractList({
   onRowClick,
   onChildRowClick,
   numericFields,
-  numericFieldsExpandedData
+  numericFieldsExpandedData,
+  deleteRowData
 }) {
   const { themeMode, onChangeMode } = useSettings();
-  const [tableData, setTableData] = useState(data);
+  const [tableData, setTableData] = useState(null);
   const [selected, setSelected] = useState(null);
   const [expandedRows, setExpandedRows] = useState(null);
   const [globalFilter, setGlobalFilter] = useState(null);
@@ -83,6 +85,7 @@ function ContractList({
   );
 
   const editIcon = (rowData) => <ModeEditOutlinedIcon onClick={() => onRowClick(rowData)} />;
+  const deleteIcon = (rowData) => <DeleteIcon onClick={() => deleteRowData(rowData)} />;
   const editIconExpanded = (rowData) => <ModeEditOutlinedIcon onClick={() => onChildRowClick(rowData)} />;
   const rowExpansionTemplate = (data) => (
     <div className="orders-subtable">
@@ -134,7 +137,7 @@ function ContractList({
       <div className="card">
         <DataTable
           editMode="row"
-          value={tableData}
+          value={data}
           expandedRows={expandedRows}
           showGridlines
           responsiveLayout="scroll"
@@ -177,6 +180,17 @@ function ContractList({
           <Column
             columnKey="edit"
             body={editIcon}
+            style={{
+              minWidth: '6rem',
+              width: '6rem',
+              paddingBottom: '0.1rem',
+              paddingTop: '0.1rem',
+              textAlign: 'center'
+            }}
+          />
+          <Column
+            columnKey="delete"
+            body={deleteIcon}
             style={{
               minWidth: '6rem',
               width: '6rem',

@@ -24,7 +24,8 @@ import jsonData from '../../utils/project-table-data.json';
 import CustomerData from '../../utils/customerslist.json';
 import CustomersList from '../../components/CustomersList';
 import { isEmail, isPhone, isName } from '../../utils/utils';
-import ContractJson from '../../utils/Contract-List-Data.json';
+import { ContractData as ConData } from './Data';
+import OpenNotification from '../../components/Notification/Notification';
 
 export default function ContractsCreation() {
   const [open, setOpen] = useState(false);
@@ -40,7 +41,7 @@ export default function ContractsCreation() {
   const regionArr = ['Region 1', 'Region 2'];
   const [multipleImages, setMultipleImages] = useState({ images: [] });
   const [axDefaultexpanded, setAxDefaultexpanded] = useState(true);
-
+  const [openNotification, setNotification] = useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -59,8 +60,8 @@ export default function ContractsCreation() {
     // contract details
     contractNo: '',
     contractName: '',
-    contractSignOn: '',
-    contractStartDate: '',
+    contractSignOn: null,
+    contractStartDate: null,
     generalDiscount: '',
     status: '',
     // Signatory information
@@ -164,6 +165,18 @@ export default function ContractsCreation() {
     } else {
       setIsError(false);
       console.log('Contract data is...', contractData);
+      ConData.push({
+        id: Math.floor(Math.random() * 10),
+        status: 'Active',
+        contractNumber: contractNo,
+        contractSignOn,
+        contractStartDate,
+        customer: customerName,
+        activeProjects: '10/12',
+        projects: []
+      });
+      setNotification(true);
+      console.log('contract list....', ConData);
     }
   };
   const [isError, setIsError] = useState(false);
@@ -198,7 +211,7 @@ export default function ContractsCreation() {
   useEffect(() => {
     if (isEditFlag) {
       console.log('paramId', paramId);
-      const popData = ContractJson.find((item) => item.contractNumber === paramId);
+      const popData = ConData.find((item) => item.contractNumber === paramId);
       console.log('log', popData);
       updateFormFields(popData);
     }
@@ -299,10 +312,19 @@ export default function ContractsCreation() {
   console.log('add contract', isEditFlag);
   tableData = isEditFlag ? jsonData : [];
   const numericFields = ['status', 'prjno', 'sdt', 'edt', 'extp', 'grpd', 'prm'];
+  const handleCloseNotification = () => setNotification(false);
   return (
     <Grid container spacing={2} padding={3}>
+      {openNotification && (
+        <OpenNotification
+          open={openNotification}
+          onClose={handleCloseNotification}
+          severityType="success"
+          message="Successfully Saved Contract"
+        />
+      )}
       <Grid item xs={12} lg={12} display="flex" justifyContent="center">
-        <Typography variant="h4">{isEditFlag ? `{t('Contract')} - ${paramId}` : t('Add Contract')}</Typography>
+        <Typography variant="h4">{isEditFlag ? `${t('Contract')} - ${paramId}` : t('Add Contract')}</Typography>
       </Grid>
       <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
         <Typography variant="h6">{t('Customer Details')}</Typography>
@@ -447,12 +469,12 @@ export default function ContractsCreation() {
             label={t('Contract Signed On')}
             inputFormat="dd-MM-yyyy"
             views={['year', 'month', 'day']}
-            // value={isEditFlag ? contractSignOn : new Date()}
             value={contractSignOn}
             error={isError && !contractSignOn}
             helperText={isError && !contractSignOn && 'Enter Sign-On Date'}
             FormHelperTextProps={{ className: 'helper_text_cls' }}
-            onChange={(newValue) => updateContractData('contractSignOn', newValue)}
+            getSelectedDate={(dt) => console.log('contractSignOn', dt)}
+            getIsoDate={(dt) => updateContractData('contractSignOn', dt)}
           />
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
@@ -460,7 +482,6 @@ export default function ContractsCreation() {
             label={t('Contract Start Date')}
             inputFormat="dd-MM-yyyy"
             views={['year', 'month', 'day']}
-            // value={isEditFlag ? contractStartDate : new Date()}
             value={contractStartDate}
             error={isError && (!contractStartDate || contractStartDate < contractSignOn)}
             helperText={
@@ -469,7 +490,8 @@ export default function ContractsCreation() {
             }
             FormHelperTextProps={{ className: 'helper_text_cls' }}
             minDate={contractSignOn}
-            onChange={(newValue) => updateContractData('contractStartDate', newValue)}
+            getSelectedDate={(dt) => console.log('contractStartDate', dt)}
+            getIsoDate={(dt) => updateContractData('contractStartDate', dt)}
             disabled={!contractSignOn}
           />
         </Grid>
