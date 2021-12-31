@@ -9,6 +9,7 @@ import {
   Button
 } from '@mui/material';
 import React, { useState, useCallback, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ArrowRight, UploadFileOutlined } from '@mui/icons-material/';
 import SearchIcon from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton';
@@ -23,11 +24,13 @@ import jsonData from '../../utils/project-table-data.json';
 import CustomerData from '../../utils/customerslist.json';
 import CustomersList from '../../components/CustomersList';
 import { isEmail, isPhone, isName } from '../../utils/utils';
-import ContractJson from '../../utils/Contract-List-Data.json';
+import { ContractData as ConData } from './Data';
+import OpenNotification from '../../components/Notification/Notification';
 
 export default function ContractsCreation() {
   const [open, setOpen] = useState(false);
   const [editingRows, setEditingRows] = useState({});
+  const { t } = useTranslation();
   const countryArr = ['SA'];
   const customerArr = ['HSD_ABH_00002', 'HSD_ABH_00004'];
   const statusArr = ['Active', 'On-Hold', 'Inactive'];
@@ -38,7 +41,7 @@ export default function ContractsCreation() {
   const regionArr = ['Region 1', 'Region 2'];
   const [multipleImages, setMultipleImages] = useState({ images: [] });
   const [axDefaultexpanded, setAxDefaultexpanded] = useState(true);
-
+  const [openNotification, setNotification] = useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -57,8 +60,8 @@ export default function ContractsCreation() {
     // contract details
     contractNo: '',
     contractName: '',
-    contractSignOn: '',
-    contractStartDate: '',
+    contractSignOn: null,
+    contractStartDate: null,
     generalDiscount: '',
     status: '',
     // Signatory information
@@ -162,6 +165,18 @@ export default function ContractsCreation() {
     } else {
       setIsError(false);
       console.log('Contract data is...', contractData);
+      ConData.push({
+        id: Math.floor(Math.random() * 10),
+        status: 'Active',
+        contractNumber: contractNo,
+        contractSignOn,
+        contractStartDate,
+        customer: customerName,
+        activeProjects: '10/12',
+        projects: []
+      });
+      setNotification(true);
+      console.log('contract list....', ConData);
     }
   };
   const [isError, setIsError] = useState(false);
@@ -196,7 +211,7 @@ export default function ContractsCreation() {
   useEffect(() => {
     if (isEditFlag) {
       console.log('paramId', paramId);
-      const popData = ContractJson.find((item) => item.contractNumber === paramId);
+      const popData = ConData.find((item) => item.contractNumber === paramId);
       console.log('log', popData);
       updateFormFields(popData);
     }
@@ -293,23 +308,32 @@ export default function ContractsCreation() {
     { field: 'grpd', header: 'Grouped', editorElement: null, style: { width: '5%' }, sortable: true, filter: true },
     { field: 'prm', header: 'Primary', editorElement: 'checkbox', style: { width: '5%' }, sortable: true, filter: true }
   ];
-
+  const headCellsType = ['NONE', 'LINK', 'NONE', 'NONE', 'NONE', 'DATE', 'DATE', 'NONE', 'NONE', 'NONE'];
   console.log('add contract', isEditFlag);
   tableData = isEditFlag ? jsonData : [];
   const numericFields = ['status', 'prjno', 'sdt', 'edt', 'extp', 'grpd', 'prm'];
+  const handleCloseNotification = () => setNotification(false);
   return (
     <Grid container spacing={2} padding={3}>
+      {openNotification && (
+        <OpenNotification
+          open={openNotification}
+          onClose={handleCloseNotification}
+          severityType="success"
+          message="Successfully Saved Contract"
+        />
+      )}
       <Grid item xs={12} lg={12} display="flex" justifyContent="center">
-        <Typography variant="h4">{isEditFlag ? `Contract - ${paramId}` : 'Add Contract'}</Typography>
+        <Typography variant="h4">{isEditFlag ? `${t('Contract')} - ${paramId}` : t('Add Contract')}</Typography>
       </Grid>
       <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
-        <Typography variant="h6">Customer Details</Typography>
+        <Typography variant="h6">{t('Customer Details')}</Typography>
         <Grid container spacing={1} item xs={12} xl={6}>
           <Grid item xs={12} xl={6} md={6}>
             <AutocompleteWidget
               options={countryArr}
               size="small"
-              label="Country"
+              label={t('Country')}
               disablePortal
               value={country}
               error={isError && !country}
@@ -324,7 +348,7 @@ export default function ContractsCreation() {
             <AutocompleteWidget
               options={regionArr}
               size="small"
-              label="Region"
+              label={t('Region')}
               disablePortal
               value={region}
               error={isError && !region}
@@ -340,7 +364,7 @@ export default function ContractsCreation() {
           <AutocompleteWidget
             options={customerArr}
             size="small"
-            label="Customer No"
+            label={t('Customer No')}
             disablePortal
             // onChange={(event, value) => setContractData({ ...contractData, customerNo: value })}
             value={customerNo}
@@ -361,7 +385,7 @@ export default function ContractsCreation() {
         <Grid item xs={12} xl={12} md={12}>
           <TextField
             fullWidth
-            label="Customer Name"
+            label={t('Customer Name')}
             size="small"
             value={customerName}
             error={isError && !customerName}
@@ -373,7 +397,7 @@ export default function ContractsCreation() {
         <Grid item xs={12} xl={12} md={12}>
           <TextField
             fullWidth
-            label="Customer Address"
+            label={t('Customer Address')}
             size="small"
             value={customerAddress}
             error={isError && !customerAddress}
@@ -385,7 +409,7 @@ export default function ContractsCreation() {
         <Grid item xs={12} xl={6} md={6}>
           <TextField
             fullWidth
-            label="CR Number"
+            label={t('CR Number')}
             size="small"
             value={crNo}
             error={isError && !crNo}
@@ -401,7 +425,7 @@ export default function ContractsCreation() {
             value={salesman}
             defaultValue={defaultSalesman}
             size="small"
-            label="Salesman"
+            label={t('Salesman')}
             disablePortal
             onChange={(event, newValue) => {
               updateContractData('salesman', newValue);
@@ -413,12 +437,12 @@ export default function ContractsCreation() {
         </Grid>
       </Grid>
       <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
-        <Typography variant="h6">Contract Details</Typography>
+        <Typography variant="h6">{t('Contract Details')}</Typography>
         <Grid container spacing={1} item xs={12} xl={6}>
           <Grid item xs={12} xl={6} md={6}>
             <TextField
               fullWidth
-              label="Contract Number"
+              label={t('Contract Number')}
               size="small"
               value={contractNo}
               error={isError && !contractNo}
@@ -431,7 +455,7 @@ export default function ContractsCreation() {
         <Grid item xs={12} xl={12} md={12}>
           <TextField
             fullWidth
-            label="Contract Name"
+            label={t('Contract Name')}
             size="small"
             value={contractName}
             error={isError && !contractName}
@@ -442,23 +466,22 @@ export default function ContractsCreation() {
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
           <BasicDatePicker
-            label="Contract Signed On"
+            label={t('Contract Signed On')}
             inputFormat="dd-MM-yyyy"
             views={['year', 'month', 'day']}
-            // value={isEditFlag ? contractSignOn : new Date()}
             value={contractSignOn}
             error={isError && !contractSignOn}
             helperText={isError && !contractSignOn && 'Enter Sign-On Date'}
             FormHelperTextProps={{ className: 'helper_text_cls' }}
-            onChange={(newValue) => updateContractData('contractSignOn', newValue)}
+            getSelectedDate={(dt) => console.log('contractSignOn', dt)}
+            getIsoDate={(dt) => updateContractData('contractSignOn', dt)}
           />
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
           <BasicDatePicker
-            label="Contract Start Date"
+            label={t('Contract Start Date')}
             inputFormat="dd-MM-yyyy"
             views={['year', 'month', 'day']}
-            // value={isEditFlag ? contractStartDate : new Date()}
             value={contractStartDate}
             error={isError && (!contractStartDate || contractStartDate < contractSignOn)}
             helperText={
@@ -467,13 +490,14 @@ export default function ContractsCreation() {
             }
             FormHelperTextProps={{ className: 'helper_text_cls' }}
             minDate={contractSignOn}
-            onChange={(newValue) => updateContractData('contractStartDate', newValue)}
+            getSelectedDate={(dt) => console.log('contractStartDate', dt)}
+            getIsoDate={(dt) => updateContractData('contractStartDate', dt)}
             disabled={!contractSignOn}
           />
         </Grid>
         <Grid item xs={12} xl={12} md={12}>
           <TextField
-            label="General Discount"
+            label={t('General Discount')}
             type="number"
             size="small"
             value={generalDiscount}
@@ -488,7 +512,7 @@ export default function ContractsCreation() {
           <AutocompleteWidget
             options={statusArr}
             size="small"
-            label="Status"
+            label={t('Status')}
             defaultValue="Active"
             value={status}
             error={isError && !status}
@@ -501,13 +525,13 @@ export default function ContractsCreation() {
         </Grid>
       </Grid>
       <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
-        <Typography variant="h6">Signatory Information</Typography>
+        <Typography variant="h6">{t('Signatory Information')}</Typography>
         <Grid item xs={12} xl={6} md={6} />
         <Grid item xs={12} xl={6} md={6}>
           <AutocompleteWidget
             options={rolesArr}
             size="small"
-            label="Role"
+            label={t('Role')}
             defaultValue="Primary"
             error={isError && !role}
             value={role}
@@ -521,7 +545,7 @@ export default function ContractsCreation() {
         <Grid item xs={12} xl={12} md={12}>
           <TextField
             fullWidth
-            label="Name"
+            label={t('Name')}
             size="small"
             onChange={(e) => updateContractData('name', e.target.value)}
             value={name}
@@ -533,7 +557,7 @@ export default function ContractsCreation() {
         <Grid item xs={12} xl={12} md={12}>
           <TextField
             fullWidth
-            label="Position"
+            label={t('Position')}
             size="small"
             onChange={(e) => updateContractData('position', e.target.value)}
             value={position}
@@ -545,7 +569,7 @@ export default function ContractsCreation() {
         <Grid item xs={12} xl={12} md={12}>
           <TextField
             fullWidth
-            label="Address"
+            label={t('Address')}
             size="small"
             onChange={(e) => updateContractData('address', e.target.value)}
             value={address}
@@ -557,7 +581,7 @@ export default function ContractsCreation() {
         <Grid item xs={12} xl={12} md={12}>
           <TextField
             fullWidth
-            label="Phone Number"
+            label={t('Phone Number')}
             size="small"
             onChange={(e) => updateContractData('phoneNo', e.target.value)}
             value={phoneNo}
@@ -571,7 +595,7 @@ export default function ContractsCreation() {
         <Grid item xs={12} xl={12} md={12}>
           <TextField
             fullWidth
-            label="Fax Number"
+            label={t('Fax Number')}
             size="small"
             onChange={(e) => updateContractData('faxNo', e.target.value)}
             value={faxNo}
@@ -583,7 +607,7 @@ export default function ContractsCreation() {
         <Grid item xs={12} xl={12} md={12}>
           <TextField
             fullWidth
-            label="Mobile Number"
+            label={t('Mobile Number')}
             size="small"
             onChange={(e) => updateContractData('mobileNo', e.target.value)}
             value={mobileNo}
@@ -598,7 +622,7 @@ export default function ContractsCreation() {
         <Grid item xs={12} xl={12} md={12}>
           <TextField
             fullWidth
-            label="Email ID"
+            label={t('Email ID')}
             size="small"
             onChange={(e) => updateContractData('emailId', e.target.value)}
             value={emailId}
@@ -612,7 +636,7 @@ export default function ContractsCreation() {
         <Grid item xs={12} xl={12} md={12}>
           <TextField
             fullWidth
-            label="Note"
+            label={t('Note')}
             size="small"
             onChange={(e) => updateContractData('note', e.target.value)}
             value={note}
@@ -623,13 +647,13 @@ export default function ContractsCreation() {
         </Grid>
       </Grid>
       <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
-        <Typography variant="h6">Additional Information</Typography>
+        <Typography variant="h6">{t('Additional Information')}</Typography>
         <Grid item xs={12} xl={12} md={12}>
           <TextField
             multiline
             minRows={3}
             fullWidth
-            label="Special Attention / Notes"
+            label={t('Special Attention / Notes')}
             size="small"
             value={specialAttention}
             onChange={(e) => updateContractData('specialAttention', e.target.value)}
@@ -640,7 +664,7 @@ export default function ContractsCreation() {
             multiline
             minRows={3}
             fullWidth
-            label="Scope of Contract"
+            label={t('Scope of Contract')}
             size="small"
             value={scopeOfContract}
             error={isError && !scopeOfContract}
@@ -658,7 +682,7 @@ export default function ContractsCreation() {
             onDrop={handleDropMultiple}
             onRemove={handleRemove}
             backgroundColor="green"
-            buttonLabel="Upload Contract (PDF)"
+            buttonLabel={t('Upload Contract (PDF)')}
             startIcon={<UploadFileOutlined />}
             checkEmpty={Boolean(multipleImages.images.length)}
             eventCalled={Boolean(checkEvent)}
@@ -672,7 +696,7 @@ export default function ContractsCreation() {
           onChange={handleChange('panel1')}
         >
           <AccordionSummary expandIcon={<ArrowRight />} aria-controls="panel1a-content" id="panel1a-header">
-            <Typography variant="h6">AX Default Fields</Typography>
+            <Typography variant="h6">{t('AX Default Fields')}</Typography>
           </AccordionSummary>
           <AccordionDetails
             id="panel1a-content"
@@ -683,7 +707,7 @@ export default function ContractsCreation() {
                 <Grid item xs={12} xl={12} md={12}>
                   <TextField
                     fullWidth
-                    label="Legal Entity"
+                    label={t('Legal Entity')}
                     size="small"
                     value={legalEntity}
                     error={isError && !legalEntity}
@@ -695,7 +719,7 @@ export default function ContractsCreation() {
                 <Grid item xs={12} xl={12} md={12}>
                   <TextField
                     fullWidth
-                    label="Account currency"
+                    label={t('Account Currency')}
                     size="small"
                     value={accountCurrency}
                     error={isError && !accountCurrency}
@@ -710,7 +734,7 @@ export default function ContractsCreation() {
                   <AutocompleteWidget
                     options={transactionCurrencyArr}
                     size="small"
-                    label="Transaction Currency"
+                    label={t('Transaction Currency')}
                     value={transactionCurrency}
                     error={isError && !transactionCurrency}
                     helperText={isError && !transactionCurrency && 'Select Transaction Currency'}
@@ -724,7 +748,7 @@ export default function ContractsCreation() {
                   <AutocompleteWidget
                     options={fundingTypeArr}
                     size="small"
-                    label="Funding Type"
+                    label={t('Funding Type')}
                     value={fundingType}
                     defaultValue="Customer"
                     error={isError && !fundingType}
@@ -746,10 +770,10 @@ export default function ContractsCreation() {
             hidden={!(axDefaultexpanded === 'panel1' || axDefaultexpanded === true)}
           >
             <AccordionSummary expandIcon={<ArrowRight />} aria-controls="panel2a-content" id="panel2a-header">
-              <Typography variant="h6">Financial Dimensions</Typography>
+              <Typography variant="h6">{t('Financial Diamensions')}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography> Lorem ipsum. </Typography>
+              <Typography> {t('Lorem ipsum.')} </Typography>
             </AccordionDetails>
           </Accordion>
         </Grid>
@@ -757,24 +781,24 @@ export default function ContractsCreation() {
       <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={12} justifyContent="center">
         <Stack direction="row" spacing={2}>
           <Button color="secondary" variant="contained" onClick={() => navigateToContractlist()}>
-            Back
+            {t('Back')}
           </Button>
           <Button variant="contained" onClick={() => handleClickSaveContract()}>
-            Save
+            {t('Save')}
           </Button>
           <Button color="warning" variant="contained">
-            Complete Contract
+            {t('Complete Contract')}
           </Button>
           {isEditFlag && (
             <Button color="primary" variant="contained">
-              AX Integration
+              {t('AX Integration')}
             </Button>
           )}
         </Stack>
       </Grid>
       <Grid item xs={12} style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button variant="contained" size="small" onClick={() => addNewProject()}>
-          Add new project
+          {t('Add new project')}
         </Button>
       </Grid>
       <Grid rowSpacing={1} columnSpacing={1} item xs={12} lg={12} justifyContent="center">
@@ -794,6 +818,7 @@ export default function ContractsCreation() {
           editMode="row"
           editOption
           numericFields={numericFields}
+          headCellsType={headCellsType}
         />
       </Grid>
     </Grid>

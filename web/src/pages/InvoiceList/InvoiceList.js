@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './InvoiceList.scss';
 import { Grid, Typography, TextField, Accordion, AccordionSummary, AccordionDetails, Button } from '@mui/material';
 import { ArrowRight } from '@mui/icons-material/';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget';
 import BasicDatePicker from '../../components/pickers/BasicDatePicker';
 import InvoiceListingData from './InvoiceListingData.json';
@@ -135,31 +137,22 @@ function InvoiceList() {
       style: { width: '10%' },
       sortable: true,
       filter: true
-    },
-    {
-      field: 'issue',
-      header: 'Issue',
-      editorElement: null,
-      style: { width: '10%' }
-    },
-    {
-      field: 'save_changes',
-      header: 'Save Changes',
-      editorElement: null,
-      style: { width: '10%' }
-    },
-    {
-      field: 'edit',
-      header: 'Edit',
-      editorElement: null,
-      style: { width: '10%' }
-    },
-    {
-      field: 'print',
-      header: 'Print',
-      editorElement: null,
-      style: { width: '10%' }
     }
+  ];
+  const headCellsType = [
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE'
   ];
 
   return (
@@ -223,9 +216,8 @@ function InvoiceList() {
             </Accordion>
           </Grid>
         </Grid>
-        {/* Filter section Container end */}
+        {/* Filter section xs={12} end */}
       </Grid>
-      {/* Container end */}
       {/* Grid for simple table */}
       <Grid container spacing={3} style={{ marginTop: '1rem' }}>
         <Grid item xs={12}>
@@ -244,9 +236,43 @@ function InvoiceList() {
             dataKey="id"
             editMode="row"
             numericFields={numericFields}
+            showIssueColumn
+            issueheader="Issue"
+            issuetype="button"
+            issuetitle="Issue"
+            showSaveChangesColumn
+            saveChangestype="button"
+            saveChangestitle="Save Changes"
+            showEditColumn
+            edittype="button"
+            edittitle="Edit"
+            showPrintColumn
+            printtype="button"
+            printtitle="Print"
+            headCellsType={headCellsType}
           />
         </Grid>
       </Grid>
+      {/* Grid for bottom Buttons */}
+      <Grid
+        container
+        spacing={2}
+        style={{ display: 'flex', alignItems: 'center', marginTop: '1rem', marginLeft: '-9px' }}
+      >
+        <Button variant="contained" size="small" style={{ margin: '0.5rem' }}>
+          Print all on page
+        </Button>
+        <Button variant="contained" size="small" style={{ margin: '0.5rem' }}>
+          Print all on page UAE
+        </Button>
+        <Button variant="contained" size="small" style={{ margin: '0.5rem' }}>
+          Issue all on page
+        </Button>
+        <Button variant="contained" size="small" style={{ margin: '0.5rem' }}>
+          Export to Excel
+        </Button>
+      </Grid>
+      {/* Container end */}
     </div>
   );
 }
