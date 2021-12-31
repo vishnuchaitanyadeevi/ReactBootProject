@@ -308,7 +308,7 @@ export default function ContractsCreation() {
     { field: 'grpd', header: 'Grouped', editorElement: null, style: { width: '5%' }, sortable: true, filter: true },
     { field: 'prm', header: 'Primary', editorElement: 'checkbox', style: { width: '5%' }, sortable: true, filter: true }
   ];
-  const headCellsType = ['NONE', 'LINK', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE'];
+  const headCellsType = ['NONE', 'LINK', 'NONE', 'NONE', 'NONE', 'DATE', 'DATE', 'NONE', 'NONE', 'NONE'];
   console.log('add contract', isEditFlag);
   tableData = isEditFlag ? jsonData : [];
   const numericFields = ['status', 'prjno', 'sdt', 'edt', 'extp', 'grpd', 'prm'];

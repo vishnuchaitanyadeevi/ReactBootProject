@@ -1,24 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import {
-  Grid,
-  Typography,
-  TextField,
-  Button,
-  Divider,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails
-} from '@mui/material';
-import { ArrowRight } from '@mui/icons-material/';
+import { Grid, Typography, TextField, Button, Divider } from '@mui/material';
 import { FilterMatchMode } from 'primereact/api';
-import SearchIcon from '@mui/icons-material/Search';
-import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from 'react-router-dom';
 import { useErrorHandler } from 'react-error-boundary';
 import DataTable from '../../components/DataTable';
-import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget';
+import BasicDatePicker from '../../components/pickers/BasicDatePicker';
 import Filters from '../../components/Filter/filter';
 import { COMPONENTS } from '../../utils/constants';
 import { SEVICE_DASHBOARD_FILTER_MASTER_DATA } from '../../components/ServiceBoard/data';
@@ -33,48 +21,8 @@ function ContractList() {
   // filter component state
   let paramId;
   let editId;
-  const [country, setCountry] = useState(null);
-  const [office, setOffice] = useState(null);
-  const [business, setBusiness] = useState(null);
-  const [businessSubType, setBusinessSubType] = useState(null);
-  const [status, setStatus] = useState(null);
-  const [customerName, setCustomerName] = useState(null);
-  const [location, setLocation] = useState(null);
-  const [contract, setContract] = useState(null);
-  const [salesman, setSalesman] = useState(null);
-  const [showFilter, setShowFilter] = useState(true);
-  const [activeProjects, setActiveProjects] = useState(null);
   const [projNumber, setprojNumber] = useState(null);
   const [tableData, setTableData] = useState(null);
-
-  const onStockFilterChange = () => {
-    const _filters1 = { ...filters1 };
-    _filters1.country.value = country;
-    _filters1.office.value = office;
-    _filters1.business.value = business;
-    _filters1.businessSubType.value = businessSubType;
-    _filters1.status.value = status;
-    _filters1.customerName.value = customerName;
-    _filters1.location.value = location;
-    _filters1.contract.value = contract;
-    _filters1.activeProjects.value = activeProjects;
-    setFilters1(_filters1);
-  };
-
-  const clearFilter1 = () => {
-    setActiveProjects('');
-    const _filters1 = { ...filters1 };
-    _filters1.country.value = null;
-    _filters1.office.value = null;
-    _filters1.business.value = null;
-    _filters1.businessSubType.value = null;
-    _filters1.status.value = null;
-    _filters1.customerName.value = null;
-    _filters1.location.value = null;
-    _filters1.contract.value = null;
-    _filters1.activeProjects.value = null;
-    setFilters1(_filters1);
-  };
 
   const [filters1, setFilters1] = useState({
     id: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -176,7 +124,6 @@ function ContractList() {
       }
     }
   };
-  const handleChangeFilter = (key, val) => setFilters1({ ...filters1, [key]: val });
   const [colName, setColName] = useState([
     {
       id: 'id',
@@ -260,14 +207,6 @@ function ContractList() {
     }
   ]);
 
-  const projectLocation = [
-    { label: 'Saudi Arabia', value: 'Saudi Arabia' },
-    { label: 'Qatar', value: 'Qatar' },
-    { label: 'Oman', value: 'Oman' },
-    { label: 'Kuwait', value: 'Kuwait' },
-    { label: 'Iraq', value: 'Iraq' },
-    { label: 'Bahrain', value: 'Bahrain' }
-  ];
   const globalFilters = [
     'id',
     'status',
@@ -276,11 +215,6 @@ function ContractList() {
     'contractStartDate',
     'customer',
     'activeProjects'
-  ];
-  const statusData = [
-    { label: 'Success', value: 'Success' },
-    { label: 'Pending', value: 'Pending' },
-    { label: 'Running', value: 'Running' }
   ];
 
   const navigate = useNavigate();

@@ -10,6 +10,7 @@ import { Toast } from 'primereact/toast';
 import Checkbox from '@mui/material/Checkbox';
 import { FilterMatchMode } from 'primereact/api';
 import useSettings from '../../hooks/useSettings';
+import BasicDatePicker from '../pickers/BasicDatePicker';
 // import ngPrimeGrid from '../ngPrimeGrid';
 import jsonData from '../../utils/project-table-data.json';
 import '../../Styles/app.scss';
@@ -231,8 +232,8 @@ export default function SimpleTable({
   };
 
   const handleClickLink = (rowData) => console.log('rowData...', rowData);
-
   const handleChangeBody = (options, idx) => {
+    console.log('options...', headCellsType[idx]);
     const key = Object.keys(options)[idx];
     const newVal = { key, value: options[key] };
     switch (headCellsType[idx]) {
@@ -249,11 +250,23 @@ export default function SimpleTable({
             {newVal.value}
           </Typography>
         );
+      case 'DATE':
+        return (
+          <div style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}>
+            <BasicDatePicker
+              label="Date"
+              inputFormat="dd-MM-yyyy"
+              views={['year', 'month', 'day']}
+              value={newVal.value}
+              getSelectedDate={(dt) => console.log('Selected Date is...', dt)}
+              getIsoDate={(dt) => console.log('ISO Date is...', dt)}
+            />
+          </div>
+        );
       default:
         return undefined;
     }
   };
-
   const handleClick = (options) => console.log('selected row...', options);
   return (
     <Grid container spacing={1}>
