@@ -23,47 +23,6 @@ import ProjectTable from '../../components/contracts/projectTable';
 import ContractJson from '../../utils/Contract-List-Data.json';
 import './ProjectCreation.scss';
 
-const tableData = [];
-const columnDataForProjects = [
-  { field: 'status', header: 'Status', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
-  {
-    field: 'prjno',
-    header: 'Project Number',
-    editorElement: null,
-    style: { width: '10%' },
-    sortable: true,
-    filter: true
-  },
-  {
-    field: 'prjnm',
-    header: 'Project Name',
-    editorElement: null,
-    style: { width: '10%' },
-    sortable: true,
-    filter: true
-  },
-  {
-    field: 'lcnm',
-    header: 'Location Name',
-    editorElement: null,
-    style: { width: '10%' },
-    sortable: true,
-    filter: true
-  },
-  {
-    field: 'bspct',
-    header: 'Business ProjCat',
-    editorElement: null,
-    style: { width: '15%' },
-    sortable: true,
-    filter: true
-  },
-  { field: 'sdt', header: 'Start Date', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
-  { field: 'edt', header: 'End Date', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
-  { field: 'extp', header: 'Ex Type', editorElement: null, style: { width: '10%' }, sortable: true, filter: true },
-  { field: 'grpd', header: 'Grouped', editorElement: null, style: { width: '5%' }, sortable: true, filter: true },
-  { field: 'prm', header: 'Primary', editorElement: 'checkbox', style: { width: '5%' }, sortable: true, filter: true }
-];
 const numericFields = ['itemCode', 'serialNumber', 'qty', 'sla', 'oStatus', 'serviceSubjOwnerShip'];
 function ProjectCreation() {
   const { themeMode, onChangeMode } = useSettings();
@@ -149,18 +108,18 @@ function ProjectCreation() {
   const isEditFlag = match('project/edit/:id');
 
   useEffect(() => {
-    if (isEditFlag) {
-      let popData;
-      // currently this for loop part has some logical issues (Will have to fix that)
-      for (let idx = 0; idx !== 6; idx += 1) {
-        if (ContractJson.find((item) => item.projects[idx].project_number === editId)) {
-          popData = ContractJson.find((item) => item.projects[idx].project_number === editId);
-          console.log('log', popData.projects[idx].project_number);
-          updateFormFields(popData, idx);
-          break;
-        }
-      }
-    }
+    // if (isEditFlag) {
+    //   let popData;
+    //   // currently this for loop part has some logical issues (Will have to fix that)
+    //   for (let idx = 0; idx !== 6; idx += 1) {
+    //     if (ContractJson.find((item) => item.projects[idx].projectNumber === editId)) {
+    //       popData = ContractJson.find((item) => item.projects[idx].projectNumber === editId);
+    //       console.log('log', popData.projects[idx].projectNumber);
+    //       updateFormFields(popData, idx);
+    //       break;
+    //     }
+    //   }
+    // }
   }, [isEditFlag]);
 
   const updateFormFields = (popData, idx) => {
@@ -272,6 +231,7 @@ function ProjectCreation() {
       filter: true
     }
   ];
+  const headCellsType = ['NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE'];
 
   const [projectData, setProjectData] = useState({
     execution: '',
@@ -1031,6 +991,7 @@ function ProjectCreation() {
             editOption
             btnLabel={t('CreateProject.Add New Service Subject')}
             numericFields={numericFields}
+            headCellsType={headCellsType}
           />
         </Grid>
       </Grid>
