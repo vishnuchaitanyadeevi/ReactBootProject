@@ -1,7 +1,9 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
+import { InputAdornment } from '@mui/material';
 import { MobileDateTimePicker } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import DateRangeIcon from '@mui/icons-material/DateRange';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import moment from 'moment';
 
@@ -27,12 +29,20 @@ export default function BasicDatePicker({
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <MobileDateTimePicker
-        value={value === '' ? null : value}
+        value={value}
         onChange={handleDateChange}
         showTodayButton
         minDate={minDate}
         maxDate={maxDate}
+        cancelText={null}
         label={label}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <DateRangeIcon />
+            </InputAdornment>
+          )
+        }}
         views={views === undefined || views === null ? ['year', 'month', 'day', 'hours', 'minutes'] : views}
         renderInput={(props) => (
           <TextField
@@ -42,6 +52,7 @@ export default function BasicDatePicker({
             error={error}
             helperText={helperText}
             FormHelperTextProps={FormHelperTextProps}
+            defaultValue="10-02-2020"
           />
         )}
         inputFormat={inputFormat === undefined || inputFormat === null ? 'dd-MM-yyyy hh:mm a' : inputFormat}

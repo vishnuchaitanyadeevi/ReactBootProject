@@ -44,6 +44,7 @@ export default function SimpleTable({
   const [tableData, setTableData] = useState(rowData);
   const [editingRows, setEditingRows] = useState({});
   const [filterState, setFilterState] = useState({});
+  const [selectedDate, setSelectedDate] = useState(null);
   const onRowEditChange = (e) => {
     setEditingRows(e.data);
   };
@@ -231,6 +232,10 @@ export default function SimpleTable({
     }
   };
 
+  const getDate = (val) => {
+    console.log('val...', val);
+    setSelectedDate(val);
+  };
   const handleClickLink = (rowData) => console.log('rowData...', rowData);
   const handleChangeBody = (options, idx) => {
     console.log('options...', headCellsType[idx]);
@@ -257,9 +262,10 @@ export default function SimpleTable({
               label="Date"
               inputFormat="dd-MM-yyyy"
               views={['year', 'month', 'day']}
-              value={newVal.value}
+              value={getDate(newVal.value)}
               getSelectedDate={(dt) => console.log('Selected Date is...', dt)}
-              getIsoDate={(dt) => console.log('ISO Date is...', dt)}
+              getIsoDate={(dt) => getDate(dt)}
+              size="large"
             />
           </div>
         );
