@@ -10,6 +10,7 @@ import { Toast } from 'primereact/toast';
 import Checkbox from '@mui/material/Checkbox';
 import { FilterMatchMode } from 'primereact/api';
 import useSettings from '../../hooks/useSettings';
+import BasicDatePicker from '../pickers/BasicDatePicker';
 // import ngPrimeGrid from '../ngPrimeGrid';
 import jsonData from '../../utils/project-table-data.json';
 import '../../Styles/app.scss';
@@ -19,10 +20,24 @@ export default function SimpleTable({
   headerData,
   editOption,
   showActionColumn,
+  showIssueColumn,
+  issuetype,
+  issuetitle,
+  issueheader,
+  showSaveChangesColumn,
+  saveChangestype,
+  saveChangestitle,
+  showEditColumn,
+  edittype,
+  edittitle,
+  showPrintColumn,
+  printtype,
+  printtitle,
   type,
   title,
   btnLabel,
   numericFields,
+  headCellsType,
   ...other
 }) {
   const { themeMode, onChangeMode } = useSettings();
@@ -126,12 +141,132 @@ export default function SimpleTable({
           </>
         );
       case 'button':
-        return <Button>{title}</Button>;
+        return (
+          <Button variant="contained" size="small">
+            {title}
+          </Button>
+        );
+      default:
+        return undefined;
+    }
+  };
+  const ActionIssueBody = (options) => {
+    switch (issuetype) {
+      case 'text':
+        return (
+          <>
+            <Typography onClick={() => handleClick(options)} style={{ cursor: 'pointer' }}>
+              {issuetitle}
+            </Typography>
+          </>
+        );
+      case 'button':
+        return (
+          <Button variant="contained" size="small" style={{ marginLeft: '0.4rem', padding: '0.2rem' }}>
+            {issuetitle}
+          </Button>
+        );
+      default:
+        return undefined;
+    }
+  };
+  const ActionSaveChangesBody = (options) => {
+    switch (saveChangestype) {
+      case 'text':
+        return (
+          <>
+            <Typography onClick={() => handleClick(options)} style={{ cursor: 'pointer' }}>
+              {saveChangestitle}
+            </Typography>
+          </>
+        );
+      case 'button':
+        return (
+          <Button variant="contained" size="small">
+            {saveChangestitle}
+          </Button>
+        );
+      default:
+        return undefined;
+    }
+  };
+  const ActionEditBody = (options) => {
+    switch (edittype) {
+      case 'text':
+        return (
+          <>
+            <Typography onClick={() => handleClick(options)} style={{ cursor: 'pointer' }}>
+              {edittitle}
+            </Typography>
+          </>
+        );
+      case 'button':
+        return (
+          <Button variant="contained" size="small" style={{ marginLeft: '0.4rem', padding: '0.2rem' }}>
+            {edittitle}
+          </Button>
+        );
+      default:
+        return undefined;
+    }
+  };
+  const ActionPrintBody = (options) => {
+    switch (printtype) {
+      case 'text':
+        return (
+          <>
+            <Typography onClick={() => handleClick(options)} style={{ cursor: 'pointer' }}>
+              {printtitle}
+            </Typography>
+          </>
+        );
+      case 'button':
+        return (
+          <Button variant="contained" size="small" style={{ marginLeft: '0.4rem', padding: '0.2rem' }}>
+            {printtitle}
+          </Button>
+        );
       default:
         return undefined;
     }
   };
 
+  const handleClickLink = (rowData) => console.log('rowData...', rowData);
+  const handleChangeBody = (options, idx) => {
+    console.log('options...', headCellsType[idx]);
+    const key = Object.keys(options)[idx];
+    const newVal = { key, value: options[key] };
+    switch (headCellsType[idx]) {
+      case 'BUTTON':
+        return <Button variant="contained">{newVal.value}</Button>;
+      case 'NONE':
+        return <Typography style={{ fontSize: '13px' }}>{newVal.value}</Typography>;
+      case 'LINK':
+        return (
+          <Typography
+            style={{ cursor: 'pointer', textDecoration: 'underline', fontSize: '13px', color: 'blue' }}
+            onClick={() => handleClickLink(options)}
+          >
+            {newVal.value}
+          </Typography>
+        );
+      case 'DATE':
+        return (
+          <div style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}>
+            <BasicDatePicker
+              label="Date"
+              inputFormat="dd-MM-yyyy"
+              views={['year', 'month', 'day']}
+              value={newVal.value}
+              getSelectedDate={(dt) => console.log('Selected Date is...', dt)}
+              getIsoDate={(dt) => console.log('ISO Date is...', dt)}
+            />
+          </div>
+        );
+      default:
+        return undefined;
+    }
+  };
   const handleClick = (options) => console.log('selected row...', options);
   return (
     <Grid container spacing={1}>
@@ -152,7 +287,7 @@ export default function SimpleTable({
         <DataTable
           header={header}
           globalFilter={globalFilter}
-          value={tableData}
+          value={rowData}
           editingRows={editingRows}
           onRowEditChange={onRowEditChange}
           onRowEditComplete={onRowEditComplete}
@@ -160,7 +295,7 @@ export default function SimpleTable({
           filterDisplay="menu"
           {...other}
         >
-          {headerData.map((headerElement) => (
+          {headerData.map((headerElement, idx) => (
             <Column
               editor={(options) => switchEditor(headerElement.editorElement, options)}
               {...headerElement}
@@ -168,6 +303,7 @@ export default function SimpleTable({
                 textAlign: `${numericFields && numericFields.includes(headerElement.field) ? 'center' : ''}`
               }}
               className={numericFields && numericFields.includes(headerElement.field) ? 'd-data-cls' : ''}
+              body={(options) => handleChangeBody(options, idx)}
             />
           ))}
           {editOption ? (
@@ -180,6 +316,58 @@ export default function SimpleTable({
               columnKey="actionKey"
               body={(options) => ActionBody(options)}
               style={{
+                paddingBottom: '0.1rem',
+                paddingTop: '0.1rem'
+              }}
+            />
+          ) : null}
+          {showIssueColumn ? (
+            <Column
+              header="ISSUE"
+              columnKey="actionKey"
+              body={(options) => ActionIssueBody(options)}
+              style={{
+                minWidth: '6rem',
+                width: '6rem',
+                paddingBottom: '0.1rem',
+                paddingTop: '0.1rem'
+              }}
+            />
+          ) : null}
+          {showSaveChangesColumn ? (
+            <Column
+              header="SAVE CHANGES"
+              columnKey="actionKey"
+              body={(options) => ActionSaveChangesBody(options)}
+              style={{
+                minWidth: '6rem',
+                width: '6rem',
+                paddingBottom: '0.1rem',
+                paddingTop: '0.1rem'
+              }}
+            />
+          ) : null}
+          {showEditColumn ? (
+            <Column
+              header="EDIT"
+              columnKey="actionKey"
+              body={(options) => ActionEditBody(options)}
+              style={{
+                minWidth: '6rem',
+                width: '6rem',
+                paddingBottom: '0.1rem',
+                paddingTop: '0.1rem'
+              }}
+            />
+          ) : null}
+          {showPrintColumn ? (
+            <Column
+              header="PRINT"
+              columnKey="actionKey"
+              body={(options) => ActionPrintBody(options)}
+              style={{
+                minWidth: '6rem',
+                width: '6rem',
                 paddingBottom: '0.1rem',
                 paddingTop: '0.1rem'
               }}

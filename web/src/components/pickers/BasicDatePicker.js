@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField';
 import { MobileDateTimePicker } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import moment from 'moment';
 
 export default function BasicDatePicker({
   label,
@@ -12,17 +13,22 @@ export default function BasicDatePicker({
   views,
   size = 'small',
   value,
-  onChange,
   error,
   helperText,
   FormHelperTextProps,
-  disabled
+  disabled,
+  getSelectedDate,
+  getIsoDate
 }) {
+  const handleDateChange = (dt) => {
+    getSelectedDate(new Date(dt));
+    getIsoDate(moment(dt).toISOString());
+  };
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <MobileDateTimePicker
-        value={value}
-        onChange={onChange}
+        value={value === '' ? null : value}
+        onChange={handleDateChange}
         showTodayButton
         minDate={minDate}
         maxDate={maxDate}

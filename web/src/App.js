@@ -2,6 +2,8 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import moment from 'moment-timezone';
+import { ErrorBoundary } from 'react-error-boundary';
+import FallBack from './components/errorHandling/FallBack';
 import Router from './routes';
 // theme
 import ThemeConfig from './theme';
@@ -13,6 +15,8 @@ import Settings from './components/settings';
 import ScrollToTop from './components/ScrollToTop';
 import ThemePrimaryColor from './components/ThemePrimaryColor';
 import { LOCAL_STORAGE_KEYS } from './utils/constants';
+
+const logger = require('./callingLogger');
 // ----------------------------------------------------------------------
 const { TOKEN_KEY } = LOCAL_STORAGE_KEYS;
 export default function App() {
@@ -35,15 +39,21 @@ export default function App() {
     return () => {};
   }, []);
 
+  const errorHandler = (error, errorInfo) => {
+    logger.error('Something Went Wrong', { meta: errorInfo });
+  };
+
   return (
-    <ThemeConfig>
-      <ThemePrimaryColor>
-        <RtlLayout>
-          {/* <Settings /> */}
-          <ScrollToTop />
-          <Router />
-        </RtlLayout>
-      </ThemePrimaryColor>
-    </ThemeConfig>
+    <ErrorBoundary FallbackComponent={FallBack} onError={errorHandler} key={location.pathname}>
+      <ThemeConfig>
+        <ThemePrimaryColor>
+          <RtlLayout>
+            {/* <Settings /> */}
+            <ScrollToTop />
+            <Router />
+          </RtlLayout>
+        </ThemePrimaryColor>
+      </ThemeConfig>
+    </ErrorBoundary>
   );
 }

@@ -142,6 +142,8 @@ function TerminateProject() {
       filter: true
     }
   ];
+  const headCellsTypeContractData = ['NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE'];
+  const headCellsTypeProjectData = ['NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE'];
   return (
     <Grid className="terminate_project_main_cls">
       <Grid container spacing={3}>
@@ -170,6 +172,7 @@ function TerminateProject() {
             style={{ marginLeft: '0.5rem' }}
             variant="contained"
             size="small"
+            onClick={() => setProjectData([])}
           >
             Terminate All
           </Button>
@@ -204,6 +207,7 @@ function TerminateProject() {
                   dataKey="id"
                   editMode="row"
                   numericFields={numericFields}
+                  headCellsType={headCellsTypeContractData}
                 />
               </Grid>
             </Grid>
@@ -229,6 +233,7 @@ function TerminateProject() {
             dataKey="id"
             editMode="row"
             numericFields={numericFieldsForProject}
+            headCellsType={headCellsTypeProjectData}
           />
         </Grid>
       </Grid>

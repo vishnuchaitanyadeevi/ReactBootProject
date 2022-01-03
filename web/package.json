@@ -123,6 +123,7 @@
     "react-dom": "^17.0.2",
     "react-draft-wysiwyg": "^1.14.7",
     "react-dropzone": "^11.3.2",
+    "react-error-boundary": "^3.1.4",
     "react-helmet": "^6.1.0",
     "react-helmet-async": "^1.0.9",
     "react-i18next": "^11.14.1",
@@ -162,6 +163,7 @@
     "typescript": "^4.1.2",
     "uuid": "^3.4.0",
     "web-vitals": "^1.0.1",
+    "winston": "^3.3.3",
     "worker-loader": "^3.0.8",
     "yup": "^0.32.9",
     "yup-password": "^0.2.2"
