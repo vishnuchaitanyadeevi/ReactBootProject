@@ -19,6 +19,8 @@ export default function SimpleTable({
   headerData,
   editOption,
   showActionColumn,
+  type,
+  title,
   showIssueColumn,
   issuetype,
   issuetitle,
@@ -32,8 +34,7 @@ export default function SimpleTable({
   showPrintColumn,
   printtype,
   printtitle,
-  type,
-  title,
+  trialColumn,
   btnLabel,
   numericFields,
   ...other
@@ -255,10 +256,21 @@ export default function SimpleTable({
           onRowEditComplete={onRowEditComplete}
           // filters={filterState}
           filterDisplay="menu"
+          responsiveLayout="scroll"
+          rowHover
+          dataKey="id"
+          emptyMessage="NO DATA FOUND"
+          scrollable
           {...other}
         >
           {headerData.map((headerElement) => (
             <Column
+              frozen={headerElement.isFrozen || headerElement.isFrozenRight}
+              alignFrozen="right"
+              style={{
+                width: `${headerElement.isFrozen ? '10%' : ''}`,
+                position: `${headerElement.isFrozen ? 'sticky' : ''}`
+              }}
               editor={(options) => switchEditor(headerElement.editorElement, options)}
               {...headerElement}
               bodyStyle={{
@@ -316,6 +328,19 @@ export default function SimpleTable({
               style={{
                 minWidth: '6rem',
                 width: '6rem',
+                paddingBottom: '0.1rem',
+                paddingTop: '0.1rem'
+              }}
+            />
+          ) : null}
+          {trialColumn ? (
+            <Column
+              header="TRIAL"
+              columnKey="actionKey"
+              body={(options) => ActionPrintBody(options)}
+              style={{
+                width: '10%',
+                position: 'sticky',
                 paddingBottom: '0.1rem',
                 paddingTop: '0.1rem'
               }}

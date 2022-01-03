@@ -302,7 +302,7 @@ export default function ContractsCreation() {
   return (
     <Grid container spacing={2} padding={3}>
       <Grid item xs={12} lg={12} display="flex" justifyContent="center">
-        <Typography variant="h4">{isEditFlag ? `{t('Contract')} - ${paramId}` : t('Add Contract')}</Typography>
+        <Typography variant="h4">{isEditFlag ? `t('Contract') - ${paramId}` : t('Add Contract')}</Typography>
       </Grid>
       <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
         <Typography variant="h6">{t('Customer Details')}</Typography>
