@@ -72,3 +72,6 @@ export const isValidStr = (str, type) => {
 export const isEmail = (str) => !PATTERN.EMAIL.test(str);
 export const isPhone = (str) => !PATTERN.PHONE.test(str);
 export const isName = (str) => !PATTERN.NAME.test(str);
+
+export const differenceBetweenArr = (arrayOne, arrayTwo, keyName) =>
+  arrayOne.filter(({ [keyName]: id1 }) => !arrayTwo.some(({ [keyName]: id2 }) => id2 === id1));

@@ -154,7 +154,8 @@
     "customer": "Customer",
     "contracts": "Contracts",
     "calloutReason": "CallOut Reason",
-    "project-ServiceSubject": "Project - Service Subject",
+    "project": "Project",
+    "serviceSubject": "Service Subject",
     "isFOLReplacement": "Is FOL Replacement",
     "paymentType": "Payment Type",
     "date": "Date",
@@ -165,6 +166,18 @@
     "task": "Task",
     "addNewTasks": "Add New Tasks",
     "spareParts": "Spare parts",
-    "new": "New"
+    "new": "New",
+    "action": "Action",
+    "taskName": "Task name",
+    "stockCode": "Stock Code",
+    "description": "Description",
+    "quantity": "Quantity",
+    "ratio": "Ratio",
+    "discountAmount": "Discount Amount",
+    "unitPrice": "Unit Price",
+    "totalPrice": "Total Price",
+    "errorCode": "Error Code",
+    "serviceRelatedNote": "Service Related Note",
+    "addNewPart": "Add New Part"
   }
 }

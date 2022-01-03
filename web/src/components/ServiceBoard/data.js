@@ -1384,7 +1384,22 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
         en: 'Fares Ibn Al Nudur St. Opp. Rashid Male Gat# 6 Al-Khobar-34428',
         ar: 'شارع فارس بن النضر مقابل. راشد مالي جات # 6 الخبر - 34428'
       },
-      value: 'makanRestaurant'
+      value: 'makanRestaurant',
+      contracts: [
+        {
+          code: 'HSDCJD_0001',
+          name: { en: 'Retal Dental Clinic | General Contract', ar: 'عيادة ريتال لطب الاسنان | عقد عام' },
+          value: 'HSDCJD_0001'
+        },
+        {
+          code: 'HSDCJD_0023',
+          name: {
+            en: 'Dar Al Hijra Intercontinental Hotel | General Contract',
+            ar: 'فندق دار الهجرة انتركونتيننتال | عقد عام'
+          },
+          value: 'HSDCJD_00023'
+        }
+      ]
     },
     {
       name: { en: 'Walid Ben Mafih Bin Mohammed Al Qsaini', ar: 'وليد بن مافح بن محمد القصيني' },
@@ -1392,12 +1407,29 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
         en: 'PO Box.# 620 10Th Cross St. Alameen Al-Aqrabhiah-Al-Knobar-31952',
         ar: 'ص.ب 620 تقاطع 10 شارع الامين العقربية -النوبر 31952'
       },
-      value: 'walidBenMafihBinMohammedAlQsaini'
+      value: 'walidBenMafihBinMohammedAlQsaini',
+      contracts: [
+        {
+          code: 'HSDCJD_0027',
+          name: {
+            en: 'Restaurant Of Oriental Cusine Co Ltd - Chop Stick',
+            ar: 'شركة مطعم المأكولات الشرقية المحدودة - عيدان الطعام'
+          },
+          value: 'HSDCJD_00027'
+        }
+      ]
     },
     {
       name: { en: 'Asia Trading Company', ar: 'شركة آسيا التجارية' },
       address: { en: 'PO Box.# 156 Al-Jafr Road Al-Hafof-31982', ar: 'ص.ب رقم 156 طريق الجفر الهفوف 31982' },
-      value: 'asiaTradingCompany'
+      value: 'asiaTradingCompany',
+      contracts: [
+        {
+          code: 'HSDCJD_0030',
+          name: { en: 'Alireza Travels | General Contract', ar: 'علي رضا للسفريات | عقد عام' },
+          value: 'HSDCJD_00030'
+        }
+      ]
     },
     {
       name: {
@@ -1405,7 +1437,14 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
         ar: 'شركة الجودة الأولى لخدمات التموين ....'
       },
       address: { en: 'P.O Box: 12281.Al Aarid Diriyah.Riyadh.', ar: 'ص.ب: 12281 العارض الدرعية الرياض.' },
-      value: 'qualityFirstCateringServiceCorporation'
+      value: 'qualityFirstCateringServiceCorporation',
+      contracts: [
+        {
+          code: 'HSDCJD_0022',
+          name: { en: 'Premium Food Company Ltd I General Contract', ar: 'شركة بريميوم فود المحدودة أنا العقد العام' },
+          value: 'HSDCJD_00022'
+        }
+      ]
     },
     {
       name: { en: 'Magenta Investments L.L.C', ar: 'ماجنتا للاستثمارات ذ' },
@@ -1413,17 +1452,44 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
         en: 'PO Box: 32449 4903 Aspin Commercial Tower, SZR.Dubai UAE',
         ar: 'ص.ب: 32449 4903 برج آسبن التجاري ، SZR ، دبي ، الإمارات العربية المتحدة'
       },
-      value: 'magentaInvestmentsLLC'
+      value: 'magentaInvestmentsLLC',
+      contracts: [
+        {
+          code: 'HSDCJD_0020',
+          name: {
+            en: 'Islamic Development Bank Group | General Contract',
+            ar: 'مجموعة البنك الاسلامي للتنمية | عقد عام'
+          },
+          value: 'HSDCJD_00020'
+        }
+      ]
     },
     {
       name: { en: 'Al Jabalain Plastic Products Est.', ar: 'مؤسسة الجبلين للمنتجات البلاستيكية.' },
       address: { en: 'P.O Box:55411.Hail.', ar: 'P.O Box:55411.Hail.' },
-      value: 'alJabalainPlasticProductsEst'
+      value: 'alJabalainPlasticProductsEst',
+      contracts: [
+        {
+          code: 'HSDCJD_0021',
+          name: {
+            en: 'Movenpick Hotel & Resort Yanbu | General Contract',
+            ar: 'فندق ومنتجع موفنبيك ينبع | عقد عام'
+          },
+          value: 'HSDCJD_00021'
+        }
+      ]
     },
     {
       name: { en: 'Basmat Alaeela Est. Trading', ar: 'مؤسسة بسمة العيلة تجارة' },
       address: { en: 'Qatif-32632', ar: 'القطيف 32632' },
-      value: 'basmatAlaeelaEstTrading'
+      value: 'basmatAlaeelaEstTrading',
+      contracts: [
+        {
+          code: 'HSDCJD_0016',
+          name: { en: 'Kinan Intemational | General Contract', ar: 'كنان الدولية | عقد عام' },
+          value: 'HSDCJD_00016'
+        }
+      ]
     },
     {
       name: { en: '66 Cups', ar: '66 كوب' },
@@ -1431,7 +1497,14 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
         en: 'P.O.Box 23514, King Abdulaziz Road, Alshatia,Jeddah',
         ar: 'ص.ب 23514 ، طريق الملك عبد العزيز ، الشاطئ ، جدة'
       },
-      value: '66Cups'
+      value: '66Cups',
+      contracts: [
+        {
+          code: 'HSDCJD_0015',
+          name: { en: 'Keen Rite I General Contract', ar: 'Keen Rite I العقد العام' },
+          value: 'HSDCJD_00015'
+        }
+      ]
     },
     {
       name: { en: 'Al Alameen Intemational School', ar: 'مدرسة العلمين الدولية' },
@@ -1439,7 +1512,14 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
         en: 'P.O.Box:6687 Salah Ad Din Ayyubi Road,Al Zahra, Riyadh 12332.',
         ar: 'ص.ب .: 6687 طريق صلاح الدين الأيوبي ، الزهراء ، الرياض 12332.'
       },
-      value: 'alAlameenIntemationalSchool'
+      value: 'alAlameenIntemationalSchool',
+      contracts: [
+        {
+          code: 'HSDCJD_0009',
+          name: { en: 'Pepsico Services LLC | General Contract', ar: 'بيبسيكو للخدمات ذ م م | عقد عام' },
+          value: 'HSDCJD_0009'
+        }
+      ]
     },
     {
       name: { en: 'Perfect Body Sports Company (Calistheni...', ar: 'شركة بيرفكت بودي الرياضية (كاليسثين ...' },
@@ -1447,12 +1527,26 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
         en: 'Perfect Body Sports Company(Calisthenics). Prince Muhammed Ibn Saad Ibn,. Riyadh. Mr. Imad-',
         ar: 'شركة بيرفكت بودي سبورتس (تمارين رياضية). الأمير محمد بن سعد بن. الرياض. السيد عماد-'
       },
-      value: 'perfectBodySportsCompanyCalistheni'
+      value: 'perfectBodySportsCompanyCalistheni',
+      contracts: [
+        {
+          code: 'HSDCJD_0007',
+          name: { en: 'Cafe Aroma | General Contract', ar: 'كافيه أروما | عقد عام' },
+          value: 'HSDCJD_0007'
+        }
+      ]
     },
     {
       name: { en: 'Altima Contracting and Industrial Service...', ar: 'التيما للمقاولات والخدمات الصناعية ...' },
       address: { en: 'Al-Jubail-31901', ar: 'الجبيل 31901' },
-      value: 'altimaContractingIndustrialService'
+      value: 'altimaContractingIndustrialService',
+      contracts: [
+        {
+          code: 'HSDCJD_0006',
+          name: { en: 'Al Waiba Restaurant | General Contract', ar: 'مطعم الويبة | عقد عام' },
+          value: 'HSDCJD_0006'
+        }
+      ]
     },
     {
       name: { en: 'The Modem Dish Company (NAYA DUR)', ar: 'شركة صحن المودم (نيا دور)' },
@@ -1460,7 +1554,14 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
         en: 'Al-Rakah Prince Turkev St. Al-Khobar-31952',
         ar: 'الراكة شارع الامير تركيف الخبر 31952'
       },
-      value: 'theModemDishCompanyNAYADUR'
+      value: 'theModemDishCompanyNAYADUR',
+      contracts: [
+        {
+          code: 'HSDCJD_0005',
+          name: { en: 'Jotun Paints | General Contract', ar: 'دهانات جوتن | عقد عام' },
+          value: 'HSDCJD_0005'
+        }
+      ]
     },
     {
       name: { en: 'Mays & Reem Coffee Shop', ar: 'مقهى ميس وريم' },
@@ -1468,7 +1569,17 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
         en: 'Al•Agrabiyah Al-Mashoora St. Al-Knobar-31952',
         ar: '• Agrabiyah Al-Mashoora - الخبر - 31952'
       },
-      value: 'maysReemCoffeeShop'
+      value: 'maysReemCoffeeShop',
+      contracts: [
+        {
+          code: 'HSDCJD_0004',
+          name: {
+            en: 'Nestle Saudi Arabia LLC | General Contract',
+            ar: 'نستله المملكة العربية السعودية ذ م م | عقد عام'
+          },
+          value: 'HSDCJD_0004'
+        }
+      ]
     },
     {
       name: { en: 'Hessa Abdullah Al Besher for Proving M...', ar: 'حصة عبدالله البشر لإثبات ...' },
@@ -1476,7 +1587,14 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
         en: 'P.O.Box:11512. Khalid Bin Al Waleed Riyadh.',
         ar: 'صندوق بريد: 11512. خالد بن الوليد الرياض.'
       },
-      value: 'hessaAbdullahAlBesherProvingM'
+      value: 'hessaAbdullahAlBesherProvingM',
+      contracts: [
+        {
+          code: 'HSDCJD_0003',
+          name: { en: 'Bouthaina Beauty I General Contract', ar: 'عقد عام بثينة للتجميل 1' },
+          value: 'HSDCJD_0003'
+        }
+      ]
     },
     {
       name: { en: 'Caesars Bluewaters Dubai LLC', ar: 'سيزرز بلوواترز دبي ذ' },
@@ -1484,63 +1602,14 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
         en: 'PO Box: 36555 Caesars Bluewaters Dubai, Bluewaters Island Duba',
         ar: 'صندوق بريد: 36555 Caesars Bluewaters Dubai، Bluewaters Island، Duba'
       },
-      value: 'caesarsBluewatersDubaiLLC'
-    }
-  ],
-  SERVICE_SUBJECTS: [
-    {
-      code: '638171',
-      name: { en: 'Prolitec Wall Mount Appliance RZAQ570 Black', ar: 'جهاز بروليتيك للتثبيت على الحائط RZAQ570 أسود' },
-      value: 'prolitecWallMountApplianceRZAQ570Black'
-    },
-    { code: '611113', name: { en: 'Ads 4', ar: 'الإعلانات 4' }, value: 'ads4' },
-    { code: 'D02023', name: { en: 'W5000 Diffuser', ar: 'الناشر W5000' }, value: '' },
-    // { code: '611113', name: { en: 'Ads 4', ar: 'الإعلانات 4' }, value: 'ads4' },
-    {
-      code: '621065',
-      name: {
-        en: 'Auto Janitor System Toilet Odor Treatment 1818138',
-        ar: 'نظام التنظيف التلقائي لرائحة المرحاض 1818138'
-      },
-      value: 'autoJanitorSystemToiletOdorTreatment1818138'
-    },
-    // {
-    //   code: '621065',
-    //   name: {
-    //     en: 'Auto Janitor System Toilet Odor Treatment 1818138',
-    //     ar: 'نظام التنظيف التلقائي لرائحة المرحاض 1818138'
-    //   },
-    //   value: 'autoJanitorSystemToiletOdorTreatment1818138'
-    // },
-    { code: '611007', name: { en: 'RM T-Cell Dispenser Chrome', ar: 'موزع RM T-Cell كروم' }, value: '' },
-    {
-      code: '611239',
-      name: {
-        en: 'EC030 Catcher - Genus Insect Light Trap 220V',
-        ar: 'EC030 الماسك - مصيدة الحشرات من الجنس بجهد 220 فولت'
-      },
-      value: 'eC030Catcher-GenusInsectLightTrap220V'
-    },
-    { code: '611089', name: { en: 'Insect Inn Ultra II', ar: 'إنسيكت إن ألترا 2' }, value: '' },
-    {
-      code: '610340',
-      name: { en: 'Aifforce Hand Dryer Chrome 220 - 240V', ar: 'آيف فورس مجفف يد كروم 220-240 فولت' },
-      value: 'aifforceHandDryerChrome220-240V'
-    },
-    {
-      code: '610024',
-      name: { en: 'MX Type Mixing Center SS 4 Prod Fleci Gap', ar: 'MX نوع خلط مركز SS 4 برود Fleci الفجوة' },
-      value: 'mXTypeMixingCenterSS4ProdFleciGap'
-    },
-    // {
-    //   code: '610340',
-    //   name: { en: 'Airforce Hand Dryer Chrome 220 - 240V', ar: 'مجفف اليد ايرفورس كروم 220 - 240 فولت' },
-    //   value: 'aifforceHandDryerChrome220'
-    // },
-    {
-      code: 'D01047',
-      name: { en: 'Automatic Liquid Soap Dispenser refillable', ar: 'موزع صابون سائل أوتوماتيكي قابل لإعادة التعبئة' },
-      value: 'automaticLiquidSoapDispenserRefillable'
+      value: 'caesarsBluewatersDubaiLLC',
+      contracts: [
+        {
+          code: 'HSDCJD_0002',
+          name: { en: 'Marhaba Restaurant | General Contract', ar: 'مطعم مرحبا | عقد عام' },
+          value: 'HSDCJD_0002'
+        }
+      ]
     }
   ],
   CURRENCYS: [
@@ -1560,100 +1629,6 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
     { name: { en: 'Ghana Cedi', ar: 'غانا سيدي' }, code: { en: 'GHS', ar: 'GHS' }, value: 'GHS' },
     { name: { en: 'Gibraltar Pound', ar: 'جبل طارق الجنيه' }, code: { en: 'GIP', ar: 'GIP' }, value: 'GIP' }
   ],
-  CONTRACTS: [
-    {
-      code: 'HSDCJD_0001',
-      name: { en: 'Retal Dental Clinic | General Contract', ar: 'عيادة ريتال لطب الاسنان | عقد عام' },
-      value: 'HSDCJD_0001'
-    },
-    {
-      code: 'HSDCJD_0002',
-      name: { en: 'Marhaba Restaurant | General Contract', ar: 'مطعم مرحبا | عقد عام' },
-      value: 'HSDCJD_0002'
-    },
-    {
-      code: 'HSDCJD_0003',
-      name: { en: 'Bouthaina Beauty I General Contract', ar: 'عقد عام بثينة للتجميل 1' },
-      value: 'HSDCJD_0003'
-    },
-    {
-      code: 'HSDCJD_0004',
-      name: { en: 'Nestle Saudi Arabia LLC | General Contract', ar: 'نستله المملكة العربية السعودية ذ م م | عقد عام' },
-      value: 'HSDCJD_0004'
-    },
-    {
-      code: 'HSDCJD_0005',
-      name: { en: 'Jotun Paints | General Contract', ar: 'دهانات جوتن | عقد عام' },
-      value: 'HSDCJD_0005'
-    },
-    {
-      code: 'HSDCJD_0006',
-      name: { en: 'Al Waiba Restaurant | General Contract', ar: 'مطعم الويبة | عقد عام' },
-      value: 'HSDCJD_0006'
-    },
-    {
-      code: 'HSDCJD_0007',
-      name: { en: 'Cafe Aroma | General Contract', ar: 'كافيه أروما | عقد عام' },
-      value: 'HSDCJD_0007'
-    },
-    {
-      code: 'HSDCJD_0009',
-      name: { en: 'Pepsico Services LLC | General Contract', ar: 'بيبسيكو للخدمات ذ م م | عقد عام' },
-      value: 'HSDCJD_0009'
-    },
-    {
-      code: 'HSDCJD_0015',
-      name: { en: 'Keen Rite I General Contract', ar: 'Keen Rite I العقد العام' },
-      value: 'HSDCJD_00015'
-    },
-    {
-      code: 'HSDCJD_0016',
-      name: { en: 'Kinan Intemational | General Contract', ar: 'كنان الدولية | عقد عام' },
-      value: 'HSDCJD_00016'
-    },
-    {
-      code: 'HSDCJD_0020',
-      name: {
-        en: 'Islamic Development Bank Group | General Contract',
-        ar: 'مجموعة البنك الاسلامي للتنمية | عقد عام'
-      },
-      value: 'HSDCJD_00020'
-    },
-    {
-      code: 'HSDCJD_0021',
-      name: {
-        en: 'Movenpick Hotel & Resort Yanbu | General Contract',
-        ar: 'فندق ومنتجع موفنبيك ينبع | عقد عام'
-      },
-      value: 'HSDCJD_00021'
-    },
-    {
-      code: 'HSDCJD_0022',
-      name: { en: 'Premium Food Company Ltd I General Contract', ar: 'شركة بريميوم فود المحدودة أنا العقد العام' },
-      value: 'HSDCJD_00022'
-    },
-    {
-      code: 'HSDCJD_0023',
-      name: {
-        en: 'Dar Al Hijra Intercontinental Hotel | General Contract',
-        ar: 'فندق دار الهجرة انتركونتيننتال | عقد عام'
-      },
-      value: 'HSDCJD_00023'
-    },
-    {
-      code: 'HSDCJD_0027',
-      name: {
-        en: 'Restaurant Of Oriental Cusine Co Ltd - Chop Stick',
-        ar: 'شركة مطعم المأكولات الشرقية المحدودة - عيدان الطعام'
-      },
-      value: 'HSDCJD_00027'
-    },
-    {
-      code: 'HSDCJD_0030',
-      name: { en: 'Alireza Travels | General Contract', ar: 'علي رضا للسفريات | عقد عام' },
-      value: 'HSDCJD_00030'
-    }
-  ],
   PROJECTS: [
     {
       code: 'HSDPJD_0001_001_001',
@@ -1665,7 +1640,19 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
       location: {
         en: 'Retal Dental Clinic | Gazzaz center | Refill Washroom',
         ar: 'عيادة ريتال لطب الاسنان | مركز القزاز | إعادة تعبئة الحمام'
-      }
+      },
+      serviceSubject: [
+        {
+          code: '638171',
+          name: {
+            en: 'Prolitec Wall Mount Appliance RZAQ570 Black',
+            ar: 'جهاز بروليتيك للتثبيت على الحائط RZAQ570 أسود'
+          },
+          value: 'prolitecWallMountApplianceRZAQ570Black'
+        },
+        { code: '611113', name: { en: 'Ads 4', ar: 'الإعلانات 4' }, value: 'ads4' },
+        { code: 'D02023', name: { en: 'W5000 Diffuser', ar: 'الناشر W5000' }, value: 'W5000Diffuser' }
+      ]
     },
     {
       code: 'HSDPJD_0002_001_001',
@@ -1677,7 +1664,19 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
       location: {
         en: 'Marhaba Restaurant | Andalus branch | Refill Washroom',
         ar: 'مطعم مرحبا | فرع الأندلس | إعادة تعبئة الحمام'
-      }
+      },
+      serviceSubject: [
+        { code: '611113', name: { en: 'Ads 4', ar: 'الإعلانات 4' }, value: 'ads4' },
+        { code: '611089', name: { en: 'Insect Inn Ultra II', ar: 'إنسيكت إن ألترا 2' }, value: 'InsectInnUltraII' },
+        {
+          code: 'D01047',
+          name: {
+            en: 'Automatic Liquid Soap Dispenser refillable',
+            ar: 'موزع صابون سائل أوتوماتيكي قابل لإعادة التعبئة'
+          },
+          value: 'automaticLiquidSoapDispenserRefillable'
+        }
+      ]
     },
     {
       code: 'HSDPJD_0003_001_001',
@@ -1689,7 +1688,25 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
       location: {
         en: 'Bouthaina Beauty | Prince Sultan street branch | Refill Washroom',
         ar: 'بثينة للتجميل | فرع شارع الأمير سلطان | إعادة تعبئة الحمام'
-      }
+      },
+      serviceSubject: [
+        {
+          code: '638171',
+          name: {
+            en: 'Prolitec Wall Mount Appliance RZAQ570 Black',
+            ar: 'جهاز بروليتيك للتثبيت على الحائط RZAQ570 أسود'
+          },
+          value: 'prolitecWallMountApplianceRZAQ570Black'
+        },
+        {
+          code: 'D01047',
+          name: {
+            en: 'Automatic Liquid Soap Dispenser refillable',
+            ar: 'موزع صابون سائل أوتوماتيكي قابل لإعادة التعبئة'
+          },
+          value: 'automaticLiquidSoapDispenserRefillable'
+        }
+      ]
     },
     {
       code: 'HSDPJD_0004_001_001',
@@ -1701,7 +1718,18 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
       location: {
         en: 'Nestle Saudi Arabia LLC | 4th floor bin sulaiman center | Refill Washroom',
         ar: 'نستله المملكة العربية السعودية ذ م م | الدور الرابع سنتر بن سليمان | إعادة تعبئة الحمام'
-      }
+      },
+      serviceSubject: [
+        {
+          code: '638171',
+          name: {
+            en: 'Prolitec Wall Mount Appliance RZAQ570 Black',
+            ar: 'جهاز بروليتيك للتثبيت على الحائط RZAQ570 أسود'
+          },
+          value: 'prolitecWallMountApplianceRZAQ570Black'
+        },
+        { code: '611089', name: { en: 'Insect Inn Ultra II', ar: 'إنسيكت إن ألترا 2' }, value: 'InsectInnUltraII' }
+      ]
     },
     {
       code: 'HSDPJD_0005_001_001',
@@ -1713,7 +1741,18 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
       location: {
         en: 'Jotun Paints | Warehouse industrial city I Refill Washroom',
         ar: 'دهانات جوتن | المستودع الصناعي بالمدينة الأول إعادة تعبئة الحمام'
-      }
+      },
+      serviceSubject: [
+        { code: 'D02023', name: { en: 'W5000 Diffuser', ar: 'الناشر W5000' }, value: 'W5000Diffuser' },
+        {
+          code: '621065',
+          name: {
+            en: 'Auto Janitor System Toilet Odor Treatment 1818138',
+            ar: 'نظام التنظيف التلقائي لرائحة المرحاض 1818138'
+          },
+          value: 'autoJanitorSystemToiletOdorTreatment1818138'
+        }
+      ]
     },
     {
       code: 'HSDPJD_0005_002_001',
@@ -1725,7 +1764,20 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
       location: {
         en: 'Jotun Paints | Office beside Red sea paint factory | Refill Washroom',
         ar: 'دهانات جوتن | مكتب بجوار مصنع دهانات البحر الاحمر | إعادة تعبئة الحمام'
-      }
+      },
+      serviceSubject: [
+        { code: 'D02023', name: { en: 'W5000 Diffuser', ar: 'الناشر W5000' }, value: 'W5000Diffuser' },
+        {
+          code: '611007',
+          name: { en: 'RM T-Cell Dispenser Chrome', ar: 'موزع RM T-Cell كروم' },
+          value: 'RM T-CellDispenserChrome'
+        },
+        {
+          code: '610024',
+          name: { en: 'MX Type Mixing Center SS 4 Prod Fleci Gap', ar: 'MX نوع خلط مركز SS 4 برود Fleci الفجوة' },
+          value: 'mXTypeMixingCenterSS4ProdFleciGap'
+        }
+      ]
     },
     {
       code: 'HSDPJD_0006_001_001',
@@ -1737,7 +1789,18 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
       location: {
         en: 'Al Waba Restaurant I Hindawiya district I Refill Washroom',
         ar: 'مطعم الوابا 1 حي الهنداوية 1 إعادة ملء دورة المياه'
-      }
+      },
+      serviceSubject: [
+        { code: '611113', name: { en: 'Ads 4', ar: 'الإعلانات 4' }, value: 'ads4' },
+        {
+          code: '621065',
+          name: {
+            en: 'Auto Janitor System Toilet Odor Treatment 1818138',
+            ar: 'نظام التنظيف التلقائي لرائحة المرحاض 1818138'
+          },
+          value: 'autoJanitorSystemToiletOdorTreatment1818138'
+        }
+      ]
     },
     {
       code: 'HSDPJD_0007_001_001',
@@ -1749,7 +1812,27 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
       location: {
         en: 'Cafe Aroma | Al hamra branch | Refill Washroom',
         ar: 'كافيه أروما | فرع الحمرا | إعادة تعبئة الحمام'
-      }
+      },
+      serviceSubject: [
+        {
+          code: '611239',
+          name: {
+            en: 'EC030 Catcher - Genus Insect Light Trap 220V',
+            ar: 'EC030 الماسك - مصيدة الحشرات من الجنس بجهد 220 فولت'
+          },
+          value: 'eC030Catcher-GenusInsectLightTrap220V'
+        },
+        {
+          code: '610340',
+          name: { en: 'Aifforce Hand Dryer Chrome 220 - 240V', ar: 'آيف فورس مجفف يد كروم 220-240 فولت' },
+          value: 'aifforceHandDryerChrome220-240V'
+        },
+        {
+          code: '610024',
+          name: { en: 'MX Type Mixing Center SS 4 Prod Fleci Gap', ar: 'MX نوع خلط مركز SS 4 برود Fleci الفجوة' },
+          value: 'mXTypeMixingCenterSS4ProdFleciGap'
+        }
+      ]
     },
     {
       code: 'HSDPJD_0009_001_001',
@@ -1761,7 +1844,15 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
       location: {
         en: 'Pepsico Services LLC I Talia street I Refill Washroom',
         ar: 'Pepsico Services LLC I شارع Talia I إعادة ملء الحمام'
-      }
+      },
+      serviceSubject: [
+        { code: '611113', name: { en: 'Ads 4', ar: 'الإعلانات 4' }, value: 'ads4' },
+        {
+          code: '611007',
+          name: { en: 'RM T-Cell Dispenser Chrome', ar: 'موزع RM T-Cell كروم' },
+          value: 'RMT-CellDispenserChrome'
+        }
+      ]
     },
     {
       code: 'HSDPJD_0015_001_001',
@@ -1773,7 +1864,8 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
       location: {
         en: 'Keen Rite | Ana Gheir Center | Refill Washroom',
         ar: 'كين رايت | مركز أنا غير | إعادة تعبئة الحمام'
-      }
+      },
+      serviceSubject: [{ code: 'D02023', name: { en: 'W5000 Diffuser', ar: 'الناشر W5000' }, value: 'W5000Diffuser' }]
     },
     {
       code: 'HSDPJD_0015_002_001',
@@ -1785,7 +1877,19 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
       location: {
         en: 'Keen Rite I Auto mall king road I Refill Washroom',
         ar: 'كين رايت أنا السيارات مول الملك الطريق أنا إعادة ملء الحمام'
-      }
+      },
+      serviceSubject: [
+        {
+          code: '611007',
+          name: { en: 'RM T-Cell Dispenser Chrome', ar: 'موزع RM T-Cell كروم' },
+          value: 'RMT-CellDispenserChrome'
+        },
+        {
+          code: '610340',
+          name: { en: 'Aifforce Hand Dryer Chrome 220 - 240V', ar: 'آيف فورس مجفف يد كروم 220-240 فولت' },
+          value: 'aifforceHandDryerChrome220-240V'
+        }
+      ]
     },
     {
       code: 'HSDPJD_0015_003_001',
@@ -1797,7 +1901,17 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
       location: {
         en: 'Keen Rite | Al khalidiya bin salman center | Refill Washroom',
         ar: 'كين رايت | مركز الخالدية بن سلمان | إعادة تعبئة الحمام'
-      }
+      },
+      serviceSubject: [
+        {
+          code: '621065',
+          name: {
+            en: 'Auto Janitor System Toilet Odor Treatment 1818138',
+            ar: 'نظام التنظيف التلقائي لرائحة المرحاض 1818138'
+          },
+          value: 'autoJanitorSystemToiletOdorTreatment1818138'
+        }
+      ]
     },
     {
       code: 'HSDPJD_0016_001_001',
@@ -1821,7 +1935,17 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
       location: {
         en: 'Kinan Intemational | Saudi Business Center | Refill Rezaroma',
         ar: 'كينان | غير المعتدل مركز الأعمال السعودي | إعادة تعبئة ريزاروما'
-      }
+      },
+      serviceSubject: [
+        {
+          code: '611239',
+          name: {
+            en: 'EC030 Catcher - Genus Insect Light Trap 220V',
+            ar: 'EC030 الماسك - مصيدة الحشرات من الجنس بجهد 220 فولت'
+          },
+          value: 'eC030Catcher-GenusInsectLightTrap220V'
+        }
+      ]
     },
     {
       code: 'HSDPJD_0016_003_001',
@@ -1833,7 +1957,17 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
       location: {
         en: 'Kinan Intemational | Asfan Medina Road I Refill Rezaroma',
         ar: 'كينان | غير المعتدل شارع أسفان مدينا أعيد ملء ريزاروما'
-      }
+      },
+      serviceSubject: [
+        {
+          code: '621065',
+          name: {
+            en: 'Auto Janitor System Toilet Odor Treatment 1818138',
+            ar: 'نظام التنظيف التلقائي لرائحة المرحاض 1818138'
+          },
+          value: 'autoJanitorSystemToiletOdorTreatment1818138'
+        }
+      ]
     },
     {
       code: 'HSDPJD_0020_001_001',
@@ -1845,7 +1979,22 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
       location: {
         en: 'Islamic Development Bank Group I ITFC Building Refill Washroom/',
         ar: 'مجموعة البنك الإسلامي للتنمية I ITFC إعادة تعبئة المبنى مرحاض /'
-      }
+      },
+      serviceSubject: [
+        {
+          code: '611007',
+          name: { en: 'RM T-Cell Dispenser Chrome', ar: 'موزع RM T-Cell كروم' },
+          value: 'RMT-CellDispenserChrome'
+        },
+        {
+          code: '611239',
+          name: {
+            en: 'EC030 Catcher - Genus Insect Light Trap 220V',
+            ar: 'EC030 الماسك - مصيدة الحشرات من الجنس بجهد 220 فولت'
+          },
+          value: 'eC030Catcher-GenusInsectLightTrap220V'
+        }
+      ]
     }
   ],
   STOCK_CODES: [
@@ -2045,4 +2194,13 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
 export const PAYMENT_TYPE = [
   { name: { en: 'Billable', ar: 'قابل للفوترة' }, value: 'billable' },
   { name: { en: 'Non Billable', ar: 'غير قابل للفوترة' }, value: 'nonBillable' }
+];
+
+export const TASKS = [
+  { name: { en: 'Task 1', ar: '1 مهمة' }, value: 'task1' },
+  { name: { en: 'Task 2', ar: '2 مهمة' }, value: 'task2' },
+  { name: { en: 'Task 3', ar: '3 مهمة' }, value: 'task3' },
+  { name: { en: 'Task 4', ar: '4 مهمة' }, value: 'task4' },
+  { name: { en: 'Task 5', ar: '5 مهمة' }, value: 'task5' },
+  { name: { en: 'Task 6', ar: '6 مهمة' }, value: 'task6' }
 ];

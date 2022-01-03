@@ -1,5 +1,5 @@
-import { POST_OFFICE, POST_BUSINESS } from '../constants';
-import { SEVICE_DASHBOARD_FILTER_MASTER_DATA } from '../../components/ServiceBoard/data';
+import { POST_OFFICE, POST_BUSINESS, POST_CONTRACTS, POST_SERVICE_SUBJECT } from '../constants';
+import { SEVICE_DASHBOARD_FILTER_MASTER_DATA, TASKS } from '../../components/ServiceBoard/data';
 
 const {
   COUNTRY,
@@ -11,9 +11,7 @@ const {
   SERVICEMAN,
   CALL_OUT_REASONS,
   CUSTOMERS,
-  SERVICE_SUBJECTS,
   CURRENCYS,
-  CONTRACTS,
   PROJECTS,
   STOCK_CODES,
   RATIOS
@@ -30,12 +28,13 @@ const initialState = {
   serviceman: SERVICEMAN,
   customers: CUSTOMERS,
   callOutReasons: CALL_OUT_REASONS,
-  serviceSubject: SERVICE_SUBJECTS,
+  serviceSubject: [],
   currency: CURRENCYS,
-  contracts: CONTRACTS,
+  contracts: [],
   projects: PROJECTS,
   stockCodes: STOCK_CODES,
-  ratios: RATIOS
+  ratios: RATIOS,
+  tasks: TASKS
 };
 
 export default function MasterDataReducer(state = initialState, actions) {
@@ -43,6 +42,10 @@ export default function MasterDataReducer(state = initialState, actions) {
   switch (actions.type) {
     case POST_OFFICE:
       return { ...state, office: data };
+    case POST_CONTRACTS:
+      return { ...state, contracts: data };
+    case POST_SERVICE_SUBJECT:
+      return { ...state, serviceSubject: data };
     default:
       return { ...state };
   }

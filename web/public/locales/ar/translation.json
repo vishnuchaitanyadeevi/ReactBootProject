@@ -170,7 +170,8 @@
     "Customer": "عميل",
     "contracts": "انكماش",
     "calloutReason": "سبب الاستدعاء",
-    "project-ServiceSubject": "مشروع - موضوع الخدمة",
+    "project": "مشروع",
+    "serviceSubject": "موضوع الخدمة",
     "isFOLReplacement": "هل استبدال FOL",
     "paymentType": "نوع الدفع",
     "date": "تاريخ",
@@ -181,6 +182,18 @@
     "task": "مهمة",
     "addNewTasks": "أضف مهام جديدة",
     "spareParts": "قطعة منفصلة",
-    "new": "جديد"
+    "new": "جديد",
+    "action": "عمل",
+    "taskName": "اسم المهمة",
+    "stockCode": "رمز السهم",
+    "description": "وصف",
+    "quantity": "كمية",
+    "ratio": "نسبة",
+    "discountAmount": "مقدار الخصم",
+    "unitPrice": "سعر الوحدة",
+    "totalPrice": "السعر الكلي",
+    "errorCode": "خطا بالكود",
+    "serviceRelatedNote": "ملاحظة متعلقة بالخدمة",
+    "addNewPart": "أضف جزء جديد"
   }
 }
