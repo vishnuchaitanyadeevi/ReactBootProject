@@ -170,6 +170,7 @@ const RenderComponent = ({ payload, metaData, ind, handleChange }) => {
               onChange={(e) => handleChange(key, e.target.value, ind)}
               inputFormat={inputFormat}
               views={views}
+              value={payload[key]}
             />
           </Grid>
         );
