@@ -265,8 +265,7 @@ export default function SimpleTable({
         >
           {headerData.map((headerElement) => (
             <Column
-              frozen={headerElement.isFrozen || headerElement.isFrozenRight}
-              alignFrozen="right"
+              frozen={headerElement.isFrozen}
               style={{
                 width: `${headerElement.isFrozen ? '10%' : ''}`,
                 position: `${headerElement.isFrozen ? 'sticky' : ''}`

@@ -41,8 +41,7 @@ function InvoiceList() {
       editorElement: null,
       sortable: true,
       filter: true,
-      isFrozen: true,
-      isFrozenRight: false
+      isFrozen: true
     },
     {
       field: 'invoice_number',
@@ -50,8 +49,7 @@ function InvoiceList() {
       editorElement: null,
       sortable: true,
       filter: true,
-      isFrozen: false,
-      isFrozenRight: false
+      isFrozen: true
     },
     {
       field: 'invoice_date',
@@ -59,8 +57,7 @@ function InvoiceList() {
       editorElement: null,
       sortable: true,
       filter: true,
-      isFrozen: false,
-      isFrozenRight: false
+      isFrozen: false
     },
     {
       field: 'project_number',
@@ -68,8 +65,7 @@ function InvoiceList() {
       editorElement: null,
       sortable: true,
       filter: true,
-      isFrozen: false,
-      isFrozenRight: false
+      isFrozen: false
     },
     {
       field: 'customer_no',
@@ -77,8 +73,7 @@ function InvoiceList() {
       editorElement: null,
       sortable: true,
       filter: true,
-      isFrozen: false,
-      isFrozenRight: false
+      isFrozen: false
     },
     {
       field: 'customer_name',
@@ -86,8 +81,7 @@ function InvoiceList() {
       editorElement: null,
       sortable: true,
       filter: true,
-      isFrozen: false,
-      isFrozenRight: false
+      isFrozen: false
     },
     {
       field: 'location_name',
@@ -95,8 +89,7 @@ function InvoiceList() {
       editorElement: null,
       sortable: true,
       filter: true,
-      isFrozen: true,
-      isFrozenRight: true
+      isFrozen: false
     },
     {
       field: 'gross_amt',
@@ -104,8 +97,7 @@ function InvoiceList() {
       editorElement: null,
       sortable: true,
       filter: true,
-      isFrozen: false,
-      isFrozenRight: false
+      isFrozen: false
     },
     {
       field: 'discount_%',
@@ -113,8 +105,7 @@ function InvoiceList() {
       editorElement: null,
       sortable: true,
       filter: true,
-      isFrozen: false,
-      isFrozenRight: false
+      isFrozen: false
     },
     {
       field: 'discount_amt',
@@ -122,8 +113,7 @@ function InvoiceList() {
       editorElement: null,
       sortable: true,
       filter: true,
-      isFrozen: false,
-      isFrozenRight: false
+      isFrozen: false
     },
     {
       field: 'net_amt',
@@ -131,8 +121,7 @@ function InvoiceList() {
       editorElement: null,
       sortable: true,
       filter: true,
-      isFrozen: false,
-      isFrozenRight: false
+      isFrozen: false
     },
     {
       field: 'vat_amt',
@@ -140,8 +129,7 @@ function InvoiceList() {
       editorElement: null,
       sortable: true,
       filter: true,
-      isFrozen: false,
-      isFrozenRight: false
+      isFrozen: false
     },
     {
       field: 'net_w_vat_amt',
@@ -149,8 +137,7 @@ function InvoiceList() {
       editorElement: null,
       sortable: true,
       filter: true,
-      isFrozen: true,
-      isFrozenRight: false
+      isFrozen: true
     }
   ];
   return (
