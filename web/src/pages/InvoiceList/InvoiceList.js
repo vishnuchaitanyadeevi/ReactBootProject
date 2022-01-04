@@ -140,6 +140,22 @@ function InvoiceList() {
       isFrozen: true
     }
   ];
+  const headCellsType = [
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE',
+    'NONE'
+  ];
+
   return (
     <div className="invoice_list_main_cls">
       <Grid container spacing={3}>
@@ -235,6 +251,7 @@ function InvoiceList() {
             printtype="button"
             printtitle="Print"
             trialColumn
+            headCellsType={headCellsType}
           />
         </Grid>
       </Grid>

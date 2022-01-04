@@ -10,6 +10,7 @@ import { Toast } from 'primereact/toast';
 import Checkbox from '@mui/material/Checkbox';
 import { FilterMatchMode } from 'primereact/api';
 import useSettings from '../../hooks/useSettings';
+import BasicDatePicker from '../pickers/BasicDatePicker';
 // import ngPrimeGrid from '../ngPrimeGrid';
 import jsonData from '../../utils/project-table-data.json';
 import '../../Styles/app.scss';
@@ -37,6 +38,7 @@ export default function SimpleTable({
   trialColumn,
   btnLabel,
   numericFields,
+  headCellsType,
   ...other
 }) {
   const { themeMode, onChangeMode } = useSettings();
@@ -230,6 +232,42 @@ export default function SimpleTable({
     }
   };
 
+  const handleClickLink = (rowData) => console.log('rowData...', rowData);
+  const handleChangeBody = (options, idx) => {
+    console.log('options...', headCellsType[idx]);
+    const key = Object.keys(options)[idx];
+    const newVal = { key, value: options[key] };
+    switch (headCellsType[idx]) {
+      case 'BUTTON':
+        return <Button variant="contained">{newVal.value}</Button>;
+      case 'NONE':
+        return <Typography style={{ fontSize: '13px' }}>{newVal.value}</Typography>;
+      case 'LINK':
+        return (
+          <Typography
+            style={{ cursor: 'pointer', textDecoration: 'underline', fontSize: '13px', color: 'blue' }}
+            onClick={() => handleClickLink(options)}
+          >
+            {newVal.value}
+          </Typography>
+        );
+      case 'DATE':
+        return (
+          <div style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}>
+            <BasicDatePicker
+              label="Date"
+              inputFormat="dd-MM-yyyy"
+              views={['year', 'month', 'day']}
+              value={newVal.value}
+              getSelectedDate={(dt) => console.log('Selected Date is...', dt)}
+              getIsoDate={(dt) => console.log('ISO Date is...', dt)}
+            />
+          </div>
+        );
+      default:
+        return undefined;
+    }
+  };
   const handleClick = (options) => console.log('selected row...', options);
   return (
     <Grid container spacing={1}>
@@ -250,7 +288,7 @@ export default function SimpleTable({
         <DataTable
           header={header}
           globalFilter={globalFilter}
-          value={tableData}
+          value={rowData}
           editingRows={editingRows}
           onRowEditChange={onRowEditChange}
           onRowEditComplete={onRowEditComplete}
@@ -263,7 +301,7 @@ export default function SimpleTable({
           scrollable
           {...other}
         >
-          {headerData.map((headerElement) => (
+          {headerData.map((headerElement, idx) => (
             <Column
               frozen={headerElement.isFrozen}
               style={{
@@ -276,6 +314,7 @@ export default function SimpleTable({
                 textAlign: `${numericFields && numericFields.includes(headerElement.field) ? 'center' : ''}`
               }}
               className={numericFields && numericFields.includes(headerElement.field) ? 'd-data-cls' : ''}
+              body={(options) => handleChangeBody(options, idx)}
             />
           ))}
           {editOption ? (

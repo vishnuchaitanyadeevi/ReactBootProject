@@ -69,6 +69,7 @@ function CustomersList({ openFlag, handleCloseDialog, showDialog }) {
       filter: true
     }
   ];
+  const headCellsType = ['NONE', 'NONE', 'NONE', 'NONE', 'NONE'];
 
   const { TEXT_FIELD, AUTOCOMPLETE } = COMPONENTS;
   const FILTER_COMPONETS = [
@@ -130,6 +131,7 @@ function CustomersList({ openFlag, handleCloseDialog, showDialog }) {
       dataKey="id"
       editMode="row"
       numericFields={numericFields}
+      headCellsType={headCellsType}
     />
   );
 
