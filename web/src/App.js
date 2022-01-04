@@ -15,6 +15,8 @@ import Settings from './components/settings';
 import ScrollToTop from './components/ScrollToTop';
 import ThemePrimaryColor from './components/ThemePrimaryColor';
 import { LOCAL_STORAGE_KEYS } from './utils/constants';
+
+const logger = require('./callingLogger');
 // ----------------------------------------------------------------------
 const { TOKEN_KEY } = LOCAL_STORAGE_KEYS;
 export default function App() {
@@ -37,7 +39,7 @@ export default function App() {
   }, []);
 
   const errorHandler = (error, errorInfo) => {
-    console.log('Logging', error, errorInfo);
+    logger.error('Something Went Wrong', { meta: errorInfo });
   };
 
   return (
