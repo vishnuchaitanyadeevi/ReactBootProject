@@ -55,6 +55,7 @@ function InvoiceList() {
       field: 'invoice_date',
       header: 'Invoice Date',
       editorElement: null,
+      style: { width: '10%' },
       sortable: true,
       filter: true,
       isFrozen: false
