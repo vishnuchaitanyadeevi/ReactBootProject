@@ -91,6 +91,7 @@ function AddCallOutPage() {
     },
     {
       control: DATEPICKER,
+      key: 'date',
       label: 'addCallout.date',
       inputFormat: 'dd-MM-yyyy',
       views: ['year', 'month', 'day'],
