@@ -171,6 +171,8 @@ const RenderComponent = ({ payload, metaData, ind, handleChange }) => {
               inputFormat={inputFormat}
               views={views}
               value={payload[key]}
+              getSelectedDate={(dt) => null}
+              getIsoDate={(dt) => handleChange(key, dt, ind)}
             />
           </Grid>
         );
