@@ -7,6 +7,7 @@ import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { Toast } from 'primereact/toast';
+import Tooltip from '@mui/material/Tooltip';
 import Checkbox from '@mui/material/Checkbox';
 import { FilterMatchMode } from 'primereact/api';
 import useSettings from '../../hooks/useSettings';
@@ -20,6 +21,8 @@ export default function SimpleTable({
   headerData,
   editOption,
   showActionColumn,
+  type,
+  title,
   showIssueColumn,
   issuetype,
   issuetitle,
@@ -33,8 +36,7 @@ export default function SimpleTable({
   showPrintColumn,
   printtype,
   printtitle,
-  type,
-  title,
+  trialColumn,
   btnLabel,
   numericFields,
   headCellsType,
@@ -134,11 +136,9 @@ export default function SimpleTable({
     switch (type) {
       case 'text':
         return (
-          <>
-            <Typography onClick={() => handleClick(options)} style={{ cursor: 'pointer' }}>
-              {title}
-            </Typography>
-          </>
+          <Typography onClick={() => handleClick(options)} style={{ cursor: 'pointer' }}>
+            {title}
+          </Typography>
         );
       case 'button':
         return (
@@ -154,11 +154,9 @@ export default function SimpleTable({
     switch (issuetype) {
       case 'text':
         return (
-          <>
-            <Typography onClick={() => handleClick(options)} style={{ cursor: 'pointer' }}>
-              {issuetitle}
-            </Typography>
-          </>
+          <Typography onClick={() => handleClick(options)} style={{ cursor: 'pointer' }}>
+            {issuetitle}
+          </Typography>
         );
       case 'button':
         return (
@@ -174,11 +172,9 @@ export default function SimpleTable({
     switch (saveChangestype) {
       case 'text':
         return (
-          <>
-            <Typography onClick={() => handleClick(options)} style={{ cursor: 'pointer' }}>
-              {saveChangestitle}
-            </Typography>
-          </>
+          <Typography onClick={() => handleClick(options)} style={{ cursor: 'pointer' }}>
+            {saveChangestitle}
+          </Typography>
         );
       case 'button':
         return (
@@ -194,11 +190,9 @@ export default function SimpleTable({
     switch (edittype) {
       case 'text':
         return (
-          <>
-            <Typography onClick={() => handleClick(options)} style={{ cursor: 'pointer' }}>
-              {edittitle}
-            </Typography>
-          </>
+          <Typography onClick={() => handleClick(options)} style={{ cursor: 'pointer' }}>
+            {edittitle}
+          </Typography>
         );
       case 'button':
         return (
@@ -214,11 +208,9 @@ export default function SimpleTable({
     switch (printtype) {
       case 'text':
         return (
-          <>
-            <Typography onClick={() => handleClick(options)} style={{ cursor: 'pointer' }}>
-              {printtitle}
-            </Typography>
-          </>
+          <Typography onClick={() => handleClick(options)} style={{ cursor: 'pointer' }}>
+            {printtitle}
+          </Typography>
         );
       case 'button':
         return (
@@ -238,29 +230,43 @@ export default function SimpleTable({
     const newVal = { key, value: options[key] };
     switch (headCellsType[idx]) {
       case 'BUTTON':
-        return <Button variant="contained">{newVal.value}</Button>;
+        return (
+          <Tooltip title={newVal.value}>
+            <Button variant="contained" tooltip={newVal.value}>
+              {newVal.value}
+            </Button>
+          </Tooltip>
+        );
       case 'NONE':
-        return <Typography style={{ fontSize: '13px' }}>{newVal.value}</Typography>;
+        return (
+          <Tooltip title={newVal.value}>
+            <Typography style={{ fontSize: '13px' }}>{newVal.value}</Typography>
+          </Tooltip>
+        );
       case 'LINK':
         return (
-          <Typography
-            style={{ cursor: 'pointer', textDecoration: 'underline', fontSize: '13px', color: 'blue' }}
-            onClick={() => handleClickLink(options)}
-          >
-            {newVal.value}
-          </Typography>
+          <Tooltip title={newVal.value}>
+            <Typography
+              style={{ cursor: 'pointer', textDecoration: 'underline', fontSize: '13px', color: 'blue' }}
+              onClick={() => handleClickLink(options)}
+            >
+              {newVal.value}
+            </Typography>
+          </Tooltip>
         );
       case 'DATE':
         return (
           <div style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}>
-            <BasicDatePicker
-              label="Date"
-              inputFormat="dd-MM-yyyy"
-              views={['year', 'month', 'day']}
-              value={newVal.value}
-              getSelectedDate={(dt) => console.log('Selected Date is...', dt)}
-              getIsoDate={(dt) => console.log('ISO Date is...', dt)}
-            />
+            <Tooltip title={newVal.value}>
+              <BasicDatePicker
+                label="Date"
+                inputFormat="dd-MM-yyyy"
+                views={['year', 'month', 'day']}
+                value={newVal.value}
+                getSelectedDate={(dt) => console.log('Selected Date is...', dt)}
+                getIsoDate={(dt) => console.log('ISO Date is...', dt)}
+              />
+            </Tooltip>
           </div>
         );
       default:
@@ -293,10 +299,19 @@ export default function SimpleTable({
           onRowEditComplete={onRowEditComplete}
           // filters={filterState}
           filterDisplay="menu"
+          responsiveLayout="scroll"
+          rowHover
+          dataKey="id"
+          emptyMessage="NO DATA FOUND"
+          scrollable
           {...other}
         >
           {headerData.map((headerElement, idx) => (
             <Column
+              frozen={headerElement.isFrozen}
+              style={{
+                position: `${headerElement.isFrozen ? 'sticky' : ''}`
+              }}
               editor={(options) => switchEditor(headerElement.editorElement, options)}
               {...headerElement}
               bodyStyle={{
@@ -355,6 +370,19 @@ export default function SimpleTable({
               style={{
                 minWidth: '6rem',
                 width: '6rem',
+                paddingBottom: '0.1rem',
+                paddingTop: '0.1rem'
+              }}
+            />
+          ) : null}
+          {trialColumn ? (
+            <Column
+              header="TRIAL"
+              columnKey="actionKey"
+              body={(options) => ActionPrintBody(options)}
+              style={{
+                width: '10%',
+                position: 'sticky',
                 paddingBottom: '0.1rem',
                 paddingTop: '0.1rem'
               }}
