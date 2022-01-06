@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Grid, Typography, TextField, Button } from '@mui/material';
 import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -12,7 +12,7 @@ import BasicDatePicker from './pickers/BasicDatePicker';
 import '../Styles/app.scss';
 
 function ContractList({
-  data,
+  rowData,
   columns,
   expandedColumns,
   filters1,
@@ -21,13 +21,16 @@ function ContractList({
   onChildRowClick,
   numericFields,
   numericFieldsExpandedData,
-  deleteRowData
+  deleteRowData,
+  headCellsType
 }) {
   const { themeMode, onChangeMode } = useSettings();
   const [tableData, setTableData] = useState(null);
   const [selected, setSelected] = useState(null);
   const [expandedRows, setExpandedRows] = useState(null);
   const [globalFilter, setGlobalFilter] = useState(null);
+  const [isUpdate, setIsUpdate] = useState(false);
+
   const onRowEditComplete = (e) => {
     const _tableData = [...tableData];
     const { newData, index } = e;
@@ -47,6 +50,7 @@ function ContractList({
     { label: 'Pending', value: 'Pending' },
     { label: 'Running', value: 'Running' }
   ];
+
   const handleChangeEditor = (editorFlag, options) => {
     switch (editorFlag) {
       case 'textField':
@@ -84,6 +88,59 @@ function ContractList({
     </div>
   );
 
+  // handleChange rowDate
+  const handleChangeDate = (newValue, data, key) => {
+    // find id and index from json and update that value
+    // Find index of specific object using findIndex method.
+    if (data && newValue) {
+      const objIndex = rowData.findIndex((obj) => obj.id === data.id);
+      console.log('Before update...', rowData[objIndex]);
+      rowData[objIndex][key] = newValue;
+      console.log('After update...', rowData[objIndex]);
+      console.log('mockData...', rowData);
+      setIsUpdate(true);
+    }
+  };
+
+  // HandleChange body
+  const handleChangeBody = (options, idx) => {
+    const key = Object.keys(options)[idx];
+    const newVal = { key, value: options[key] };
+    switch (headCellsType[idx]) {
+      case 'BUTTON':
+        return <Button variant="contained">{newVal.value}</Button>;
+      case 'NONE':
+        return <Typography style={{ fontSize: '13px' }}>{newVal.value}</Typography>;
+      case 'LINK':
+        return (
+          <Typography style={{ cursor: 'pointer', textDecoration: 'underline', fontSize: '13px', color: 'blue' }}>
+            {newVal.value}
+          </Typography>
+        );
+      case 'DATE':
+        return (
+          <div style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}>
+            <BasicDatePicker
+              label="Date"
+              inputFormat="dd-MM-yyyy"
+              views={['year', 'month', 'day']}
+              value={newVal.value}
+              getSelectedDate={(dt) => console.log('date..', dt)}
+              getIsoDate={(e) => handleChangeDate(e, options, key)}
+              size="large"
+            />
+          </div>
+        );
+      default:
+        return undefined;
+    }
+  };
+  useEffect(() => {
+    if (isUpdate) {
+      console.log('calling..date change');
+      setIsUpdate(false);
+    }
+  }, [isUpdate]);
   const editIcon = (rowData) => <ModeEditOutlinedIcon onClick={() => onRowClick(rowData)} />;
   const deleteIcon = (rowData) => <DeleteIcon onClick={() => deleteRowData(rowData)} />;
   const editIconExpanded = (rowData) => <ModeEditOutlinedIcon onClick={() => onChildRowClick(rowData)} />;
@@ -137,7 +194,7 @@ function ContractList({
       <div className="card">
         <DataTable
           editMode="row"
-          value={data}
+          value={rowData}
           expandedRows={expandedRows}
           showGridlines
           responsiveLayout="scroll"
@@ -164,7 +221,7 @@ function ContractList({
         >
           <Column expander style={{ minWidth: '1rem', textAlign: 'center' }} />
           {columns &&
-            columns.map((col) => (
+            columns.map((col, idx) => (
               <Column
                 field={col.field}
                 header={col.header}
@@ -175,6 +232,7 @@ function ContractList({
                 filterType="text"
                 style={{ textAlign: `${numericFields && numericFields.includes(col.field) ? 'center' : ''}` }}
                 className={numericFields && numericFields.includes(col.field) ? 'd-data-cls' : ''}
+                body={(options) => handleChangeBody(options, idx)}
               />
             ))}
           <Column
