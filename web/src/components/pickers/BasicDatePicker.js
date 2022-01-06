@@ -29,7 +29,7 @@ export default function BasicDatePicker({
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <MobileDateTimePicker
-        value={value}
+        value={value === '' ? null : value}
         onChange={handleDateChange}
         showTodayButton
         minDate={minDate}
