@@ -4,6 +4,7 @@ import { Grid, Typography, TextField, Accordion, AccordionSummary, AccordionDeta
 import { ArrowRight } from '@mui/icons-material/';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { Tooltip } from 'primereact/tooltip';
 import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget';
 import BasicDatePicker from '../../components/pickers/BasicDatePicker';
 import InvoiceListingData from './InvoiceListingData.json';
@@ -38,17 +39,17 @@ function InvoiceList() {
       field: 'id',
       header: 'ID',
       editorElement: null,
-      style: { width: '10%' },
       sortable: true,
-      filter: true
+      filter: true,
+      isFrozen: true
     },
     {
       field: 'invoice_number',
       header: 'Invoice Number',
       editorElement: null,
-      style: { width: '10%' },
       sortable: true,
-      filter: true
+      filter: true,
+      isFrozen: true
     },
     {
       field: 'invoice_date',
@@ -56,87 +57,88 @@ function InvoiceList() {
       editorElement: null,
       style: { width: '10%' },
       sortable: true,
-      filter: true
+      filter: true,
+      isFrozen: false
     },
     {
       field: 'project_number',
       header: 'Project Number',
       editorElement: null,
-      style: { width: '10%' },
       sortable: true,
-      filter: true
+      filter: true,
+      isFrozen: false
     },
     {
       field: 'customer_no',
       header: 'Customer No.',
       editorElement: null,
-      style: { width: '10%' },
       sortable: true,
-      filter: true
+      filter: true,
+      isFrozen: false
     },
     {
       field: 'customer_name',
       header: 'Customer Name',
       editorElement: null,
-      style: { width: '10%' },
       sortable: true,
-      filter: true
+      filter: true,
+      isFrozen: false
     },
     {
       field: 'location_name',
       header: 'Location Name',
       editorElement: null,
-      style: { width: '10%' },
       sortable: true,
-      filter: true
+      filter: true,
+      isFrozen: false
     },
     {
       field: 'gross_amt',
       header: 'Gross AMT',
       editorElement: null,
-      style: { width: '10%' },
       sortable: true,
-      filter: true
+      filter: true,
+      isFrozen: false
     },
     {
       field: 'discount_%',
       header: 'Discount %',
       editorElement: null,
-      style: { width: '10%' },
       sortable: true,
-      filter: true
+      filter: true,
+      isFrozen: false
     },
     {
       field: 'discount_amt',
       header: 'Discount AMT',
       editorElement: null,
-      style: { width: '10%' },
       sortable: true,
-      filter: true
+      filter: true,
+      isFrozen: false
     },
     {
       field: 'net_amt',
       header: 'NET AMT',
       editorElement: null,
-      style: { width: '10%' },
       sortable: true,
-      filter: true
+      filter: true,
+      isFrozen: false
     },
     {
       field: 'vat_amt',
       header: 'VAT AMT',
       editorElement: null,
-      style: { width: '10%' },
       sortable: true,
-      filter: true
+      filter: true,
+      isFrozen: false
     },
     {
       field: 'net_w_vat_amt',
       header: 'Net w VAT AMT',
       editorElement: null,
-      style: { width: '10%' },
       sortable: true,
-      filter: true
+      filter: true,
+      isFrozen: true
     }
   ];
   const headCellsType = [
@@ -249,6 +251,7 @@ function InvoiceList() {
             showPrintColumn
             printtype="button"
             printtitle="Print"
+            trialColumn
             headCellsType={headCellsType}
           />
         </Grid>
