@@ -1,19 +1,16 @@
-import React, { Fragment, useState, useCallback } from 'react';
-import { Grid, Typography, Button } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Grid, Typography, Button, Checkbox } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
 import { Helmet } from 'react-helmet';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
-import { InputNumber } from 'primereact/inputnumber';
-import { Dropdown } from 'primereact/dropdown';
-import { Toast } from 'primereact/toast';
 import Tooltip from '@mui/material/Tooltip';
-import Checkbox from '@mui/material/Checkbox';
 import { FilterMatchMode } from 'primereact/api';
 import useSettings from '../../hooks/useSettings';
 import BasicDatePicker from '../pickers/BasicDatePicker';
+
 // import ngPrimeGrid from '../ngPrimeGrid';
-import jsonData from '../../utils/project-table-data.json';
 import '../../Styles/app.scss';
 
 export default function SimpleTable({
@@ -43,9 +40,10 @@ export default function SimpleTable({
   ...other
 }) {
   const { themeMode, onChangeMode } = useSettings();
-  const [tableData, setTableData] = useState(rowData);
+  const [tableData, setTableData] = useState();
   const [editingRows, setEditingRows] = useState({});
   const [filterState, setFilterState] = useState({});
+  const [isUpdate, setIsUpdate] = useState(false);
   const onRowEditChange = (e) => {
     setEditingRows(e.data);
   };
@@ -223,9 +221,28 @@ export default function SimpleTable({
     }
   };
 
+  const editIcon = () => <EditIcon />;
+  // handleChange rowDate
+  const handleChangeDate = (newValue, data, key) => {
+    // find id and index from json and update that value
+    // Find index of specific object using findIndex method.
+    if (data && newValue) {
+      const objIndex = rowData.findIndex((obj) => obj.id === data.id);
+      console.log('Before update...', rowData[objIndex]);
+      rowData[objIndex][key] = newValue;
+      console.log('After update...', rowData[objIndex]);
+      console.log('mockData...', rowData);
+      setIsUpdate(true);
+    }
+  };
+  useEffect(() => {
+    if (isUpdate) {
+      console.log('calling..date change');
+      setIsUpdate(false);
+    }
+  }, [isUpdate]);
   const handleClickLink = (rowData) => console.log('rowData...', rowData);
   const handleChangeBody = (options, idx) => {
-    console.log('options...', headCellsType[idx]);
     const key = Object.keys(options)[idx];
     const newVal = { key, value: options[key] };
     switch (headCellsType[idx]) {
@@ -257,22 +274,22 @@ export default function SimpleTable({
       case 'DATE':
         return (
           <div style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}>
-            <Tooltip title={newVal.value}>
-              <BasicDatePicker
-                label="Date"
-                inputFormat="dd-MM-yyyy"
-                views={['year', 'month', 'day']}
-                value={newVal.value}
-                getSelectedDate={(dt) => console.log('Selected Date is...', dt)}
-                getIsoDate={(dt) => console.log('ISO Date is...', dt)}
-              />
-            </Tooltip>
+            <BasicDatePicker
+              label="Date"
+              inputFormat="dd-MM-yyyy"
+              views={['year', 'month', 'day']}
+              value={newVal.value}
+              getSelectedDate={(dt) => console.log('date..', dt)}
+              getIsoDate={(e) => handleChangeDate(e, options, key)}
+              size="large"
+            />
           </div>
         );
       default:
         return undefined;
     }
   };
+
   const handleClick = (options) => console.log('selected row...', options);
   return (
     <Grid container spacing={1}>
@@ -300,10 +317,8 @@ export default function SimpleTable({
           // filters={filterState}
           filterDisplay="menu"
           responsiveLayout="scroll"
-          rowHover
-          dataKey="id"
           emptyMessage="NO DATA FOUND"
-          scrollable
+          // scrollable
           {...other}
         >
           {headerData.map((headerElement, idx) => (
@@ -321,9 +336,7 @@ export default function SimpleTable({
               body={(options) => handleChangeBody(options, idx)}
             />
           ))}
-          {editOption ? (
-            <Column rowEditor headerStyle={{ width: '10%', minWidth: '8rem' }} bodyStyle={{ textAlign: 'center' }} />
-          ) : null}
+          {editOption ? <Column field="Action" header="Action" body={(options) => editIcon(options)} /> : null}
           {showActionColumn ? (
             <Column
               field="Action"

@@ -143,7 +143,7 @@ function TerminateProject() {
     }
   ];
   const headCellsTypeContractData = ['NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE'];
-  const headCellsTypeProjectData = ['NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE'];
+  const headCellsTypeProjectData = ['NONE', 'NONE', 'NONE', 'DATE', 'DATE', 'DATE', 'NONE', 'NONE'];
   return (
     <Grid className="terminate_project_main_cls">
       <Grid container spacing={3}>

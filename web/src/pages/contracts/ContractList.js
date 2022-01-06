@@ -255,6 +255,7 @@ function ContractList() {
 
   const numericFields = ['id', 'contractNumber', 'contractSignOn', 'contractStartDate', 'status', 'activeProjects'];
   const numericFieldsExpandedData = ['id', 'status', 'project_number', 'project_start_date', 'end_date'];
+  const headCellsType = ['NONE', 'NONE', 'NONE', 'DATE', 'DATE', 'NONE', 'NONE'];
 
   return (
     <Grid className="contract_list_main_cls">
@@ -307,7 +308,7 @@ function ContractList() {
         {/* Grid for all contract list */}
         <Grid item xs={12}>
           <DataTable
-            data={tableData}
+            rowData={tableData}
             columns={colName}
             expandedColumns={expandColName}
             filters1={filters1}
@@ -317,6 +318,7 @@ function ContractList() {
             numericFields={numericFields}
             numericFieldsExpandedData={numericFieldsExpandedData}
             deleteRowData={deleteRowData}
+            headCellsType={headCellsType}
           />
         </Grid>
       </Grid>
