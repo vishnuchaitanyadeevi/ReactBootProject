@@ -22,6 +22,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
+import BasicDatePicker from '../pickers/BasicDatePicker';
 import useSettings from '../../hooks/useSettings';
 import { COMPONENTS, LANGUAGES_CODES_RTL_ORIENTATION, THEME } from '../../utils/constants';
 import { COLOR_CODES } from '../ServiceBoard/data';
@@ -37,7 +38,7 @@ export default function Filters({
 }) {
   const { t } = useTranslation();
   const { lang, themeMode } = useSettings();
-  const { TEXT_FIELD, SELECT_BOX, CHECKBOX, RADIO, AUTOCOMPLETE } = COMPONENTS;
+  const { TEXT_FIELD, SELECT_BOX, CHECKBOX, RADIO, AUTOCOMPLETE, DATEPICKER } = COMPONENTS;
   const [payload, setPayload] = useState({});
   const [open, setOpen] = useState(true);
 
@@ -187,6 +188,12 @@ export default function Filters({
                 />
               )}
             />
+          </Grid>
+        );
+      case DATEPICKER:
+        return (
+          <Grid item xs={12} sm={columnWidth} style={{ ...groupStyle }} key={`${key}-${ind}`}>
+            <BasicDatePicker label="Date" inputFormat="dd-MM-yyyy" views={['year', 'month', 'day']} />
           </Grid>
         );
       default:

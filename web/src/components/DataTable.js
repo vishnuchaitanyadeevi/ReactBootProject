@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet';
 import { InputText } from 'primereact/inputtext';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import Tooltip from '@mui/material/Tooltip';
 import useSettings from '../hooks/useSettings';
 import AutocompleteWidget from './Autocomplete/autocompletWidget';
 import BasicDatePicker from './pickers/BasicDatePicker';
@@ -50,7 +51,11 @@ function ContractList({
   const handleChangeEditor = (editorFlag, options) => {
     switch (editorFlag) {
       case 'textField':
-        return <TextField type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />;
+        return (
+          <Tooltip title={options.value}>
+            <TextField type="text" value={options.value} onChange={(e) => options.editorCallback(e.target.value)} />
+          </Tooltip>
+        );
       case 'date':
         return (
           <BasicDatePicker

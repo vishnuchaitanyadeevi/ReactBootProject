@@ -60,3 +60,7 @@ export const GET_LOCATION = 'GET_LOCATION';
 export const POST_LOCATION = 'POST_LOCATION';
 export const GET_SERVICEMEN = 'GET_SERVICEMEN';
 export const POST_SERVICEMEN = 'POST_SERVICEMEN';
+
+// Invoice List Filters
+export const GET_SALESMAN = 'GET_SALESMAN';
+export const POST_SALESMAN = 'POST_SALESMAN';

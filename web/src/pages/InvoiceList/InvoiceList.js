@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import './InvoiceList.scss';
 import { Grid, Typography, TextField, Accordion, AccordionSummary, AccordionDetails, Button } from '@mui/material';
 import { ArrowRight } from '@mui/icons-material/';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { Tooltip } from 'primereact/tooltip';
+import { FilterMatchMode } from 'primereact/api';
 import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget';
 import BasicDatePicker from '../../components/pickers/BasicDatePicker';
 import InvoiceListingData from './InvoiceListingData.json';
+import Filters from '../../components/Filter/filter';
+import { COMPONENTS } from '../../utils/constants';
+import { SEVICE_DASHBOARD_FILTER_MASTER_DATA } from '../../components/ServiceBoard/data';
+import { POST_OFFICE } from '../../redux/constants';
 import SimpleTable from '../../components/table/simpleTable';
 
 function InvoiceList() {
+  const masterData = useSelector((state) => state.MasterDataReducer);
+  const dispatch = useDispatch();
   const [tableData, setTableData] = useState(InvoiceListingData);
   const [editingRows, setEditingRows] = useState({});
   const numericFields = [
@@ -141,6 +148,94 @@ function InvoiceList() {
       isFrozen: true
     }
   ];
+  const [filters1, setFilters1] = useState({
+    country: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    office: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    salesman: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    serviceman: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    customer: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    projinvonacno: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    status: { value: null, matchMode: FilterMatchMode.CONTAINS }
+  });
+  const { TEXT_FIELD, AUTOCOMPLETE, DATEPICKER } = COMPONENTS;
+  const FILTER_COMPONETS = [
+    {
+      control: AUTOCOMPLETE,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'country',
+      label: 'serviceDashboard.country',
+      placeholder: 'serviceDashboard.country',
+      options: masterData?.country
+    },
+    {
+      control: AUTOCOMPLETE,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'office',
+      label: 'Office',
+      placeholder: 'Office',
+      options: masterData?.office
+    },
+    {
+      control: AUTOCOMPLETE,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'salesman',
+      label: 'Salesman',
+      placeholder: 'Salesman',
+      options: masterData?.salesman
+    },
+    {
+      control: AUTOCOMPLETE,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'serviceman',
+      label: 'Serviceman',
+      placeholder: 'Serviceman',
+      options: masterData?.serviceman
+    },
+    {
+      control: TEXT_FIELD,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'customer',
+      label: 'Customer Name',
+      placeholder: 'Customer Name'
+    },
+    {
+      control: TEXT_FIELD,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'projinvonacno',
+      label: 'Proj. Inv. OnAc. No.',
+      placeholder: 'Proj. Inv. OnAc. No.'
+    },
+    {
+      control: AUTOCOMPLETE,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'status',
+      label: 'Status',
+      placeholder: 'Status',
+      options: masterData?.status
+    },
+    {
+      control: DATEPICKER,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'start'
+    },
+    {
+      control: DATEPICKER,
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      key: 'end'
+    }
+  ];
+  const getFilterData = (data) => {
+    console.log('Filtered data: ', data);
+  };
+  const getFilterDataPayloadChange = (key, val) => {
+    console.log(key, val);
+    if (key === 'country') {
+      const country = SEVICE_DASHBOARD_FILTER_MASTER_DATA.OFFICE.find((office) => office.country === val);
+      if (country) {
+        dispatch({ type: POST_OFFICE, data: country.offices });
+      }
+    }
+  };
   const headCellsType = [
     'NONE',
     'NONE',
@@ -165,60 +260,14 @@ function InvoiceList() {
             Invoice List
           </Typography>
         </Grid>
-        {/* Filter section Start */}
-        <Grid container spacing={3} style={{ marginTop: '0px', marginLeft: '10px' }}>
-          <Grid item xs={12}>
-            <Accordion style={{ boxShadow: 'none' }} fullWidth>
-              <AccordionSummary
-                style={{ display: 'flex', alignItems: 'center', flexDirection: 'row-reverse' }}
-                expandIcon={<ArrowRight />}
-                aria-controls="panel1d-content"
-                id="panel1d-header"
-              >
-                <Typography variant="h6">Filters</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                {/* Autocompletewidget grid container start */}
-                <Grid Container spacing={3} style={{ display: 'flex', alignItems: 'center' }}>
-                  <Grid item xs={6} sm={2}>
-                    <AutocompleteWidget options={countries} label="Country" disablePortal autoSelect size="small" />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <AutocompleteWidget options={countries} label="Office" disablePortal autoSelect size="small" />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <AutocompleteWidget options={countries} label="Salesmen" disablePortal autoSelect size="small" />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <AutocompleteWidget options={countries} label="Servicemen" disablePortal autoSelect size="small" />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <TextField fullWidth label="Customer" size="small" />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <TextField fullWidth label="Proj.Inv.OnAc.No" size="small" />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <AutocompleteWidget options={countries} label="Status" disablePortal autoSelect size="small" />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <BasicDatePicker label="Date" inputFormat="dd-MM-yyyy" views={['year', 'month', 'day']} />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <BasicDatePicker label="Date" inputFormat="dd-MM-yyyy" views={['year', 'month', 'day']} />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <Button variant="contained" size="small">
-                      Filter
-                    </Button>
-                  </Grid>
-                </Grid>
-                {/* Autocompletewidget grid container end */}
-              </AccordionDetails>
-            </Accordion>
-          </Grid>
+        <Grid item xs={12}>
+          <Filters
+            components={FILTER_COMPONETS}
+            apiUrl="dummyUrl"
+            getFilterData={getFilterData}
+            getFilterDataPayloadChange={getFilterDataPayloadChange}
+          />
         </Grid>
-        {/* Filter section xs={12} end */}
       </Grid>
       {/* Grid for simple table */}
       <Grid container spacing={3} style={{ marginTop: '1rem' }}>

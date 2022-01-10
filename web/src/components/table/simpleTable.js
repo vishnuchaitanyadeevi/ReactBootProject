@@ -303,7 +303,7 @@ export default function SimpleTable({
           rowHover
           dataKey="id"
           emptyMessage="NO DATA FOUND"
-          scrollable
+          // scrollable
           {...other}
         >
           {headerData.map((headerElement, idx) => (
@@ -370,19 +370,6 @@ export default function SimpleTable({
               style={{
                 minWidth: '6rem',
                 width: '6rem',
-                paddingBottom: '0.1rem',
-                paddingTop: '0.1rem'
-              }}
-            />
-          ) : null}
-          {trialColumn ? (
-            <Column
-              header="TRIAL"
-              columnKey="actionKey"
-              body={(options) => ActionPrintBody(options)}
-              style={{
-                width: '10%',
-                position: 'sticky',
                 paddingBottom: '0.1rem',
                 paddingTop: '0.1rem'
               }}

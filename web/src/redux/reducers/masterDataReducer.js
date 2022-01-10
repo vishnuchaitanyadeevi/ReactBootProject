@@ -7,6 +7,7 @@ import {
   GET_STATUS,
   GET_LOCATION,
   GET_SERVICEMEN,
+  GET_SALESMAN,
   POST_COUNTRY,
   POST_OFFICE,
   POST_BUSINESS,
@@ -14,11 +15,12 @@ import {
   POST_PROJECT_STATUS,
   POST_STATUS,
   POST_LOCATION,
-  POST_SERVICEMEN
+  POST_SERVICEMEN,
+  POST_SALESMAN
 } from '../constants';
 import { SEVICE_DASHBOARD_FILTER_MASTER_DATA } from '../../components/ServiceBoard/data';
 
-const { COUNTRY, BUSINESS, PROJECT_STATUS, STATUS, CONTRACT, LOCATION, SERVICEMAN } =
+const { COUNTRY, BUSINESS, PROJECT_STATUS, STATUS, CONTRACT, LOCATION, SERVICEMAN, SALESMAN } =
   SEVICE_DASHBOARD_FILTER_MASTER_DATA;
 
 const initialState = {
@@ -29,7 +31,8 @@ const initialState = {
   status: STATUS,
   contract: CONTRACT,
   location: LOCATION,
-  serviceman: SERVICEMAN
+  serviceman: SERVICEMAN,
+  salesman: SALESMAN
 };
 
 export default function MasterDataReducer(state = initialState, actions) {
@@ -54,6 +57,8 @@ export default function MasterDataReducer(state = initialState, actions) {
     case GET_LOCATION:
       return { ...state };
     case GET_SERVICEMEN:
+      return { ...state };
+    case GET_SALESMAN:
       return { ...state };
     default:
       return { ...state };
