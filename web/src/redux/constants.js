@@ -51,7 +51,7 @@ export const POST_OFFICE = 'POST_OFFICE';
 export const GET_BUSINESS = 'GET_BUSINESS';
 export const POST_BUSINESS = 'POST_BUSINESS';
 export const GET_CONTRACT = 'GET_CONTRACT';
-export const POST_CONTRACT = 'POST_CONTRACT';
+export const POST_CONTRACTS = 'POST_CONTRACTS';
 export const GET_PROJECT_STATUS = 'GET_PROJECT_STATUS';
 export const POST_PROJECT_STATUS = 'POST_PROJECT_STATUS';
 export const GET_STATUS = 'GET_STATUS';
@@ -60,7 +60,4 @@ export const GET_LOCATION = 'GET_LOCATION';
 export const POST_LOCATION = 'POST_LOCATION';
 export const GET_SERVICEMEN = 'GET_SERVICEMEN';
 export const POST_SERVICEMEN = 'POST_SERVICEMEN';
-
-// Invoice List Filters
-export const GET_SALESMAN = 'GET_SALESMAN';
-export const POST_SALESMAN = 'POST_SALESMAN';
+export const POST_SERVICE_SUBJECT = 'POST_SERVICE_SUBJECT';

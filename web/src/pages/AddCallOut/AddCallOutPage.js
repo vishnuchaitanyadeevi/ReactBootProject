@@ -1,313 +1,354 @@
-import React, { useState } from 'react';
-import {
-  Grid,
-  Typography,
-  TextField,
-  Button,
-  Divider,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-  FormControl,
-  FormLabel,
-  Checkbox
-} from '@mui/material';
-import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget';
-import BasicDatePicker from '../../components/pickers/BasicDatePicker';
-import SimpleTable from '../../components/table/simpleTable';
-import TaskTable from './TaskTable';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { Grid, Divider, Button, Typography } from '@mui/material';
+import { isArray } from 'lodash';
+import { PAYMENT_TYPE } from '../../components/ServiceBoard/data';
+import RenderComponent from '../../components/RenderComponent';
+import useSettings from '../../hooks/useSettings';
+import { COMPONENTS } from '../../utils/constants';
 import './AddCallOutPage.scss';
+import Tasks from './Task';
+import SpareParts from './SpareParts';
+import { POST_CONTRACTS, POST_SERVICE_SUBJECT } from '../../redux/constants';
 
 function AddCallOutPage() {
-  const jsonData = [
-    {
-      id: 1,
-      serviceSubject: 'Service Subject 1',
-      taskName: 'Task Name 1',
-      note: 'Testing note... 1'
-    },
-    {
-      id: 2,
-      serviceSubject: 'Service Subject 2',
-      taskName: 'Task Name 2',
-      note: 'Testing note... 2'
-    }
-  ];
-  const [taskData, setTaskData] = useState(jsonData);
-  const [sparePartData, setSparePartData] = useState([]);
-  const [editingRows, setEditingRows] = useState({});
+  const dispatch = useDispatch();
+  const { lang } = useSettings();
+  const { t } = useTranslation();
+  const masterData = useSelector((state) => state.MasterDataReducer);
+  const { projects, serviceSubject, currency, customers, contracts, callOutReasons, serviceman, tasks } = masterData;
+  const { TEXT_FIELD, CHECKBOX, AUTOCOMPLETE, DATEPICKER, TEXT_AREA, MULTI_SELECT_BOX } = COMPONENTS;
+  const [payload, setPayload] = useState({});
+  const [projectNames, setProjectNames] = useState([]);
 
-  const columnDataForTask = [
+  const [customerAddress, setCustomerAddress] = useState('');
+  const [projectLocation, setProjectLocation] = useState('');
+
+  const newTask = { service: '', task: '', notes: '' };
+  const newSparePart = {
+    service: '',
+    description: '',
+    stockCode: '',
+    quantity: '',
+    ratio: '',
+    discountAmount: '',
+    unitPrice: '',
+    totalPrice: '',
+    errorCode: '',
+    serviceRelatedNote: ''
+  };
+
+  const componentsSet1 = [
     {
-      field: 'serviceSubject',
-      header: 'Service Subject',
-      editorElement: 'text',
-      sortable: true,
-      filter: true
+      control: AUTOCOMPLETE,
+      key: 'customer',
+      label: 'addCallout.customer',
+      placeholder: 'addCallout.customer',
+      columnWidth: '5',
+      options: customers
     },
     {
-      field: 'taskName',
-      header: 'Task Name',
-      editorElement: 'text',
-      sortable: true,
-      filter: true
+      control: AUTOCOMPLETE,
+      key: 'contract',
+      label: 'addCallout.contracts',
+      placeholder: 'addCallout.contracts',
+      columnWidth: '3.5',
+      options: contracts
     },
     {
-      field: 'note',
-      header: 'Note',
-      editorElement: 'text',
-      sortable: true,
-      filter: true
+      control: AUTOCOMPLETE,
+      key: 'calloutReason',
+      label: 'addCallout.calloutReason',
+      placeholder: 'addCallout.calloutReason',
+      columnWidth: '3.5',
+      options: callOutReasons
+    },
+    {
+      control: AUTOCOMPLETE,
+      key: 'project',
+      label: 'addCallout.project',
+      placeholder: 'addCallout.project',
+      columnWidth: '3',
+      options: projects
+    },
+    {
+      control: MULTI_SELECT_BOX,
+      key: 'serviceSubject',
+      label: 'addCallout.serviceSubject',
+      placeholder: 'addCallout.serviceSubject',
+      columnWidth: '9',
+      options: serviceSubject,
+      controlStyle: { height: '2rem' },
+      labelStyle: { marginTop: '-0.5rem' }
+    },
+    {
+      control: CHECKBOX,
+      key: 'isFOLReplacement',
+      label: 'addCallout.isFOLReplacement',
+      placeholder: 'addCallout.isFOLReplacement',
+      columnWidth: '3'
+    },
+    {
+      control: DATEPICKER,
+      key: 'date',
+      label: 'addCallout.date',
+      inputFormat: 'dd-MM-yyyy',
+      views: ['year', 'month', 'day'],
+      columnWidth: '2'
+    },
+    {
+      control: AUTOCOMPLETE,
+      key: 'serviceman',
+      label: 'serviceDashboard.serviceman',
+      placeholder: 'serviceDashboard.serviceman',
+      columnWidth: '3.5',
+      options: serviceman
+    },
+    {
+      control: AUTOCOMPLETE,
+      key: 'paymentType',
+      label: 'addCallout.paymentType',
+      placeholder: 'addCallout.paymentType',
+      columnWidth: '3.5',
+      options: PAYMENT_TYPE
     }
   ];
 
-  const columnDataForSparePart = [
+  const componentsSet2 = [
     {
-      field: 'stockCode',
-      header: 'Stock Code',
-      editorElement: 'text',
-      sortable: true,
-      filter: true
+      control: TEXT_FIELD,
+      key: 'serviceFee',
+      label: 'addCallout.serviceFee',
+      placeholder: 'addCallout.serviceFee',
+      columnWidth: '2.5'
     },
     {
-      field: 'description',
-      header: 'Description',
-      editorElement: 'text',
-      sortable: true,
-      filter: true
+      control: AUTOCOMPLETE,
+      key: 'currency',
+      label: 'addCallout.currency',
+      placeholder: 'addCallout.currency',
+      columnWidth: '1',
+      options: currency
     },
     {
-      field: 'quantity',
-      header: 'Quantity',
-      editorElement: 'text',
-      sortable: true,
-      filter: true
-    },
-    {
-      field: 'ratio',
-      header: 'Ratio',
-      editorElement: 'text',
-      sortable: true,
-      filter: true
-    },
-    {
-      field: 'action',
-      header: 'Action',
-      editorElement: 'text',
-      sortable: true,
-      filter: true
-    },
-    {
-      field: 'discountAmount',
-      header: 'Discount Amount',
-      editorElement: 'text',
-      sortable: true,
-      filter: true
-    },
-    {
-      field: 'unitPrice',
-      header: 'Unit Price',
-      editorElement: 'text',
-      sortable: true,
-      filter: true
-    },
-    {
-      field: 'totalPrice',
-      header: 'Total Price',
-      editorElement: 'text',
-      sortable: true,
-      filter: true
-    },
-    {
-      field: 'errorCode',
-      header: 'Error Code',
-      editorElement: 'text',
-      sortable: true,
-      filter: true
-    },
-    {
-      field: 'serviceRelatedNote',
-      header: 'Service Related Note',
-      editorElement: 'text',
-      sortable: true,
-      filter: true
+      control: TEXT_AREA,
+      key: 'notes',
+      label: 'addCallout.notes',
+      placeholder: 'addCallout.notes',
+      columnWidth: '12',
+      controlStyle: { width: '100%', padding: '0.5rem', marginLeft: '1.5rem' }
     }
   ];
-  const headCellsTypeTask = ['NONE', 'NONE', 'NONE'];
-  const headCellsTypeSparePart = ['NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE', 'NONE'];
-  const customerData = [
-    { label: 'A', value: 'A' },
-    { label: 'B', value: 'B' },
-    { label: 'C', value: 'C' }
-  ];
+
+  const updatePayload = (pairs) => setPayload({ ...payload, ...pairs });
+
+  const handleChange = (key, val) => {
+    updatePayload({ [key]: val });
+    switch (key) {
+      case 'customer': {
+        const cust = customers?.find((cst) => cst.value === val);
+        dispatch({ type: POST_CONTRACTS, data: cust?.contracts || [] });
+        break;
+      }
+      case 'project':
+        setProjectNames(typeof val === 'string' ? val.split(',') : val);
+        break;
+      case 'serviceSubject': {
+        setProjectNames(typeof val === 'string' ? val.split(',') : val);
+        let tasks = payload.tasks || [];
+        let spareParts = payload.spareParts || [];
+        if (isArray(tasks) && tasks.length > 0) {
+          val.forEach((v) => {
+            const serv = tasks.every((tsk) => tsk.service !== v.value);
+            if (serv) {
+              tasks.push({ ...newTask, service: v.value });
+              spareParts.push({ ...newSparePart, service: v.value });
+            }
+          });
+        } else {
+          tasks = [{ ...newTask, service: val[0]?.value }];
+          spareParts = [{ ...newSparePart, service: val[0]?.value }];
+        }
+        updatePayload({ tasks, spareParts, [key]: val });
+        break;
+      }
+      default:
+        break;
+    }
+    // if (key === 'customer') {
+    //   const cust = customers?.find((cst) => cst.value === val);
+    //   dispatch({ type: POST_CONTRACTS, data: cust?.contracts || [] });
+    // }
+  };
+
+  const addNewTask = () => {
+    const tasks = [...payload.tasks, newTask];
+    updatePayload({ tasks });
+  };
+  const addNewSparePart = () => {
+    const spareParts = [...payload.spareParts, newSparePart];
+    updatePayload({ spareParts });
+  };
+
+  useEffect(() => {
+    const customer = customers?.find((cust) => cust?.value === payload?.customer);
+    if (customer) {
+      setCustomerAddress(customer?.address);
+    }
+  }, [payload.customer]);
+
+  useEffect(() => {
+    const project = projects?.find((cust) => cust?.value === payload?.project);
+    if (project) {
+      const { location, serviceSubject } = project;
+      setProjectLocation(location);
+      if (isArray(serviceSubject)) {
+        dispatch({ type: POST_SERVICE_SUBJECT, data: serviceSubject });
+      } else {
+        dispatch({ type: POST_SERVICE_SUBJECT, data: [] });
+      }
+    }
+  }, [payload.project]);
+
+  useEffect(() => {}, [projects]);
 
   return (
     <Grid className="Add_Call_out_main_cls">
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Typography variant="h4" align="center">
-            Add Call Out
+            {t('addCallout.addCallOut')}
           </Typography>
         </Grid>
         <Grid item xs={12}>
           <Divider style={{ backgroundColor: '#c7d2fe' }} />
         </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h6">General Data</Typography>
+        {componentsSet1.map((comp) => (
+          <RenderComponent metaData={comp} payload={payload} ind={1} handleChange={handleChange} />
+        ))}
+        <Grid item xs={12} sm={8.5}>
+          <div>
+            <span style={{ fontSize: '0.7rem' }}>
+              {t('addCallout.customerAddress')} {lang}:
+              <span
+                style={{ color: 'rgb(136 137 140)', fontSize: '0.7rem', marginLeft: '0.2rem', marginBottom: '1rem' }}
+              >
+                {(customerAddress && customerAddress[lang]) || ''}
+              </span>
+            </span>
+          </div>
+          <div>
+            <span style={{ fontSize: '0.7rem' }}>
+              {t('serviceDashboard.location')}:
+              <span
+                style={{ color: 'rgb(136 137 140)', fontSize: '0.7rem', marginLeft: '0.2rem', marginBottom: '1rem' }}
+              >
+                {(projectLocation && projectLocation[lang]) || ''}
+              </span>
+            </span>
+          </div>
         </Grid>
-        {/* Form Data Grid section */}
-        <Grid item xs={6} sm={4}>
-          <AutocompleteWidget options={customerData} label="Customer" disablePortal autoSelect size="small" />
-        </Grid>
-        <Grid item xs={6} sm={4}>
-          <AutocompleteWidget options={customerData} label="Contract" disablePortal autoSelect size="small" />
-        </Grid>
-        <Grid item xs={6} sm={4}>
-          <AutocompleteWidget options={customerData} label="Project" disablePortal autoSelect size="small" />
-        </Grid>
-        <Grid item xs={6} sm={4}>
-          <span style={{ fontSize: '0.7rem' }}>Service Subject:</span>
-          <Typography style={{ color: 'rgb(136 137 140)', fontSize: '0.7rem', marginBottom: '1rem' }}>
-            Testing Service Subject
-          </Typography>
-        </Grid>
-        <Grid item xs={6} sm={4}>
-          <span style={{ fontSize: '0.7rem' }}>Customer:</span>
-          <Typography style={{ color: 'rgb(136 137 140)', fontSize: '0.7rem', marginBottom: '1rem' }}>
-            Testing Customer
-          </Typography>
-        </Grid>
-        <Grid item xs={6} sm={4}>
-          <span style={{ fontSize: '0.7rem' }}>Location:</span>
-          <Typography style={{ color: 'rgb(136 137 140)', fontSize: '0.7rem', marginBottom: '1rem' }}>
-            Testing Location
-          </Typography>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <BasicDatePicker label="Date" inputFormat="dd-MM-yyyy" views={['year', 'month', 'day']} />
-        </Grid>
-        <Grid
-          style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}
-          item
-          xs={6}
-          sm={2}
-        >
-          <span style={{ fontSize: '0.7rem', marginTop: '-5px' }}>Status:</span>
-          <Typography style={{ color: 'rgb(136 137 140)', fontSize: '0.7rem' }}>Call out</Typography>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <AutocompleteWidget options={customerData} label="Serviceman" disablePortal autoSelect size="small" />
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <FormControl component="fieldset">
-            <FormLabel component="legend" style={{ fontSize: '0.7rem' }}>
-              Payment Type
-            </FormLabel>
-            <RadioGroup row aria-label="Payment Type" name="radio-buttons-group">
-              <FormControlLabel value="Billable" control={<Radio size="small" />} label="Billable" />
-              <FormControlLabel value="Non billable" control={<Radio size="small" />} label="Non billable" />
-            </RadioGroup>
-          </FormControl>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <TextField fullWidth label="Service Fee" size="small" />
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <AutocompleteWidget options={customerData} label="Call Out Reason" disablePortal autoSelect size="small" />
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <TextField fullWidth label="Notes" size="small" />
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <FormControlLabel control={<Checkbox size="small" />} label="FOL Replacement" />
-        </Grid>
-        <Grid item xs={12}>
-          <Divider style={{ backgroundColor: '#c7d2fe', marginTop: '0.5rem' }} />
-        </Grid>
+        {componentsSet2.map((comp) => (
+          <RenderComponent metaData={comp} payload={payload} ind={1} handleChange={handleChange} />
+        ))}
+        {/* <RenderComponent
+          metaData={{
+            control: TEXT_FIELD,
+            key: 'serviceFee',
+            label: 'addCallout.serviceFee',
+            placeholder: 'addCallout.serviceFee',
+            columnWidth: '2.5'
+          }}
+          payload={payload}
+          ind={9}
+          handleChange={handleChange}
+        />
+        <RenderComponent
+          metaData={{
+            control: AUTOCOMPLETE,
+            key: 'currency',
+            label: 'addCallout.currency',
+            placeholder: 'addCallout.currency',
+            columnWidth: '1',
+            options: currency
+          }}
+          payload={payload}
+          ind={9}
+          handleChange={handleChange}
+        />
+        <RenderComponent
+          metaData={{
+            control: TEXT_AREA,
+            key: 'notes',
+            label: 'addCallout.notes',
+            placeholder: 'addCallout.notes',
+            columnWidth: '12',
+            controlStyle: { width: '100%', padding: '0.5rem', marginLeft: '1.5rem' }
+          }}
+          payload={payload}
+          ind={9}
+          handleChange={handleChange}
+        /> */}
+        <Divider style={{ backgroundColor: '#c7d2fe', marginTop: '0.5rem' }} />
       </Grid>
 
       {/* Task Grid Container */}
       <Grid container spacing={3} style={{ marginTop: '0.1rem' }}>
-        <Grid item xs={12} sm={12}>
-          <Typography variant="h4" align="center">
-            Tasks
-          </Typography>
-        </Grid>
         {/* Tabular layout */}
-        {/* <Grid item xs={12} style={{ display: 'flex', justifyContent: 'flex-start' }}>
-          <Typography style={{ textDecoration: 'underline', fontSize: '1rem', cursor: 'pointer' }}>
-            Add new task
+        {/* <Grid item xs={12} sm={12}>
+          <Typography variant="h4" align="center">
+            {t('addCallout.task')}
           </Typography>
         </Grid> */}
         <Grid item xs={12}>
-          <SimpleTable
-            rowData={taskData}
-            headerData={columnDataForTask}
-            paginator
-            rowsPerPageOptions={[10, 20, 50, 100]}
-            rows={10}
-            showGridlines
-            responsiveLayout="scroll"
-            resizableColumns
-            columnResizeMode="expand"
-            size="small"
-            // editingRows={editingRows}
-            dataKey="id"
-            editMode="row"
-            type="text"
-            title="View project"
-            editOption
-            btnLabel="Add new task"
-            headCellsType={headCellsTypeTask}
+          <Tasks
+            serviceSubjects={serviceSubject}
+            lang={lang}
+            tasks={payload.tasks}
+            updatePayload={updatePayload}
+            tasksList={tasks}
           />
+          <Grid item xs={2} style={{ float: 'right' }}>
+            <Button style={{ marginLeft: '0.5rem' }} variant="contained" size="small" onClick={() => addNewTask()}>
+              {t('addCallout.addNewTasks')}
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
       <Divider style={{ backgroundColor: '#c7d2fe', marginTop: '0.8rem' }} />
       {/* Spare parts Grid Container */}
       <Grid container spacing={3} style={{ marginTop: '0.1rem' }}>
-        <Grid item xs={12} sm={12}>
+        {/* <Grid item xs={12} sm={12}>
           <Typography variant="h4" align="center">
-            Spare parts
+            {t('addCallout.spareParts')}
           </Typography>
-        </Grid>
-        {/* <Grid item xs={12} style={{ display: 'flex', justifyContent: 'flex-start' }}>
-          <Typography style={{ textDecoration: 'underline', fontSize: '1rem', cursor: 'pointer' }}>Add part</Typography>
         </Grid> */}
         <Grid item xs={12}>
-          <SimpleTable
-            rowData={sparePartData}
-            headerData={columnDataForSparePart}
-            paginator
-            rowsPerPageOptions={[10, 20, 50, 100]}
-            rows={10}
-            showGridlines
-            responsiveLayout="scroll"
-            resizableColumns
-            columnResizeMode="expand"
-            size="small"
-            editingRows={editingRows}
-            dataKey="id"
-            editMode="row"
-            showActionColumn
-            type="text"
-            title="View project"
-            editOption
-            btnLabel="Spare parts"
-            headCellsType={headCellsTypeSparePart}
+          <SpareParts
+            serviceSubjects={serviceSubject}
+            lang={lang}
+            spareParts={payload.spareParts}
+            updatePayload={updatePayload}
           />
+          <Grid item xs={2} style={{ float: 'right' }}>
+            <Button style={{ marginLeft: '0.5rem' }} variant="contained" size="small" onClick={() => addNewSparePart()}>
+              {t('addCallout.addNewPart')}
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
       {/* Button Grid Container */}
       <Grid container spacing={3} style={{ marginTop: '0.1rem' }}>
         <Grid style={{ display: 'flex', justifyContent: 'center' }} item xs={12} sm={12}>
           <Button style={{ marginLeft: '0.5rem' }} variant="contained" size="small">
-            Save
+            {t('CreateProject.Save')}
           </Button>
           <Button color="warning" style={{ marginLeft: '0.5rem' }} variant="contained" size="small">
-            Back
+            {t('CreateProject.Back')}
           </Button>
           <Button color="secondary" style={{ marginLeft: '0.5rem' }} variant="contained" size="small">
-            New
+            {t('addCallout.new')}
           </Button>
         </Grid>
       </Grid>

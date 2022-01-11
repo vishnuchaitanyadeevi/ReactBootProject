@@ -6,10 +6,10 @@ import { ArrowRight } from '@mui/icons-material/';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { FilterMatchMode } from 'primereact/api';
+import Filters from '../../components/Filter/filter';
 import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget';
 import BasicDatePicker from '../../components/pickers/BasicDatePicker';
 import InvoiceListingData from './InvoiceListingData.json';
-import Filters from '../../components/Filter/filter';
 import { COMPONENTS } from '../../utils/constants';
 import { SEVICE_DASHBOARD_FILTER_MASTER_DATA } from '../../components/ServiceBoard/data';
 import { POST_OFFICE } from '../../redux/constants';
@@ -148,80 +148,87 @@ function InvoiceList() {
       isFrozen: true
     }
   ];
-  const [filters1, setFilters1] = useState({
-    country: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    office: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    salesman: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    serviceman: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    customer: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    projinvonacno: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    status: { value: null, matchMode: FilterMatchMode.CONTAINS }
-  });
+  const { country, office, salesman, serviceman, status } = masterData;
   const { TEXT_FIELD, AUTOCOMPLETE, DATEPICKER } = COMPONENTS;
   const FILTER_COMPONETS = [
     {
       control: AUTOCOMPLETE,
-      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
       key: 'country',
-      label: 'serviceDashboard.country',
-      placeholder: 'serviceDashboard.country',
-      options: masterData?.country
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      label: 'invoiceList.country',
+      placeholder: 'invoiceList.country',
+      columnWidth: '2',
+      options: country
     },
     {
       control: AUTOCOMPLETE,
-      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
       key: 'office',
-      label: 'Office',
-      placeholder: 'Office',
-      options: masterData?.office
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      label: 'invoiceList.office',
+      placeholder: 'invoiceList.office',
+      columnWidth: '2',
+      options: office
     },
     {
       control: AUTOCOMPLETE,
-      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
       key: 'salesman',
-      label: 'Salesman',
-      placeholder: 'Salesman',
-      options: masterData?.salesman
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      label: 'invoiceList.salesman',
+      placeholder: 'invoiceList.salesman',
+      columnWidth: '2',
+      options: salesman
     },
     {
       control: AUTOCOMPLETE,
-      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
       key: 'serviceman',
-      label: 'Serviceman',
-      placeholder: 'Serviceman',
-      options: masterData?.serviceman
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      label: 'invoiceList.serviceman',
+      placeholder: 'invoiceList.serviceman',
+      columnWidth: '2',
+      options: serviceman
     },
     {
       control: TEXT_FIELD,
-      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
       key: 'customer',
-      label: 'Customer Name',
-      placeholder: 'Customer Name'
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      label: 'invoiceList.customer',
+      placeholder: 'invoiceList.customer',
+      columnWidth: '2'
     },
     {
       control: TEXT_FIELD,
-      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
       key: 'projinvonacno',
-      label: 'Proj. Inv. OnAc. No.',
-      placeholder: 'Proj. Inv. OnAc. No.'
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      label: 'invoiceList.projinvonacno',
+      placeholder: 'invoiceList.projinvonacno',
+      columnWidth: '2'
     },
     {
       control: AUTOCOMPLETE,
-      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
       key: 'status',
-      label: 'Status',
-      placeholder: 'Status',
-      options: masterData?.status
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      label: 'invoiceList.status',
+      placeholder: 'invoiceList.status',
+      columnWidth: '2',
+      options: status
     },
     {
       control: DATEPICKER,
+      key: 'date',
       groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
-      key: 'start'
+      label: 'addCallout.date',
+      inputFormat: 'dd-MM-yyyy',
+      views: ['year', 'month', 'day'],
+      columnWidth: '2'
     },
     {
       control: DATEPICKER,
+      key: 'date',
       groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
-      key: 'end'
+      label: 'addCallout.date',
+      inputFormat: 'dd-MM-yyyy',
+      views: ['year', 'month', 'day'],
+      columnWidth: '2'
     }
   ];
   const getFilterData = (data) => {
