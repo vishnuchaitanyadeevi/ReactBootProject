@@ -41,7 +41,7 @@ function ContractList() {
     contract: { value: null, matchMode: FilterMatchMode.CONTAINS }
   });
 
-  const { TEXT_FIELD, AUTOCOMPLETE } = COMPONENTS;
+  const { TEXT_FIELD, AUTOCOMPLETE, DATEPICKER } = COMPONENTS;
   const FILTER_COMPONETS = [
     {
       control: AUTOCOMPLETE,
@@ -188,12 +188,14 @@ function ContractList() {
     {
       id: 'projectStartDate',
       header: 'Project Start Date',
-      field: 'projectStartDate'
+      field: 'projectStartDate',
+      editorElement: 'DATE'
     },
     {
       id: 'endDate',
       header: 'Project End Date',
-      field: 'endDate'
+      field: 'endDate',
+      editorElement: 'DATE'
     },
     {
       id: 'business',

@@ -252,5 +252,14 @@
     "errorCode": "Error Code",
     "serviceRelatedNote": "Service Related Note",
     "addNewPart": "Add New Part"
+  },
+  "invoiceList": {
+    "country": "Country",
+    "office": "Office",
+    "salesman": "Salesman",
+    "serviceman": "Serviceman",
+    "customer": "Customer",
+    "projinvonacno": "Proj. Inv. OnAC. No.",
+    "status": "Status"
   }
 }
