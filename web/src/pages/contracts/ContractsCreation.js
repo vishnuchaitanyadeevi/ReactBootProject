@@ -9,8 +9,10 @@ import {
   Button
 } from '@mui/material';
 import React, { useState, useCallback, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { ArrowRight, UploadFileOutlined } from '@mui/icons-material/';
+import PercentIcon from '@mui/icons-material/Percent';
 import SearchIcon from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton';
 import { matchPath, useLocation, useNavigate } from 'react-router-dom';
@@ -18,6 +20,7 @@ import ProjectTable from '../../components/contracts/projectTable';
 import BasicDatePicker from '../../components/pickers/BasicDatePicker';
 import UploadFile from '../../components/UploadFile';
 import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget';
+import RenderComponent from '../../components/RenderComponent';
 import './ContractsCreation.scss';
 import SimpleTable from '../../components/table/simpleTable';
 import jsonData from '../../utils/project-table-data.json';
@@ -25,31 +28,21 @@ import CustomerData from '../../utils/customerslist.json';
 import CustomersList from '../../components/CustomersList';
 import { isEmail, isPhone, isName } from '../../utils/utils';
 import { ContractData as ConData } from './Data';
+import { COMPONENTS } from '../../utils/constants';
 import OpenNotification from '../../components/Notification/Notification';
+import { POST_OFFICE } from '../../redux/constants';
+import { SEVICE_DASHBOARD_FILTER_MASTER_DATA } from '../../components/ServiceBoard/data';
 
 export default function ContractsCreation() {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [editingRows, setEditingRows] = useState({});
+  const [isError, setIsError] = useState(false);
   const { t } = useTranslation();
-  const countryArr = ['SA'];
-  const customerArr = ['HSD_ABH_00002', 'HSD_ABH_00004'];
-  const statusArr = ['Active', 'On-Hold', 'Inactive'];
-  const rolesArr = ['Primary', 'Role 1', 'Role 2 ', 'Role 3'];
-  const transactionCurrencyArr = ['Riyal', 'Dollar'];
-  const fundingTypeArr = ['Customer', 'Third Party'];
-  const salesmanArr = ['Abdul Razak', 'Abdul Miyan', 'Shehnaz Kureshi'];
-  const regionArr = ['Region 1', 'Region 2'];
   const [multipleImages, setMultipleImages] = useState({ images: [] });
   const [axDefaultexpanded, setAxDefaultexpanded] = useState(true);
   const [openNotification, setNotification] = useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  // const [tableData, setTableData] = useState({});
-  let tableData = [];
-  const [contractData, setContractData] = useState({
-    // customer details
+  const [payload, setPayload] = useState({
     country: '',
     region: '',
     customerNo: '',
@@ -57,14 +50,12 @@ export default function ContractsCreation() {
     customerAddress: '',
     crNo: '',
     salesman: '',
-    // contract details
     contractNo: '',
     contractName: '',
     contractSignOn: null,
     contractStartDate: null,
     generalDiscount: '',
     status: '',
-    // Signatory information
     role: '',
     name: '',
     position: '',
@@ -74,22 +65,20 @@ export default function ContractsCreation() {
     mobileNo: '',
     emailId: '',
     note: '',
-    // Additional information
     specialAttention: '',
     scopeOfContract: '',
-    uploadContractFile: '',
-    // AX default fields
     legalEntity: '',
     transactionCurrency: '',
     accountCurrency: '',
     fundingType: ''
   });
-
-  // destructing contract data object
+  const { TEXT_FIELD, CHECKBOX, AUTOCOMPLETE, DATEPICKER, TEXT_AREA, MULTI_SELECT_BOX, ICON } = COMPONENTS;
+  const masterData = useSelector((state) => state.MasterDataReducer);
+  const { country, office, customerNo, serviceman, projectStatus, role, currency, fundingType } = masterData;
   const {
-    country,
+    countryData,
     region,
-    customerNo,
+    customersNo,
     customerName,
     customerAddress,
     crNo,
@@ -100,7 +89,7 @@ export default function ContractsCreation() {
     contractStartDate,
     generalDiscount,
     status,
-    role,
+    roles,
     name,
     position,
     address,
@@ -108,81 +97,346 @@ export default function ContractsCreation() {
     faxNo,
     mobileNo,
     emailId,
-    note,
-    specialAttention,
-    scopeOfContract,
-    uploadContractFile,
-    legalEntity,
-    transactionCurrency,
-    accountCurrency,
-    fundingType
-  } = contractData;
-
-  const [defaultSalesman, setdefaultSalesman] = useState('Abdul Miyan');
-  // HandleChange contract data fuction
-  const updateContractData = (key, val) => {
-    setContractData({ ...contractData, [key]: val });
-    console.log(key, val);
+    note
+  } = payload;
+  const handleChangeExpand = () => {
+    setAxDefaultexpanded(!axDefaultexpanded);
   };
-  console.log('Customer Number', customerNo);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClickSearchCustomer = () => setOpen(true);
+
+  const componentsSet1 = [
+    {
+      control: AUTOCOMPLETE,
+      key: 'countryData',
+      label: 'Country',
+      placeholder: 'Country',
+      columnWidth: 6,
+      options: country,
+      isError: !countryData && isError,
+      helperText: !countryData && isError && 'Enter Country'
+    },
+    {
+      control: AUTOCOMPLETE,
+      key: 'region',
+      label: 'Region',
+      placeholder: 'Region',
+      columnWidth: 6,
+      options: office,
+      isError: !region && isError,
+      helperText: !region && isError && 'Enter Region'
+    },
+    {
+      control: AUTOCOMPLETE,
+      key: 'customersNo',
+      label: 'Customer Number',
+      placeholder: 'Customer Number',
+      columnWidth: 6,
+      options: customerNo,
+      isError: !customersNo && isError,
+      helperText: !customersNo && isError && 'Enter Customer number'
+    },
+    {
+      control: ICON,
+      columnWidth: 3,
+      onClickIcon: handleClickSearchCustomer
+    },
+    {
+      control: TEXT_FIELD,
+      key: 'customerName',
+      label: 'Customer Name',
+      placeholder: 'Customer Name',
+      columnWidth: 12,
+      isError: !customerName && isError,
+      helperText: !customerName && isError && 'Enter customer name'
+    },
+    {
+      control: TEXT_FIELD,
+      key: 'customerAddress',
+      label: 'Customer Address',
+      placeholder: 'Customer Address',
+      columnWidth: 12,
+      isError: !customerAddress && isError,
+      helperText: !customerAddress && isError && 'Enter Customer Address'
+    },
+    {
+      control: TEXT_FIELD,
+      key: 'crNo',
+      label: 'CR Number',
+      placeholder: 'CR Number',
+      columnWidth: 12,
+      isError: !crNo && isError,
+      helperText: !crNo && isError && 'Enter CR Number'
+    },
+    {
+      control: AUTOCOMPLETE,
+      key: 'salesman',
+      label: 'Salesman',
+      placeholder: 'Salesman',
+      columnWidth: 12,
+      options: serviceman,
+      isError: !salesman && isError,
+      helperText: !salesman && isError && 'Enter Salesman'
+    }
+  ];
+
+  const componentsSet2 = [
+    {
+      control: TEXT_FIELD,
+      key: 'contractNo',
+      label: 'Contract Number',
+      placeholder: 'Contract Number',
+      columnWidth: 6,
+      isError: !contractNo && isError,
+      helperText: !contractNo && isError && 'Enter Contract Number'
+    },
+    {
+      control: TEXT_FIELD,
+      key: 'contractName',
+      label: 'Contract Name',
+      placeholder: 'Contract Name',
+      columnWidth: 12,
+      isError: !contractName && isError,
+      helperText: !contractName && isError && 'Enter Contract Name'
+    },
+    {
+      control: DATEPICKER,
+      key: 'contractSignOn',
+      label: 'Contract Sign On',
+      inputFormat: 'dd-MM-yyyy',
+      views: ['year', 'month', 'day'],
+      columnWidth: 12,
+      error: !contractSignOn && isError,
+      helperText: !contractSignOn && isError && 'Enter Contract Sign On Date'
+    },
+    {
+      control: DATEPICKER,
+      key: 'contractStartDate',
+      label: 'Contract Start Date',
+      inputFormat: 'dd-MM-yyyy',
+      views: ['year', 'month', 'day'],
+      columnWidth: 12,
+      error: !contractStartDate && isError,
+      helperText: !contractStartDate && isError && 'Enter Contract Start Date'
+    },
+    {
+      control: TEXT_FIELD,
+      key: 'generalDiscount',
+      label: 'General Discount',
+      placeholder: 'General Discount',
+      columnWidth: 4,
+      isFieldIcon: true,
+      Icon: PercentIcon,
+      isError: !generalDiscount && isError,
+      helperText: !generalDiscount && isError && 'Enter General Discount'
+    },
+    {
+      control: AUTOCOMPLETE,
+      key: 'status',
+      label: 'Status',
+      placeholder: 'Status',
+      columnWidth: 6,
+      options: projectStatus,
+      isError: !status && isError,
+      helperText: !status && isError && 'Enter Project Status'
+    }
+  ];
+
+  const componentsSet3 = [
+    {
+      control: AUTOCOMPLETE,
+      key: 'roles',
+      label: 'Role',
+      placeholder: 'Role',
+      columnWidth: 6,
+      options: role,
+      isError: !roles && isError,
+      helperText: !roles && isError && 'Enter Role'
+    },
+    {
+      control: TEXT_FIELD,
+      key: 'name',
+      label: 'Name',
+      placeholder: 'name',
+      columnWidth: 12,
+      isError: !name && isError,
+      helperText: !name && isError && 'Enter Name'
+    },
+    {
+      control: TEXT_FIELD,
+      key: 'position',
+      label: 'Position',
+      placeholder: 'Position',
+      columnWidth: 12,
+      isError: !position && isError,
+      helperText: !position && isError && 'Enter Position'
+    },
+    {
+      control: TEXT_FIELD,
+      key: 'address',
+      label: 'Address',
+      placeholder: 'Address',
+      columnWidth: 12,
+      isError: !address && isError,
+      helperText: !address && isError && 'Enter Address'
+    },
+    {
+      control: TEXT_FIELD,
+      key: 'phoneNo',
+      label: 'Phone Number',
+      placeholder: 'Phone Number',
+      columnWidth: 12,
+      isError: !phoneNo && isError,
+      helperText: !phoneNo && isError && 'Enter Phone Number'
+    },
+    {
+      control: TEXT_FIELD,
+      key: 'faxNo',
+      label: 'Fax Number',
+      placeholder: 'Fax Number',
+      columnWidth: 12,
+      isError: !faxNo && isError,
+      helperText: !faxNo && isError && 'Enter Fax Number'
+    },
+    {
+      control: TEXT_FIELD,
+      key: 'mobileNo',
+      label: 'Mobile Number',
+      placeholder: 'Mobile Number',
+      columnWidth: 12,
+      isError: isError && (!mobileNo || isPhone(mobileNo)),
+      helperText:
+        (isError && !mobileNo && 'Enter Mobile Number') || (isError && isPhone(mobileNo) && 'Not Valid Mobile Number')
+    },
+    {
+      control: TEXT_FIELD,
+      key: 'emailId',
+      label: 'Email ID',
+      placeholder: 'Email ID',
+      columnWidth: 12,
+      isError: isError && (!emailId || isEmail(emailId)),
+      helperText: (isError && !emailId && 'Enter Email Id') || (isError && isEmail(emailId) && 'Not Valid Email Id')
+    },
+    {
+      control: TEXT_FIELD,
+      key: 'note',
+      label: 'Note',
+      placeholder: 'Note',
+      columnWidth: 12
+    }
+  ];
+
+  const componentsSet4 = [
+    {
+      control: TEXT_AREA,
+      key: 'specialAttention',
+      label: 'Special Attention / Notes',
+      placeholder: 'Special Attention / Notes',
+      columnWidth: 12,
+      controlStyle: { width: '100%', padding: '0.5rem' }
+    },
+    {
+      control: TEXT_AREA,
+      key: 'scopeOfContract',
+      label: 'Scope Of Contract',
+      placeholder: 'Scope Of Contract',
+      columnWidth: 12,
+      controlStyle: { width: '100%', padding: '0.5rem' }
+    }
+  ];
+
+  const componentsSet5 = [
+    {
+      control: TEXT_FIELD,
+      key: 'legalEntity',
+      label: 'Legal Entity',
+      placeholder: 'Legal Entity',
+      columnWidth: 6
+    },
+    {
+      control: AUTOCOMPLETE,
+      key: 'transactionCurrency',
+      label: 'Transaction Currency',
+      placeholder: 'transactionCurrency',
+      columnWidth: 6,
+      options: currency
+    },
+    {
+      control: TEXT_FIELD,
+      key: 'accountCurrency',
+      label: 'Legal Entity',
+      placeholder: 'Legal Entity',
+      columnWidth: 6
+    },
+    {
+      control: AUTOCOMPLETE,
+      key: 'fundingType',
+      label: 'Funding Type',
+      placeholder: 'Funding Type',
+      columnWidth: 6,
+      options: fundingType
+    }
+  ];
+
+  console.log('officce,,,', office);
+  // const [tableData, setTableData] = useState({});
+  let tableData = [];
+
+  const updatePayload = (pairs) => setPayload({ ...payload, ...pairs });
+
+  const handleChangeData = (key, val) => {
+    console.log('key.val...', key, val);
+    updatePayload({ [key]: val });
+    switch (key) {
+      case 'countryData': {
+        const countryData = SEVICE_DASHBOARD_FILTER_MASTER_DATA.OFFICE.find((office) => office.country === val);
+        console.log('country...', countryData);
+        if (countryData) {
+          dispatch({ type: POST_OFFICE, data: countryData?.offices || [] });
+        }
+        break;
+      }
+      default:
+        break;
+    }
+  };
+
   const [checkEvent, setCheckEvent] = useState(false);
   const handleClickSaveContract = () => {
-    const checkFile = multipleImages.images.length;
-    setCheckEvent(true);
-    console.log('logs', checkEvent);
     if (
+      !countryData ||
+      !region ||
+      !customerNo ||
+      !customerName ||
+      !customerAddress ||
+      !crNo ||
+      !salesman ||
+      !contractNo ||
+      !contractName ||
+      !generalDiscount ||
+      !status ||
+      !roles ||
       !name ||
       !position ||
       !address ||
       !phoneNo ||
       !faxNo ||
       !mobileNo ||
+      isPhone(mobileNo) ||
       !emailId ||
-      isEmail(emailId) ||
-      !note ||
-      !customerName ||
-      !customerAddress ||
-      !contractNo ||
-      !contractName ||
-      !crNo ||
-      !country ||
-      !region ||
-      !customerNo ||
-      !salesman ||
-      !contractSignOn ||
-      !contractStartDate ||
-      !generalDiscount ||
-      !status ||
-      !scopeOfContract ||
-      !legalEntity ||
-      !transactionCurrency ||
-      !accountCurrency ||
-      !fundingType ||
-      !checkFile
+      isEmail(emailId)
     ) {
       setIsError(true);
-      console.log('length', checkFile);
+      console.log('in error', payload);
     } else {
       setIsError(false);
-      console.log('Contract data is...', contractData);
-      ConData.push({
-        id: Math.floor(Math.random() * 10),
-        status: 'Active',
-        contractNumber: contractNo,
-        contractSignOn,
-        contractStartDate,
-        customer: customerName,
-        activeProjects: '10/12',
-        projects: []
-      });
+      console.log('contract data...', payload);
       setNotification(true);
-      console.log('contract list....', ConData);
     }
   };
-  const [isError, setIsError] = useState(false);
-  const handleChange = (panel) => (event, isExpanded) => {
-    setAxDefaultexpanded(isExpanded ? panel : false);
-  };
+
   const handleDropMultiple = useCallback((acceptedFiles) => {
     setMultipleImages({
       ...multipleImages,
@@ -219,47 +473,46 @@ export default function ContractsCreation() {
 
   const updateFormFields = (popData) => {
     console.log('PopData', popData);
-    setContractData({
-      ...contractData,
-      region: popData?.region,
-      contractName: popData?.contractName,
-      country: popData?.country,
-      contractNo: popData?.contractNumber,
-      contractSignOn: popData?.contractSignOn,
-      contractStartDate: popData?.contractStartDate,
-      customerNo: popData?.customerNumber,
-      // customerName: popData?.customerName,
-      // customerAddress: popData?.customerAddress,
-      salesman: popData?.salesman,
-      name: popData?.signName,
-      position: popData?.signPos,
-      address: popData?.signAdd,
-      phoneNo: popData?.phoneNo,
-      faxNo: popData?.faxNo,
-      mobileNo: popData?.mobileNo,
-      emailId: popData?.emailId,
-      note: popData?.note,
-      specialAttention: popData?.specialAttention,
-      scopeOfContract: popData?.scopeOfContract,
-      legalEntity: popData?.legalEntity,
-      transactionCurrency: popData?.transactionCurrency,
-      accountCurrency: popData?.accountCurrency,
-      fundingType: popData?.fundingType,
-      generalDiscount: popData?.generalDiscount,
-      crNo: popData?.crNo
-    });
+    // setContractData({
+    //   ...contractData,
+    //   region: popData?.region,
+    //   contractName: popData?.contractName,
+    //   country: popData?.country,
+    //   contractNo: popData?.contractNumber,
+    //   contractSignOn: popData?.contractSignOn,
+    //   contractStartDate: popData?.contractStartDate,
+    //   customerNo: popData?.customerNumber,
+    //   // customerName: popData?.customerName,
+    //   // customerAddress: popData?.customerAddress,
+    //   salesman: popData?.salesman,
+    //   name: popData?.signName,
+    //   position: popData?.signPos,
+    //   address: popData?.signAdd,
+    //   phoneNo: popData?.phoneNo,
+    //   faxNo: popData?.faxNo,
+    //   mobileNo: popData?.mobileNo,
+    //   emailId: popData?.emailId,
+    //   note: popData?.note,
+    //   specialAttention: popData?.specialAttention,
+    //   scopeOfContract: popData?.scopeOfContract,
+    //   legalEntity: popData?.legalEntity,
+    //   transactionCurrency: popData?.transactionCurrency,
+    //   accountCurrency: popData?.accountCurrency,
+    //   fundingType: popData?.fundingType,
+    //   generalDiscount: popData?.generalDiscount,
+    //   crNo: popData?.crNo
+    // });
   };
 
-  console.log('contractData', contractData);
-  useEffect(() => {
-    if (customerNo) {
-      console.log('calling... only customerNo no', customerNo);
-      const newData = CustomerData.find((item) => item.custno === customerNo);
-      setContractData({ ...contractData, customerName: newData.name, customerAddress: newData.address });
-    } /* else {
-      setContractData({ ...contractData, customerName: '', customerAddress: '' });
-    } */
-  }, [customerNo]);
+  // useEffect(() => {
+  //   if (customerNo) {
+  //     console.log('calling... only customerNo no', customerNo);
+  //     const newData = CustomerData.find((item) => item.custno === customerNo);
+  //     setContractData({ ...contractData, customerName: newData.name, customerAddress: newData.address });
+  //   } /* else {
+  //     setContractData({ ...contractData, customerName: '', customerAddress: '' });
+  //   } */
+  // }, [customerNo]);
 
   // handle remove selcted file
   const handleRemove = (file) => {
@@ -323,357 +576,45 @@ export default function ContractsCreation() {
           message="Successfully Saved Contract"
         />
       )}
-      <Grid item xs={12} lg={12} display="flex" justifyContent="center">
+      {open && <CustomersList openFlag={open} handleCloseDialog={(param) => setOpen(param)} />}
+      <Grid item xs={12} lg={12} display="flex" justifyContent="center" style={{ marginBottom: '1rem' }}>
         <Typography variant="h4">{isEditFlag ? `${t('Contract')} - ${paramId}` : t('Add Contract')}</Typography>
       </Grid>
-      <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
-        <Typography variant="h6">{t('Customer Details')}</Typography>
-        <Grid container spacing={1} item xs={12} xl={6}>
-          <Grid item xs={12} xl={6} md={6}>
-            <AutocompleteWidget
-              options={countryArr}
-              size="small"
-              label={t('Country')}
-              disablePortal
-              value={country}
-              error={isError && !country}
-              helperText={isError && !country && 'Select Country'}
-              FormHelperTextProps={{ className: 'helper_text_cls' }}
-              onChange={(event, newValue) => {
-                updateContractData('country', newValue);
-              }}
-            />
-          </Grid>
-          <Grid item xs={12} xl={6} md={6}>
-            <AutocompleteWidget
-              options={regionArr}
-              size="small"
-              label={t('Region')}
-              disablePortal
-              value={region}
-              error={isError && !region}
-              helperText={isError && !region && 'Select Region'}
-              FormHelperTextProps={{ className: 'helper_text_cls' }}
-              onChange={(event, newValue) => {
-                updateContractData('region', newValue);
-              }}
-            />
+
+      {/* Grid for Customer Details */}
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={6}>
+          <Typography variant="h6">{t('Customer Details')}</Typography>
+          <Grid style={{ marginTop: 0 }} container spacing={3}>
+            {/* Components for customer details */}
+            {componentsSet1.map((comp) => (
+              <RenderComponent metaData={comp} payload={payload} ind={1} handleChange={handleChangeData} />
+            ))}
+            <Grid item xs={12}>
+              <Typography variant="h6">{t('Signatory Information')}</Typography>
+            </Grid>
+            {/* Components for Signatory information */}
+            {componentsSet3.map((comp) => (
+              <RenderComponent metaData={comp} payload={payload} ind={1} handleChange={handleChangeData} />
+            ))}
           </Grid>
         </Grid>
-        <Grid item xs={12} xl={6} md={6}>
-          <AutocompleteWidget
-            options={customerArr}
-            size="small"
-            label={t('Customer No')}
-            disablePortal
-            // onChange={(event, value) => setContractData({ ...contractData, customerNo: value })}
-            value={customerNo}
-            error={isError && !customerNo}
-            helperText={isError && !customerNo && 'Enter Customer Number'}
-            FormHelperTextProps={{ className: 'helper_text_cls' }}
-            onChange={(event, newValue) => {
-              updateContractData('customerNo', newValue);
-            }}
-          />
-        </Grid>
-        <Grid item xs={12} xl={6} md={6}>
-          <IconButton aria-label="SearchIcon" size="small" color="primary" onClick={() => handleOpen()}>
-            <SearchIcon />
-          </IconButton>
-          {open && <CustomersList openFlag={open} handleCloseDialog={(param) => setOpen(param)} />}
-        </Grid>
-        <Grid item xs={12} xl={12} md={12}>
-          <TextField
-            fullWidth
-            label={t('Customer Name')}
-            size="small"
-            value={customerName}
-            error={isError && !customerName}
-            helperText={isError && !customerName && 'Enter Customer Name'}
-            FormHelperTextProps={{ className: 'helper_text_cls' }}
-            onChange={(e) => updateContractData('customerName', e.target.value)}
-          />
-        </Grid>
-        <Grid item xs={12} xl={12} md={12}>
-          <TextField
-            fullWidth
-            label={t('Customer Address')}
-            size="small"
-            value={customerAddress}
-            error={isError && !customerAddress}
-            helperText={isError && !customerAddress && 'Enter Customer Address'}
-            FormHelperTextProps={{ className: 'helper_text_cls' }}
-            onChange={(e) => updateContractData('customerAddress', e.target.value)}
-          />
-        </Grid>
-        <Grid item xs={12} xl={6} md={6}>
-          <TextField
-            fullWidth
-            label={t('CR Number')}
-            size="small"
-            value={crNo}
-            error={isError && !crNo}
-            helperText={isError && !crNo && 'Enter CR Number'}
-            FormHelperTextProps={{ className: 'helper_text_cls' }}
-            onChange={(e) => updateContractData('crNo', e.target.value)}
-          />
-        </Grid>
-        <Grid item xs={12} xl={6} md={6} />
-        <Grid item xs={12} xl={6} md={6}>
-          <AutocompleteWidget
-            options={salesmanArr}
-            value={salesman}
-            defaultValue={defaultSalesman}
-            size="small"
-            label={t('Salesman')}
-            disablePortal
-            onChange={(event, newValue) => {
-              updateContractData('salesman', newValue);
-            }}
-            error={isError && !salesman}
-            helperText={isError && !salesman && 'Select Salesman'}
-            FormHelperTextProps={{ className: 'helper_text_cls' }}
-          />
-        </Grid>
-      </Grid>
-      <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
-        <Typography variant="h6">{t('Contract Details')}</Typography>
-        <Grid container spacing={1} item xs={12} xl={6}>
-          <Grid item xs={12} xl={6} md={6}>
-            <TextField
-              fullWidth
-              label={t('Contract Number')}
-              size="small"
-              value={contractNo}
-              error={isError && !contractNo}
-              helperText={isError && !contractNo && 'Enter Contract Number'}
-              FormHelperTextProps={{ className: 'helper_text_cls' }}
-              onChange={(e) => updateContractData('contractNo', e.target.value)}
-            />
+
+        <Grid item xs={12} sm={6}>
+          <Typography variant="h6">{t('Contract Details')}</Typography>
+          <Grid style={{ marginTop: 0 }} container spacing={3}>
+            {/* Components for Contract Details */}
+            {componentsSet2.map((comp) => (
+              <RenderComponent metaData={comp} payload={payload} ind={1} handleChange={handleChangeData} />
+            ))}
           </Grid>
-        </Grid>
-        <Grid item xs={12} xl={12} md={12}>
-          <TextField
-            fullWidth
-            label={t('Contract Name')}
-            size="small"
-            value={contractName}
-            error={isError && !contractName}
-            helperText={isError && !contractName && 'Enter Contract Name'}
-            FormHelperTextProps={{ className: 'helper_text_cls' }}
-            onChange={(e) => updateContractData('contractName', e.target.value)}
-          />
-        </Grid>
-        <Grid item xs={12} xl={12} md={12}>
-          <BasicDatePicker
-            label={t('Contract Signed On')}
-            inputFormat="dd-MM-yyyy"
-            views={['year', 'month', 'day']}
-            value={contractSignOn}
-            error={isError && !contractSignOn}
-            helperText={isError && !contractSignOn && 'Enter Sign-On Date'}
-            FormHelperTextProps={{ className: 'helper_text_cls' }}
-            getSelectedDate={(dt) => console.log('contractSignOn', dt)}
-            getIsoDate={(dt) => updateContractData('contractSignOn', dt)}
-          />
-        </Grid>
-        <Grid item xs={12} xl={12} md={12}>
-          <BasicDatePicker
-            label={t('Contract Start Date')}
-            inputFormat="dd-MM-yyyy"
-            views={['year', 'month', 'day']}
-            value={contractStartDate}
-            error={isError && (!contractStartDate || contractStartDate < contractSignOn)}
-            helperText={
-              (isError && !contractStartDate && 'Enter Start Date') ||
-              (isError && contractStartDate < contractSignOn && 'Start Date can not be before Sign-On Date')
-            }
-            FormHelperTextProps={{ className: 'helper_text_cls' }}
-            minDate={contractSignOn}
-            getSelectedDate={(dt) => console.log('contractStartDate', dt)}
-            getIsoDate={(dt) => updateContractData('contractStartDate', dt)}
-            disabled={!contractSignOn}
-          />
-        </Grid>
-        <Grid item xs={12} xl={12} md={12}>
-          <TextField
-            label={t('General Discount')}
-            type="number"
-            size="small"
-            value={generalDiscount}
-            error={isError && !generalDiscount}
-            helperText={isError && !generalDiscount && 'Enter General Discount'}
-            FormHelperTextProps={{ className: 'helper_text_cls' }}
-            onChange={(e) => updateContractData('generalDiscount', e.target.value)}
-          />
-          %
-        </Grid>
-        <Grid item xs={12} xl={6} md={6}>
-          <AutocompleteWidget
-            options={statusArr}
-            size="small"
-            label={t('Status')}
-            defaultValue="Active"
-            value={status}
-            error={isError && !status}
-            helperText={isError && !status && 'Select Status'}
-            FormHelperTextProps={{ className: 'helper_text_cls' }}
-            onChange={(event, newValue) => {
-              updateContractData('status', newValue);
-            }}
-          />
-        </Grid>
-      </Grid>
-      <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
-        <Typography variant="h6">{t('Signatory Information')}</Typography>
-        <Grid item xs={12} xl={6} md={6} />
-        <Grid item xs={12} xl={6} md={6}>
-          <AutocompleteWidget
-            options={rolesArr}
-            size="small"
-            label={t('Role')}
-            defaultValue="Primary"
-            error={isError && !role}
-            value={role}
-            helperText={isError && !role && 'Select Role'}
-            FormHelperTextProps={{ className: 'helper_text_cls' }}
-            onChange={(event, newValue) => {
-              updateContractData('role', newValue);
-            }}
-          />
-        </Grid>
-        <Grid item xs={12} xl={12} md={12}>
-          <TextField
-            fullWidth
-            label={t('Name')}
-            size="small"
-            onChange={(e) => updateContractData('name', e.target.value)}
-            value={name}
-            error={isError && (!name || isName(name))}
-            helperText={(isError && !name && 'Enter Name') || (isError && isName(name) && 'Not Valid Name')}
-            FormHelperTextProps={{ className: 'helper_text_cls' }}
-          />
-        </Grid>
-        <Grid item xs={12} xl={12} md={12}>
-          <TextField
-            fullWidth
-            label={t('Position')}
-            size="small"
-            onChange={(e) => updateContractData('position', e.target.value)}
-            value={position}
-            error={isError && !position}
-            helperText={isError && !position && 'Enter Position'}
-            FormHelperTextProps={{ className: 'helper_text_cls' }}
-          />
-        </Grid>
-        <Grid item xs={12} xl={12} md={12}>
-          <TextField
-            fullWidth
-            label={t('Address')}
-            size="small"
-            onChange={(e) => updateContractData('address', e.target.value)}
-            value={address}
-            error={isError && !address}
-            helperText={isError && !address && 'Enter Address'}
-            FormHelperTextProps={{ className: 'helper_text_cls' }}
-          />
-        </Grid>
-        <Grid item xs={12} xl={12} md={12}>
-          <TextField
-            fullWidth
-            label={t('Phone Number')}
-            size="small"
-            onChange={(e) => updateContractData('phoneNo', e.target.value)}
-            value={phoneNo}
-            error={isError && (!phoneNo || isPhone(phoneNo))}
-            helperText={
-              (isError && !phoneNo && 'Enter Phone Number') || (isError && isPhone(phoneNo) && 'Not Valid Phone Number')
-            }
-            FormHelperTextProps={{ className: 'helper_text_cls' }}
-          />
-        </Grid>
-        <Grid item xs={12} xl={12} md={12}>
-          <TextField
-            fullWidth
-            label={t('Fax Number')}
-            size="small"
-            onChange={(e) => updateContractData('faxNo', e.target.value)}
-            value={faxNo}
-            error={isError && !faxNo}
-            helperText={isError && !faxNo && 'Enter Fax Number'}
-            FormHelperTextProps={{ className: 'helper_text_cls' }}
-          />
-        </Grid>
-        <Grid item xs={12} xl={12} md={12}>
-          <TextField
-            fullWidth
-            label={t('Mobile Number')}
-            size="small"
-            onChange={(e) => updateContractData('mobileNo', e.target.value)}
-            value={mobileNo}
-            error={isError && (!mobileNo || isPhone(mobileNo))}
-            helperText={
-              (isError && !mobileNo && 'Enter Mobile Number') ||
-              (isError && isPhone(mobileNo) && 'Not Valid Mobile Number')
-            }
-            FormHelperTextProps={{ className: 'helper_text_cls' }}
-          />
-        </Grid>
-        <Grid item xs={12} xl={12} md={12}>
-          <TextField
-            fullWidth
-            label={t('Email ID')}
-            size="small"
-            onChange={(e) => updateContractData('emailId', e.target.value)}
-            value={emailId}
-            error={isError && (!emailId || isEmail(emailId))}
-            helperText={
-              (isError && !emailId && 'Enter Email Id') || (isError && isEmail(emailId) && 'Not Valid Email Id')
-            }
-            FormHelperTextProps={{ className: 'helper_text_cls' }}
-          />
-        </Grid>
-        <Grid item xs={12} xl={12} md={12}>
-          <TextField
-            fullWidth
-            label={t('Note')}
-            size="small"
-            onChange={(e) => updateContractData('note', e.target.value)}
-            value={note}
-            error={isError && !note}
-            helperText={isError && !note && 'Enter Note'}
-            FormHelperTextProps={{ className: 'helper_text_cls' }}
-          />
-        </Grid>
-      </Grid>
-      <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={6}>
-        <Typography variant="h6">{t('Additional Information')}</Typography>
-        <Grid item xs={12} xl={12} md={12}>
-          <TextField
-            multiline
-            minRows={3}
-            fullWidth
-            label={t('Special Attention / Notes')}
-            size="small"
-            value={specialAttention}
-            onChange={(e) => updateContractData('specialAttention', e.target.value)}
-          />
-        </Grid>
-        <Grid item xs={12} xl={12} md={12}>
-          <TextField
-            multiline
-            minRows={3}
-            fullWidth
-            label={t('Scope of Contract')}
-            size="small"
-            value={scopeOfContract}
-            error={isError && !scopeOfContract}
-            helperText={isError && !scopeOfContract && 'Enter Scope of Contract'}
-            FormHelperTextProps={{ className: 'helper_text_cls' }}
-            onChange={(e) => updateContractData('scopeOfContract', e.target.value)}
-          />
-        </Grid>
-        <Grid item xs={12} xl={6} md={6}>
+          <Grid style={{ display: 'fles', alignItems: 'center' }} item xs={12} sm={6}>
+            <Typography variant="h6">{t('Additional Information')}</Typography>
+          </Grid>
+          {/* Components for Additional Information */}
+          {componentsSet4.map((comp) => (
+            <RenderComponent metaData={comp} payload={payload} ind={1} handleChange={handleChangeData} />
+          ))}
           <UploadFile
             showPreview
             maxSize={3145728}
@@ -689,101 +630,40 @@ export default function ContractsCreation() {
           />
         </Grid>
       </Grid>
-      <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={12}>
-        <Accordion
-          fullWidth
-          expanded={axDefaultexpanded === 'panel1' || axDefaultexpanded === true}
-          onChange={handleChange('panel1')}
-        >
-          <AccordionSummary expandIcon={<ArrowRight />} aria-controls="panel1a-content" id="panel1a-header">
-            <Typography variant="h6">{t('AX Default Fields')}</Typography>
-          </AccordionSummary>
-          <AccordionDetails
-            id="panel1a-content"
-            hidden={!(axDefaultexpanded === 'panel1' || axDefaultexpanded === true)}
-          >
-            <Grid container spacing={1}>
-              <Grid container rowSpacing={1} columnSpacing={2} item xs={12} xl={6} md={6}>
-                <Grid item xs={12} xl={12} md={12}>
-                  <TextField
-                    fullWidth
-                    label={t('Legal Entity')}
-                    size="small"
-                    value={legalEntity}
-                    error={isError && !legalEntity}
-                    helperText={isError && !legalEntity && 'Enter Legal Entity'}
-                    FormHelperTextProps={{ className: 'helper_text_cls' }}
-                    onChange={(e) => updateContractData('legalEntity', e.target.value)}
-                  />
-                </Grid>
-                <Grid item xs={12} xl={12} md={12}>
-                  <TextField
-                    fullWidth
-                    label={t('Account Currency')}
-                    size="small"
-                    value={accountCurrency}
-                    error={isError && !accountCurrency}
-                    helperText={isError && !accountCurrency && 'Enter Account Currency'}
-                    FormHelperTextProps={{ className: 'helper_text_cls' }}
-                    onChange={(e) => updateContractData('accountCurrency', e.target.value)}
-                  />
-                </Grid>
-              </Grid>
-              <Grid container rowSpacing={1} columnSpacing={2} item xs={12} xl={6} md={6}>
-                <Grid item xs={12} xl={12} md={12}>
-                  <AutocompleteWidget
-                    options={transactionCurrencyArr}
-                    size="small"
-                    label={t('Transaction Currency')}
-                    value={transactionCurrency}
-                    error={isError && !transactionCurrency}
-                    helperText={isError && !transactionCurrency && 'Select Transaction Currency'}
-                    FormHelperTextProps={{ className: 'helper_text_cls' }}
-                    onChange={(event, newValue) => {
-                      updateContractData('transactionCurrency', newValue);
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={12} xl={12} md={12}>
-                  <AutocompleteWidget
-                    options={fundingTypeArr}
-                    size="small"
-                    label={t('Funding Type')}
-                    value={fundingType}
-                    defaultValue="Customer"
-                    error={isError && !fundingType}
-                    helperText={isError && !fundingType && 'Select Transaction Currency'}
-                    FormHelperTextProps={{ className: 'helper_text_cls' }}
-                    onChange={(event, newValue) => {
-                      updateContractData('fundingType', newValue);
-                    }}
-                  />
-                </Grid>
-              </Grid>
-            </Grid>
-          </AccordionDetails>
-        </Accordion>
-        <Grid item xs={12} xl={4} md={4} hidden={!(axDefaultexpanded === 'panel1' || axDefaultexpanded === true)}>
-          <Accordion
-            fullWidth
-            expanded={axDefaultexpanded === 'panel1' || axDefaultexpanded === true}
-            hidden={!(axDefaultexpanded === 'panel1' || axDefaultexpanded === true)}
-          >
-            <AccordionSummary expandIcon={<ArrowRight />} aria-controls="panel2a-content" id="panel2a-header">
-              <Typography variant="h6">{t('Financial Diamensions')}</Typography>
+
+      {/* Grid for ax fields */}
+      {/* Components for ax fields */}
+      <Grid container spacing={3} style={{ marginTop: 0 }}>
+        <Grid item xs={12} sm={12}>
+          <Accordion expanded={axDefaultexpanded} onChange={handleChangeExpand}>
+            <AccordionSummary expandIcon={<ArrowRight />} aria-controls="panel1bh-content" id="panel1bh-header">
+              <Typography variant="h6">{t('AX Default Fields')}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography> {t('Lorem ipsum.')} </Typography>
+              <Grid container spacing={3}>
+                <Grid item xs={12} sm={6}>
+                  <Grid container spacing={3}>
+                    {componentsSet5.map((comp) => (
+                      <RenderComponent metaData={comp} payload={payload} ind={1} handleChange={handleChangeData} />
+                    ))}
+                  </Grid>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="h6">{t('Financial Diamensions')}</Typography>
+                  <Typography> {t('Lorem ipsum.')} </Typography>
+                </Grid>
+              </Grid>
             </AccordionDetails>
           </Accordion>
         </Grid>
       </Grid>
-      <Grid container rowSpacing={1} columnSpacing={1} item xs={12} lg={12} justifyContent="center">
+
+      <Grid container style={{ marginTop: 0 }} item xs={12} lg={12} justifyContent="center">
         <Stack direction="row" spacing={2}>
           <Button color="secondary" variant="contained" onClick={() => navigateToContractlist()}>
             {t('Back')}
           </Button>
-          <Button variant="contained" onClick={() => handleClickSaveContract()}>
+          <Button onClick={handleClickSaveContract} variant="contained">
             {t('Save')}
           </Button>
           <Button color="warning" variant="contained">
@@ -813,7 +693,6 @@ export default function ContractsCreation() {
           resizableColumns
           columnResizeMode="expand"
           size="small"
-          // editingRows={editingRows}
           dataKey="id"
           editMode="row"
           editOption

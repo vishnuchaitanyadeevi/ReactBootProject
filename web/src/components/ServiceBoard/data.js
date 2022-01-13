@@ -2188,6 +2188,24 @@ export const SEVICE_DASHBOARD_FILTER_MASTER_DATA = {
     { id: 18, value: '700 ml', title: { en: '700 ml', ar: '700 مل' }, roatio: '0.70000000' },
     { id: 19, value: '800 ml', title: { en: '800 ml', ar: '800 مل' }, roatio: '0.80000000' },
     { id: 20, value: '850 ml', title: { en: '850 ml', ar: '850 مل' }, roatio: '0.85000000' }
+  ],
+  CUSTOMERNUMBER: [
+    { name: { en: 'HSD_RUH_00604', ar: 'HSD_RUH_00604' }, value: 'HSD_RUH_00604' },
+    { name: { en: 'HSD_ABH_00001', ar: 'HSD_ABH_00001' }, value: 'HSD_ABH_00001' },
+    { name: { en: 'HSD_ABH_00002', ar: 'HSD_ABH_00002' }, value: 'HSD_ABH_00002' },
+    { name: { en: 'HSD_ABH_00003', ar: 'HSD_ABH_00003' }, value: 'HSD_ABH_00003' },
+    { name: { en: 'HSD_ABH_00004', ar: 'HSD_ABH_00004' }, value: 'HSD_ABH_00004' },
+    { name: { en: 'HSD_RUH_00604', ar: 'HSD_RUH_00604' }, value: 'HSD_RUH_00604' }
+  ],
+  ROLE: [
+    { name: { en: 'Primary', ar: 'خبرات' }, value: 'Primary' },
+    { name: { en: 'Role 1', ar: 'الدور 1' }, value: 'Role 1' },
+    { name: { en: 'Role 2', ar: 'الدور 2' }, value: 'Role 2' },
+    { name: { en: 'Role 3', ar: 'الدور 3' }, value: 'Role 3' }
+  ],
+  FUNDING_TYPE: [
+    { name: { en: 'Customer', ar: 'عميل' }, value: 'Customer' },
+    { name: { en: 'Third Party', ar: 'الحفلة الثالثة' }, value: 'Third Party' }
   ]
 };
 

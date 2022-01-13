@@ -14,7 +14,10 @@ const {
   CURRENCYS,
   PROJECTS,
   STOCK_CODES,
-  RATIOS
+  RATIOS,
+  CUSTOMERNUMBER,
+  ROLE,
+  FUNDING_TYPE
 } = SEVICE_DASHBOARD_FILTER_MASTER_DATA;
 
 const initialState = {
@@ -34,7 +37,10 @@ const initialState = {
   projects: PROJECTS,
   stockCodes: STOCK_CODES,
   ratios: RATIOS,
-  tasks: TASKS
+  tasks: TASKS,
+  customerNo: CUSTOMERNUMBER,
+  role: ROLE,
+  fundingType: FUNDING_TYPE
 };
 
 export default function MasterDataReducer(state = initialState, actions) {

@@ -19,15 +19,18 @@ import {
   MenuItem,
   InputLabel,
   OutlinedInput,
-  Chip
+  Chip,
+  InputAdornment
 } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import BasicDatePicker from './pickers/BasicDatePicker';
 // import BasicDatePicker from '../components';
 import { COMPONENTS } from '../utils/constants';
 import useSettings from '../hooks/useSettings';
 
-const { TEXT_FIELD, SELECT_BOX, CHECKBOX, RADIO, AUTOCOMPLETE, DATEPICKER, TEXT_AREA, MULTI_SELECT_BOX } = COMPONENTS;
+const { TEXT_FIELD, SELECT_BOX, CHECKBOX, RADIO, AUTOCOMPLETE, DATEPICKER, TEXT_AREA, MULTI_SELECT_BOX, ICON } =
+  COMPONENTS;
 
 const RenderComponent = ({ payload, metaData, ind, handleChange }) => {
   const { t } = useTranslation();
@@ -37,6 +40,8 @@ const RenderComponent = ({ payload, metaData, ind, handleChange }) => {
     const {
       control,
       isPasswordField = false,
+      isFieldIcon = false,
+      Icon,
       variant,
       key,
       showLabel = false,
@@ -50,20 +55,25 @@ const RenderComponent = ({ payload, metaData, ind, handleChange }) => {
       select = false,
       fullWidth = true,
       columnWidth = 1.5,
+      xs = 12,
+      sm = 12,
       inputFormat = 'dd-MM-yyyy',
       views = ['year', 'month', 'day'],
       defaultValue = '',
       maxRows = 10,
       minRows = 4,
       menuProps = {},
-      selectedVals = []
+      selectedVals = [],
+      isError = false,
+      helperText = false,
+      onClickIcon
     } = metaData;
 
     switch (control) {
       case TEXT_FIELD:
       case SELECT_BOX:
         return (
-          <Grid item xs={12} sm={columnWidth} style={{ ...groupStyle }} key={`${key}-${ind}`}>
+          <Grid item xs={xs} sm={columnWidth} style={{ ...groupStyle }} key={`${key}-${ind}`}>
             {showLabel && <FormLabel style={labelStyle}>{t([label])}</FormLabel>}
             <TextField
               variant={variant || 'outlined'}
@@ -77,6 +87,15 @@ const RenderComponent = ({ payload, metaData, ind, handleChange }) => {
               onChange={(e) => handleChange(key, e.target.value, ind)}
               value={payload[key] || ''}
               style={{ ...controlStyle }}
+              error={isError}
+              helperText={helperText}
+              InputProps={{
+                endAdornment: isFieldIcon && (
+                  <InputAdornment position="end">
+                    <Icon />
+                  </InputAdornment>
+                )
+              }}
             >
               {select && isArray(options) && (
                 <>
@@ -152,6 +171,8 @@ const RenderComponent = ({ payload, metaData, ind, handleChange }) => {
                   placeholder={t([placeholder])}
                   SelectProps={{ native: true }}
                   variant={variant || 'outlined'}
+                  error={isError}
+                  helperText={helperText}
                   {...params}
                   label={t([label])}
                   inputProps={{
@@ -173,6 +194,8 @@ const RenderComponent = ({ payload, metaData, ind, handleChange }) => {
               value={payload[key]}
               getSelectedDate={(dt) => null}
               getIsoDate={(dt) => handleChange(key, dt, ind)}
+              error={isError}
+              helperText={helperText}
             />
           </Grid>
         );
@@ -222,6 +245,12 @@ const RenderComponent = ({ payload, metaData, ind, handleChange }) => {
                 ))}
               </Select>
             </FormControl>
+          </Grid>
+        );
+      case ICON:
+        return (
+          <Grid item xs={12} sm={columnWidth} style={{ ...groupStyle }} key={`${key}-${ind}`}>
+            <SearchIcon onClick={onClickIcon} style={{ cursor: 'pointer' }} />
           </Grid>
         );
       default:
