@@ -267,5 +267,15 @@
     "errorCode": "خطا بالكود",
     "serviceRelatedNote": "ملاحظة متعلقة بالخدمة",
     "addNewPart": "أضف جزء جديد"
+  },
+  "invoiceList": {
+    "Invoice List": "قائمة الفاتورة",
+    "country": "دولة",
+    "office": "مكتب. مقر. مركز",
+    "salesman": "بائع",
+    "serviceman": "جندي",
+    "customer": "عميل",
+    "projinvonacno": "مشروع. Inv. اوناك. رقم.",
+    "status": "حالة"
   }
 }

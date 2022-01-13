@@ -27,11 +27,11 @@ export const ContractData = [
         location: 'Qatar'
       },
       {
-        id: '1003',
+        id: '1002',
         status: 'Returned',
         projectNumber: 'PRNO_003',
         projectStartDate: '01-02-2012',
-        endDate: '15-03-2012',
+        endDate: '08-03-2012',
         business: 'Organization',
         location: 'Kuwait'
       }
@@ -47,7 +47,7 @@ export const ContractData = [
     activeProjects: '2/10',
     projects: [
       {
-        id: '1001',
+        id: '1004',
         status: 'Success',
         projectNumber: 'PRNO_002',
         projectStartDate: '01-05-2012',
@@ -56,7 +56,7 @@ export const ContractData = [
         location: 'Iraq'
       },
       {
-        id: '1002',
+        id: '1005',
         status: 'Running',
         projectNumber: 'PRNO_003',
         projectStartDate: '01-04-2012',
@@ -65,7 +65,7 @@ export const ContractData = [
         location: 'Bahrain'
       },
       {
-        id: '1003',
+        id: '1006',
         status: 'Returned',
         projectNumber: 'PRNO_003',
         projectStartDate: '01-02-2012',

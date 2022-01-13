@@ -266,7 +266,7 @@ function InvoiceList() {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Typography variant="h4" align="center">
-            Invoice List
+            {t('Invoice List')}
           </Typography>
         </Grid>
         <Grid item xs={12}>

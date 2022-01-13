@@ -23,7 +23,8 @@ function ContractList({
   numericFields,
   numericFieldsExpandedData,
   deleteRowData,
-  headCellsType
+  headCellsType,
+  headCellsExapndedType
 }) {
   const { themeMode, onChangeMode } = useSettings();
   const [tableData, setTableData] = useState(null);
@@ -31,6 +32,7 @@ function ContractList({
   const [expandedRows, setExpandedRows] = useState(null);
   const [globalFilter, setGlobalFilter] = useState(null);
   const [isUpdate, setIsUpdate] = useState(false);
+  const [tempdata, setTempdata] = useState([]);
 
   const onRowEditComplete = (e) => {
     const _tableData = [...tableData];
@@ -103,6 +105,7 @@ function ContractList({
       rowData[objIndex][key] = newValue;
       console.log('After update...', rowData[objIndex]);
       console.log('mockData...', rowData);
+      // console.log('Expanded', rowData.projects);
       setIsUpdate(true);
     }
   };
@@ -130,7 +133,7 @@ function ContractList({
               inputFormat="dd-MM-yyyy"
               views={['year', 'month', 'day']}
               value={newVal.value}
-              getSelectedDate={(dt) => console.log('date..', dt)}
+              getSelectedDate={(dt) => console.log('bodydate..', dt)}
               getIsoDate={(e) => handleChangeDate(e, options, key)}
               size="large"
             />
@@ -140,6 +143,54 @@ function ContractList({
         return undefined;
     }
   };
+
+  const handleExpandedChangeDate = (newValue, data, key) => {
+    // find id and index from json and update that value
+    // Find index of specific object using findIndex method.
+    if (data && newValue) {
+      const objIndex = tempdata.findIndex((obj) => obj.id === data.id);
+      console.log('Before update...', tempdata[objIndex]);
+      tempdata[objIndex][key] = newValue;
+      console.log('After update...', tempdata[objIndex]);
+      console.log('mockData...', tempdata);
+      // console.log('Expanded', rowData.projects);
+      setIsUpdate(true);
+    }
+  };
+  // ExpandedChangeBody
+  const handleChangeExpandedBody = (options, idx) => {
+    const key = Object.keys(options)[idx];
+    const newVal = { key, value: options[key] };
+    switch (headCellsExapndedType[idx]) {
+      case 'BUTTON':
+        return <Button variant="contained">{newVal.value}</Button>;
+      case 'NONE':
+        return <Typography style={{ fontSize: '13px' }}>{newVal.value}</Typography>;
+      case 'LINK':
+        return (
+          <Typography style={{ cursor: 'pointer', textDecoration: 'underline', fontSize: '13px', color: 'blue' }}>
+            {newVal.value}
+          </Typography>
+        );
+      case 'DATE':
+        return (
+          <div style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}>
+            <BasicDatePicker
+              label="Date"
+              inputFormat="dd-MM-yyyy"
+              views={['year', 'month', 'day']}
+              value={newVal.value}
+              getSelectedDate={(dt) => console.log('date..', dt)}
+              getIsoDate={(e) => handleExpandedChangeDate(e, options, key)}
+              size="large"
+            />
+          </div>
+        );
+      default:
+        return undefined;
+    }
+  };
+
   useEffect(() => {
     if (isUpdate) {
       console.log('calling..date change');
@@ -149,45 +200,51 @@ function ContractList({
   const editIcon = (rowData) => <ModeEditOutlinedIcon onClick={() => onRowClick(rowData)} />;
   const deleteIcon = (rowData) => <DeleteIcon onClick={() => deleteRowData(rowData)} />;
   const editIconExpanded = (rowData) => <ModeEditOutlinedIcon onClick={() => onChildRowClick(rowData)} />;
-  const rowExpansionTemplate = (data) => (
-    <div className="orders-subtable">
-      <DataTable
-        value={data.projects}
-        responsiveLayout="scroll"
-        showGridlines
-        resizableColumns
-        columnResizeMode="expand"
-        size="small"
-        paginator
-        rows={10}
-        scrollable
-        scrollHeight="400px"
-        filterDisplay="menu"
-      >
-        {expandedColumns &&
-          expandedColumns.map((col) => (
-            <Column
-              field={col.field}
-              header={col.header}
-              sortable
-              filter
-              style={{ justifyContent: `${numericFieldsExpandedData.includes(col.field) ? 'center' : ''}` }}
-            />
-          ))}
-        <Column
-          columnKey="edit"
-          body={editIconExpanded}
-          style={{
-            minWidth: '6rem',
-            width: '6rem',
-            paddingBottom: '0.1rem',
-            paddingTop: '0.1rem',
-            justifyContent: 'center'
-          }}
-        />
-      </DataTable>
-    </div>
-  );
+  const rowExpansionTemplate = (data) => {
+    if (data) {
+      setTempdata(data.projects);
+    }
+    return (
+      <div className="orders-subtable">
+        <DataTable
+          value={data.projects}
+          responsiveLayout="scroll"
+          showGridlines
+          resizableColumns
+          columnResizeMode="expand"
+          size="small"
+          paginator
+          rows={10}
+          scrollable
+          scrollHeight="400px"
+          filterDisplay="menu"
+        >
+          {expandedColumns &&
+            expandedColumns.map((col, idx) => (
+              <Column
+                field={col.field}
+                header={col.header}
+                sortable
+                filter
+                style={{ justifyContent: `${numericFieldsExpandedData.includes(col.field) ? 'center' : ''}` }}
+                body={(options) => handleChangeExpandedBody(options, idx)}
+              />
+            ))}
+          <Column
+            columnKey="edit"
+            body={editIconExpanded}
+            style={{
+              minWidth: '6rem',
+              width: '6rem',
+              paddingBottom: '0.1rem',
+              paddingTop: '0.1rem',
+              justifyContent: 'center'
+            }}
+          />
+        </DataTable>
+      </div>
+    );
+  };
   return (
     <div className="datatable-rowexpansion-demo">
       <Helmet>

@@ -254,6 +254,7 @@
     "addNewPart": "Add New Part"
   },
   "invoiceList": {
+    "Invoice List": "Invoice List",
     "country": "Country",
     "office": "Office",
     "salesman": "Salesman",
