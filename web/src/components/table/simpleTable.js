@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Typography, Button, Checkbox } from '@mui/material';
+import { Grid, Typography, Button, Checkbox, TextField } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { Helmet } from 'react-helmet';
 import { DataTable } from 'primereact/datatable';
@@ -241,6 +241,18 @@ export default function SimpleTable({
       setIsUpdate(false);
     }
   }, [isUpdate]);
+
+  const handleChangeTextfield = (newValue, data, key) => {
+    console.log('calling...', newValue?.target.value, data, key);
+    if (data && newValue) {
+      const objIndex = rowData.findIndex((obj) => obj.id === data.id);
+      console.log('Before update...', rowData[objIndex]);
+      rowData[objIndex][key] = newValue?.target.value;
+      console.log('After update...', rowData[objIndex]);
+      console.log('mockData...', rowData);
+      setIsUpdate(true);
+    }
+  };
   const handleClickLink = (rowData) => console.log('rowData...', rowData);
   const handleChangeBody = (options, idx) => {
     const key = Object.keys(options)[idx];
@@ -260,6 +272,8 @@ export default function SimpleTable({
             <Typography style={{ fontSize: '13px' }}>{newVal.value}</Typography>
           </Tooltip>
         );
+      case 'TEXTFIELD':
+        return <TextField value={newVal.value} fullWidth onChange={(e) => handleChangeTextfield(e, options, key)} />;
       case 'LINK':
         return (
           <Tooltip title={newVal.value}>

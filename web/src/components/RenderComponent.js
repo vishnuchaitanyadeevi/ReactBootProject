@@ -21,7 +21,7 @@ import {
   OutlinedInput,
   Chip
 } from '@mui/material';
-import TextareaAutosize from '@mui/base/TextareaAutosize';
+import TextareaAutosize from '@mui/material/TextareaAutosize';
 import BasicDatePicker from './pickers/BasicDatePicker';
 // import BasicDatePicker from '../components';
 import { COMPONENTS } from '../utils/constants';
