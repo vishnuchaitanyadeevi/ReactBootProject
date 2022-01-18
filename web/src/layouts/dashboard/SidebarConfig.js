@@ -31,6 +31,11 @@ const sidebarConfig = [
     items: [
       { title: 'dashboard', path: PATH_DASHBOARD.general.home },
       {
+        title: 'Administration',
+        path: '',
+        children: [{ title: 'Country List', path: '/countryList' }]
+      },
+      {
         title: 'Master List',
         path: PATH_DASHBOARD.general.service,
         children: [
