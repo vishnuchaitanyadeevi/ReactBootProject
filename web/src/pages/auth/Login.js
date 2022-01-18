@@ -38,7 +38,7 @@ const ContentStyle = styled('div')(({ theme }) => ({
 export default function Login() {
   return (
     <RootStyle title="Reza Hygiene OMS">
-      <MHidden width="mdDown">
+      {/* <MHidden width="mdDown">
         <SectionStyle>
           <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
             Hi, Welcome Back
@@ -46,8 +46,7 @@ export default function Login() {
           <img src="/static/home/rezaLogo.png" alt="reza" style={{ padding: '0 1.1rem 0 1.1rem' }} />
           <img src="/static/home/omslogo.png" alt="oms" />
         </SectionStyle>
-      </MHidden>
-
+      </MHidden> */}
       <Container maxWidth="sm">
         <ContentStyle>
           <LoginForm />

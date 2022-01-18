@@ -56,7 +56,8 @@ const RenderComponent = ({ payload, metaData, ind, handleChange }) => {
       maxRows = 10,
       minRows = 4,
       menuProps = {},
-      selectedVals = []
+      selectedVals = [],
+      type = 'text'
     } = metaData;
 
     switch (control) {
@@ -68,7 +69,7 @@ const RenderComponent = ({ payload, metaData, ind, handleChange }) => {
             <TextField
               variant={variant || 'outlined'}
               size={size || 'small'}
-              type={isPasswordField ? 'password' : 'text'}
+              type={isPasswordField ? 'password' : type}
               select={select}
               fullWidth={fullWidth}
               label={t([label])}

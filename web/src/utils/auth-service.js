@@ -1,6 +1,6 @@
 import { postData } from './rest-services';
 import { LOCAL_STORAGE_KEYS } from './constants';
-import { setLocalStorageItem } from './utils';
+import { setLocalStorageItem, clearLocalStorage } from './utils';
 
 const { TOKEN_KEY } = LOCAL_STORAGE_KEYS;
 export const login = async (params) => {
@@ -15,7 +15,8 @@ export const login = async (params) => {
 };
 
 export const logout = () => {
-  if (localStorage.getItem(TOKEN_KEY) === null) return false;
-  localStorage.removeItem(TOKEN_KEY);
+  clearLocalStorage();
+  // if (localStorage.getItem(TOKEN_KEY) === null) return false;
+  // localStorage.removeItem(TOKEN_KEY);
   return true;
 };

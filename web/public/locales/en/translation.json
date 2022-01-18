@@ -261,5 +261,9 @@
     "cancel": "Cancel",
     "proceed": "Proceed",
     "ok": "Ok"
+  },
+  "login": {
+    "username": "Username",
+    "password": "Password"
   }
 }

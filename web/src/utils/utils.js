@@ -4,6 +4,10 @@ import { PATTERN, REGX_TYPE } from './constants';
 
 export const setLocalStorageItem = (key, val) => localStorage.setItem(key, val);
 
+export const clearLocalStorage = () => localStorage.clear();
+
+export const clearSessionStorage = () => sessionStorage.clear();
+
 export const ageCalculator = (date) => {
   const a = moment(new Date());
   const b = moment(date);
