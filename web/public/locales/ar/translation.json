@@ -92,6 +92,7 @@
     "audit": "مراجعة",
     "highene": "هايين",
     "service": "خدمة",
+    "serviceStatus": "حالة الخدمة",
     "companyName": "اسم الشركة",
     "customerName": "اسم الزبون",
     "lastServiceDate": "تاريخ آخر خدمة",
@@ -110,10 +111,12 @@
     "contract": "اتفافية",
     "status": "حالة",
     "location": "موقع",
-    "servicemen": "العسكريين"
+    "servicemen": "العسكريين",
+    "customerAndContactDetails": "تفاصيل العميل والاتصال"
   },
   "filter": {
     "filter": "منقي",
+    "filters": "المرشحات",
     "clear": "صافي"
   },
   "ProjectExpiration": {
@@ -267,5 +270,11 @@
     "errorCode": "خطا بالكود",
     "serviceRelatedNote": "ملاحظة متعلقة بالخدمة",
     "addNewPart": "أضف جزء جديد"
+  },
+  "dialog": {
+    "dialog": "حوار",
+    "cancel": "يلغي",
+    "proceed": "تقدم",
+    "ok": "موافق"
   }
 }

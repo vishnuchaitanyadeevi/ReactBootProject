@@ -6,13 +6,10 @@ import CustomLaneHeader from './CustomLaneHeader';
 
 import './ServiceBoard.css';
 
-export default function ServiceBoard({ data = [] }) {
+export default function ServiceBoard({ data = [], onCardClick }) {
   const { t } = useTranslation();
 
-  const onCardClickHandler = (cardId, cardDetails, laneId) => {
-    alert(`${cardId} clicked from ${laneId}`);
-    console.log(`${cardId} clicked from ${laneId}: `, cardDetails);
-  };
+  const onCardClickHandler = (cardId, cardDetails, laneId) => onCardClick(cardId, cardDetails, laneId);
 
   const onCardDragEndHandler = (cardId, sourceLaneId, targetLaneId, position, cardDetails) => {
     alert(`${cardId} moved from ${sourceLaneId} to ${targetLaneId} to ${position}`);

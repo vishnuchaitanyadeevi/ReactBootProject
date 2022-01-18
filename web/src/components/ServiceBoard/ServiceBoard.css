@@ -173,3 +173,6 @@
 .pointer-cls {
   cursor: pointer;
 }
+.service-types {
+  width: 20% !important;
+}

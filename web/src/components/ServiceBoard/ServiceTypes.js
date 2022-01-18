@@ -14,7 +14,7 @@ import { serviceTypes } from './data';
 import { SERVICE_TYPES } from '../../utils/constants';
 import './ServiceBoard.css';
 
-const ServiceTypes = ({ showTitle = true, emptyGridLen = 6, iconsGridLen = 5, leftMrgn = '4rem' }) => {
+const ServiceTypes = () => {
   const { t } = useTranslation();
   const {
     COMPLETE,
@@ -64,11 +64,10 @@ const ServiceTypes = ({ showTitle = true, emptyGridLen = 6, iconsGridLen = 5, le
         return '';
     }
   };
-
   return (
     <>
       {serviceTypes.map((service) => (
-        <Stack style={{ padding: '0.5rem 0 0 0.5rem' }}>
+        <Stack style={{ padding: '0.5rem 0 0 0.5rem' }} direction="row" spacing={2}>
           <span
             className="service-men-clr"
             style={{ backgroundColor: service.colorCode, borderColor: service.colorCode }}

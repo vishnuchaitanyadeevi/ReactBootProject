@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -9,18 +10,25 @@ function DialogComponent({
   open,
   handleClose,
   maxWidth,
-  Title,
+  title,
   Content,
-  Actions,
   titleProps,
   contentProps,
-  actionProps
+  cacelButtonText,
+  proceedButtonText,
+  handleProceed
 }) {
+  const { t } = useTranslation();
   return (
     <Dialog fullWidth maxWidth={maxWidth} open={open} onClose={handleClose}>
-      <DialogTitle {...titleProps}>{Title}</DialogTitle>
+      <DialogTitle {...titleProps}>{t(title || 'dialog.dialog')}</DialogTitle>
       <DialogContent {...contentProps}>{Content}</DialogContent>
-      <DialogActions {...actionProps}>{Actions}</DialogActions>
+      <DialogActions>
+        <Button onClick={handleProceed}>{t(proceedButtonText || 'dialog.proceed')}</Button>
+        <Button autoFocus onClick={handleClose}>
+          {t(cacelButtonText || 'dialog.cancel')}
+        </Button>
+      </DialogActions>
     </Dialog>
   );
 }
