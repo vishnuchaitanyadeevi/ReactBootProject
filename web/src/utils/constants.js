@@ -59,7 +59,9 @@ export const PATTERN = {
   EMAIL: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
   // PHONE: /^(?!0000000000)(?!000-000-0000)(?:\?1[-.●]?)?\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/
   PHONE: /^\([2-9][\d]{2}\) [\d]{3}-[\d]{4}$/,
-  NAME: /^[a-zA-Z][a-zA-Z ]*$/
+  NAME: /^[a-zA-Z][a-zA-Z ]*$/, // Alphabets
+  USERNAME: /^[a-zA-Z0-9.]*$/, // Alphanumeric with dot
+  ALPHANUMERIC: /^[a-zA-Z0-9]*$/ // Alphanumeric
 };
 
 export const COMPONENTS = {
