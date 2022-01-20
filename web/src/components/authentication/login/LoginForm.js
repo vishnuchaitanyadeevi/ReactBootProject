@@ -20,6 +20,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { LoadingButton } from '@mui/lab';
 import { LOCAL_STORAGE_KEYS, PATTERN } from '../../../utils/constants';
 import { login } from '../../../utils/auth-service';
+import { LoginOtp } from './LoginOtp';
 // hooks
 import useIsMountedRef from '../../../hooks/useIsMountedRef';
 
@@ -34,8 +35,11 @@ export default function LoginForm() {
   const [user, setUser] = useState();
   const navigate = useNavigate();
   const isMountedRef = useIsMountedRef();
-  const views = { login: 'login', forgotId: 'forgotId', forgotPwd: 'forgotPwd' };
+  const views = { login: 'login', forgotUsername: 'forgotUsername', forgotPwd: 'forgotPwd' };
   const [view, setView] = useState(views.login);
+  const [otpDialog, setOtpDialog] = useState(true);
+
+  const isForgotUsernameView = view === views.forgotUsername;
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem('user');
@@ -44,19 +48,6 @@ export default function LoginForm() {
       setUser(foundUser);
     }
   }, []);
-
-  // login the user
-  /* const handleSubmit = async (e) => {
-    e.preventDefault();
-    const user = { username, password };
-    // send the username and password to the server
-    const response = await axios.post('http://localhost:4000/login', user);
-    // set the state of the user
-    setUser(response.data);
-    // store the user in localStorage
-    localStorage.setItem('user', JSON.stringify(response.data));
-  };
-  */
 
   const loginSchema = Yup.object().shape({
     // username: Yup.string().email('Username must be a valid email address').required('Username is required'),
@@ -71,13 +62,13 @@ export default function LoginForm() {
 
   const formik = useFormik({
     initialValues: {
-      username,
-      password
+      username: '',
+      password: ''
     },
     validationSchema: loginSchema,
     onSubmit: async (e) => {
-      // onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      // alert(JSON.stringify(values, null, 2));
+      setOtpDialog(true);
       // navigate('/home');
       /*
       const user = { username, password };
@@ -92,18 +83,26 @@ export default function LoginForm() {
   });
 
   const forgotIdPwdSchema = Yup.object().shape({
-    email: Yup.string().email('Email must be a valid email address').required('Enter your email')
+    email: isForgotUsernameView
+      ? Yup.string().email('Email must be a valid email address').required('Enter your email')
+      : Yup.string()
+          .required('Enter your username')
+          .matches(
+            PATTERN.USERNAME,
+            'Please enter only alphanumeric characters with no other characters except . (dot). '
+          )
   });
 
   const formikForgotIdorPwd = useFormik({
     initialValues: {
-      email
+      email: ''
     },
     validationSchema: forgotIdPwdSchema,
     onSubmit: async (e) => {
-      alert(`${view === views.forgotId ? 'Username ' : 'Password reset link '}sent to ${valuesF.email}`);
+      alert('Please check your registered Email ID.');
     }
   });
+
   const { errors, touched, values, isSubmitting, getFieldProps } = formik;
 
   const {
@@ -114,10 +113,20 @@ export default function LoginForm() {
     getFieldProps: getFieldPropsF
   } = formikForgotIdorPwd;
 
+  const verifyOtp = () => {
+    navigate('/home');
+  };
+
   const changeView = (view) => setView(view);
+
+  const handleOtpDialogClose = () => setOtpDialog(false);
+
+  const sendOtp = () => alert(`OTP sent to registered mobile no. and Email ID`);
 
   return (
     <>
+      <LoginOtp open={otpDialog} handleClose={handleOtpDialogClose} verifyOtp={verifyOtp} resendOtp={sendOtp} />
+      {/* <LoginOtp open={otpDialog} /> */}
       <img src="/static/home/rezaLogo.png" alt="reza" style={{ padding: '0 1.1rem 0 1.1rem' }} />
       <img src="/static/home/omslogo.png" alt="oms" />
       {view === views.login ? (
@@ -168,8 +177,8 @@ export default function LoginForm() {
          control={<Checkbox {...getFieldProps('remember')} checked={values.remember} />}
          label="Remember me"
        /> */}
-              <Link variant="forgotId" onClick={() => changeView(views.forgotId)}>
-                Forgot Your ID?
+              <Link variant="forgotUsername" onClick={() => changeView(views.forgotUsername)}>
+                Forgot Your Username?
               </Link>
               <Link variant="forgotPassword" onClick={() => changeView(views.forgotPwd)}>
                 Forgot Your Password?
@@ -180,20 +189,22 @@ export default function LoginForm() {
       ) : (
         <FormikProvider value={formikForgotIdorPwd}>
           <Typography variant="h5" align="center">
-            Forgot your {`${view === views.forgotId ? 'ID' : 'Password'}`}
+            Forgot your {`${isForgotUsernameView ? 'Username' : 'Password'}`}
           </Typography>
           <Form autoComplete="off" noValidate onSubmit={formikForgotIdorPwd.handleSubmit}>
             <Stack spacing={3}>
               <Typography>
-                {view === views.forgotId
-                  ? 'If you forgot your ID, an email with a username ID will be sent to you. Please enter register email ID.'
-                  : 'If you forgot your password an email with a password will be sent to you. Click on the link in that email and you will be taken to page where you can the create a new password.'}
+                {`An Email with ${
+                  isForgotUsernameView ? 'your username' : 'reset password link'
+                } will be sent to your registered Email ID, Please enter ${
+                  isForgotUsernameView ? 'registered Email ID.' : 'Username.'
+                }`}
               </Typography>
               <TextField
                 fullWidth
                 autoComplete="email"
-                type="email"
-                label="Email"
+                type={`${isForgotUsernameView ? 'email' : 'text'}`}
+                label={`${isForgotUsernameView ? 'Email' : 'Username'}`}
                 onChange={formikForgotIdorPwd.handleChange}
                 {...getFieldPropsF('email')}
                 error={Boolean(touchedF.email && errorsF.email)}
@@ -204,13 +215,11 @@ export default function LoginForm() {
                   <LoadingButton
                     fullWidth
                     size="large"
-                    type="submit"
                     variant="contained"
                     loading={isSubmittingF}
-                    // onClick={handleSendEmail}
-                    // disabled={!valuesF.email || errorsF.email}
+                    onClick={() => changeView(views.login)}
                   >
-                    {view === views.forgotId ? 'Send Username' : 'Send Reset Link'}
+                    Cancel
                   </LoadingButton>
                 </Grid>
                 <Grid item sm={1} />
@@ -218,11 +227,13 @@ export default function LoginForm() {
                   <LoadingButton
                     fullWidth
                     size="large"
+                    type="submit"
                     variant="contained"
                     loading={isSubmittingF}
-                    onClick={() => changeView(views.login)}
+                    // onClick={handleSendEmail}
+                    // disabled={!valuesF.email || errorsF.email}
                   >
-                    Cancel
+                    {isForgotUsernameView ? 'Send Username' : 'Send Reset Link'}
                   </LoadingButton>
                 </Grid>
               </Grid>

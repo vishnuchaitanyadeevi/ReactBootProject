@@ -61,7 +61,7 @@ table.data-grid tr td.cell {
   z-index: 1100;
 }
 
-.css-3yhpc8-MuiGrid-root>.MuiGrid-item {
+.css-3yhpc8-MuiGrid-root > .MuiGrid-item {
   padding-top: 8px;
 }
 
@@ -72,7 +72,11 @@ table.data-grid tr td.cell {
   height: 25px;
 }
 
-.p-datatable-scrollable .p-datatable-thead > tr, .p-datatable-scrollable .p-datatable-tbody > tr, .p-datatable-scrollable .p-datatable-tfoot > tr, .p-datatable-table .p-datatable-thead > tr, .p-datatable-table .p-datatable-tbody > tr {
+.p-datatable-scrollable .p-datatable-thead > tr,
+.p-datatable-scrollable .p-datatable-tbody > tr,
+.p-datatable-scrollable .p-datatable-tfoot > tr,
+.p-datatable-table .p-datatable-thead > tr,
+.p-datatable-table .p-datatable-tbody > tr {
   font-size: small !important;
 }
 
@@ -112,9 +116,14 @@ px
   border-color: black !important;
 }
 */
-.p-paginator-page, .p-paginator-next, .p-paginator-last, .p-paginator-first, .p-paginator-prev, .p-paginator-current {
-  height: 2rem!important;
-  min-width: 2rem!important;
+.p-paginator-page,
+.p-paginator-next,
+.p-paginator-last,
+.p-paginator-first,
+.p-paginator-prev,
+.p-paginator-current {
+  height: 2rem !important;
+  min-width: 2rem !important;
 }
 
 .p-paginator {
@@ -130,11 +139,12 @@ px
   padding: 3px 0px 0px 1px !important;
 }
 
-.p-datatable .p-datatable-tbody > tr, .p-datatable-table .p-datatable-tbody > tr {
+.p-datatable .p-datatable-tbody > tr,
+.p-datatable-table .p-datatable-tbody > tr {
   height: 1.65rem !important;
 }
 
-.datatable-rowexpansion-demo .p-datatable .p-datatable-tbody > tr :hover{
+.datatable-rowexpansion-demo .p-datatable .p-datatable-tbody > tr :hover {
   cursor: pointer;
 }
 
@@ -209,14 +219,19 @@ px
  
  */
 
-
 // gradient animation ends
-.MuiGrid-root>.MuiGrid-item {
+.MuiGrid-root > .MuiGrid-item {
   padding-top: 8px;
 }
 
 // global css for centering header for primeReact dataGrid
-.d-data-cls .p-column-header-content{
+.d-data-cls .p-column-header-content {
   display: flex;
   justify-content: center;
+}
+
+.error {
+  float: left;
+  font-size: 0.7rem;
+  color: red;
 }
