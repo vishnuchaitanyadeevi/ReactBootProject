@@ -2,28 +2,25 @@ export const InternalUserTableData = [
   {
     id: 1,
     name: 'Mohammad Qasem Abou',
-    userName: 'mmhost',
+    userName: 'mmhost1301',
     email: 'matjaz.msrek@kivi.si',
-    phone: '031546569',
-    displayName: 'Mohammad Abou',
+    mobileNo: '031546569',
     shortName: 'Mohammad'
   },
   {
     id: 2,
     name: 'Leighton Clive Darren',
-    userName: 'darren',
+    userName: 'darren1001',
     email: 'cpam.hygiene@rezagroup.com',
-    phone: '+966553691440',
-    displayName: 'Darren Leighton',
+    mobileNo: '+966553691440',
     shortName: 'Darren'
   },
   {
     id: 3,
     name: 'Abdul Majid Abdulaziz',
-    userName: 'naik',
+    userName: 'naik1002',
     email: 'wpam.hygiene@rezagroup.com',
-    phone: '+966504603776',
-    displayName: 'Abdul Majid',
+    mobileNo: '+966504603776',
     shortName: 'Majid'
   }
 ];

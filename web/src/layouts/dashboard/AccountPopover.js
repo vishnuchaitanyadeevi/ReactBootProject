@@ -77,7 +77,7 @@ export default function AccountPopover() {
           style={{ cursor: 'pointer' }}
           noWrap
         >
-          Administration
+          {t('administration.administration')}
         </Typography>
       </Stack>
       <MIconButton

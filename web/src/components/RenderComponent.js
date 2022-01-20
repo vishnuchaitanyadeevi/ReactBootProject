@@ -166,6 +166,7 @@ const RenderComponent = ({ payload, metaData, ind, handleChange }) => {
         return (
           <Grid item xs={12} sm={columnWidth} key={`${key}-${ind}`} style={{ ...groupStyle }}>
             <BasicDatePicker
+              size={size || 'small'}
               label={t([label])}
               onChange={(e) => handleChange(key, e.target.value, ind)}
               inputFormat={inputFormat}

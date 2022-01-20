@@ -252,5 +252,21 @@
     "errorCode": "Error Code",
     "serviceRelatedNote": "Service Related Note",
     "addNewPart": "Add New Part"
+  },
+  "administration": {
+    "administration": "Administration",
+    "whatDoYouWantToDo": "What do you want to do?",
+    "users": "Users"
+  },
+  "userList": {
+    "internalUser": "Internal Users",
+    "externalUser": "External Users",
+    "addUser": "Add New User",
+    "userName": "User Name",
+    "email": "Email",
+    "name": "Name",
+    "mobileNo": "Mobile No.",
+    "displayName": "Display Name",
+    "shortName": "Short Name"
   }
 }
