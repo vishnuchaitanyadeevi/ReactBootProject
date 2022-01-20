@@ -35,8 +35,8 @@ const sidebarConfig = [
         path: PATH_DASHBOARD.general.service,
         children: [
           { title: 'Customers', path: '/customers' },
-          { title: 'Salesman', path: '' },
-          { title: 'Servicemen/Technicians', path: '' }
+          { title: 'Salesman', path: '', isPending: true },
+          { title: 'Servicemen/Technicians', path: '', isPending: true }
         ]
       },
       {
@@ -45,7 +45,7 @@ const sidebarConfig = [
         children: [
           { title: 'Contracts', path: '/contractsList' },
           // { title: 'Projects', path: '/project/add' },
-          { title: 'Service Orders', path: '' },
+          { title: 'Service Orders', path: '', isPending: true },
           { title: 'Project Expiration List', path: '/projectExpiration' },
           { title: 'Terminate Projects', path: '/terminateProject' }
         ]
@@ -63,9 +63,9 @@ const sidebarConfig = [
         path: '',
         children: [
           { title: 'Material Picking List', path: '/data' },
-          { title: 'Material And Price List', path: '' },
-          { title: 'FOL Installation List', path: '' },
-          { title: 'Equipments/Devices', path: '' }
+          { title: 'Material And Price List', path: '', isPending: true },
+          { title: 'FOL Installation List', path: '', isPending: true },
+          { title: 'Equipments/Devices', path: '', isPending: true }
         ]
       },
       {
@@ -74,28 +74,28 @@ const sidebarConfig = [
         children: [
           { title: 'Invoice List', path: '/invoiceList' },
           { title: 'TableTrial', path: '/tabletrial' },
-          { title: 'Invoice Overview', path: '' }
+          { title: 'Invoice Overview', path: '', isPending: true }
         ]
       },
       {
         title: 'Credit Notes',
         path: '',
         children: [
-          { title: 'Credit Notes Proposal And Workflow', path: '' },
-          { title: 'Credit Control View', path: '' },
-          { title: 'Credit Control Coordinator View', path: '' }
+          { title: 'Credit Notes Proposal And Workflow', path: '', isPending: true },
+          { title: 'Credit Control View', path: '', isPending: true },
+          { title: 'Credit Control Coordinator View', path: '', isPending: true }
         ]
       },
-      { title: 'Reports', path: '' },
-      { title: 'iPad Synchronization Log', path: '' },
-      { title: 'Route Analysis', path: '' },
-      { title: 'Manage Questions', path: '' },
-      { title: 'Discount Workflow', path: '' },
-      { title: 'Equipment Builder', path: '' },
-      { title: 'Ax Synchronization', path: '' },
-      { title: 'Mobile Warehouse', path: '' },
-      { title: 'Salesmen View', path: '' },
-      { title: 'Export', path: '' }
+      { title: 'Reports', path: '', isPending: true },
+      { title: 'iPad Synchronization Log', path: '', isPending: true },
+      { title: 'Route Analysis', path: '', isPending: true },
+      { title: 'Manage Questions', path: '', isPending: true },
+      { title: 'Discount Workflow', path: '', isPending: true },
+      { title: 'Equipment Builder', path: '', isPending: true },
+      { title: 'Ax Synchronization', path: '', isPending: true },
+      { title: 'Mobile Warehouse', path: '', isPending: true },
+      { title: 'Salesmen View', path: '', isPending: true },
+      { title: 'Export', path: '', isPending: true }
       /* {
         title: 'Demo',
         path: '',

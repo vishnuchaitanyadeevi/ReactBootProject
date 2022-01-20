@@ -13,6 +13,7 @@ import ServiceMens from '../components/ServiceBoard/ServiceMens';
 import ServiceTypes from '../components/ServiceBoard/ServiceTypes';
 import Filters from '../components/Filter/filter';
 import { serviceDataEn, serviceDataAr, SEVICE_DASHBOARD_FILTER_MASTER_DATA } from '../components/ServiceBoard/data';
+import DialogComponent from '../components/Dialog';
 
 import { MAX_LANES, GROUP_BY, LANGUAGE_CODES, COMPONENTS } from '../utils/constants';
 import { sortListOfObjects } from '../utils/utils';
@@ -36,6 +37,7 @@ export default function ServiceDashboard() {
   const [sortBy, setSortBy] = useState(SERVICE_MEN);
   const [servicemenAnchorEl, setServicemenAnchorEl] = useState(null);
   const [serviceTypeAnchorEl, setServiceTypeAnchorEl] = useState(null);
+  const [cardDialog, setCardDialog] = useState(false);
 
   const { TEXT_FIELD, AUTOCOMPLETE, CHECKBOX } = COMPONENTS;
 
@@ -186,6 +188,15 @@ export default function ServiceDashboard() {
     changeData();
   };
 
+  const handleCardDialogClose = () => setCardDialog(false);
+
+  const handleCardDialogOpen = () => setCardDialog(true);
+
+  const handleCardClick = (cardId, cardDetails, laneId) => {
+    handleCardDialogOpen();
+    console.log(`${cardId} clicked from ${laneId}: `, cardDetails);
+  };
+
   const getFilterData = (data) => {
     console.log('Filtered data: ', data);
   };
@@ -209,6 +220,13 @@ export default function ServiceDashboard() {
   return (
     <>
       <Grid container>
+        <DialogComponent
+          open={cardDialog}
+          handleClose={handleCardDialogClose}
+          handleProceed={handleCardDialogClose}
+          title="serviceDashboard.customerAndContactDetails"
+          proceedButtonText="dialog.ok"
+        />
         <Grid item xs={12}>
           <Filters
             components={FILTER_COMPONETS}
@@ -268,7 +286,7 @@ export default function ServiceDashboard() {
           >
             <ServiceMens />
           </Popover>
-          <Tooltip title={t('serviceDashboard.service')} arrow>
+          <Tooltip title={t('serviceDashboard.serviceStatus')} arrow>
             <HomeRepairServiceIcon
               className="mt-half-rm mr-1rm pointer-cls"
               style={{ float: 'right' }}
@@ -285,7 +303,7 @@ export default function ServiceDashboard() {
               horizontal: 'left'
             }}
           >
-            <ServiceTypes showTitle={false} emptyGridLen={0} iconsGridLen={12} leftMrgn="0" />
+            <ServiceTypes />
           </Popover>
         </Grid>
         <Grid item xs={12} md={1.5}>
@@ -313,7 +331,7 @@ export default function ServiceDashboard() {
         </Grid>
       </Grid>
       <Grid container className="service-board-grid">
-        <ServiceBoard data={data} />
+        <ServiceBoard data={data} onCardClick={handleCardClick} />
       </Grid>
     </>
   );
