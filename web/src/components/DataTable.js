@@ -7,7 +7,7 @@ import { InputText } from 'primereact/inputtext';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import useSettings from '../hooks/useSettings';
-import AutocompleteWidget from './Autocomplete/autocompletWidget';
+import { rowsPerPageOptions } from '../utils/constants';
 import BasicDatePicker from './pickers/BasicDatePicker';
 import '../Styles/app.scss';
 
@@ -158,6 +158,7 @@ function ContractList({
         scrollable
         scrollHeight="400px"
         filterDisplay="menu"
+        rowsPerPageOptions={rowsPerPageOptions}
       >
         {expandedColumns &&
           expandedColumns.map((col) => (
@@ -214,7 +215,7 @@ function ContractList({
           onRowEditComplete={onRowEditComplete}
           reorderableColumns
           stripedRows
-          rowsPerPageOptions={[10, 20, 50, 100]}
+          rowsPerPageOptions={rowsPerPageOptions}
           selection={selected}
           onSelectionChange={(e) => setSelected(e.value)}
           resizableColumns

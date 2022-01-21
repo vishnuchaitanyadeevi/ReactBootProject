@@ -72,3 +72,5 @@ export const COMPONENTS = {
   TEXT_AREA: 'TEXT_AREA',
   MULTI_SELECT_BOX: 'MULTI_SELECT_BOX'
 };
+
+export const rowsPerPageOptions = [10, 20, 50, 100, 500];
