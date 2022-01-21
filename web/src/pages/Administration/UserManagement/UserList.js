@@ -57,22 +57,22 @@ function UserList() {
   const getInternalUserData = () => {
     if (InternalUserTableData) {
       const displayData = [];
-      InternalUserTableData.map((item) =>
-        displayData.push({
-          name: item.name,
-          userName: item.userName,
-          email: item.email,
-          mobileNo: item.mobileNo,
-          shortName: item.shortName,
+      InternalUserTableData.map((item) => {
+        const { name, userName, email, mobileNo, shortName, id } = item;
+        return displayData.push({
+          name,
+          userName,
+          email,
+          mobileNo,
+          shortName,
           edit: null,
           delete: null,
-          id: item.id
-        })
-      );
+          id
+        });
+      });
       if (displayData.length > 0) {
         setInternalUserData(displayData);
       }
-      console.log('displayData....', displayData);
     }
   };
 
