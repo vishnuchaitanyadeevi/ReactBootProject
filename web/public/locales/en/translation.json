@@ -277,5 +277,21 @@
     "cancel": "Cancel",
     "proceed": "Proceed",
     "ok": "Ok"
+  },
+  "administration": {
+    "administration": "Administration",
+    "whatDoYouWantToDo": "What do you want to do?",
+    "users": "Users"
+  },
+  "userList": {
+    "internalUser": "Internal Users",
+    "externalUser": "External Users",
+    "addUser": "Add New User",
+    "userName": "User Name",
+    "email": "Email",
+    "name": "Name",
+    "mobileNo": "Mobile No.",
+    "displayName": "Display Name",
+    "shortName": "Short Name"
   }
 }

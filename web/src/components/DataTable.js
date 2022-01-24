@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Typography, TextField, Button } from '@mui/material';
+import { Grid, Typography, TextField, Button } from '@mui/material';
 import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Helmet } from 'react-helmet';
@@ -7,10 +7,9 @@ import { InputText } from 'primereact/inputtext';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import Tooltip from '@mui/material/Tooltip';
-import { COMPONENTS, DATE_FORMAT } from '../utils/constants';
+import { COMPONENTS, DATE_FORMAT, rowsPerPageOptions } from '../utils/constants';
 import RenderComponent from './RenderComponent';
 import useSettings from '../hooks/useSettings';
-// import RenderComponent from '../components/RenderComponent';
 import BasicDatePicker from './pickers/BasicDatePicker';
 import '../Styles/app.scss';
 
@@ -100,30 +99,24 @@ function ContractList({
   );
 
   // handleChange rowDate
-  const handleChangeDate = (newValue, data, key) => {
+  const handleChangeDate = (key, value, options) => {
     // find id and index from json and update that value
     // Find index of specific object using findIndex method.
-    if (data && newValue) {
-      const objIndex = rowData.findIndex((obj) => obj.id === data.id);
-      rowData[objIndex][key] = newValue;
-      setIsUpdate(true);
+    const objIndex = rowData.indexOf(options);
+    if (objIndex !== -1) {
+      rowData[objIndex][key] = value;
     }
+    setIsUpdate(true);
   };
-  // BUtton <Button variant="contained">{newVal.value}</Button>;
-  // NONE <Typography style={{ fontSize: '13px' }}>{newVal.value}</Typography>;
-  // LINK <Typography style={{ cursor: 'pointer', textDecoration: 'underline', fontSize: '13px', color: 'blue' }}>
-  // {newVal.value}</Typography>
-  // DATEPICKER <div style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}>
-  //               <BasicDatePicker
-  //                 label="Date"
-  //                 inputFormat="dd-MM-yyyy"
-  //                 views={['year', 'month', 'day']}
-  //                 value={newVal.value}
-  //                 getSelectedDate={(dt) => console.log('bodydate..', dt)}
-  //                 getIsoDate={(e) => handleChangeDate(e, options, key)}
-  //                 size="large"
-  //               />
-  //            </div>
+
+  const handleChangeTextfield = (key, value, options) => {
+    const objIndex = rowData.indexOf(options);
+    if (objIndex !== -1) {
+      rowData[objIndex][key] = value;
+    }
+    setIsUpdate(true);
+  };
+  const handleClickLink = (rowData) => console.log('rowData...', rowData);
 
   // HandleChange body
   const handleChangeBody = (options, idx) => {
@@ -131,174 +124,154 @@ function ContractList({
     const newVal = { key, value: options[key] };
     switch (headCellsType[idx]) {
       case 'BUTTON':
-        if (newVal) {
-          const newPayload = { displayName: newVal?.value };
-          return (
-            <RenderComponent
-              metaData={{
-                control: BUTTON,
-                key: 'displayName',
-                label: 'displayName',
-                columnWidth: 12
-              }}
-              payload={newPayload}
-              ind={1}
-              handleChange={(key, Val) => handleChangeButton(key, val, options)}
-            />
-          );
-        }
-        break;
+        return (
+          <Tooltip title={newVal.value}>
+            <Button variant="contained" tooltip={newVal.value}>
+              {newVal.value}
+            </Button>
+          </Tooltip>
+        );
       case 'NONE':
+        return (
+          <Tooltip title={newVal?.value}>
+            <Typography style={{ fontSize: '13px' }}>{newVal?.value}</Typography>
+          </Tooltip>
+        );
+      case 'TEXTFIELD':
         if (newVal) {
-          const newPayload = { displayName: newVal?.value };
           return (
-            <RenderComponent
-              metaData={{
-                control: NONE,
-                key: 'displayName',
-                label: 'displayName',
-                columnWidth: 12
-              }}
-              payload={newPayload}
-              ind={1}
-              handleChange={(key, Val) => handleChangeNone(key, val, options)}
-            />
+            <Grid style={{ marginTop: '0.1rem', marginBottom: '0.1rem' }}>
+              <RenderComponent
+                metaData={{
+                  control: TEXT_FIELD,
+                  key: `${newVal?.key}`,
+                  label: `${newVal?.key}`,
+                  placeholder: `${newVal?.key}`,
+                  columnWidth: 12,
+                  size: 'large'
+                }}
+                payload={{ [newVal?.key]: newVal?.value }}
+                ind={1}
+                handleChange={(key, val) => handleChangeTextfield(key, val, options)}
+              />
+            </Grid>
           );
         }
         break;
       case 'LINK':
-        if (newVal) {
-          const newPayload = { displayName: newVal?.value };
-          return (
-            <RenderComponent
-              metaData={{
-                control: LINK,
-                key: 'displayName',
-                label: 'displayName',
-                columnWidth: 12
-              }}
-              payload={newPayload}
-              ind={1}
-              handleChange={(key, Val) => handleChangeLink(key, val, options)}
-            />
-          );
-        }
-        break;
+        return (
+          <Tooltip title={newVal.value}>
+            <Typography
+              style={{ cursor: 'pointer', textDecoration: 'underline', fontSize: '13px', color: 'blue' }}
+              onClick={() => handleClickLink(options)}
+            >
+              {newVal.value}
+            </Typography>
+          </Tooltip>
+        );
       case 'DATE':
-        if (newVal) {
-          const newPayload = { displayName: newVal?.value };
-          return (
+        return (
+          <div style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}>
             <RenderComponent
               metaData={{
                 control: DATEPICKER,
-                key: 'displayName',
-                label: 'displayName',
-                inputFormat: INPUT_FORMAT,
-                views: VIEWS,
-                // value= {displayName},
-                columnWidth: 12
+                key: `${newVal?.key}`,
+                label: `${newVal?.key}`,
+                placeholder: `${newVal?.key}`,
+                columnWidth: 12,
+                size: 'large'
               }}
-              payload={newPayload}
+              payload={{ [newVal?.key]: newVal?.value }}
               ind={1}
-              handleChange={(key, Val) => handleChangeDate(key, val, options)}
+              handleChange={(key, val) => handleChangeDate(key, val, options)}
             />
-          );
-        }
-        break;
+          </div>
+        );
       default:
         return undefined;
     }
   };
-
-  const handleExpandedChangeDate = (newValue, data, key) => {
+  // Handle ExpandedDatechange
+  const handleExpandedChangeDate = (key, value, options) => {
+    // console.log('Logging...', newValue, data, key);
     // find id and index from json and update that value
     // Find index of specific object using findIndex method.
-    if (data && newValue) {
-      const objIndex = tempdata.findIndex((obj) => obj.id === data.id);
-      tempdata[objIndex][key] = newValue;
+    if (options && value) {
+      const objIndex = tempdata.indexOf(options);
+      tempdata[objIndex][key] = value;
       setIsUpdate(true);
     }
   };
+
   // ExpandedChangeBody
   const handleChangeExpandedBody = (options, idx) => {
     const key = Object.keys(options)[idx];
     const newVal = { key, value: options[key] };
     switch (headCellsExapndedType[idx]) {
       case 'BUTTON':
-        if (newVal) {
-          const newPayload = { displayName: newVal?.value };
-          return (
-            <RenderComponent
-              metaData={{
-                control: BUTTON,
-                key: 'displayName',
-                label: 'displayName',
-                columnWidth: 12
-              }}
-              payload={newPayload}
-              ind={1}
-              handleChange={(key, Val) => handleChangeButton(key, val, options)}
-            />
-          );
-        }
-        break;
+        return (
+          <Tooltip title={newVal.value}>
+            <Button variant="contained" tooltip={newVal.value}>
+              {newVal.value}
+            </Button>
+          </Tooltip>
+        );
       case 'NONE':
+        return (
+          <Tooltip title={newVal?.value}>
+            <Typography style={{ fontSize: '13px' }}>{newVal?.value}</Typography>
+          </Tooltip>
+        );
+      case 'TEXTFIELD':
         if (newVal) {
-          const newPayload = { displayName: newVal?.value };
           return (
-            <RenderComponent
-              metaData={{
-                control: NONE,
-                key: 'displayName',
-                label: 'displayName',
-                columnWidth: 12
-              }}
-              payload={newPayload}
-              ind={1}
-              handleChange={(key, Val) => handleChangeNone(key, val, options)}
-            />
+            <Grid style={{ marginTop: '0.1rem', marginBottom: '0.1rem' }}>
+              <RenderComponent
+                metaData={{
+                  control: TEXT_FIELD,
+                  key: `${newVal?.key}`,
+                  label: `${newVal?.key}`,
+                  placeholder: `${newVal?.key}`,
+                  columnWidth: 12,
+                  size: 'large'
+                }}
+                payload={{ [newVal?.key]: newVal?.value }}
+                ind={1}
+                handleChange={(key, val) => handleChangeTextfield(key, val, options)}
+              />
+            </Grid>
           );
         }
         break;
       case 'LINK':
-        if (newVal) {
-          const newPayload = { displayName: newVal?.value };
-          return (
-            <RenderComponent
-              metaData={{
-                control: LINK,
-                key: 'displayName',
-                label: 'displayName',
-                columnWidth: 12
-              }}
-              payload={newPayload}
-              ind={1}
-              handleChange={(key, Val) => handleChangeLink(key, val, options)}
-            />
-          );
-        }
-        break;
+        return (
+          <Tooltip title={newVal.value}>
+            <Typography
+              style={{ cursor: 'pointer', textDecoration: 'underline', fontSize: '13px', color: 'blue' }}
+              onClick={() => handleClickLink(options)}
+            >
+              {newVal.value}
+            </Typography>
+          </Tooltip>
+        );
       case 'DATE':
-        if (newVal) {
-          const newPayload = { displayName: newVal?.value };
-          return (
+        return (
+          <div style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}>
             <RenderComponent
               metaData={{
                 control: DATEPICKER,
-                key: 'displayName',
-                label: 'displayName',
-                inputFormat: INPUT_FORMAT,
-                views: VIEWS,
-                // value= {displayName},
-                columnWidth: 12
+                key: `${newVal?.key}`,
+                label: `${newVal?.key}`,
+                placeholder: `${newVal?.key}`,
+                columnWidth: 12,
+                size: 'large'
               }}
-              payload={newPayload}
+              payload={{ [newVal?.key]: newVal?.value }}
               ind={1}
-              handleChange={(key, Val) => handleExpandedChangeDate(key, val, options)}
+              handleChange={(key, val) => handleExpandedChangeDate(key, val, options)}
             />
-          );
-        }
-        break;
+          </div>
+        );
       default:
         return undefined;
     }
@@ -306,10 +279,11 @@ function ContractList({
 
   useEffect(() => {
     if (isUpdate) {
-      //  console.log('calling..date change');
+      console.log('calling..date change');
       setIsUpdate(false);
     }
   }, [isUpdate]);
+
   const editIcon = (rowData) => <ModeEditOutlinedIcon onClick={() => onRowClick(rowData)} />;
   const deleteIcon = (rowData) => <DeleteIcon onClick={() => deleteRowData(rowData)} />;
   const editIconExpanded = (rowData) => <ModeEditOutlinedIcon onClick={() => onChildRowClick(rowData)} />;
@@ -331,6 +305,7 @@ function ContractList({
           scrollable
           scrollHeight="400px"
           filterDisplay="menu"
+          rowsPerPageOptions={rowsPerPageOptions}
         >
           {expandedColumns &&
             expandedColumns.map((col, idx) => (
@@ -389,7 +364,7 @@ function ContractList({
           onRowEditComplete={onRowEditComplete}
           reorderableColumns
           stripedRows
-          rowsPerPageOptions={[10, 20, 50, 100]}
+          rowsPerPageOptions={rowsPerPageOptions}
           selection={selected}
           onSelectionChange={(e) => setSelected(e.value)}
           resizableColumns

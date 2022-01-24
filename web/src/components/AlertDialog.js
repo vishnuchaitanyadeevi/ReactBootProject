@@ -32,7 +32,7 @@ const AlertDialog = ({
         {dialogContent}
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleNegative}>{negativeText}</Button>
+        <Button onClick={handleClose}>{negativeText}</Button>
         <Button onClick={handleSubmit} autoFocus>
           {positiveText}
         </Button>

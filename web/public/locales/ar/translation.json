@@ -286,5 +286,21 @@
     "cancel": "يلغي",
     "proceed": "تقدم",
     "ok": "موافق"
+  },
+  "administration": {
+    "administration": "الادارة",
+    "whatDoYouWantToDo": "ماذا تريد أن تفعل؟",
+    "users": "المستخدمون"
+  },
+  "userList": {
+    "internalUser": "المستخدمون الداخليون",
+    "externalUser": "مستخدمين خارجيين",
+    "addUser": "إضافة مستخدم جديد",
+    "userName": "اسم االمستخدم",
+    "email": "بريد الالكتروني",
+    "name": "اسم",
+    "mobileNo": "رقم الموبايل.",
+    "displayName": "اسم العرض",
+    "shortName": "اسم قصير"
   }
 }
