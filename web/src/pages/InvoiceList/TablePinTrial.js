@@ -3,8 +3,8 @@ import './InvoiceList.scss';
 import { Grid, Typography } from '@mui/material';
 import { Column } from 'primereact/column';
 import DataTable from '../../components/DataTable';
-import InvoiceListingData from './InvoiceListingData.json';
 import SimpleTable from '../../components/table/simpleTable';
+import { InvoiceData } from './Data';
 
 function TablePinTrial() {
   const [editingRows, setEditingRows] = useState({});
@@ -122,7 +122,7 @@ function TablePinTrial() {
         </Grid>
         <Grid item xs={12}>
           <SimpleTable
-            rowData={InvoiceListingData}
+            rowData={InvoiceData}
             headerData={columnDataForInvoice}
             paginator
             rowsPerPageOptions={[10, 20, 50, 100]}

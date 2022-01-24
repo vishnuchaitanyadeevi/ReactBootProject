@@ -115,6 +115,7 @@
     "audit": "Audit",
     "highene": "Highene",
     "service": "Service",
+    "serviceStatus": "Service status",
     "companyName": "Company Name",
     "customerName": "Customer Name",
     "lastServiceDate": "Last Service Date",
@@ -133,10 +134,12 @@
     "contract": "Contract",
     "status": "Status",
     "location": "Location",
-    "servicemen": "Servicemen"
+    "servicemen": "Servicemen",
+    "customerAndContactDetails": "Customer and contact details"
   },
   "filter": {
     "filter": "Filter",
+    "filters": "Filters",
     "clear": "Clear"
   },
   "ProjectExpiration": {
@@ -268,5 +271,11 @@
     "AddNewCountry": "Add New Country",
     "CountryName": "Country Name",
     "Currency": "Currency"
+  },
+  "dialog": {
+    "dialog": "Dialog",
+    "cancel": "Cancel",
+    "proceed": "Proceed",
+    "ok": "Ok"
   }
 }

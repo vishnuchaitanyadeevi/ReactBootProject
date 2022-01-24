@@ -72,7 +72,7 @@ export default function Filters({
     <div className={displayBorder ? 'filter-section' : ''} style={{ borderColor: BORDER }}>
       <Typography variant="h5" style={{ color: TXT, marginBottom: '0.5rem' }}>
         {open ? <ArrowDropUpIcon onClick={handleClick} /> : <ArrowDropDownIcon onClick={handleClick} />}
-        {t('filter.filter')}
+        {t('filter.filters')}
       </Typography>
       <Collapse in={open} timeout="auto" unmountOnExit>
         {isArray(components) && (

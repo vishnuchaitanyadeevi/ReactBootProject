@@ -1,40 +1,63 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import './InvoiceList.scss';
 import { useTranslation } from 'react-i18next';
 import { Grid, Typography, Button } from '@mui/material';
-// import { ArrowRight } from '@mui/icons-material/';
-// import { DataTable } from 'primereact/datatable';
-// import { Column } from 'primereact/column';
-// import { FilterMatchMode } from 'primereact/api';
-// import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget';
-// import BasicDatePicker from '../../components/pickers/BasicDatePicker';
 import Filters from '../../components/Filter/filter';
-import InvoiceListingData from './InvoiceListingData.json';
 import { COMPONENTS } from '../../utils/constants';
 import { SEVICE_DASHBOARD_FILTER_MASTER_DATA } from '../../components/ServiceBoard/data';
 import { POST_OFFICE } from '../../redux/constants';
 import SimpleTable from '../../components/table/simpleTable';
+import { InvoiceData } from './Data';
+import './InvoiceList.scss';
 
 function InvoiceList() {
   const masterData = useSelector((state) => state.MasterDataReducer);
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const [tableData, setTableData] = useState(InvoiceListingData);
+  const [invoiceData, setInvoiceData] = useState(null);
   const [editingRows, setEditingRows] = useState({});
   const numericFields = [
     'id',
-    'invoice_number',
-    'invoice_date',
-    'project_number',
-    'customer_no',
-    'gross_amt',
+    'InvoiceNumber',
+    'InvoiceDate',
+    'ProjectNumber',
+    'CustomerNo',
+    'GrossAmt',
     'discount_%',
-    'discount_amt',
-    'net_amt',
-    'vat_amt',
-    'net_w_vat_amt'
+    'DiscountAmt',
+    'NetAmt',
+    'VatAmt',
+    'NetWVatAmt'
   ];
+  useEffect(() => {
+    getInvoiceData();
+  }, []);
+  const getInvoiceData = () => {
+    if (InvoiceData) {
+      const displayData = [];
+      InvoiceData.map((item) =>
+        displayData.push({
+          id: item.id,
+          InvoiceNumber: item.InvoiceNumber,
+          InvoiceDate: item.InvoiceDate,
+          ProjectNumber: item.ProjectNumber,
+          CustomerNo: item.CustomerNo,
+          CustomerName: item.CustomerName,
+          LocationName: item.LocationName,
+          GrossAmt: item.GrossAmt,
+          Discount: item.Discount,
+          DiscountAmt: item.DiscountAmt,
+          NetAmt: item.NetAmt,
+          VatAmt: item.VatAmt,
+          NetWVatAmt: item.NetWVatAmt
+        })
+      );
+      if (displayData.length > 0) {
+        setInvoiceData(displayData);
+      }
+      console.log('displayData....', displayData);
+    }
+  };
   const countries = [
     { label: 'Saudi Arabia', value: 'Saudi Arabia' },
     { label: 'Qatar', value: 'Qatar' },
@@ -53,7 +76,7 @@ function InvoiceList() {
       isFrozen: true
     },
     {
-      field: 'invoice_number',
+      field: 'InvoiceNumber',
       header: 'Invoice Number',
       editorElement: null,
       sortable: true,
@@ -61,7 +84,7 @@ function InvoiceList() {
       isFrozen: true
     },
     {
-      field: 'invoice_date',
+      field: 'InvoiceDate',
       header: 'Invoice Date',
       editorElement: null,
       style: { width: '10%' },
@@ -70,7 +93,7 @@ function InvoiceList() {
       isFrozen: false
     },
     {
-      field: 'project_number',
+      field: 'ProjectNumber',
       header: 'Project Number',
       editorElement: null,
       sortable: true,
@@ -78,7 +101,7 @@ function InvoiceList() {
       isFrozen: false
     },
     {
-      field: 'customer_no',
+      field: 'CustomerNo',
       header: 'Customer No.',
       editorElement: null,
       sortable: true,
@@ -86,7 +109,7 @@ function InvoiceList() {
       isFrozen: false
     },
     {
-      field: 'customer_name',
+      field: 'CustomerName',
       header: 'Customer Name',
       editorElement: null,
       sortable: true,
@@ -94,7 +117,7 @@ function InvoiceList() {
       isFrozen: false
     },
     {
-      field: 'location_name',
+      field: 'LocationName',
       header: 'Location Name',
       editorElement: null,
       sortable: true,
@@ -102,7 +125,7 @@ function InvoiceList() {
       isFrozen: false
     },
     {
-      field: 'gross_amt',
+      field: 'GrossAmt',
       header: 'Gross AMT',
       editorElement: null,
       sortable: true,
@@ -118,7 +141,7 @@ function InvoiceList() {
       isFrozen: false
     },
     {
-      field: 'discount_amt',
+      field: 'DiscountAmt',
       header: 'Discount AMT',
       editorElement: null,
       sortable: true,
@@ -126,7 +149,7 @@ function InvoiceList() {
       isFrozen: false
     },
     {
-      field: 'net_amt',
+      field: 'NetAmt',
       header: 'NET AMT',
       editorElement: null,
       sortable: true,
@@ -134,7 +157,7 @@ function InvoiceList() {
       isFrozen: false
     },
     {
-      field: 'vat_amt',
+      field: 'VatAmt',
       header: 'VAT AMT',
       editorElement: null,
       sortable: true,
@@ -142,7 +165,7 @@ function InvoiceList() {
       isFrozen: false
     },
     {
-      field: 'net_w_vat_amt',
+      field: 'NetWVatAmt',
       header: 'Net w VAT AMT',
       editorElement: null,
       sortable: true,
@@ -282,7 +305,7 @@ function InvoiceList() {
       <Grid container spacing={3} style={{ marginTop: '1rem' }}>
         <Grid item xs={12}>
           <SimpleTable
-            rowData={InvoiceListingData}
+            rowData={InvoiceData}
             headerData={columnDataForInvoice}
             paginator
             rowsPerPageOptions={[10, 20, 50, 100]}

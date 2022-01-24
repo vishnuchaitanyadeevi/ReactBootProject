@@ -7,6 +7,8 @@ import { InputText } from 'primereact/inputtext';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import Tooltip from '@mui/material/Tooltip';
+import { COMPONENTS, DATE_FORMAT } from '../utils/constants';
+import RenderComponent from './RenderComponent';
 import useSettings from '../hooks/useSettings';
 // import RenderComponent from '../components/RenderComponent';
 import BasicDatePicker from './pickers/BasicDatePicker';
@@ -33,6 +35,8 @@ function ContractList({
   const [globalFilter, setGlobalFilter] = useState(null);
   const [isUpdate, setIsUpdate] = useState(false);
   const [tempdata, setTempdata] = useState([]);
+  const { TEXT_FIELD, DATEPICKER, LINK, NONE, BUTTON } = COMPONENTS;
+  const { INPUT_FORMAT, VIEWS } = DATE_FORMAT;
 
   const onRowEditComplete = (e) => {
     const _tableData = [...tableData];
@@ -101,14 +105,25 @@ function ContractList({
     // Find index of specific object using findIndex method.
     if (data && newValue) {
       const objIndex = rowData.findIndex((obj) => obj.id === data.id);
-      console.log('Before update...', rowData[objIndex]);
       rowData[objIndex][key] = newValue;
-      console.log('After update...', rowData[objIndex]);
-      console.log('mockData...', rowData);
-      // console.log('Expanded', rowData.projects);
       setIsUpdate(true);
     }
   };
+  // BUtton <Button variant="contained">{newVal.value}</Button>;
+  // NONE <Typography style={{ fontSize: '13px' }}>{newVal.value}</Typography>;
+  // LINK <Typography style={{ cursor: 'pointer', textDecoration: 'underline', fontSize: '13px', color: 'blue' }}>
+  // {newVal.value}</Typography>
+  // DATEPICKER <div style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}>
+  //               <BasicDatePicker
+  //                 label="Date"
+  //                 inputFormat="dd-MM-yyyy"
+  //                 views={['year', 'month', 'day']}
+  //                 value={newVal.value}
+  //                 getSelectedDate={(dt) => console.log('bodydate..', dt)}
+  //                 getIsoDate={(e) => handleChangeDate(e, options, key)}
+  //                 size="large"
+  //               />
+  //            </div>
 
   // HandleChange body
   const handleChangeBody = (options, idx) => {
@@ -116,29 +131,80 @@ function ContractList({
     const newVal = { key, value: options[key] };
     switch (headCellsType[idx]) {
       case 'BUTTON':
-        return <Button variant="contained">{newVal.value}</Button>;
-      case 'NONE':
-        return <Typography style={{ fontSize: '13px' }}>{newVal.value}</Typography>;
-      case 'LINK':
-        return (
-          <Typography style={{ cursor: 'pointer', textDecoration: 'underline', fontSize: '13px', color: 'blue' }}>
-            {newVal.value}
-          </Typography>
-        );
-      case 'DATE':
-        return (
-          <div style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}>
-            <BasicDatePicker
-              label="Date"
-              inputFormat="dd-MM-yyyy"
-              views={['year', 'month', 'day']}
-              value={newVal.value}
-              getSelectedDate={(dt) => console.log('bodydate..', dt)}
-              getIsoDate={(e) => handleChangeDate(e, options, key)}
-              size="large"
+        if (newVal) {
+          const newPayload = { displayName: newVal?.value };
+          return (
+            <RenderComponent
+              metaData={{
+                control: BUTTON,
+                key: 'displayName',
+                label: 'displayName',
+                columnWidth: 12
+              }}
+              payload={newPayload}
+              ind={1}
+              handleChange={(key, Val) => handleChangeButton(key, val, options)}
             />
-          </div>
-        );
+          );
+        }
+        break;
+      case 'NONE':
+        if (newVal) {
+          const newPayload = { displayName: newVal?.value };
+          return (
+            <RenderComponent
+              metaData={{
+                control: NONE,
+                key: 'displayName',
+                label: 'displayName',
+                columnWidth: 12
+              }}
+              payload={newPayload}
+              ind={1}
+              handleChange={(key, Val) => handleChangeNone(key, val, options)}
+            />
+          );
+        }
+        break;
+      case 'LINK':
+        if (newVal) {
+          const newPayload = { displayName: newVal?.value };
+          return (
+            <RenderComponent
+              metaData={{
+                control: LINK,
+                key: 'displayName',
+                label: 'displayName',
+                columnWidth: 12
+              }}
+              payload={newPayload}
+              ind={1}
+              handleChange={(key, Val) => handleChangeLink(key, val, options)}
+            />
+          );
+        }
+        break;
+      case 'DATE':
+        if (newVal) {
+          const newPayload = { displayName: newVal?.value };
+          return (
+            <RenderComponent
+              metaData={{
+                control: DATEPICKER,
+                key: 'displayName',
+                label: 'displayName',
+                inputFormat: INPUT_FORMAT,
+                views: VIEWS,
+                // value= {displayName},
+                columnWidth: 12
+              }}
+              payload={newPayload}
+              ind={1}
+              handleChange={(key, Val) => handleChangeDate(key, val, options)}
+            />
+          );
+        }
+        break;
       default:
         return undefined;
     }
@@ -149,11 +215,7 @@ function ContractList({
     // Find index of specific object using findIndex method.
     if (data && newValue) {
       const objIndex = tempdata.findIndex((obj) => obj.id === data.id);
-      console.log('Before update...', tempdata[objIndex]);
       tempdata[objIndex][key] = newValue;
-      console.log('After update...', tempdata[objIndex]);
-      console.log('mockData...', tempdata);
-      // console.log('Expanded', rowData.projects);
       setIsUpdate(true);
     }
   };
@@ -163,29 +225,80 @@ function ContractList({
     const newVal = { key, value: options[key] };
     switch (headCellsExapndedType[idx]) {
       case 'BUTTON':
-        return <Button variant="contained">{newVal.value}</Button>;
-      case 'NONE':
-        return <Typography style={{ fontSize: '13px' }}>{newVal.value}</Typography>;
-      case 'LINK':
-        return (
-          <Typography style={{ cursor: 'pointer', textDecoration: 'underline', fontSize: '13px', color: 'blue' }}>
-            {newVal.value}
-          </Typography>
-        );
-      case 'DATE':
-        return (
-          <div style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}>
-            <BasicDatePicker
-              label="Date"
-              inputFormat="dd-MM-yyyy"
-              views={['year', 'month', 'day']}
-              value={newVal.value}
-              getSelectedDate={(dt) => console.log('date..', dt)}
-              getIsoDate={(e) => handleExpandedChangeDate(e, options, key)}
-              size="large"
+        if (newVal) {
+          const newPayload = { displayName: newVal?.value };
+          return (
+            <RenderComponent
+              metaData={{
+                control: BUTTON,
+                key: 'displayName',
+                label: 'displayName',
+                columnWidth: 12
+              }}
+              payload={newPayload}
+              ind={1}
+              handleChange={(key, Val) => handleChangeButton(key, val, options)}
             />
-          </div>
-        );
+          );
+        }
+        break;
+      case 'NONE':
+        if (newVal) {
+          const newPayload = { displayName: newVal?.value };
+          return (
+            <RenderComponent
+              metaData={{
+                control: NONE,
+                key: 'displayName',
+                label: 'displayName',
+                columnWidth: 12
+              }}
+              payload={newPayload}
+              ind={1}
+              handleChange={(key, Val) => handleChangeNone(key, val, options)}
+            />
+          );
+        }
+        break;
+      case 'LINK':
+        if (newVal) {
+          const newPayload = { displayName: newVal?.value };
+          return (
+            <RenderComponent
+              metaData={{
+                control: LINK,
+                key: 'displayName',
+                label: 'displayName',
+                columnWidth: 12
+              }}
+              payload={newPayload}
+              ind={1}
+              handleChange={(key, Val) => handleChangeLink(key, val, options)}
+            />
+          );
+        }
+        break;
+      case 'DATE':
+        if (newVal) {
+          const newPayload = { displayName: newVal?.value };
+          return (
+            <RenderComponent
+              metaData={{
+                control: DATEPICKER,
+                key: 'displayName',
+                label: 'displayName',
+                inputFormat: INPUT_FORMAT,
+                views: VIEWS,
+                // value= {displayName},
+                columnWidth: 12
+              }}
+              payload={newPayload}
+              ind={1}
+              handleChange={(key, Val) => handleExpandedChangeDate(key, val, options)}
+            />
+          );
+        }
+        break;
       default:
         return undefined;
     }
@@ -193,7 +306,7 @@ function ContractList({
 
   useEffect(() => {
     if (isUpdate) {
-      console.log('calling..date change');
+      //  console.log('calling..date change');
       setIsUpdate(false);
     }
   }, [isUpdate]);

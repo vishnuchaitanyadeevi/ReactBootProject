@@ -60,7 +60,7 @@ NavItem.propTypes = {
   active: PropTypes.func
 };
 
-function NavItem({ item, active }) {
+function NavItem({ item, active, isPending }) {
   const { t } = useTranslation();
   const theme = useTheme();
   let isActiveRoot = active(item.path);
@@ -100,7 +100,11 @@ function NavItem({ item, active }) {
           }}
         >
           {/* <ListItemIconStyle>{icon && icon}</ListItemIconStyle> */}
-          <ListItemText disableTypography primary={t([title])} />
+          <ListItemText
+            disableTypography
+            primary={t([title])}
+            style={{ textDecoration: `${isPending ? 'line-through' : ''}` }}
+          />
           {info && info}
           <Box
             component={Icon}
@@ -142,7 +146,11 @@ function NavItem({ item, active }) {
                       }}
                     />
                   </ListItemIconStyle>
-                  <ListItemText disableTypography primary={t([item.title])} />
+                  <ListItemText
+                    disableTypography
+                    primary={t([item.title])}
+                    style={{ textDecoration: `${item.isPending ? 'line-through' : ''}` }}
+                  />
                 </ListItemStyle>
               );
             })}
@@ -161,7 +169,11 @@ function NavItem({ item, active }) {
       }}
     >
       {/* <ListItemIconStyle>{icon && icon}</ListItemIconStyle> */}
-      <ListItemText disableTypography primary={t([title])} />
+      <ListItemText
+        disableTypography
+        primary={t([title])}
+        style={{ textDecoration: `${isPending ? 'line-through' : ''}` }}
+      />
       {info && info}
     </ListItemStyle>
   );
@@ -183,7 +195,7 @@ export default function NavSection({ navConfig, ...other }) {
           <List key={subheader} disablePadding>
             <ListSubheaderStyle>{subheader}</ListSubheaderStyle>
             {items.map((item) => (
-              <NavItem key={item.title} item={item} active={match} />
+              <NavItem key={item.title} item={item} active={match} isPending={item.isPending} />
             ))}
           </List>
         );
