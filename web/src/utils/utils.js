@@ -79,3 +79,5 @@ export const isName = (str) => !PATTERN.NAME.test(str);
 
 export const differenceBetweenArr = (arrayOne, arrayTwo, keyName) =>
   arrayOne.filter(({ [keyName]: id1 }) => !arrayTwo.some(({ [keyName]: id2 }) => id2 === id1));
+
+export const isObject = (val) => val && val instanceof Object;

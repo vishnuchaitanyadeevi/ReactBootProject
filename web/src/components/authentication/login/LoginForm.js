@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import * as Yup from 'yup';
-import { Route, useNavigate } from 'react-router-dom';
+import { Route, useNavigate, useLocation } from 'react-router-dom';
 import { FormikProvider, Form, useFormik } from 'formik';
 
 // material
@@ -18,7 +18,7 @@ import {
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { LoadingButton } from '@mui/lab';
-import { LOCAL_STORAGE_KEYS, PATTERN } from '../../../utils/constants';
+import { LOCAL_STORAGE_KEYS, PATTERN, LOGIN_PROPS, ROUTES } from '../../../utils/constants';
 import { login } from '../../../utils/auth-service';
 import { LoginOtp } from './LoginOtp';
 // hooks
@@ -26,20 +26,28 @@ import useIsMountedRef from '../../../hooks/useIsMountedRef';
 
 const { TOKEN_KEY } = LOCAL_STORAGE_KEYS;
 export default function LoginForm() {
+  const location = useLocation();
+  const defaultView = location?.state?.defaultView || LOGIN_PROPS.LOGIN;
   const [showPassword, setShowPassword] = useState(false);
+  const [showResetPass, setShowResetPass] = useState({
+    password: false,
+    confirmPassowrd: false
+  });
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
+  const handleClickShowResetPass = (key) => setShowResetPass({ ...showResetPass, [key]: !showResetPass[key] });
+  const handleMouseShowResetPass = (key) => setShowResetPass({ ...showResetPass, [key]: !showResetPass[key] });
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [user, setUser] = useState();
   const navigate = useNavigate();
   const isMountedRef = useIsMountedRef();
-  const views = { login: 'login', forgotUsername: 'forgotUsername', forgotPwd: 'forgotPwd' };
-  const [view, setView] = useState(views.login);
-  const [otpDialog, setOtpDialog] = useState(true);
 
-  const isForgotUsernameView = view === views.forgotUsername;
+  const [view, setView] = useState(defaultView);
+  const [otpDialog, setOtpDialog] = useState(false);
+
+  const isForgotUsernameView = view === LOGIN_PROPS.FORGOT_USERNAME;
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem('user');
@@ -103,6 +111,30 @@ export default function LoginForm() {
     }
   });
 
+  const ResetPwdSchema = Yup.object().shape({
+    password: Yup.string()
+      .required('Password is required')
+      .matches(PATTERN.ALPHANUMERIC, 'Please enter only alphanumeric characters. ')
+      .min(8, 'Password Should be more than 8 digits'),
+    confirmPassword: Yup.string()
+      .when('password', (password, schema) => {
+        if (password) return schema.required('Confirm Password is required');
+      })
+      .oneOf([Yup.ref('password')], 'Passwords must match')
+  });
+
+  const formikResetPwd = useFormik({
+    initialValues: {
+      password: '',
+      confirmPassword: ''
+    },
+    validationSchema: ResetPwdSchema,
+    onSubmit: async (e) => {
+      alert('Password reset successfully.');
+      navigate(ROUTES.HOME);
+    }
+  });
+
   const { errors, touched, values, isSubmitting, getFieldProps } = formik;
 
   const {
@@ -112,6 +144,14 @@ export default function LoginForm() {
     isSubmitting: isSubmittingF,
     getFieldProps: getFieldPropsF
   } = formikForgotIdorPwd;
+
+  const {
+    errors: errorsR,
+    touched: touchedR,
+    values: valuesR,
+    isSubmitting: isSubmittingR,
+    getFieldProps: getFieldPropsR
+  } = formikResetPwd;
 
   const verifyOtp = () => {
     navigate('/home');
@@ -129,7 +169,7 @@ export default function LoginForm() {
       {/* <LoginOtp open={otpDialog} /> */}
       <img src="/static/home/rezaLogo.png" alt="reza" style={{ padding: '0 1.1rem 0 1.1rem' }} />
       <img src="/static/home/omslogo.png" alt="oms" />
-      {view === views.login ? (
+      {view === LOGIN_PROPS.LOGIN && (
         <FormikProvider value={formik}>
           <Form autoComplete="off" noValidate onSubmit={formik.handleSubmit}>
             <Stack spacing={3}>
@@ -177,16 +217,17 @@ export default function LoginForm() {
          control={<Checkbox {...getFieldProps('remember')} checked={values.remember} />}
          label="Remember me"
        /> */}
-              <Link variant="forgotUsername" onClick={() => changeView(views.forgotUsername)}>
+              <Link variant="forgotUsername" onClick={() => changeView(LOGIN_PROPS.FORGOT_USERNAME)}>
                 Forgot Your Username?
               </Link>
-              <Link variant="forgotPassword" onClick={() => changeView(views.forgotPwd)}>
+              <Link variant="forgotPassword" onClick={() => changeView(LOGIN_PROPS.FORGOT_PASSWORD)}>
                 Forgot Your Password?
               </Link>
             </Stack>
           </Form>
         </FormikProvider>
-      ) : (
+      )}
+      {(view === LOGIN_PROPS.FORGOT_PASSWORD || view === LOGIN_PROPS.FORGOT_USERNAME) && (
         <FormikProvider value={formikForgotIdorPwd}>
           <Typography variant="h5" align="center">
             Forgot your {`${isForgotUsernameView ? 'Username' : 'Password'}`}
@@ -217,7 +258,7 @@ export default function LoginForm() {
                     size="large"
                     variant="contained"
                     loading={isSubmittingF}
-                    onClick={() => changeView(views.login)}
+                    onClick={() => changeView(LOGIN_PROPS.LOGIN)}
                   >
                     Cancel
                   </LoadingButton>
@@ -234,6 +275,89 @@ export default function LoginForm() {
                     // disabled={!valuesF.email || errorsF.email}
                   >
                     {isForgotUsernameView ? 'Send Username' : 'Send Reset Link'}
+                  </LoadingButton>
+                </Grid>
+              </Grid>
+            </Stack>
+          </Form>
+        </FormikProvider>
+      )}
+      {view === LOGIN_PROPS.RESET && (
+        <FormikProvider value={formikResetPwd}>
+          <Form autoComplete="off" noValidate onSubmit={formikResetPwd.handleSubmit}>
+            <Stack spacing={3}>
+              <TextField
+                type={`${showResetPass.password ? 'text' : 'password'}`}
+                fullWidth
+                autoComplete="current-password"
+                label="Password"
+                onChange={formikResetPwd.handleChange}
+                {...getFieldPropsR('password')}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        edge="end"
+                        onClick={() => handleClickShowResetPass('password')}
+                        onMouseDown={() => handleMouseShowResetPass('password')}
+                        size="large"
+                      >
+                        {showResetPass.password ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
+                error={Boolean(touchedR.password && errorsR.password)}
+                helperText={touchedR.password && errorsR.password}
+              />
+              <TextField
+                type={`${showResetPass.confirmPassowrd ? 'text' : 'password'}`}
+                fullWidth
+                autoComplete="current-password"
+                label="Confirm Password"
+                onChange={formikResetPwd.handleChange}
+                {...getFieldPropsR('confirmPassword')}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        edge="end"
+                        onClick={() => handleClickShowResetPass('confirmPassowrd')}
+                        onMouseDown={() => handleMouseShowResetPass('confirmPassowrd')}
+                        size="large"
+                      >
+                        {showResetPass.confirmPassowrd ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
+                error={Boolean(touchedR.confirmPassword && errorsR.confirmPassword)}
+                helperText={touchedR.confirmPassword && errorsR.confirmPassword}
+              />
+              <Grid container>
+                <Grid item sm={5.5}>
+                  <LoadingButton
+                    fullWidth
+                    size="large"
+                    variant="contained"
+                    loading={isSubmittingF}
+                    onClick={() => navigate(ROUTES.LOGIN)}
+                  >
+                    Cancel
+                  </LoadingButton>
+                </Grid>
+                <Grid item sm={1} />
+                <Grid item sm={5.5}>
+                  <LoadingButton
+                    fullWidth
+                    size="large"
+                    type="submit"
+                    variant="contained"
+                    loading={isSubmittingR}
+                    // onClick={handleSendEmail}
+                    // disabled={!valuesF.email || errorsF.email}
+                  >
+                    Reset
                   </LoadingButton>
                 </Grid>
               </Grid>

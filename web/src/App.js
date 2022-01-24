@@ -14,18 +14,25 @@ import RtlLayout from './components/RtlLayout';
 import Settings from './components/settings';
 import ScrollToTop from './components/ScrollToTop';
 import ThemePrimaryColor from './components/ThemePrimaryColor';
-import { LOCAL_STORAGE_KEYS } from './utils/constants';
+import { ROUTES } from './utils/constants';
 
 const logger = require('./callingLogger');
 // ----------------------------------------------------------------------
-const { TOKEN_KEY } = LOCAL_STORAGE_KEYS;
+
 export default function App() {
   moment.tz.setDefault('Asia/Kuala_Lumpur');
   const navigate = useNavigate();
   const location = useLocation();
+  const queryParams = new URLSearchParams(window.location.search);
+  const { VALIDATE } = ROUTES;
 
   useEffect(() => {
-    if (localStorage.getItem('username')) {
+    const accessCode = queryParams.get('accessCode');
+    alert(`location.pathname: ${location.pathname} <=> accessCode: ${accessCode}`);
+    const { pathname } = location;
+    if (VALIDATE === pathname) {
+      navigate(`${VALIDATE}/${accessCode}`);
+    } else if (localStorage.getItem('username')) {
       navigate('/home');
     } else {
       navigate('/login');

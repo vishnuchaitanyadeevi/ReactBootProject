@@ -74,3 +74,29 @@ export const COMPONENTS = {
   TEXT_AREA: 'TEXT_AREA',
   MULTI_SELECT_BOX: 'MULTI_SELECT_BOX'
 };
+
+export const NOTIFICATION_MSG_FORMAT = { type: '', msg: '', status: false };
+
+export const SNACK_BAR_MESSAGE_TYPE = {
+  SUCCESS: 'success',
+  ERROR: 'error',
+  WARNING: 'warning'
+};
+
+export const ROUTES = {
+  FORGOT_PASSWORD: '/forgotPassword',
+  DEFAULT: '/',
+  HOME: '/home',
+  LOGOUT: '/logout',
+  VALIDATE: '/validate',
+  VALIDATE_ACCESS_CODE: '/validate/:accessCode',
+  LOGIN: '/login',
+  RESET_PASSWORD: '/resetPassword'
+};
+
+export const LOGIN_PROPS = {
+  LOGIN: 'login',
+  FORGOT_USERNAME: 'forgotUsername',
+  FORGOT_PASSWORD: 'forgotPwd',
+  RESET: 'resetPassword'
+};

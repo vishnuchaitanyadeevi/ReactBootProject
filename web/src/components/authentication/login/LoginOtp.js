@@ -81,7 +81,7 @@ export function LoginOtp({ maxWidth, open, handleClose, verifyOtp, resendOtp }) 
               </Grid>
               <Grid item xs={12} textAlign="center">
                 <Paper elevation={0}>
-                  <Typography variant="h6">Please enter the verification code sent to your mobile</Typography>
+                  <Typography variant="h6">Please enter the verification code</Typography>
                 </Paper>
               </Grid>
               <Grid item xs={12} container justify="center" alignItems="center" direction="column">
@@ -110,26 +110,6 @@ export function LoginOtp({ maxWidth, open, handleClose, verifyOtp, resendOtp }) 
                     </Box>
                   )}
                 </Grid>
-                <Grid item xs>
-                  <Typography variant="caption" display="block" gutterBottom>
-                    Didn't get a code ? &nbsp;
-                    <Link href="#" onClick={resendOtp}>
-                      Send Again
-                    </Link>
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                    onClick={handleOnClick}
-                  >
-                    Verify
-                  </Button>
-                </Grid>
               </Grid>
             </Grid>
           </div>
@@ -138,6 +118,9 @@ export function LoginOtp({ maxWidth, open, handleClose, verifyOtp, resendOtp }) 
       <DialogActions>
         <Button autoFocus onClick={handleClose}>
           {t('dialog.cancel')}
+        </Button>
+        <Button autoFocus onClick={handleOnClick}>
+          {t('dialog.proceed')}
         </Button>
       </DialogActions>
     </Dialog>

@@ -6,8 +6,10 @@ import DashboardLayout from '../layouts/dashboard';
 import LogoOnlyLayout from '../layouts/LogoOnlyLayout';
 // components
 import LoadingScreen from '../components/LoadingScreen';
+import ValidateEmail from '../components/authentication/login/ValidateEmail';
 import Login from '../pages/auth/Login';
 import MainLayout from '../layouts/main';
+import { ROUTES } from '../utils/constants';
 
 // ----------------------------------------------------------------------
 const Loadable = (Component) => (props) => {
@@ -35,12 +37,22 @@ const Loadable = (Component) => (props) => {
   );
 };
 
+const { VALIDATE_ACCESS_CODE, RESET_PASSWORD } = ROUTES;
+
 export default function Router() {
   return useRoutes([
     // Dashboard Routes
     {
       path: 'login',
       element: <Login />
+    },
+    {
+      path: RESET_PASSWORD,
+      element: <Login />
+    },
+    {
+      path: VALIDATE_ACCESS_CODE,
+      element: <ValidateEmail />
     },
     {
       /* path: 'dashboard',
