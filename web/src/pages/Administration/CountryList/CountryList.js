@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Grid, Typography, Divider, Button } from '@mui/material';
-import SimpleTable from '../../components/table/simpleTable';
+import SimpleTable from '../../../components/table/simpleTable';
 import { getCountryListData } from './CountryListService';
 import './countrylist.scss';
 

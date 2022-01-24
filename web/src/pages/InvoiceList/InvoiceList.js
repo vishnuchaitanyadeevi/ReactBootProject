@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Grid, Typography, Button } from '@mui/material';
+import ErrorIcon from '@mui/icons-material/Error';
+import SaveIcon from '@mui/icons-material/Save';
+import EditIcon from '@mui/icons-material/Edit';
+import PrintIcon from '@mui/icons-material/Print';
 import Filters from '../../components/Filter/filter';
 import { COMPONENTS } from '../../utils/constants';
 import { SEVICE_DASHBOARD_FILTER_MASTER_DATA } from '../../components/ServiceBoard/data';
@@ -35,27 +39,41 @@ function InvoiceList() {
   const getInvoiceData = () => {
     if (InvoiceData) {
       const displayData = [];
-      InvoiceData.map((item) =>
-        displayData.push({
-          id: item.id,
-          InvoiceNumber: item.InvoiceNumber,
-          InvoiceDate: item.InvoiceDate,
-          ProjectNumber: item.ProjectNumber,
-          CustomerNo: item.CustomerNo,
-          CustomerName: item.CustomerName,
-          LocationName: item.LocationName,
-          GrossAmt: item.GrossAmt,
-          Discount: item.Discount,
-          DiscountAmt: item.DiscountAmt,
-          NetAmt: item.NetAmt,
-          VatAmt: item.VatAmt,
-          NetWVatAmt: item.NetWVatAmt
-        })
-      );
+      InvoiceData.map((item) => {
+        const {
+          InvoiceNumber,
+          InvoiceDate,
+          ProjectNumber,
+          CustomerNo,
+          CustomerName,
+          LocationName,
+          GrossAmt,
+          Discount,
+          DiscountAmt,
+          NetAmt,
+          VatAmt,
+          NetWVatAmt,
+          id
+        } = item;
+        return displayData.push({
+          InvoiceNumber,
+          InvoiceDate,
+          ProjectNumber,
+          CustomerNo,
+          CustomerName,
+          LocationName,
+          GrossAmt,
+          Discount,
+          DiscountAmt,
+          NetAmt,
+          VatAmt,
+          NetWVatAmt,
+          id
+        });
+      });
       if (displayData.length > 0) {
         setInvoiceData(displayData);
       }
-      console.log('displayData....', displayData);
     }
   };
   const countries = [
@@ -66,111 +84,49 @@ function InvoiceList() {
     { label: 'Iraq', value: 'Iraq' },
     { label: 'Bahrain', value: 'Bahrain' }
   ];
+
+  const handleIssue = (val) => console.log('IssueData...', val);
+  const handleSaveChanges = (val) => console.log('SaveChanges...', val);
+  const handleEdit = (val) => console.log('EditData...', val);
+  const handlePrint = (val) => console.log('PrintData...', val);
+
   const columnDataForInvoice = [
+    { field: 'id', header: 'ID', sortable: true, filter: true, isFrozen: true },
+    { field: 'InvoiceNumber', header: 'Invoice Number', sortable: true, filter: true, isFrozen: true },
+    { field: 'InvoiceDate', header: 'Invoice Date', sortable: true, filter: true, isFrozen: false },
+    { field: 'ProjectNumber', header: 'Project Number', sortable: true, filter: true, isFrozen: false },
+    { field: 'CustomerNo', header: 'Customer No.', sortable: true, filter: true, isFrozen: false },
+    { field: 'CustomerName', header: 'Customer Name', sortable: true, filter: true, isFrozen: false },
+    { field: 'LocationName', header: 'Location Name', sortable: true, filter: true, isFrozen: false },
+    { field: 'GrossAmt', header: 'Gross AMT', sortable: true, filter: true, isFrozen: false },
+    { field: 'discount_%', header: 'Discount %', sortable: true, filter: true, isFrozen: false },
+    { field: 'DiscountAmt', header: 'Discount AMT', sortable: true, filter: true, isFrozen: false },
+    { field: 'NetAmt', header: 'NET AMT', sortable: true, filter: true, isFrozen: false },
+    { field: 'VatAmt', header: 'VAT AMT', sortable: true, filter: true, isFrozen: false },
+    { field: 'NetWVatAmt', header: 'Net w VAT AMT', sortable: true, filter: true, isFrozen: true },
     {
-      field: 'id',
-      header: 'ID',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: true
+      field: 'issue',
+      header: 'Issue',
+      icon: <ErrorIcon style={{ cursor: 'pointer', textAlign: 'center' }} />,
+      onClick: handleIssue
     },
     {
-      field: 'InvoiceNumber',
-      header: 'Invoice Number',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: true
+      field: 'saveChanges',
+      header: 'Save Changes',
+      icon: <SaveIcon style={{ cursor: 'pointer', textAlign: 'center' }} />,
+      onClick: handleSaveChanges
     },
     {
-      field: 'InvoiceDate',
-      header: 'Invoice Date',
-      editorElement: null,
-      style: { width: '10%' },
-      sortable: true,
-      filter: true,
-      isFrozen: false
+      field: 'edit',
+      header: 'Edit',
+      icon: <EditIcon style={{ cursor: 'pointer', textAlign: 'center' }} />,
+      onClick: handleEdit
     },
     {
-      field: 'ProjectNumber',
-      header: 'Project Number',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: false
-    },
-    {
-      field: 'CustomerNo',
-      header: 'Customer No.',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: false
-    },
-    {
-      field: 'CustomerName',
-      header: 'Customer Name',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: false
-    },
-    {
-      field: 'LocationName',
-      header: 'Location Name',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: false
-    },
-    {
-      field: 'GrossAmt',
-      header: 'Gross AMT',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: false
-    },
-    {
-      field: 'discount_%',
-      header: 'Discount %',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: false
-    },
-    {
-      field: 'DiscountAmt',
-      header: 'Discount AMT',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: false
-    },
-    {
-      field: 'NetAmt',
-      header: 'NET AMT',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: false
-    },
-    {
-      field: 'VatAmt',
-      header: 'VAT AMT',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: false
-    },
-    {
-      field: 'NetWVatAmt',
-      header: 'Net w VAT AMT',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: true
+      field: 'print',
+      header: 'Print',
+      icon: <PrintIcon style={{ cursor: 'pointer', textAlign: 'center' }} />,
+      onClick: handlePrint
     }
   ];
   const { country, office, salesman, serviceman, status } = masterData;
@@ -281,7 +237,11 @@ function InvoiceList() {
     'NONE',
     'NONE',
     'NONE',
-    'NONE'
+    'NONE',
+    'ICON',
+    'ICON',
+    'ICON',
+    'ICON'
   ];
 
   return (
@@ -319,20 +279,6 @@ function InvoiceList() {
             dataKey="id"
             editMode="row"
             numericFields={numericFields}
-            showIssueColumn
-            issueheader="Issue"
-            issuetype="button"
-            issuetitle="Issue"
-            showSaveChangesColumn
-            saveChangestype="button"
-            saveChangestitle="Save Changes"
-            showEditColumn
-            edittype="button"
-            edittitle="Edit"
-            showPrintColumn
-            printtype="button"
-            printtitle="Print"
-            trialColumn
             headCellsType={headCellsType}
           />
         </Grid>

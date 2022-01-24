@@ -281,7 +281,8 @@
   "administration": {
     "administration": "Administration",
     "whatDoYouWantToDo": "What do you want to do?",
-    "users": "Users"
+    "users": "Users",
+    "countryList": "Country List"
   },
   "userList": {
     "internalUser": "Internal Users",

@@ -33,7 +33,7 @@ const sidebarConfig = [
       {
         title: 'Administration',
         path: '',
-        children: [{ title: 'Country List', path: '/countryList' }]
+        children: [{ title: 'Administration', path: '/administration' }]
       },
       {
         title: 'Master List',

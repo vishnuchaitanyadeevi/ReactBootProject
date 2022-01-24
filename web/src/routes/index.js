@@ -43,10 +43,6 @@ export default function Router() {
       element: <Login />
     },
     {
-      path: '/reset-password',
-      element: <ForgotPassword />
-    },
-    {
       /* path: 'dashboard',
       element: <DashboardLayout />,
       children: [{ path: '', element: <Dashboard /> }] */
@@ -152,6 +148,10 @@ export default function Router() {
           element: <TableTrialPage />
         },
         {
+          path: '/reset-password',
+          element: <ForgotPassword />
+        },
+        {
           path: '/administration',
           element: <AdministrationLandingPage />
         },
@@ -213,7 +213,7 @@ const PageFour = Loadable(lazy(() => import('../pages/PageFour')));
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 const LandingPage = Loadable(lazy(() => import('../pages/LandingPage')));
 const ForgotPassword = Loadable(lazy(() => import('../pages/auth/ForgotPassword')));
-const CountryList = Loadable(lazy(() => import('../pages/CountryList/CountryList')));
+const CountryList = Loadable(lazy(() => import('../pages/Administration/CountryList/CountryList')));
 const Employee = Loadable(lazy(() => import('../pages/Employee')));
 const Data = Loadable(lazy(() => import('../pages/Data')));
 const Invoice = Loadable(lazy(() => import('../pages/Invoice')));
