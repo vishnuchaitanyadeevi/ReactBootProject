@@ -1,4 +1,4 @@
-export const InvoiceData = [
+export const invoiceData = [
   {
     id: '61901',
     InvoiceNumber: ' ',

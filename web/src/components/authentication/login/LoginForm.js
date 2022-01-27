@@ -128,9 +128,7 @@ export default function LoginForm() {
             control={<Checkbox {...getFieldProps('remember')} checked={values.remember} />}
             label="Remember me"
           />
-          <Link component={RouterLink} variant="subtitle2" to={PATH_AUTH.resetPassword}>
-            Forgot ID or Password?
-          </Link>
+          <Link variant="subtitle2">Forgot password?</Link>
         </Stack>
         <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
           Login

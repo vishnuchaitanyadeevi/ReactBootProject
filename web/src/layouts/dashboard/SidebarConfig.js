@@ -78,7 +78,6 @@ const sidebarConfig = [
         path: '',
         children: [
           { title: 'Invoice List', path: '/invoiceList' },
-          { title: 'TableTrial', path: '/tabletrial' },
           { title: 'Invoice Overview', path: '', isPending: true }
         ]
       },

@@ -11,7 +11,7 @@ import { COMPONENTS } from '../../utils/constants';
 import { SEVICE_DASHBOARD_FILTER_MASTER_DATA } from '../../components/ServiceBoard/data';
 import { POST_OFFICE } from '../../redux/constants';
 import SimpleTable from '../../components/table/simpleTable';
-import { InvoiceData } from './Data';
+import { invoiceData } from './Data';
 import './InvoiceList.scss';
 
 function InvoiceList() {
@@ -37,9 +37,9 @@ function InvoiceList() {
     getInvoiceData();
   }, []);
   const getInvoiceData = () => {
-    if (InvoiceData) {
+    if (invoiceData) {
       const displayData = [];
-      InvoiceData.map((item) => {
+      invoiceData.map((item) => {
         const {
           InvoiceNumber,
           InvoiceDate,
@@ -265,7 +265,7 @@ function InvoiceList() {
       <Grid container spacing={3} style={{ marginTop: '1rem' }}>
         <Grid item xs={12}>
           <SimpleTable
-            rowData={InvoiceData}
+            rowData={invoiceData}
             headerData={columnDataForInvoice}
             paginator
             rowsPerPageOptions={[10, 20, 50, 100]}

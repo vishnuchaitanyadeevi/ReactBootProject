@@ -33,7 +33,7 @@ function CountryList() {
   ];
 
   return (
-    <Grid className="Country_List_main_cls">
+    <Grid className="countryListMainCls">
       <Grid container>
         <Grid item xs={12}>
           <Typography variant="h4" align="center">

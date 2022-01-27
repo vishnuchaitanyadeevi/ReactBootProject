@@ -193,7 +193,6 @@ function ContractList({
   };
   // Handle ExpandedDatechange
   const handleExpandedChangeDate = (key, value, options) => {
-    // console.log('Logging...', newValue, data, key);
     // find id and index from json and update that value
     // Find index of specific object using findIndex method.
     if (options && value) {

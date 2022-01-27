@@ -24,7 +24,7 @@ export default function SimpleTable({
   btnLabel,
   numericFields,
   headCellsType,
-  isglobalfilter = true,
+  isGlobalFilter = true,
   ...other
 }) {
   const { themeMode, onChangeMode } = useSettings();
@@ -271,7 +271,7 @@ export default function SimpleTable({
       )}
       <Grid item xs={12} lg={12}>
         <DataTable
-          header={isglobalfilter ? header : null}
+          header={isGlobalFilter ? header : null}
           globalFilter={globalFilter}
           value={rowData}
           editingRows={editingRows}
