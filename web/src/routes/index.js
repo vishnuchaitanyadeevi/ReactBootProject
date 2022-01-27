@@ -6,7 +6,6 @@ import DashboardLayout from '../layouts/dashboard';
 import LogoOnlyLayout from '../layouts/LogoOnlyLayout';
 // components
 import LoadingScreen from '../components/LoadingScreen';
-import ValidateEmail from '../components/authentication/login/ValidateEmail';
 import Login from '../pages/auth/Login';
 import MainLayout from '../layouts/main';
 import { ROUTES } from '../utils/constants';
@@ -222,3 +221,4 @@ const ServiceDashboardPage = Loadable(lazy(() => import('../pages/ScheduleServic
 const TerminateProjectPage = Loadable(lazy(() => import('../pages/TerminateAllProject/TerminateProject')));
 const InvoiceListPage = Loadable(lazy(() => import('../pages/InvoiceList/InvoiceList')));
 const TableTrialPage = Loadable(lazy(() => import('../pages/InvoiceList/TablePinTrial')));
+const ValidateEmail = Loadable(lazy(() => import('../components/authentication/login/ValidateEmail')));

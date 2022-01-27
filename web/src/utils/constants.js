@@ -95,8 +95,13 @@ export const ROUTES = {
 };
 
 export const LOGIN_PROPS = {
-  LOGIN: 'login',
+  LOGIN_PAGE: 'login',
   FORGOT_USERNAME: 'forgotUsername',
   FORGOT_PASSWORD: 'forgotPwd',
-  RESET: 'resetPassword'
+  RESET_PASSORD: 'resetPassword'
+};
+
+export const STATUS = {
+  SUCCESS: 'Success',
+  FAILED: 'Failed'
 };

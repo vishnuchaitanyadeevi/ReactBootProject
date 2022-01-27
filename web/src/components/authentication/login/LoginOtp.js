@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export function LoginOtp({ maxWidth, open, handleClose, verifyOtp, resendOtp }) {
+export function LoginOtp({ maxWidth, open, handleClose, verifyOtp }) {
   const { t } = useTranslation();
   const classes = useStyles();
   const maxNum = 4;

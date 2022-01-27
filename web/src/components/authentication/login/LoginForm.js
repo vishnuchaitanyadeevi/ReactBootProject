@@ -13,41 +13,94 @@ import {
   InputAdornment,
   FormControlLabel,
   Typography,
-  Grid
+  Grid,
+  Popover
 } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { LoadingButton } from '@mui/lab';
-import { LOCAL_STORAGE_KEYS, PATTERN, LOGIN_PROPS, ROUTES } from '../../../utils/constants';
+import { LOCAL_STORAGE_KEYS, PATTERN, LOGIN_PROPS, ROUTES, STATUS } from '../../../utils/constants';
 import { login } from '../../../utils/auth-service';
+import { ERRORS, NOTIFICATIONS } from '../../../utils/messages';
 import { LoginOtp } from './LoginOtp';
+import DialogComponent from '../../Dialog';
 // hooks
-import useIsMountedRef from '../../../hooks/useIsMountedRef';
+import useBoolean from '../../../hooks/useBoolean';
 
 const { TOKEN_KEY } = LOCAL_STORAGE_KEYS;
 export default function LoginForm() {
   const location = useLocation();
-  const defaultView = location?.state?.defaultView || LOGIN_PROPS.LOGIN;
-  const [showPassword, setShowPassword] = useState(false);
-  const [showResetPass, setShowResetPass] = useState({
-    password: false,
-    confirmPassowrd: false
-  });
-  const handleClickShowPassword = () => setShowPassword(!showPassword);
-  const handleMouseDownPassword = () => setShowPassword(!showPassword);
-  const handleClickShowResetPass = (key) => setShowResetPass({ ...showResetPass, [key]: !showResetPass[key] });
-  const handleMouseShowResetPass = (key) => setShowResetPass({ ...showResetPass, [key]: !showResetPass[key] });
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
+  const { LOGIN_PAGE, FORGOT_USERNAME, FORGOT_PASSWORD, RESET_PASSORD } = LOGIN_PROPS;
+  const { USERNAME, ALPHANUMERIC } = PATTERN;
+  const defaultView = location?.state?.defaultView || LOGIN_PAGE;
+  const {
+    PASSWORD_REQUIRED,
+    ENTER_VALID_PASSWORD,
+    PASSWORD_MINIMUM_8_CHARS,
+    CONFIRM_PASSWORD_REQUIRED,
+    PASSWORD_MUST_MATCH,
+    EMAIL_MUST_VALID_ADDRESS,
+    ENTER_YOUR_EMAIL,
+    ENTER_YOUR_USERNAME,
+    ENTER_VALID_USERNAME,
+    USERNAME_REQUIRED
+  } = ERRORS;
+  const { PASSWORD_RESET_SUCCESS, CHECK_EMAIL_ID } = NOTIFICATIONS;
+
+  const [showPassword, setShowPassword] = useBoolean(false);
+  const [showResetPassword, setShowResetPassword] = useBoolean(false);
+  const [showResetConfirmPassowrd, setShowResetConfirmPassowrd] = useBoolean(false);
   const [user, setUser] = useState();
-  const navigate = useNavigate();
-  const isMountedRef = useIsMountedRef();
-
+  const [servicemenAnchorEl, setServicemenAnchorEl] = useState(null);
   const [view, setView] = useState(defaultView);
-  const [otpDialog, setOtpDialog] = useState(false);
+  const [otpDialog, setOtpDialog] = useBoolean(false);
+  const [dialogOpen, setDialogOpen] = useBoolean(false);
+  const [dialogInfo, setDialofInfo] = useState({
+    title: STATUS.Success,
+    content: CHECK_EMAIL_ID,
+    proceedButtonText: 'Ok',
+    isCancelButton: false,
+    contentProps: { style: { marginBottom: '-2rem', marginTop: '1rem' } }
+  });
 
-  const isForgotUsernameView = view === LOGIN_PROPS.FORGOT_USERNAME;
+  const isLoginView = view === LOGIN_PAGE;
+
+  const isForgotUsernameView = view === FORGOT_USERNAME;
+
+  const isForgotPasswordView = view === FORGOT_PASSWORD;
+
+  const isForgotResetPasswordView = view === RESET_PASSORD;
+
+  const servicemenOpen = Boolean(servicemenAnchorEl);
+
+  const toggelPasswordVisibility = () => (showPassword ? setShowPassword.off() : setShowPassword.on());
+
+  const toggelResetPasswordVisibility = () =>
+    showResetPassword ? setShowResetPassword.off() : setShowResetPassword.on();
+
+  const toggelResetConfirmPasswordVisibility = () =>
+    showResetConfirmPassowrd ? setShowResetConfirmPassowrd.off() : setShowResetConfirmPassowrd.on();
+
+  const navigate = useNavigate();
+
+  const handleServicemenClose = () => setServicemenAnchorEl(null);
+
+  const handleServicemenClick = (e) => {
+    setServicemenAnchorEl(e.currentTarget);
+    e.stopPropagation();
+  };
+
+  const handleCardDialogOpen = () => setDialogOpen.on();
+
+  const handleCardDialogClose = () => {
+    setDialogOpen.off();
+    if (isForgotResetPasswordView) {
+      navigate(ROUTES.LOGIN);
+    } else {
+      setView(LOGIN_PAGE);
+    }
+  };
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem('user');
@@ -58,14 +111,8 @@ export default function LoginForm() {
   }, []);
 
   const loginSchema = Yup.object().shape({
-    // username: Yup.string().email('Username must be a valid email address').required('Username is required'),
-    username: Yup.string()
-      .required('Username is required')
-      .matches(PATTERN.USERNAME, 'Please enter only alphanumeric characters with no other characters except . (dot). '),
-    password: Yup.string()
-      .required('Password is required')
-      .matches(PATTERN.ALPHANUMERIC, 'Please enter only alphanumeric characters. ')
-      .min(8, 'Password Should be more than 8 digits')
+    username: Yup.string().required(USERNAME_REQUIRED).matches(USERNAME, ENTER_VALID_USERNAME),
+    password: Yup.string().required(PASSWORD_REQUIRED)
   });
 
   const formik = useFormik({
@@ -75,30 +122,14 @@ export default function LoginForm() {
     },
     validationSchema: loginSchema,
     onSubmit: async (e) => {
-      // alert(JSON.stringify(values, null, 2));
-      setOtpDialog(true);
-      // navigate('/home');
-      /*
-      const user = { username, password };
-      // send the username and password to the server
-      const response = await axios.post('http://localhost:4000/login', user);
-      // set the state of the user
-      setUser(response.data);
-      // store the user in localStorage
-      localStorage.setItem('user', JSON.stringify(response.data));
-      */
+      setOtpDialog.on();
     }
   });
 
   const forgotIdPwdSchema = Yup.object().shape({
     email: isForgotUsernameView
-      ? Yup.string().email('Email must be a valid email address').required('Enter your email')
-      : Yup.string()
-          .required('Enter your username')
-          .matches(
-            PATTERN.USERNAME,
-            'Please enter only alphanumeric characters with no other characters except . (dot). '
-          )
+      ? Yup.string().email(EMAIL_MUST_VALID_ADDRESS).required(ENTER_YOUR_EMAIL)
+      : Yup.string().required(ENTER_YOUR_USERNAME).matches(USERNAME, ENTER_VALID_USERNAME)
   });
 
   const formikForgotIdorPwd = useFormik({
@@ -107,20 +138,20 @@ export default function LoginForm() {
     },
     validationSchema: forgotIdPwdSchema,
     onSubmit: async (e) => {
-      alert('Please check your registered Email ID.');
+      handleCardDialogOpen();
     }
   });
 
   const ResetPwdSchema = Yup.object().shape({
     password: Yup.string()
-      .required('Password is required')
-      .matches(PATTERN.ALPHANUMERIC, 'Please enter only alphanumeric characters. ')
-      .min(8, 'Password Should be more than 8 digits'),
+      .required(PASSWORD_REQUIRED)
+      .matches(ALPHANUMERIC, ENTER_VALID_PASSWORD)
+      .min(8, PASSWORD_MINIMUM_8_CHARS),
     confirmPassword: Yup.string()
       .when('password', (password, schema) => {
-        if (password) return schema.required('Confirm Password is required');
+        if (password) return schema.required(CONFIRM_PASSWORD_REQUIRED);
       })
-      .oneOf([Yup.ref('password')], 'Passwords must match')
+      .oneOf([Yup.ref('password')], PASSWORD_MUST_MATCH)
   });
 
   const formikResetPwd = useFormik({
@@ -130,8 +161,7 @@ export default function LoginForm() {
     },
     validationSchema: ResetPwdSchema,
     onSubmit: async (e) => {
-      alert('Password reset successfully.');
-      navigate(ROUTES.HOME);
+      handleCardDialogOpen();
     }
   });
 
@@ -154,22 +184,39 @@ export default function LoginForm() {
   } = formikResetPwd;
 
   const verifyOtp = () => {
+    localStorage.setItem('username', 'sanket.test');
     navigate('/home');
   };
 
   const changeView = (view) => setView(view);
 
-  const handleOtpDialogClose = () => setOtpDialog(false);
+  const handleOtpDialogClose = () => setOtpDialog.off();
 
-  const sendOtp = () => alert(`OTP sent to registered mobile no. and Email ID`);
+  useEffect(() => {
+    if (isForgotResetPasswordView) {
+      setDialofInfo({ ...dialogInfo, content: PASSWORD_RESET_SUCCESS });
+    } else {
+      setDialofInfo({ ...dialogInfo, content: CHECK_EMAIL_ID });
+    }
+  }, [view]);
 
   return (
     <>
-      <LoginOtp open={otpDialog} handleClose={handleOtpDialogClose} verifyOtp={verifyOtp} resendOtp={sendOtp} />
+      <DialogComponent
+        open={dialogOpen}
+        handleClose={handleCardDialogClose}
+        handleProceed={handleCardDialogClose}
+        title={dialogInfo.title}
+        content={dialogInfo.content}
+        contentProps={dialogInfo.contentProps}
+        proceedButtonText={dialogInfo.proceedButtonText}
+        isCancelButton={false}
+      />
+      <LoginOtp open={otpDialog} handleClose={handleOtpDialogClose} verifyOtp={verifyOtp} />
       {/* <LoginOtp open={otpDialog} /> */}
       <img src="/static/home/rezaLogo.png" alt="reza" style={{ padding: '0 1.1rem 0 1.1rem' }} />
       <img src="/static/home/omslogo.png" alt="oms" />
-      {view === LOGIN_PROPS.LOGIN && (
+      {isLoginView && (
         <FormikProvider value={formik}>
           <Form autoComplete="off" noValidate onSubmit={formik.handleSubmit}>
             <Stack spacing={3}>
@@ -196,11 +243,11 @@ export default function LoginForm() {
                     <InputAdornment position="end">
                       <IconButton
                         edge="end"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
+                        onClick={toggelPasswordVisibility}
+                        onMouseDown={toggelPasswordVisibility}
                         size="large"
                       >
-                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
                     </InputAdornment>
                   )
@@ -217,17 +264,17 @@ export default function LoginForm() {
          control={<Checkbox {...getFieldProps('remember')} checked={values.remember} />}
          label="Remember me"
        /> */}
-              <Link variant="forgotUsername" onClick={() => changeView(LOGIN_PROPS.FORGOT_USERNAME)}>
-                Forgot Your Username?
+              <Link variant="forgotUsername" onClick={() => changeView(FORGOT_USERNAME)}>
+                Forgot your Username?
               </Link>
-              <Link variant="forgotPassword" onClick={() => changeView(LOGIN_PROPS.FORGOT_PASSWORD)}>
-                Forgot Your Password?
+              <Link variant="forgotPassword" onClick={() => changeView(FORGOT_PASSWORD)}>
+                Forgot your Password?
               </Link>
             </Stack>
           </Form>
         </FormikProvider>
       )}
-      {(view === LOGIN_PROPS.FORGOT_PASSWORD || view === LOGIN_PROPS.FORGOT_USERNAME) && (
+      {(isForgotPasswordView || isForgotUsernameView) && (
         <FormikProvider value={formikForgotIdorPwd}>
           <Typography variant="h5" align="center">
             Forgot your {`${isForgotUsernameView ? 'Username' : 'Password'}`}
@@ -258,7 +305,7 @@ export default function LoginForm() {
                     size="large"
                     variant="contained"
                     loading={isSubmittingF}
-                    onClick={() => changeView(LOGIN_PROPS.LOGIN)}
+                    onClick={() => changeView(LOGIN_PAGE)}
                   >
                     Cancel
                   </LoadingButton>
@@ -282,36 +329,71 @@ export default function LoginForm() {
           </Form>
         </FormikProvider>
       )}
-      {view === LOGIN_PROPS.RESET && (
+      {isForgotResetPasswordView && (
         <FormikProvider value={formikResetPwd}>
           <Form autoComplete="off" noValidate onSubmit={formikResetPwd.handleSubmit}>
             <Stack spacing={3}>
+              <>
+                <TextField
+                  type={`${showResetPassword ? 'text' : 'password'}`}
+                  fullWidth
+                  autoComplete="current-password"
+                  label="Password"
+                  onChange={formikResetPwd.handleChange}
+                  {...getFieldPropsR('password')}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton onClick={handleServicemenClick}>
+                          <InfoOutlinedIcon />
+                        </IconButton>
+                        <IconButton
+                          edge="end"
+                          onClick={toggelResetPasswordVisibility}
+                          onMouseDown={toggelResetPasswordVisibility}
+                          size="large"
+                        >
+                          {showResetPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    )
+                  }}
+                  error={Boolean(touchedR.password && errorsR.password)}
+                  helperText={touchedR.password && errorsR.password}
+                />
+                <Popover
+                  id="servicemen"
+                  open={servicemenOpen}
+                  anchorEl={servicemenAnchorEl}
+                  onClose={handleServicemenClose}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left'
+                  }}
+                >
+                  <ul style={{ listStyleType: 'circle', listStylePosition: 'inside' }}>
+                    <li style={{ padding: '0.2rem 0.5rem 0 0.5rem' }}>
+                      <span style={{ marginLeft: '-0.5rem' }}>Be at least eight characters long</span>
+                    </li>
+                    <li style={{ padding: '0.2rem 0.5rem 0 0.5rem' }}>
+                      <span style={{ marginLeft: '-0.5rem' }}>Should be alphanumeric</span>
+                    </li>
+                    <li style={{ padding: '0.2rem 0.5rem 0 0.5rem' }}>
+                      <span style={{ marginLeft: '-0.5rem' }}>No case sensitivity</span>
+                    </li>
+                    <li style={{ padding: '0.2rem 0.5rem 0 0.5rem' }}>
+                      <span style={{ marginLeft: '-0.5rem' }}>
+                        No special characters (like &,%, * , =,/ ,_,.) to be used
+                      </span>
+                    </li>
+                    <li style={{ padding: '0.2rem 0.5rem 0 0.5rem' }}>
+                      <span style={{ marginLeft: '-0.5rem' }}>Enter and Confirm password should match</span>
+                    </li>
+                  </ul>
+                </Popover>
+              </>
               <TextField
-                type={`${showResetPass.password ? 'text' : 'password'}`}
-                fullWidth
-                autoComplete="current-password"
-                label="Password"
-                onChange={formikResetPwd.handleChange}
-                {...getFieldPropsR('password')}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        edge="end"
-                        onClick={() => handleClickShowResetPass('password')}
-                        onMouseDown={() => handleMouseShowResetPass('password')}
-                        size="large"
-                      >
-                        {showResetPass.password ? <Visibility /> : <VisibilityOff />}
-                      </IconButton>
-                    </InputAdornment>
-                  )
-                }}
-                error={Boolean(touchedR.password && errorsR.password)}
-                helperText={touchedR.password && errorsR.password}
-              />
-              <TextField
-                type={`${showResetPass.confirmPassowrd ? 'text' : 'password'}`}
+                type={`${showResetConfirmPassowrd ? 'text' : 'password'}`}
                 fullWidth
                 autoComplete="current-password"
                 label="Confirm Password"
@@ -322,11 +404,11 @@ export default function LoginForm() {
                     <InputAdornment position="end">
                       <IconButton
                         edge="end"
-                        onClick={() => handleClickShowResetPass('confirmPassowrd')}
-                        onMouseDown={() => handleMouseShowResetPass('confirmPassowrd')}
+                        onClick={toggelResetConfirmPasswordVisibility}
+                        onMouseDown={toggelResetConfirmPasswordVisibility}
                         size="large"
                       >
-                        {showResetPass.confirmPassowrd ? <Visibility /> : <VisibilityOff />}
+                        {showResetConfirmPassowrd ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
                     </InputAdornment>
                   )

@@ -111,8 +111,7 @@
     "contract": "اتفافية",
     "status": "حالة",
     "location": "موقع",
-    "servicemen": "العسكريين",
-    "customerAndContactDetails": "تفاصيل العميل والاتصال"
+    "servicemen": "العسكريين"
   },
   "filter": {
     "filter": "منقي",
@@ -275,7 +274,8 @@
     "dialog": "حوار",
     "cancel": "يلغي",
     "proceed": "تقدم",
-    "ok": "موافق"
+    "ok": "موافق",
+    "succes": "نجاح"
   },
   "login": {
     "username": "اسم المستخدم",

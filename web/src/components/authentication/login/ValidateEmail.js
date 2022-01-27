@@ -2,74 +2,94 @@ import React, { useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
 import { Grid, Toolbar, Typography, Container, AppBar as MuiAppBar, Button } from '@material-ui/core';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import { useParams } from 'react-router';
+import { Backdrop, CircularProgress } from '@mui/material';
 import { NOTIFICATIONS } from '../../../utils/messages';
-import {
-  ROUTES,
-  NOTIFICATION_MSG_FORMAT,
-  SNACK_BAR_MESSAGE_TYPE,
-  LOCAL_STORAGE_KEYS,
-  LOGIN_PROPS
-} from '../../../utils/constants';
+import DialogComponent from '../../Dialog';
+import { ROUTES, LOGIN_PROPS, STATUS } from '../../../utils/constants';
 import { clearLocalStorage } from '../../../utils/utils';
-
-// import OpenNotification from '../../../components/Notification';
-import OpenNotification from '../../Notification/Notification';
+import useBoolean from '../../../hooks/useBoolean';
 
 const ValidateEmail = () => {
   const navigate = useNavigate();
-  const [errorMessage, setErrorMessage] = useState('');
+  const { EMAIL_VERIFICATION_SUCCESS, PASSWORD_RESET_FAILED, ACCESS_CODE_NOT_FOUND } = NOTIFICATIONS;
+  const [loader, setLoader] = useState(true);
+  const [dialogOpen, setDialogOpen] = useBoolean(false);
+  const [dialogConf, setDialogConf] = useState({
+    title: '',
+    content: '',
+    isSuccess: true,
+    proceedButtonText: ''
+  });
+
   const { accessCode } = useParams();
-  const [notification, setNotification] = useState({ ...NOTIFICATION_MSG_FORMAT });
-  const handleCloseShowSnackbar = () => setNotification({ ...NOTIFICATION_MSG_FORMAT });
-  const { HOME, LOGIN, RESET_PASSWORD } = ROUTES;
+  const { LOGIN, RESET_PASSWORD } = ROUTES;
 
   const validateUser = async () => {
     const res = accessCode === 'abcde';
     if (res) {
-      // setNotification({
-      //   ...notification,
-      //   type: SNACK_BAR_MESSAGE_TYPE.SUCCESS,
-      //   msg: NOTIFICATIONS.EMAIL_VERIFICATION_SUCCESS,
-      //   status: true
-      // });
-      alert(NOTIFICATIONS.EMAIL_VERIFICATION_SUCCESS);
-      navigate(RESET_PASSWORD, { state: { defaultView: LOGIN_PROPS.RESET } }, { replace: true });
+      setDialogConf({
+        ...dialogConf,
+        title: STATUS.SUCCESS,
+        content: EMAIL_VERIFICATION_SUCCESS,
+        proceedButtonText: ''
+      });
+      handleCardDialogOpen();
     } else {
-      // setNotification({
-      //   ...notification,
-      //   type: SNACK_BAR_MESSAGE_TYPE.ERROR,
-      //   msg: 'Invalid access code',
-      //   status: true
-      // });
-      alert(NOTIFICATIONS.PASSWORD_RESET_FAILED);
-      redirectToLogin();
+      setDialogConf({
+        ...dialogConf,
+        title: STATUS.FAILED,
+        content: PASSWORD_RESET_FAILED,
+        isSuccess: false,
+        proceedButtonText: 'Ok'
+      });
+      handleCardDialogOpen();
+    }
+    setLoader(false);
+  };
+
+  const redirect = (path, state) => navigate(path, state, { replace: true });
+
+  const handleCardDialogClose = () => {
+    setDialogOpen.off();
+    if (dialogConf.isSuccess) {
+      redirect(RESET_PASSWORD, { state: { defaultView: LOGIN_PROPS.RESET_PASSORD } });
+    } else {
+      redirect(LOGIN, { state: { defaultView: LOGIN_PROPS.FORGOT_PASSWORD } });
     }
   };
 
-  const redirectToLogin = () => navigate(HOME);
+  const handleCardDialogOpen = () => setDialogOpen.on();
 
   useEffect(() => {
     if (accessCode) {
       clearLocalStorage();
-      validateUser();
+      setTimeout(() => {
+        validateUser();
+      }, 2000);
     } else {
-      alert(NOTIFICATIONS.ACCESS_CODE_NOT_FOUND);
-      redirectToLogin();
+      setDialogConf({
+        ...dialogConf,
+        title: STATUS.SUCCESS,
+        content: ACCESS_CODE_NOT_FOUND,
+        isSuccess: false
+      });
+      handleCardDialogOpen();
     }
   }, []);
 
   return (
     <>
-      {notification.status && (
-        <OpenNotification
-          openSnackbar={notification.status}
-          onCloseMethod={handleCloseShowSnackbar}
-          severityType={notification.type}
-          messageData={notification.msg}
-        />
-      )}
+      <DialogComponent
+        open={dialogOpen}
+        handleClose={handleCardDialogClose}
+        handleProceed={handleCardDialogClose}
+        title={dialogConf.title}
+        content={dialogConf.content}
+        contentProps={{ style: { marginBottom: '-2rem', marginTop: '1rem' } }}
+        isCancelButton={false}
+        proceedButtonText={dialogConf.proceedButtonText}
+      />
       <Helmet title="Validate User" />
       <Toolbar>
         <Container maxWidth="xl">
@@ -87,24 +107,15 @@ const ValidateEmail = () => {
               </Grid>
             </Grid>
           </Grid>
+          <Backdrop
+            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={loader}
+            // onClick={handleClose}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
         </Container>
       </Toolbar>
-      <Grid style={{ minHeight: '100%', height: '100%', padding: '20px' }}>
-        {errorMessage ? (
-          <>
-            <Typography variant="h3" gutterBottom display="inline">
-              {errorMessage}
-            </Typography>
-            <Button variant="contained" className="email_send_resend_btn" onClick={redirectToLogin}>
-              Go to login
-            </Button>
-          </>
-        ) : (
-          <Typography style={{ color: '#FFF' }} variant="h3" gutterBottom display="inline">
-            Loading…
-          </Typography>
-        )}
-      </Grid>
     </>
   );
 };

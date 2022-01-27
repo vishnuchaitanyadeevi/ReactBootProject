@@ -11,23 +11,27 @@ function DialogComponent({
   handleClose,
   maxWidth,
   title,
-  Content,
+  content,
   titleProps,
   contentProps,
+  isCancelButton = true,
   cacelButtonText,
+  isProceedButton = true,
   proceedButtonText,
   handleProceed
 }) {
   const { t } = useTranslation();
   return (
     <Dialog fullWidth maxWidth={maxWidth} open={open} onClose={handleClose}>
-      <DialogTitle {...titleProps}>{t(title || 'dialog.dialog')}</DialogTitle>
-      <DialogContent {...contentProps}>{Content}</DialogContent>
+      <DialogTitle {...titleProps}>{title}</DialogTitle>
+      <DialogContent {...contentProps}>{content}</DialogContent>
       <DialogActions>
-        <Button onClick={handleProceed}>{t(proceedButtonText || 'dialog.proceed')}</Button>
-        <Button autoFocus onClick={handleClose}>
-          {t(cacelButtonText || 'dialog.cancel')}
-        </Button>
+        {isProceedButton && <Button onClick={handleProceed}>{proceedButtonText || 'Proceed'}</Button>}
+        {isCancelButton && (
+          <Button autoFocus onClick={handleClose}>
+            {cacelButtonText || 'Cancel'}
+          </Button>
+        )}
       </DialogActions>
     </Dialog>
   );

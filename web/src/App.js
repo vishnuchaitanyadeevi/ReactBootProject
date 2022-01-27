@@ -28,7 +28,6 @@ export default function App() {
 
   useEffect(() => {
     const accessCode = queryParams.get('accessCode');
-    alert(`location.pathname: ${location.pathname} <=> accessCode: ${accessCode}`);
     const { pathname } = location;
     if (VALIDATE === pathname) {
       navigate(`${VALIDATE}/${accessCode}`);
