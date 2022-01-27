@@ -70,6 +70,15 @@ export default function AccountPopover() {
         <Button onClick={logoutHandler} color="secondary">
           {t('Logout')}
         </Button>
+        <Typography
+          onClick={() => navigate('/administration')}
+          variant="subtitle1"
+          sx={{ color: 'text.secondary' }}
+          style={{ cursor: 'pointer' }}
+          noWrap
+        >
+          {t('administration.administration')}
+        </Typography>
       </Stack>
       <MIconButton
         ref={anchorRef}

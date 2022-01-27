@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Typography, Button, Checkbox } from '@mui/material';
+import { Grid, Typography, Button, Checkbox, TextField } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { Helmet } from 'react-helmet';
 import { DataTable } from 'primereact/datatable';
@@ -7,8 +7,9 @@ import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import Tooltip from '@mui/material/Tooltip';
 import { FilterMatchMode } from 'primereact/api';
+import { COMPONENTS, rowsPerPageOptions } from '../../utils/constants';
 import useSettings from '../../hooks/useSettings';
-import BasicDatePicker from '../pickers/BasicDatePicker';
+import RenderComponent from '../RenderComponent';
 
 // import ngPrimeGrid from '../ngPrimeGrid';
 import '../../Styles/app.scss';
@@ -44,6 +45,10 @@ export default function SimpleTable({
   const [editingRows, setEditingRows] = useState({});
   const [filterState, setFilterState] = useState({});
   const [isUpdate, setIsUpdate] = useState(false);
+  const { lang } = useSettings();
+  const [payload, setPayload] = useState({});
+  const { TEXT_FIELD, CHECKBOX, AUTOCOMPLETE, DATEPICKER, TEXT_AREA, MULTI_SELECT_BOX } = COMPONENTS;
+
   const onRowEditChange = (e) => {
     setEditingRows(e.data);
   };
@@ -222,18 +227,15 @@ export default function SimpleTable({
   };
 
   const editIcon = () => <EditIcon />;
-  // handleChange rowDate
-  const handleChangeDate = (newValue, data, key) => {
+
+  const handleChangeDate = (key, value, options) => {
     // find id and index from json and update that value
     // Find index of specific object using findIndex method.
-    if (data && newValue) {
-      const objIndex = rowData.findIndex((obj) => obj.id === data.id);
-      console.log('Before update...', rowData[objIndex]);
-      rowData[objIndex][key] = newValue;
-      console.log('After update...', rowData[objIndex]);
-      console.log('mockData...', rowData);
-      setIsUpdate(true);
+    const objIndex = rowData.indexOf(options);
+    if (objIndex !== -1) {
+      rowData[objIndex][key] = value;
     }
+    setIsUpdate(true);
   };
   useEffect(() => {
     if (isUpdate) {
@@ -241,6 +243,14 @@ export default function SimpleTable({
       setIsUpdate(false);
     }
   }, [isUpdate]);
+
+  const handleChangeTextfield = (key, value, options) => {
+    const objIndex = rowData.indexOf(options);
+    if (objIndex !== -1) {
+      rowData[objIndex][key] = value;
+    }
+    setIsUpdate(true);
+  };
   const handleClickLink = (rowData) => console.log('rowData...', rowData);
   const handleChangeBody = (options, idx) => {
     const key = Object.keys(options)[idx];
@@ -256,10 +266,31 @@ export default function SimpleTable({
         );
       case 'NONE':
         return (
-          <Tooltip title={newVal.value}>
-            <Typography style={{ fontSize: '13px' }}>{newVal.value}</Typography>
+          <Tooltip title={newVal?.value}>
+            <Typography style={{ fontSize: '13px' }}>{newVal?.value}</Typography>
           </Tooltip>
         );
+      case 'TEXTFIELD':
+        if (newVal) {
+          return (
+            <Grid style={{ marginTop: '0.1rem', marginBottom: '0.1rem' }}>
+              <RenderComponent
+                metaData={{
+                  control: TEXT_FIELD,
+                  key: `${newVal?.key}`,
+                  label: `${newVal?.key}`,
+                  placeholder: `${newVal?.key}`,
+                  columnWidth: 12,
+                  size: 'large'
+                }}
+                payload={{ [newVal?.key]: newVal?.value }}
+                ind={1}
+                handleChange={(key, val) => handleChangeTextfield(key, val, options)}
+              />
+            </Grid>
+          );
+        }
+        break;
       case 'LINK':
         return (
           <Tooltip title={newVal.value}>
@@ -274,15 +305,32 @@ export default function SimpleTable({
       case 'DATE':
         return (
           <div style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}>
-            <BasicDatePicker
-              label="Date"
-              inputFormat="dd-MM-yyyy"
-              views={['year', 'month', 'day']}
-              value={newVal.value}
-              getSelectedDate={(dt) => console.log('date..', dt)}
-              getIsoDate={(e) => handleChangeDate(e, options, key)}
-              size="large"
+            <RenderComponent
+              metaData={{
+                control: DATEPICKER,
+                key: `${newVal?.key}`,
+                label: `${newVal?.key}`,
+                placeholder: `${newVal?.key}`,
+                columnWidth: 12,
+                size: 'large'
+              }}
+              payload={{ [newVal?.key]: newVal?.value }}
+              ind={1}
+              handleChange={(key, val) => handleChangeDate(key, val, options)}
             />
+          </div>
+        );
+      case 'ICON':
+        return (
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <span
+              onClick={() => headerData[idx].onClick(options)}
+              onKeyDown={() => headerData[idx].onClick(options)}
+              role="button"
+              tabIndex={0}
+            >
+              {headerData[idx].icon}
+            </span>
           </div>
         );
       default:
@@ -318,6 +366,7 @@ export default function SimpleTable({
           filterDisplay="menu"
           responsiveLayout="scroll"
           emptyMessage="NO DATA FOUND"
+          rowsPerPageOptions={rowsPerPageOptions}
           // scrollable
           {...other}
         >

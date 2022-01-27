@@ -153,6 +153,14 @@ export default function Router() {
         {
           path: '/tabletrial',
           element: <TableTrialPage />
+        },
+        {
+          path: '/administration',
+          element: <AdministrationLandingPage />
+        },
+        {
+          path: '/userList',
+          element: <UserListPage />
         }
       ]
     },
@@ -222,3 +230,5 @@ const TerminateProjectPage = Loadable(lazy(() => import('../pages/TerminateAllPr
 const InvoiceListPage = Loadable(lazy(() => import('../pages/InvoiceList/InvoiceList')));
 const TableTrialPage = Loadable(lazy(() => import('../pages/InvoiceList/TablePinTrial')));
 const ValidateEmail = Loadable(lazy(() => import('../components/authentication/login/ValidateEmail')));
+const AdministrationLandingPage = Loadable(lazy(() => import('../pages/Administration/AdministrationLandingPage')));
+const UserListPage = Loadable(lazy(() => import('../pages/Administration/UserManagement/UserList')));

@@ -21,7 +21,7 @@ import {
   OutlinedInput,
   Chip
 } from '@mui/material';
-import TextareaAutosize from '@mui/base/TextareaAutosize';
+import TextareaAutosize from '@mui/material/TextareaAutosize';
 import BasicDatePicker from './pickers/BasicDatePicker';
 // import BasicDatePicker from '../components';
 import { COMPONENTS } from '../utils/constants';
@@ -167,6 +167,7 @@ const RenderComponent = ({ payload, metaData, ind, handleChange }) => {
         return (
           <Grid item xs={12} sm={columnWidth} key={`${key}-${ind}`} style={{ ...groupStyle }}>
             <BasicDatePicker
+              size={size || 'small'}
               label={t([label])}
               onChange={(e) => handleChange(key, e.target.value, ind)}
               inputFormat={inputFormat}
