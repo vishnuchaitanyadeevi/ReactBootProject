@@ -282,11 +282,8 @@ export default function LoginForm() {
           <Form autoComplete="off" noValidate onSubmit={formikForgotIdorPwd.handleSubmit}>
             <Stack spacing={3}>
               <Typography>
-                {`An Email with ${
-                  isForgotUsernameView ? 'your username' : 'reset password link'
-                } will be sent to your registered Email ID, Please enter ${
-                  isForgotUsernameView ? 'registered Email ID.' : 'Username.'
-                }`}
+                {`${isForgotUsernameView ? 'Username' : 'Reset Password Link'} will be sent to your registered Email ID.
+                Please enter registered Email Id. `}
               </Typography>
               <TextField
                 fullWidth
