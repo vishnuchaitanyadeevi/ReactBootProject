@@ -12,7 +12,7 @@ import { SEVICE_DASHBOARD_FILTER_MASTER_DATA } from '../../components/ServiceBoa
 import { POST_OFFICE } from '../../redux/constants';
 import SimpleTable from '../../components/table/simpleTable';
 import { invoiceData } from './Data';
-import './InvoiceList.scss';
+import './invoiceList.scss';
 
 function InvoiceList() {
   const masterData = useSelector((state) => state.MasterDataReducer);
