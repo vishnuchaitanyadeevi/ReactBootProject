@@ -13,10 +13,12 @@ import useBoolean from '../../../hooks/useBoolean';
 const ValidateEmail = () => {
   const navigate = useNavigate();
   const { EMAIL_VERIFICATION_SUCCESS, PASSWORD_RESET_FAILED, ACCESS_CODE_NOT_FOUND } = NOTIFICATIONS;
+  const { SUCCESS, FAILED } = STATUS;
   const [loader, setLoader] = useState(true);
   const [dialogOpen, setDialogOpen] = useBoolean(false);
-  const [dialogConf, setDialogConf] = useState({
+  const [dialogInfo, setDialogInfo] = useState({
     title: '',
+    titleType: SUCCESS,
     content: '',
     isSuccess: true,
     proceedButtonText: ''
@@ -28,17 +30,19 @@ const ValidateEmail = () => {
   const validateUser = async () => {
     const res = accessCode === 'abcde';
     if (res) {
-      setDialogConf({
-        ...dialogConf,
-        title: STATUS.SUCCESS,
+      setDialogInfo({
+        ...dialogInfo,
+        title: SUCCESS,
+        titleType: SUCCESS,
         content: EMAIL_VERIFICATION_SUCCESS,
         proceedButtonText: ''
       });
       handleCardDialogOpen();
     } else {
-      setDialogConf({
-        ...dialogConf,
-        title: STATUS.FAILED,
+      setDialogInfo({
+        ...dialogInfo,
+        title: FAILED,
+        titleType: FAILED,
         content: PASSWORD_RESET_FAILED,
         isSuccess: false,
         proceedButtonText: 'Ok'
@@ -52,7 +56,7 @@ const ValidateEmail = () => {
 
   const handleCardDialogClose = () => {
     setDialogOpen.off();
-    if (dialogConf.isSuccess) {
+    if (dialogInfo.isSuccess) {
       redirect(RESET_PASSWORD, { state: { defaultView: LOGIN_PROPS.RESET_PASSORD } });
     } else {
       redirect(LOGIN, { state: { defaultView: LOGIN_PROPS.FORGOT_PASSWORD } });
@@ -68,9 +72,10 @@ const ValidateEmail = () => {
         validateUser();
       }, 2000);
     } else {
-      setDialogConf({
-        ...dialogConf,
-        title: STATUS.SUCCESS,
+      setDialogInfo({
+        ...dialogInfo,
+        title: SUCCESS,
+        titleType: SUCCESS,
         content: ACCESS_CODE_NOT_FOUND,
         isSuccess: false
       });
@@ -84,11 +89,12 @@ const ValidateEmail = () => {
         open={dialogOpen}
         handleClose={handleCardDialogClose}
         handleProceed={handleCardDialogClose}
-        title={dialogConf.title}
-        content={dialogConf.content}
+        title={dialogInfo.title}
+        titleType={dialogInfo.titleType}
+        content={dialogInfo.content}
         contentProps={{ style: { marginBottom: '-2rem', marginTop: '1rem' } }}
         isCancelButton={false}
-        proceedButtonText={dialogConf.proceedButtonText}
+        proceedButtonText={dialogInfo.proceedButtonText}
       />
       <Helmet title="Validate User" />
       <Toolbar>

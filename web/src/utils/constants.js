@@ -103,5 +103,7 @@ export const LOGIN_PROPS = {
 
 export const STATUS = {
   SUCCESS: 'Success',
-  FAILED: 'Failed'
+  FAILED: 'Failed',
+  WARNING: 'Warning',
+  ERROR: 'Error'
 };

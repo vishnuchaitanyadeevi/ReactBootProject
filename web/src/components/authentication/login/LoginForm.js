@@ -22,7 +22,7 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { LoadingButton } from '@mui/lab';
 import { LOCAL_STORAGE_KEYS, PATTERN, LOGIN_PROPS, ROUTES, STATUS } from '../../../utils/constants';
 import { login } from '../../../utils/auth-service';
-import { ERRORS, NOTIFICATIONS } from '../../../utils/messages';
+import { ERRORS, NOTIFICATIONS, PASSWORD_POLICY } from '../../../utils/messages';
 import { LoginOtp } from './LoginOtp';
 import DialogComponent from '../../Dialog';
 // hooks
@@ -47,6 +47,7 @@ export default function LoginForm() {
     USERNAME_REQUIRED
   } = ERRORS;
   const { PASSWORD_RESET_SUCCESS, CHECK_EMAIL_ID } = NOTIFICATIONS;
+  const { SUCCESS } = STATUS;
 
   const [showPassword, setShowPassword] = useBoolean(false);
   const [showResetPassword, setShowResetPassword] = useBoolean(false);
@@ -56,8 +57,9 @@ export default function LoginForm() {
   const [view, setView] = useState(defaultView);
   const [otpDialog, setOtpDialog] = useBoolean(false);
   const [dialogOpen, setDialogOpen] = useBoolean(false);
-  const [dialogInfo, setDialofInfo] = useState({
-    title: STATUS.Success,
+  const [dialogInfo, setDialogInfo] = useState({
+    title: SUCCESS,
+    titleType: SUCCESS,
     content: CHECK_EMAIL_ID,
     proceedButtonText: 'Ok',
     isCancelButton: false,
@@ -194,9 +196,9 @@ export default function LoginForm() {
 
   useEffect(() => {
     if (isForgotResetPasswordView) {
-      setDialofInfo({ ...dialogInfo, content: PASSWORD_RESET_SUCCESS });
+      setDialogInfo({ ...dialogInfo, content: PASSWORD_RESET_SUCCESS });
     } else {
-      setDialofInfo({ ...dialogInfo, content: CHECK_EMAIL_ID });
+      setDialogInfo({ ...dialogInfo, content: CHECK_EMAIL_ID });
     }
   }, [view]);
 
@@ -207,6 +209,7 @@ export default function LoginForm() {
         handleClose={handleCardDialogClose}
         handleProceed={handleCardDialogClose}
         title={dialogInfo.title}
+        titleType={dialogInfo.titleType}
         content={dialogInfo.content}
         contentProps={dialogInfo.contentProps}
         proceedButtonText={dialogInfo.proceedButtonText}
@@ -283,7 +286,7 @@ export default function LoginForm() {
             <Stack spacing={3}>
               <Typography>
                 {`${isForgotUsernameView ? 'Username' : 'Reset Password Link'} will be sent to your registered Email ID.
-                Please enter registered Email Id. `}
+                Please enter registered Email ID. `}
               </Typography>
               <TextField
                 fullWidth
@@ -369,23 +372,11 @@ export default function LoginForm() {
                   }}
                 >
                   <ul style={{ listStyleType: 'circle', listStylePosition: 'inside' }}>
-                    <li style={{ padding: '0.2rem 0.5rem 0 0.5rem' }}>
-                      <span style={{ marginLeft: '-0.5rem' }}>Be at least eight characters long</span>
-                    </li>
-                    <li style={{ padding: '0.2rem 0.5rem 0 0.5rem' }}>
-                      <span style={{ marginLeft: '-0.5rem' }}>Should be alphanumeric</span>
-                    </li>
-                    <li style={{ padding: '0.2rem 0.5rem 0 0.5rem' }}>
-                      <span style={{ marginLeft: '-0.5rem' }}>No case sensitivity</span>
-                    </li>
-                    <li style={{ padding: '0.2rem 0.5rem 0 0.5rem' }}>
-                      <span style={{ marginLeft: '-0.5rem' }}>
-                        No special characters (like &,%, * , =,/ ,_,.) to be used
-                      </span>
-                    </li>
-                    <li style={{ padding: '0.2rem 0.5rem 0 0.5rem' }}>
-                      <span style={{ marginLeft: '-0.5rem' }}>Enter and Confirm password should match</span>
-                    </li>
+                    {PASSWORD_POLICY.map((msg) => (
+                      <li style={{ padding: '0.2rem 0.5rem 0 0.5rem' }}>
+                        <span style={{ marginLeft: '-0.5rem' }}>{msg}</span>
+                      </li>
+                    ))}
                   </ul>
                 </Popover>
               </>
