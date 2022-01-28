@@ -11,7 +11,7 @@ import { COMPONENTS } from '../../utils/constants';
 import { SEVICE_DASHBOARD_FILTER_MASTER_DATA } from '../../components/ServiceBoard/data';
 import { POST_OFFICE } from '../../redux/constants';
 import SimpleTable from '../../components/table/simpleTable';
-import { invoiceData } from './data';
+import { invoiceData } from './Data';
 import './invoiceList.scss';
 
 function InvoiceList() {
