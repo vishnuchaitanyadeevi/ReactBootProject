@@ -21,23 +21,10 @@ export default function SimpleTable({
   showActionColumn,
   type,
   title,
-  showIssueColumn,
-  issuetype,
-  issuetitle,
-  issueheader,
-  showSaveChangesColumn,
-  saveChangestype,
-  saveChangestitle,
-  showEditColumn,
-  edittype,
-  edittitle,
-  showPrintColumn,
-  printtype,
-  printtitle,
-  trialColumn,
   btnLabel,
   numericFields,
   headCellsType,
+  isGlobalFilter = true,
   ...other
 }) {
   const { themeMode, onChangeMode } = useSettings();
@@ -147,78 +134,6 @@ export default function SimpleTable({
         return (
           <Button variant="contained" size="small">
             {title}
-          </Button>
-        );
-      default:
-        return undefined;
-    }
-  };
-  const ActionIssueBody = (options) => {
-    switch (issuetype) {
-      case 'text':
-        return (
-          <Typography onClick={() => handleClick(options)} style={{ cursor: 'pointer' }}>
-            {issuetitle}
-          </Typography>
-        );
-      case 'button':
-        return (
-          <Button variant="contained" size="small" style={{ marginLeft: '0.4rem', padding: '0.2rem' }}>
-            {issuetitle}
-          </Button>
-        );
-      default:
-        return undefined;
-    }
-  };
-  const ActionSaveChangesBody = (options) => {
-    switch (saveChangestype) {
-      case 'text':
-        return (
-          <Typography onClick={() => handleClick(options)} style={{ cursor: 'pointer' }}>
-            {saveChangestitle}
-          </Typography>
-        );
-      case 'button':
-        return (
-          <Button variant="contained" size="small">
-            {saveChangestitle}
-          </Button>
-        );
-      default:
-        return undefined;
-    }
-  };
-  const ActionEditBody = (options) => {
-    switch (edittype) {
-      case 'text':
-        return (
-          <Typography onClick={() => handleClick(options)} style={{ cursor: 'pointer' }}>
-            {edittitle}
-          </Typography>
-        );
-      case 'button':
-        return (
-          <Button variant="contained" size="small" style={{ marginLeft: '0.4rem', padding: '0.2rem' }}>
-            {edittitle}
-          </Button>
-        );
-      default:
-        return undefined;
-    }
-  };
-  const ActionPrintBody = (options) => {
-    switch (printtype) {
-      case 'text':
-        return (
-          <Typography onClick={() => handleClick(options)} style={{ cursor: 'pointer' }}>
-            {printtitle}
-          </Typography>
-        );
-      case 'button':
-        return (
-          <Button variant="contained" size="small" style={{ marginLeft: '0.4rem', padding: '0.2rem' }}>
-            {printtitle}
           </Button>
         );
       default:
@@ -356,7 +271,7 @@ export default function SimpleTable({
       )}
       <Grid item xs={12} lg={12}>
         <DataTable
-          header={header}
+          header={isGlobalFilter ? header : null}
           globalFilter={globalFilter}
           value={rowData}
           editingRows={editingRows}
@@ -393,71 +308,6 @@ export default function SimpleTable({
               columnKey="actionKey"
               body={(options) => ActionBody(options)}
               style={{
-                paddingBottom: '0.1rem',
-                paddingTop: '0.1rem'
-              }}
-            />
-          ) : null}
-          {showIssueColumn ? (
-            <Column
-              header="ISSUE"
-              columnKey="actionKey"
-              body={(options) => ActionIssueBody(options)}
-              style={{
-                minWidth: '6rem',
-                width: '6rem',
-                paddingBottom: '0.1rem',
-                paddingTop: '0.1rem'
-              }}
-            />
-          ) : null}
-          {showSaveChangesColumn ? (
-            <Column
-              header="SAVE CHANGES"
-              columnKey="actionKey"
-              body={(options) => ActionSaveChangesBody(options)}
-              style={{
-                minWidth: '6rem',
-                width: '6rem',
-                paddingBottom: '0.1rem',
-                paddingTop: '0.1rem'
-              }}
-            />
-          ) : null}
-          {showEditColumn ? (
-            <Column
-              header="EDIT"
-              columnKey="actionKey"
-              body={(options) => ActionEditBody(options)}
-              style={{
-                minWidth: '6rem',
-                width: '6rem',
-                paddingBottom: '0.1rem',
-                paddingTop: '0.1rem'
-              }}
-            />
-          ) : null}
-          {trialColumn ? (
-            <Column
-              header="TRIAL"
-              columnKey="actionKey"
-              body={(options) => ActionPrintBody(options)}
-              style={{
-                width: '10%',
-                position: 'sticky',
-                paddingBottom: '0.1rem',
-                paddingTop: '0.1rem'
-              }}
-            />
-          ) : null}
-          {showPrintColumn ? (
-            <Column
-              header="PRINT"
-              columnKey="actionKey"
-              body={(options) => ActionPrintBody(options)}
-              style={{
-                minWidth: '6rem',
-                width: '6rem',
                 paddingBottom: '0.1rem',
                 paddingTop: '0.1rem'
               }}

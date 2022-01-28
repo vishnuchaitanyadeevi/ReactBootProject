@@ -64,6 +64,11 @@ export const PATTERN = {
   ALPHANUMERIC: /^[a-zA-Z0-9]*$/ // Alphanumeric
 };
 
+export const DATE_FORMAT = {
+  INPUT_FORMAT: 'dd-MM-yyyy',
+  VIEWS: ['year', 'month', 'day']
+};
+
 export const COMPONENTS = {
   TEXT_FIELD: 'TEXT_FIELD',
   SELECT_BOX: 'SELECT_BOX',
@@ -72,7 +77,10 @@ export const COMPONENTS = {
   AUTOCOMPLETE: 'AUTOCOMPLETE',
   DATEPICKER: 'DATEPICKER',
   TEXT_AREA: 'TEXT_AREA',
-  MULTI_SELECT_BOX: 'MULTI_SELECT_BOX'
+  MULTI_SELECT_BOX: 'MULTI_SELECT_BOX',
+  BUTTON: 'BUTTON',
+  LINK: 'LINK',
+  NONE: 'NONE'
 };
 
 export const NOTIFICATION_MSG_FORMAT = { type: '', msg: '', status: false };

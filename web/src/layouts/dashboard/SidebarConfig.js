@@ -31,6 +31,11 @@ const sidebarConfig = [
     items: [
       { title: 'dashboard', path: PATH_DASHBOARD.general.home },
       {
+        title: 'Administration',
+        path: '',
+        children: [{ title: 'Administration', path: '/administration' }]
+      },
+      {
         title: 'Master List',
         path: PATH_DASHBOARD.general.service,
         children: [
@@ -73,7 +78,6 @@ const sidebarConfig = [
         path: '',
         children: [
           { title: 'Invoice List', path: '/invoiceList' },
-          { title: 'TableTrial', path: '/tabletrial' },
           { title: 'Invoice Overview', path: '', isPending: true }
         ]
       },

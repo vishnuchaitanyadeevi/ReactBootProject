@@ -41,7 +41,7 @@ function ContractList() {
     contract: { value: null, matchMode: FilterMatchMode.CONTAINS }
   });
 
-  const { TEXT_FIELD, AUTOCOMPLETE } = COMPONENTS;
+  const { TEXT_FIELD, AUTOCOMPLETE, DATEPICKER } = COMPONENTS;
   const FILTER_COMPONETS = [
     {
       control: AUTOCOMPLETE,
@@ -256,6 +256,7 @@ function ContractList() {
   const numericFields = ['id', 'contractNumber', 'contractSignOn', 'contractStartDate', 'status', 'activeProjects'];
   const numericFieldsExpandedData = ['id', 'status', 'project_number', 'project_start_date', 'end_date'];
   const headCellsType = ['NONE', 'NONE', 'NONE', 'DATE', 'DATE', 'NONE', 'NONE'];
+  const headCellsExapndedType = ['NONE', 'NONE', 'NONE', 'DATE', 'DATE', 'NONE', 'NONE'];
 
   return (
     <Grid className="contract_list_main_cls">
@@ -319,6 +320,7 @@ function ContractList() {
             numericFieldsExpandedData={numericFieldsExpandedData}
             deleteRowData={deleteRowData}
             headCellsType={headCellsType}
+            headCellsExapndedType={headCellsExapndedType}
           />
         </Grid>
       </Grid>

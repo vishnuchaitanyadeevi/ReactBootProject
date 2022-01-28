@@ -1,31 +1,81 @@
-import React, { useState } from 'react';
-import './InvoiceList.scss';
-import { Grid, Typography, TextField, Accordion, AccordionSummary, AccordionDetails, Button } from '@mui/material';
-import { ArrowRight } from '@mui/icons-material/';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import { Tooltip } from 'primereact/tooltip';
-import AutocompleteWidget from '../../components/Autocomplete/autocompletWidget';
-import BasicDatePicker from '../../components/pickers/BasicDatePicker';
-import InvoiceListingData from './InvoiceListingData.json';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { Grid, Typography, Button } from '@mui/material';
+import ErrorIcon from '@mui/icons-material/Error';
+import SaveIcon from '@mui/icons-material/Save';
+import EditIcon from '@mui/icons-material/Edit';
+import PrintIcon from '@mui/icons-material/Print';
+import Filters from '../../components/Filter/filter';
+import { COMPONENTS } from '../../utils/constants';
+import { SEVICE_DASHBOARD_FILTER_MASTER_DATA } from '../../components/ServiceBoard/data';
+import { POST_OFFICE } from '../../redux/constants';
 import SimpleTable from '../../components/table/simpleTable';
+import { invoiceData } from './data';
+import './invoiceList.scss';
 
 function InvoiceList() {
-  const [tableData, setTableData] = useState(InvoiceListingData);
+  const masterData = useSelector((state) => state.MasterDataReducer);
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const [invoiceData, setInvoiceData] = useState(null);
   const [editingRows, setEditingRows] = useState({});
   const numericFields = [
     'id',
-    'invoice_number',
-    'invoice_date',
-    'project_number',
-    'customer_no',
-    'gross_amt',
+    'InvoiceNumber',
+    'InvoiceDate',
+    'ProjectNumber',
+    'CustomerNo',
+    'GrossAmt',
     'discount_%',
-    'discount_amt',
-    'net_amt',
-    'vat_amt',
-    'net_w_vat_amt'
+    'DiscountAmt',
+    'NetAmt',
+    'VatAmt',
+    'NetWVatAmt'
   ];
+  useEffect(() => {
+    getInvoiceData();
+  }, []);
+  const getInvoiceData = () => {
+    if (invoiceData) {
+      const displayData = [];
+      invoiceData.map((item) => {
+        const {
+          InvoiceNumber,
+          InvoiceDate,
+          ProjectNumber,
+          CustomerNo,
+          CustomerName,
+          LocationName,
+          GrossAmt,
+          Discount,
+          DiscountAmt,
+          NetAmt,
+          VatAmt,
+          NetWVatAmt,
+          id
+        } = item;
+        return displayData.push({
+          InvoiceNumber,
+          InvoiceDate,
+          ProjectNumber,
+          CustomerNo,
+          CustomerName,
+          LocationName,
+          GrossAmt,
+          Discount,
+          DiscountAmt,
+          NetAmt,
+          VatAmt,
+          NetWVatAmt,
+          id
+        });
+      });
+      if (displayData.length > 0) {
+        setInvoiceData(displayData);
+      }
+    }
+  };
   const countries = [
     { label: 'Saudi Arabia', value: 'Saudi Arabia' },
     { label: 'Qatar', value: 'Qatar' },
@@ -34,113 +84,146 @@ function InvoiceList() {
     { label: 'Iraq', value: 'Iraq' },
     { label: 'Bahrain', value: 'Bahrain' }
   ];
+
+  const handleIssue = (val) => console.log('IssueData...', val);
+  const handleSaveChanges = (val) => console.log('SaveChanges...', val);
+  const handleEdit = (val) => console.log('EditData...', val);
+  const handlePrint = (val) => console.log('PrintData...', val);
+
   const columnDataForInvoice = [
+    { field: 'id', header: 'ID', sortable: true, filter: true, isFrozen: true },
+    { field: 'InvoiceNumber', header: 'Invoice Number', sortable: true, filter: true, isFrozen: true },
+    { field: 'InvoiceDate', header: 'Invoice Date', sortable: true, filter: true, isFrozen: false },
+    { field: 'ProjectNumber', header: 'Project Number', sortable: true, filter: true, isFrozen: false },
+    { field: 'CustomerNo', header: 'Customer No.', sortable: true, filter: true, isFrozen: false },
+    { field: 'CustomerName', header: 'Customer Name', sortable: true, filter: true, isFrozen: false },
+    { field: 'LocationName', header: 'Location Name', sortable: true, filter: true, isFrozen: false },
+    { field: 'GrossAmt', header: 'Gross AMT', sortable: true, filter: true, isFrozen: false },
+    { field: 'discount_%', header: 'Discount %', sortable: true, filter: true, isFrozen: false },
+    { field: 'DiscountAmt', header: 'Discount AMT', sortable: true, filter: true, isFrozen: false },
+    { field: 'NetAmt', header: 'NET AMT', sortable: true, filter: true, isFrozen: false },
+    { field: 'VatAmt', header: 'VAT AMT', sortable: true, filter: true, isFrozen: false },
+    { field: 'NetWVatAmt', header: 'Net w VAT AMT', sortable: true, filter: true, isFrozen: true },
     {
-      field: 'id',
-      header: 'ID',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: true
+      field: 'issue',
+      header: 'Issue',
+      icon: <ErrorIcon style={{ cursor: 'pointer', textAlign: 'center' }} />,
+      onClick: handleIssue
     },
     {
-      field: 'invoice_number',
-      header: 'Invoice Number',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: true
+      field: 'saveChanges',
+      header: 'Save Changes',
+      icon: <SaveIcon style={{ cursor: 'pointer', textAlign: 'center' }} />,
+      onClick: handleSaveChanges
     },
     {
-      field: 'invoice_date',
-      header: 'Invoice Date',
-      editorElement: null,
-      style: { width: '10%' },
-      sortable: true,
-      filter: true,
-      isFrozen: false
+      field: 'edit',
+      header: 'Edit',
+      icon: <EditIcon style={{ cursor: 'pointer', textAlign: 'center' }} />,
+      onClick: handleEdit
     },
     {
-      field: 'project_number',
-      header: 'Project Number',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: false
-    },
-    {
-      field: 'customer_no',
-      header: 'Customer No.',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: false
-    },
-    {
-      field: 'customer_name',
-      header: 'Customer Name',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: false
-    },
-    {
-      field: 'location_name',
-      header: 'Location Name',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: false
-    },
-    {
-      field: 'gross_amt',
-      header: 'Gross AMT',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: false
-    },
-    {
-      field: 'discount_%',
-      header: 'Discount %',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: false
-    },
-    {
-      field: 'discount_amt',
-      header: 'Discount AMT',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: false
-    },
-    {
-      field: 'net_amt',
-      header: 'NET AMT',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: false
-    },
-    {
-      field: 'vat_amt',
-      header: 'VAT AMT',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: false
-    },
-    {
-      field: 'net_w_vat_amt',
-      header: 'Net w VAT AMT',
-      editorElement: null,
-      sortable: true,
-      filter: true,
-      isFrozen: true
+      field: 'print',
+      header: 'Print',
+      icon: <PrintIcon style={{ cursor: 'pointer', textAlign: 'center' }} />,
+      onClick: handlePrint
     }
   ];
+  const { country, office, salesman, serviceman, status } = masterData;
+  const { TEXT_FIELD, AUTOCOMPLETE, DATEPICKER } = COMPONENTS;
+  const FILTER_COMPONETS = [
+    {
+      control: AUTOCOMPLETE,
+      key: 'country',
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      label: 'invoiceList.country',
+      placeholder: 'invoiceList.country',
+      columnWidth: '2',
+      options: country
+    },
+    {
+      control: AUTOCOMPLETE,
+      key: 'office',
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      label: 'invoiceList.office',
+      placeholder: 'invoiceList.office',
+      columnWidth: '2',
+      options: office
+    },
+    {
+      control: AUTOCOMPLETE,
+      key: 'salesman',
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      label: 'invoiceList.salesman',
+      placeholder: 'invoiceList.salesman',
+      columnWidth: '2',
+      options: salesman
+    },
+    {
+      control: AUTOCOMPLETE,
+      key: 'serviceman',
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      label: 'invoiceList.serviceman',
+      placeholder: 'invoiceList.serviceman',
+      columnWidth: '2',
+      options: serviceman
+    },
+    {
+      control: TEXT_FIELD,
+      key: 'customer',
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      label: 'invoiceList.customer',
+      placeholder: 'invoiceList.customer',
+      columnWidth: '2'
+    },
+    {
+      control: TEXT_FIELD,
+      key: 'projinvonacno',
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      label: 'invoiceList.projinvonacno',
+      placeholder: 'invoiceList.projinvonacno',
+      columnWidth: '2'
+    },
+    {
+      control: AUTOCOMPLETE,
+      key: 'status',
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      label: 'invoiceList.status',
+      placeholder: 'invoiceList.status',
+      columnWidth: '2',
+      options: status
+    },
+    {
+      control: DATEPICKER,
+      key: 'date',
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      label: 'addCallout.date',
+      inputFormat: 'dd-MM-yyyy',
+      views: ['year', 'month', 'day'],
+      columnWidth: '2'
+    },
+    {
+      control: DATEPICKER,
+      key: 'date',
+      groupStyle: { marginLeft: '0.5rem', marginRight: '0.5rem' },
+      label: 'addCallout.date',
+      inputFormat: 'dd-MM-yyyy',
+      views: ['year', 'month', 'day'],
+      columnWidth: '2'
+    }
+  ];
+  const getFilterData = (data) => {
+    console.log('Filtered data: ', data);
+  };
+  const getFilterDataPayloadChange = (key, val) => {
+    console.log(key, val);
+    if (key === 'country') {
+      const country = SEVICE_DASHBOARD_FILTER_MASTER_DATA.OFFICE.find((office) => office.country === val);
+      if (country) {
+        dispatch({ type: POST_OFFICE, data: country.offices });
+      }
+    }
+  };
   const headCellsType = [
     'NONE',
     'NONE',
@@ -154,7 +237,11 @@ function InvoiceList() {
     'NONE',
     'NONE',
     'NONE',
-    'NONE'
+    'NONE',
+    'ICON',
+    'ICON',
+    'ICON',
+    'ICON'
   ];
 
   return (
@@ -162,69 +249,23 @@ function InvoiceList() {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Typography variant="h4" align="center">
-            Invoice List
+            {t('Invoice List')}
           </Typography>
         </Grid>
-        {/* Filter section Start */}
-        <Grid container spacing={3} style={{ marginTop: '0px', marginLeft: '10px' }}>
-          <Grid item xs={12}>
-            <Accordion style={{ boxShadow: 'none' }} fullWidth>
-              <AccordionSummary
-                style={{ display: 'flex', alignItems: 'center', flexDirection: 'row-reverse' }}
-                expandIcon={<ArrowRight />}
-                aria-controls="panel1d-content"
-                id="panel1d-header"
-              >
-                <Typography variant="h6">Filters</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                {/* Autocompletewidget grid container start */}
-                <Grid Container spacing={3} style={{ display: 'flex', alignItems: 'center' }}>
-                  <Grid item xs={6} sm={2}>
-                    <AutocompleteWidget options={countries} label="Country" disablePortal autoSelect size="small" />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <AutocompleteWidget options={countries} label="Office" disablePortal autoSelect size="small" />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <AutocompleteWidget options={countries} label="Salesmen" disablePortal autoSelect size="small" />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <AutocompleteWidget options={countries} label="Servicemen" disablePortal autoSelect size="small" />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <TextField fullWidth label="Customer" size="small" />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <TextField fullWidth label="Proj.Inv.OnAc.No" size="small" />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <AutocompleteWidget options={countries} label="Status" disablePortal autoSelect size="small" />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <BasicDatePicker label="Date" inputFormat="dd-MM-yyyy" views={['year', 'month', 'day']} />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <BasicDatePicker label="Date" inputFormat="dd-MM-yyyy" views={['year', 'month', 'day']} />
-                  </Grid>
-                  <Grid item xs={6} sm={2}>
-                    <Button variant="contained" size="small">
-                      Filter
-                    </Button>
-                  </Grid>
-                </Grid>
-                {/* Autocompletewidget grid container end */}
-              </AccordionDetails>
-            </Accordion>
-          </Grid>
+        <Grid item xs={12}>
+          <Filters
+            components={FILTER_COMPONETS}
+            apiUrl="dummyUrl"
+            getFilterData={getFilterData}
+            getFilterDataPayloadChange={getFilterDataPayloadChange}
+          />
         </Grid>
-        {/* Filter section xs={12} end */}
       </Grid>
       {/* Grid for simple table */}
       <Grid container spacing={3} style={{ marginTop: '1rem' }}>
         <Grid item xs={12}>
           <SimpleTable
-            rowData={InvoiceListingData}
+            rowData={invoiceData}
             headerData={columnDataForInvoice}
             paginator
             rowsPerPageOptions={[10, 20, 50, 100]}
@@ -238,20 +279,6 @@ function InvoiceList() {
             dataKey="id"
             editMode="row"
             numericFields={numericFields}
-            showIssueColumn
-            issueheader="Issue"
-            issuetype="button"
-            issuetitle="Issue"
-            showSaveChangesColumn
-            saveChangestype="button"
-            saveChangestitle="Save Changes"
-            showEditColumn
-            edittype="button"
-            edittitle="Edit"
-            showPrintColumn
-            printtype="button"
-            printtitle="Print"
-            trialColumn
             headCellsType={headCellsType}
           />
         </Grid>

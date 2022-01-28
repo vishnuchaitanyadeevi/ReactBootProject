@@ -22,19 +22,39 @@ function AdministrationLandingPage() {
           </Typography>
         </Grid>
       </Grid>
-
-      <Grid style={{ marginTop: 0 }} container spacing={3}>
-        <Grid item xs={2} style={{ cursor: 'pointer' }}>
-          <Grid
-            onClick={() => navigate('/userList')}
-            style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}
-          >
-            <IconButton style={{ backgroundColor: '#94b1bf', padding: '1rem' }}>
-              <GroupIcon style={{ height: 50, width: 50, color: '#FFF' }} />
-            </IconButton>
-            <Typography style={{ color: '#637381', marginTop: '0.5rem' }} variant="h6">
-              {`${t('administration.users')}`}
-            </Typography>
+      <Grid container spacing={2} style={{ marginTop: '0.1rem' }}>
+        <Grid item xs={3}>
+          <Grid style={{ marginTop: 0 }} container spacing={3}>
+            <Grid item xs={2} style={{ cursor: 'pointer' }}>
+              <Grid
+                onClick={() => navigate('/userList')}
+                style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}
+              >
+                <IconButton style={{ backgroundColor: '#94b1bf', padding: '1rem' }}>
+                  <GroupIcon style={{ height: 50, width: 50, color: '#FFF' }} />
+                </IconButton>
+                <Typography style={{ color: '#637381', marginTop: '0.5rem' }} variant="h6">
+                  {`${t('administration.users')}`}
+                </Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={3}>
+          <Grid style={{ marginTop: 0 }} container spacing={3}>
+            <Grid item xs={2} style={{ cursor: 'pointer' }}>
+              <Grid
+                onClick={() => navigate('/countryList')}
+                style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}
+              >
+                <IconButton style={{ backgroundColor: '#94b1bf', padding: '1rem' }}>
+                  <GroupIcon style={{ height: 50, width: 50, color: '#FFF' }} />
+                </IconButton>
+                <Typography style={{ color: '#637381', marginTop: '0.5rem', textAlign: 'center' }} variant="h6">
+                  {`${t('administration.countryList')}`}
+                </Typography>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
