@@ -12,7 +12,7 @@ import useBoolean from '../../../hooks/useBoolean';
 
 const ValidateEmail = () => {
   const navigate = useNavigate();
-  const { EMAIL_VERIFICATION_SUCCESS, PASSWORD_RESET_FAILED, ACCESS_CODE_NOT_FOUND } = NOTIFICATIONS;
+  const { EMAIL_VERIFICATION_SUCCESS, EMAIL_VERIFICATION_FAILED, ACCESS_CODE_NOT_FOUND } = NOTIFICATIONS;
   const { SUCCESS, FAILED } = STATUS;
   const [loader, setLoader] = useState(true);
   const [dialogOpen, setDialogOpen] = useBoolean(false);
@@ -43,7 +43,7 @@ const ValidateEmail = () => {
         ...dialogInfo,
         title: FAILED,
         titleType: FAILED,
-        content: PASSWORD_RESET_FAILED,
+        content: EMAIL_VERIFICATION_FAILED,
         isSuccess: false,
         proceedButtonText: 'Ok'
       });
