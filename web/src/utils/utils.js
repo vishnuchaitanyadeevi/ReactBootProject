@@ -4,6 +4,10 @@ import { PATTERN, REGX_TYPE } from './constants';
 
 export const setLocalStorageItem = (key, val) => localStorage.setItem(key, val);
 
+export const clearLocalStorage = () => localStorage.clear();
+
+export const clearSessionStorage = () => sessionStorage.clear();
+
 export const ageCalculator = (date) => {
   const a = moment(new Date());
   const b = moment(date);
@@ -75,3 +79,5 @@ export const isName = (str) => !PATTERN.NAME.test(str);
 
 export const differenceBetweenArr = (arrayOne, arrayTwo, keyName) =>
   arrayOne.filter(({ [keyName]: id1 }) => !arrayTwo.some(({ [keyName]: id2 }) => id2 === id1));
+
+export const isObject = (val) => val && val instanceof Object;

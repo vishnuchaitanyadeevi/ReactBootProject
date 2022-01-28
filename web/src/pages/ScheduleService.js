@@ -224,8 +224,8 @@ export default function ServiceDashboard() {
           open={cardDialog}
           handleClose={handleCardDialogClose}
           handleProceed={handleCardDialogClose}
-          title="serviceDashboard.customerAndContactDetails"
-          proceedButtonText="dialog.ok"
+          title="Customer and contact details"
+          proceedButtonText="Ok"
         />
         <Grid item xs={12}>
           <Filters

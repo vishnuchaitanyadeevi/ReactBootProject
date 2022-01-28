@@ -59,7 +59,9 @@ export const PATTERN = {
   EMAIL: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
   // PHONE: /^(?!0000000000)(?!000-000-0000)(?:\?1[-.●]?)?\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/
   PHONE: /^\([2-9][\d]{2}\) [\d]{3}-[\d]{4}$/,
-  NAME: /^[a-zA-Z][a-zA-Z ]*$/
+  NAME: /^[a-zA-Z][a-zA-Z ]*$/, // Alphabets
+  USERNAME: /^[a-zA-Z0-9.]*$/, // Alphanumeric with dot
+  ALPHANUMERIC: /^[a-zA-Z0-9]*$/ // Alphanumeric
 };
 
 export const DATE_FORMAT = {
@@ -81,4 +83,36 @@ export const COMPONENTS = {
   NONE: 'NONE'
 };
 
+export const NOTIFICATION_MSG_FORMAT = { type: '', msg: '', status: false };
+
+export const SNACK_BAR_MESSAGE_TYPE = {
+  SUCCESS: 'success',
+  ERROR: 'error',
+  WARNING: 'warning'
+};
+
+export const ROUTES = {
+  FORGOT_PASSWORD: '/forgotPassword',
+  DEFAULT: '/',
+  HOME: '/home',
+  LOGOUT: '/logout',
+  VALIDATE: '/validate',
+  VALIDATE_ACCESS_CODE: '/validate/:accessCode',
+  LOGIN: '/login',
+  RESET_PASSWORD: '/resetPassword'
+};
+
+export const LOGIN_PROPS = {
+  LOGIN_PAGE: 'login',
+  FORGOT_USERNAME: 'forgotUsername',
+  FORGOT_PASSWORD: 'forgotPwd',
+  RESET_PASSORD: 'resetPassword'
+};
+
+export const STATUS = {
+  SUCCESS: 'Success',
+  FAILED: 'Failed',
+  WARNING: 'Warning',
+  ERROR: 'Error'
+};
 export const rowsPerPageOptions = [10, 20, 50, 100, 500];

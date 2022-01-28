@@ -134,8 +134,7 @@
     "contract": "Contract",
     "status": "Status",
     "location": "Location",
-    "servicemen": "Servicemen",
-    "customerAndContactDetails": "Customer and contact details"
+    "servicemen": "Servicemen"
   },
   "filter": {
     "filter": "Filter",
@@ -276,7 +275,12 @@
     "dialog": "Dialog",
     "cancel": "Cancel",
     "proceed": "Proceed",
-    "ok": "Ok"
+    "ok": "Ok",
+    "succes": "Success"
+  },
+  "login": {
+    "username": "Username",
+    "password": "Password"
   },
   "administration": {
     "administration": "Administration",

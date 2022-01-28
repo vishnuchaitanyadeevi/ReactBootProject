@@ -8,6 +8,7 @@ import LogoOnlyLayout from '../layouts/LogoOnlyLayout';
 import LoadingScreen from '../components/LoadingScreen';
 import Login from '../pages/auth/Login';
 import MainLayout from '../layouts/main';
+import { ROUTES } from '../utils/constants';
 
 // ----------------------------------------------------------------------
 const Loadable = (Component) => (props) => {
@@ -35,12 +36,22 @@ const Loadable = (Component) => (props) => {
   );
 };
 
+const { VALIDATE_ACCESS_CODE, RESET_PASSWORD } = ROUTES;
+
 export default function Router() {
   return useRoutes([
     // Dashboard Routes
     {
       path: 'login',
       element: <Login />
+    },
+    {
+      path: RESET_PASSWORD,
+      element: <Login />
+    },
+    {
+      path: VALIDATE_ACCESS_CODE,
+      element: <ValidateEmail />
     },
     {
       /* path: 'dashboard',
@@ -217,6 +228,7 @@ const Customers = Loadable(lazy(() => import('../pages/Customers')));
 const AddCallOutPage = Loadable(lazy(() => import('../pages/AddCallOut/AddCallOutPage')));
 const ServiceDashboardPage = Loadable(lazy(() => import('../pages/ScheduleService')));
 const TerminateProjectPage = Loadable(lazy(() => import('../pages/TerminateAllProject/TerminateProject')));
-const InvoiceListPage = Loadable(lazy(() => import('../pages/InvoiceList/invoiceList')));
+const InvoiceListPage = Loadable(lazy(() => import('../pages/InvoiceList/InvoiceList')));
+const ValidateEmail = Loadable(lazy(() => import('../components/authentication/login/ValidateEmail')));
 const AdministrationLandingPage = Loadable(lazy(() => import('../pages/Administration/AdministrationLandingPage')));
 const UserListPage = Loadable(lazy(() => import('../pages/Administration/UserManagement/UserList')));
