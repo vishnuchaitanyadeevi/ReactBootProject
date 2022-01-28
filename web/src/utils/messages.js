@@ -10,7 +10,7 @@ export const NOTIFICATIONS = {
   EMAIL_VERIFICATION_FAILED: 'Email verification failed! Please resend password reset link again.',
   INVALID_USER_PASSWORD: 'Invalid username or password.',
   PASSWORD_RESET_FAILED: 'Email verification failed, please resent password again.',
-  PASSWORD_RESET_SUCCESS: 'Password reset successfully, Please login.',
+  PASSWORD_RESET_SUCCESS: 'Password reset successfully. Login to continue.',
   CHECK_EMAIL_ID: 'Please check your registered Email ID.'
 };
 
