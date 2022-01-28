@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router';
 import * as Yup from 'yup';
-import { Route, useNavigate } from 'react-router-dom';
+import { Route, useNavigate, Link as RouterLink } from 'react-router-dom';
 import { FormikProvider, Form, useFormik } from 'formik';
 import { Icon } from '@iconify/react';
 import axios from 'axios';
@@ -15,6 +15,8 @@ import { LOCAL_STORAGE_KEYS } from '../../../utils/constants';
 import { login } from '../../../utils/auth-service';
 // hooks
 import useIsMountedRef from '../../../hooks/useIsMountedRef';
+// routes
+import { PATH_AUTH } from '../../../routes/paths';
 
 const { TOKEN_KEY } = LOCAL_STORAGE_KEYS;
 export default function LoginForm() {

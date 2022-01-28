@@ -256,6 +256,22 @@
     "serviceRelatedNote": "Service Related Note",
     "addNewPart": "Add New Part"
   },
+  "invoiceList": {
+    "Invoice List": "Invoice List",
+    "country": "Country",
+    "office": "Office",
+    "salesman": "Salesman",
+    "serviceman": "Serviceman",
+    "customer": "Customer",
+    "projinvonacno": "Proj. Inv. OnAC. No.",
+    "status": "Status"
+  },
+  "CountryList": {
+    "CountryList": "Country List",
+    "AddNewCountry": "Add New Country",
+    "CountryName": "Country Name",
+    "Currency": "Currency"
+  },
   "dialog": {
     "dialog": "Dialog",
     "cancel": "Cancel",
@@ -265,7 +281,8 @@
   "administration": {
     "administration": "Administration",
     "whatDoYouWantToDo": "What do you want to do?",
-    "users": "Users"
+    "users": "Users",
+    "countryList": "Country List"
   },
   "userList": {
     "internalUser": "Internal Users",

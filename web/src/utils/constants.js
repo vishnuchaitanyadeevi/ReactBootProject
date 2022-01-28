@@ -62,6 +62,11 @@ export const PATTERN = {
   NAME: /^[a-zA-Z][a-zA-Z ]*$/
 };
 
+export const DATE_FORMAT = {
+  INPUT_FORMAT: 'dd-MM-yyyy',
+  VIEWS: ['year', 'month', 'day']
+};
+
 export const COMPONENTS = {
   TEXT_FIELD: 'TEXT_FIELD',
   SELECT_BOX: 'SELECT_BOX',
@@ -70,7 +75,10 @@ export const COMPONENTS = {
   AUTOCOMPLETE: 'AUTOCOMPLETE',
   DATEPICKER: 'DATEPICKER',
   TEXT_AREA: 'TEXT_AREA',
-  MULTI_SELECT_BOX: 'MULTI_SELECT_BOX'
+  MULTI_SELECT_BOX: 'MULTI_SELECT_BOX',
+  BUTTON: 'BUTTON',
+  LINK: 'LINK',
+  NONE: 'NONE'
 };
 
 export const rowsPerPageOptions = [10, 20, 50, 100, 500];
